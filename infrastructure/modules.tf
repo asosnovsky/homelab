@@ -15,3 +15,14 @@ module "storage" {
 output "pvc" {
   value = module.storage.pvc
 }
+
+
+module "postgres" {
+  source = "./postgres"
+
+  namespace = local.namespace
+  pvc       = module.storage.pvc.postgres.name
+  depends_on = [
+    module.storage
+  ]
+}
