@@ -14,6 +14,11 @@ module "storage" {
       node_name = var.node_name_master
       data_path = "${var.local_root_storage_path}/redis"
     }
+    nextcloud = {
+      storage   = "50Gi"
+      node_name = var.node_name_master
+      data_path = "${var.local_root_storage_path}/nextcloud"
+    }
   }
 }
 
@@ -41,7 +46,7 @@ module "pg-users" {
 
   namespace = local.namespace
   secret_db = module.postgres.db_secret
-  users = ["nextcloud"]
+  users     = ["nextcloud"]
 
   depends_on = [
     module.postgres

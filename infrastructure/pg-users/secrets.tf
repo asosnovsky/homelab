@@ -9,8 +9,8 @@ resource "random_password" "pg_users_pswd" {
 
 locals {
   users = {
-    for u, pwd in random_password.pg_users_pswd:
-      var.users[u] => pwd.result
+    for u, pwd in random_password.pg_users_pswd :
+    var.users[u] => pwd.result
   }
 }
 
