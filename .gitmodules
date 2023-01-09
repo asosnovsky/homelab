@@ -1,0 +1,3 @@
+[submodule "charts/nextcloud"]
+	path = charts/nextcloud
+	url = git@github.com:asosnovsky/nexcloud-helm.git

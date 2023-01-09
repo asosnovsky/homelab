@@ -1,0 +1,6 @@
+postgres:
+  host: postgres.homelab.svc.cluster.local
+  secretUserKey: username
+  secretPasswordKey: password
+pvc:
+  tfstate: changeme

@@ -6,18 +6,13 @@ resource "random_password" "password" {
 
 resource "kubernetes_secret" "password" {
   metadata {
-    name      = "pg-password"
+    name      = "redis-password"
     namespace = var.namespace
   }
 
   data = {
-    username = "postgres"
     password = random_password.password.result
   }
 
   type = "Opaque"
-}
-
-output "db_secret" {
-  value = kubernetes_secret.password.metadata[0].name
 }

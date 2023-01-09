@@ -1,8 +1,9 @@
-resource "helm_release" "pg" {
-  name         = "postgres"
+resource "helm_release" "redis" {
+  name = "redis"
+
   namespace    = var.namespace
   repository   = "https://charts.bitnami.com/bitnami"
-  chart        = "postgresql"
+  chart        = "redis"
   timeout      = 60
   reuse_values = true
 
@@ -16,7 +17,7 @@ resource "helm_release" "pg" {
   }
 
   set {
-    name  = "primary.persistence.existingClaim"
+    name  = "master.persistence.existingClaim"
     value = var.pvc
   }
 }

@@ -7,9 +7,10 @@ module "infra" {
   local_root_storage_path = var.local_root_storage_path
   node_name_master        = var.node_name_master
   node_name_nas           = var.node_name_nas
+  db_users                = ["nextcloud"]
 }
 
 
-output "pvc" {
-  value = module.infra.pvc
+output "infra" {
+  value = module.infra
 }

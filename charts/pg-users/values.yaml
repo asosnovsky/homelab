@@ -1,0 +1,6 @@
+users: {}
+postgres:
+  host: changeme.local
+  secretName: changeme
+  secretUserKey: username
+  secretPasswordKey: password

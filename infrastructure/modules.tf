@@ -9,13 +9,13 @@ module "storage" {
       node_name = var.node_name_master
       data_path = "${var.local_root_storage_path}/postgres"
     }
+    redis = {
+      storage   = "10Gi"
+      node_name = var.node_name_master
+      data_path = "${var.local_root_storage_path}/redis"
+    }
   }
 }
-
-output "pvc" {
-  value = module.storage.pvc
-}
-
 
 module "postgres" {
   source = "./postgres"
@@ -24,5 +24,26 @@ module "postgres" {
   pvc       = module.storage.pvc.postgres.name
   depends_on = [
     module.storage
+  ]
+}
+module "redis" {
+  source = "./redis"
+
+  namespace = local.namespace
+  pvc       = module.storage.pvc.redis.name
+
+  depends_on = [
+    module.storage
+  ]
+}
+module "pg-users" {
+  source = "./pg-users"
+
+  namespace = local.namespace
+  secret_db = module.postgres.db_secret
+  users = ["nextcloud"]
+
+  depends_on = [
+    module.postgres
   ]
 }

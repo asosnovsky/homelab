@@ -1,3 +1,5 @@
+fullnameOverride: "postgres"
+
 image:
   tag: 15.1.0-debian-11-r19
   repository: bitnami/postgresql
@@ -5,8 +7,7 @@ image:
 
 auth:
   secretKeys:
-    adminPasswordKey: username
-    userPasswordKey: password
+    adminPasswordKey: password
 
 architecture: standalone
 postgresqlDataDir: /bitnami/postgresql/data
