@@ -6,7 +6,7 @@ resource "random_password" "password" {
 
 resource "kubernetes_secret" "password" {
   metadata {
-    name      = "redis-password"
+    name      = "homelab.password.redis"
     namespace = var.namespace
   }
 

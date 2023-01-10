@@ -13,10 +13,10 @@ module "infra" {
 module "services" {
   source = "./services"
 
-  namespace         = module.infra.namespace
-  redis-secret-name = module.infra.redis_secret
-  db-user-secrets   = module.infra.db_user_secrets
-  pvcs              = module.infra.pvcs
+  namespace       = module.infra.namespace
+  redis_secret    = module.infra.redis_secret
+  db_user_secrets = module.infra.db_user_secrets
+  pvcs            = module.infra.pvcs
 }
 
 output "infra" {

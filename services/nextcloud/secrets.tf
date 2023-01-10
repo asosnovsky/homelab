@@ -6,7 +6,7 @@ resource "random_password" "password" {
 
 resource "kubernetes_secret" "password" {
   metadata {
-    name      = "nextcloud-password"
+    name      = "homelab.nextcloud.password"
     namespace = var.namespace
   }
 

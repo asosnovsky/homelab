@@ -24,7 +24,7 @@ resource "helm_release" "nextcloud" {
             name = "REDIS_HOST_PASSWORD",
             valueFrom = {
               secretKeyRef = {
-                name = var.redis-secret-name
+                name = var.redis_secret
                 key  = "password"
               }
             }
@@ -46,12 +46,12 @@ resource "helm_release" "nextcloud" {
 
   set {
     name  = "externalDatabase.existingSecret.secretName"
-    value = var.db-user-secret-name
+    value = var.db_user_secret
   }
 
   set {
     name  = "externalRedis.existingSecret"
-    value = var.redis-secret-name
+    value = var.redis_secret
   }
 
   set {

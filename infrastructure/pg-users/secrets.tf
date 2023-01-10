@@ -17,7 +17,7 @@ locals {
 resource "kubernetes_secret" "pg_users" {
   for_each = local.users
   metadata {
-    name      = "pg-password-${each.key}"
+    name      = "homelab.password.pg.${each.key}"
     namespace = var.namespace
   }
 

@@ -1,0 +1,8 @@
+services: 
+  nextcloud:
+    host: nextcloud.sosnovsky.ca
+    port: 
+      number: 8080
+    
+  random:
+    host: minim.sosnovsky.ca

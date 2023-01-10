@@ -1,6 +1,6 @@
 variable "namespace" {}
-variable "redis-secret-name" {}
-variable "db-user-secrets" {
+variable "redis_secret" {}
+variable "db_user_secrets" {
   type = map(object({
     name      = string
     namespace = string
