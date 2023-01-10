@@ -1,12 +1,36 @@
 resource "helm_release" "nextcloud" {
   name         = "nextcloud"
   namespace    = var.namespace
-  chart        = "charts/nextcloud/charts/nextcloud"
+  repository   = "https://nextcloud.github.io/helm/"
+  chart        = "nextcloud"
   timeout      = 60
   reuse_values = true
 
   values = [
     file("${path.module}/values.yaml"),
+    yamlencode({
+      "nextcloud" : {
+        "extraEnv" : [
+          {
+            name  = "REDIS_HOST"
+            value = "redis-master.homelab.svc.cluster.local"
+          },
+          {
+            name  = "REDIS_HOST_PORT",
+            value = "6379"
+          },
+          {
+            name = "REDIS_HOST_PASSWORD",
+            valueFrom = {
+              secretKeyRef = {
+                name = var.redis-secret-name
+                key  = "password"
+              }
+            }
+          }
+        ]
+      }
+    })
   ]
 
   set {
