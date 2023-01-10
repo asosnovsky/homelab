@@ -5,5 +5,6 @@ variable "volumes" {
     storage   = string
     node_name = string
     data_path = string
+    access_mode = string
   }))
 }

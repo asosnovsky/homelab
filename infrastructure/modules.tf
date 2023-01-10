@@ -8,16 +8,19 @@ module "storage" {
       storage   = "10Gi"
       node_name = var.node_name_master
       data_path = "${var.local_root_storage_path}/postgres"
+      access_mode = "ReadWriteOnce"
     }
     redis = {
       storage   = "10Gi"
       node_name = var.node_name_master
       data_path = "${var.local_root_storage_path}/redis"
+      access_mode = "ReadWriteOnce"
     }
     nextcloud = {
       storage   = "50Gi"
       node_name = var.node_name_master
       data_path = "${var.local_root_storage_path}/nextcloud"
+      access_mode = "ReadWriteMany"
     }
   }
 }

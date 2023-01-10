@@ -6,18 +6,14 @@ resource "random_password" "password" {
 
 resource "kubernetes_secret" "password" {
   metadata {
-    name      = "redis-password"
+    name      = "nextcloud-password"
     namespace = var.namespace
   }
 
   data = {
+    username = "admin"
     password = random_password.password.result
   }
 
   type = "Opaque"
-}
-
-
-output "redis_secret" {
-  value = kubernetes_secret.password.metadata[0].name
 }

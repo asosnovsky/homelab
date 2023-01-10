@@ -10,6 +10,14 @@ module "infra" {
   db_users                = ["nextcloud"]
 }
 
+module "services" {
+  source = "./services"
+
+  namespace = module.infra.namespace
+  redis-secret-name = module.infra.redis_secret
+  db-user-secrets = module.infra.db_user_secrets
+  pvcs = module.infra.pvcs
+}
 
 output "infra" {
   value = module.infra

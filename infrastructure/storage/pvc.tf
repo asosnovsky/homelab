@@ -6,7 +6,7 @@ resource "kubernetes_persistent_volume_claim" "pvc" {
   }
   spec {
     storage_class_name = kubernetes_storage_class.local-storage.metadata.0.name
-    access_modes       = ["ReadWriteOnce"]
+    access_modes       = [each.value.access_mode]
     resources {
       requests = {
         storage = each.value.storage

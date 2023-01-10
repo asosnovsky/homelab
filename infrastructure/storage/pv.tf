@@ -8,7 +8,7 @@ resource "kubernetes_persistent_volume" "pv" {
       storage = each.value.storage
     }
     storage_class_name               = kubernetes_storage_class.local-storage.metadata.0.name
-    access_modes                     = ["ReadWriteOnce"]
+    access_modes                     = [each.value.access_mode]
     persistent_volume_reclaim_policy = "Retain"
     node_affinity {
       required {
