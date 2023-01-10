@@ -5,6 +5,7 @@ resource "helm_release" "nextcloud" {
   chart        = "nextcloud"
   timeout      = 60
   reuse_values = true
+  version      = "3.3.6"
 
   values = [
     file("${path.module}/values.yaml"),

@@ -4,6 +4,7 @@ resource "helm_release" "pg" {
   repository   = "https://charts.bitnami.com/bitnami"
   chart        = "postgresql"
   timeout      = 60
+  version      = "12.1.8"
   reuse_values = true
 
   values = [

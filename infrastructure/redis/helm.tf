@@ -6,6 +6,7 @@ resource "helm_release" "redis" {
   chart        = "redis"
   timeout      = 60
   reuse_values = true
+  version      = "17.4.2"
 
   values = [
     file("${path.module}/values.yaml")
