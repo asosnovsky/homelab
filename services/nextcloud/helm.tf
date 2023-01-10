@@ -10,27 +10,27 @@ resource "helm_release" "nextcloud" {
   ]
 
   set {
-    name = "nextcloud.host"
+    name  = "nextcloud.host"
     value = var.host
   }
 
   set {
-    name = "nextcloud.existingSecret.secretName"
+    name  = "nextcloud.existingSecret.secretName"
     value = kubernetes_secret.password.metadata[0].name
   }
 
   set {
-    name = "externalDatabase.existingSecret.secretName"
+    name  = "externalDatabase.existingSecret.secretName"
     value = var.db-user-secret-name
   }
 
   set {
-    name = "externalRedis.existingSecret"
+    name  = "externalRedis.existingSecret"
     value = var.redis-secret-name
   }
 
-  set  {
-    name = "persistence.existingClaim"
+  set {
+    name  = "persistence.existingClaim"
     value = var.pvc
   }
 }

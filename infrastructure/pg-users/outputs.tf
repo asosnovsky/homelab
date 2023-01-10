@@ -10,7 +10,7 @@ data "kubernetes_secret" "pgs" {
 }
 output "secrets" {
   value = {
-    for k, v in data.kubernetes_secret.pgs:
-        var.users[k] => v.metadata[0]
+    for k, v in data.kubernetes_secret.pgs :
+    var.users[k] => v.metadata[0]
   }
 }
