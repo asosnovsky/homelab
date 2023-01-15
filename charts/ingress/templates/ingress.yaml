@@ -5,7 +5,13 @@ kind: Ingress
 metadata:
   name: "{{ $.Release.Name }}-{{ $serviceName }}"
   namespace: {{ $.Release.Namespace }}
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  # tls:
+  #   - secretName: "homelab.{{ $.Release.Name }}.cert.{{ $serviceName }}"
+  #     hosts:
+  #       - {{ $service.host }}
   rules:
   - host: {{ $service.host }}
     http:
@@ -18,30 +24,20 @@ spec:
         path: {{ $service.path | default "/" }}
         pathType: Prefix
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: "homelab.{{ $.Release.Name }}.cert.{{ $serviceName }}"
-  namespace: {{ $.Release.Namespace }}
-type: kubernetes.io/tls
-stringData:
-  tls.key: ""
-  tls.crt: ""
----
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: "{{ $.Release.Name }}-{{ $serviceName }}"
-  namespace: {{ $.Release.Namespace }}
-spec:
-  acme:
-    server: {{ $.Values.acme_server }}
-    email: {{ $.Values.email }}
-    skipTLSVerify: {{ $.Values.skipTLSVerify }}
-    privateKeySecretRef:
-      name: "homelab.{{ $.Release.Name }}.cert.{{ $serviceName }}"
-    solvers:
-    - http01:
-        ingress:
-          name: "{{ $.Release.Name }}-{{ $serviceName }}"
+# apiVersion: cert-manager.io/v1
+# kind: Issuer
+# metadata:
+#   name: "{{ $.Release.Name }}-{{ $serviceName }}"
+#   namespace: {{ $.Release.Namespace }}
+# spec:
+#   acme:
+#     server: {{ $.Values.acme_server }}
+#     email: {{ $.Values.email }}
+#     skipTLSVerify: {{ $.Values.skipTLSVerify }}
+#     privateKeySecretRef:
+#       name: "homelab.{{ $.Release.Name }}.cert.{{ $serviceName }}"
+#     solvers:
+#     - http01:
+#         ingress:
+#           name: "{{ $.Release.Name }}-{{ $serviceName }}"
 {{ end }}

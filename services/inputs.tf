@@ -1,5 +1,6 @@
 variable "namespace" {}
 variable "redis_secret" {}
+variable "root_dns" {}
 variable "db_user_secrets" {
   type = map(object({
     name      = string
