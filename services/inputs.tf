@@ -13,3 +13,9 @@ variable "pvcs" {
     namespace = string
   }))
 }
+variable "reverse_proxies" {
+  type = map(object({
+    ip   = string
+    port = string
+  }))
+}

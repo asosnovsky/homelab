@@ -20,6 +20,16 @@ module "services" {
   db_user_secrets = module.infra.db_user_secrets
   pvcs            = module.infra.pvcs
   root_dns        = var.root_dns
+  reverse_proxies = {
+    home = {
+      port = 8123
+      ip   = "192.168.0.20"
+    }
+    yellow = {
+      port = 8123
+      ip   = "192.168.0.23"
+    }
+  }
 }
 
 output "infra" {

@@ -14,12 +14,12 @@ module "ingress" {
   namespace = var.namespace
   email     = "ariel@sosnovsky.ca"
   mode      = "dev"
-  services = {
+  services = merge({
     "nextcloud" : {
       host = "nextcloud.${var.root_dns}"
       port = {
         number = 8080
       }
     }
-  }
+  }, local.reverse_proxies_ingress_def)
 }

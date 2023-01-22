@@ -7,8 +7,8 @@ resource "kubernetes_secret" "cert" {
   }
 
   data = {
-    "tls.key": "",
-    "tls.crt": "",
+    "tls.key" : "",
+    "tls.crt" : "",
   }
 
   type = "kubernetes.io/tls"
