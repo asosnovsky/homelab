@@ -15,7 +15,9 @@ variable "pvcs" {
 }
 variable "reverse_proxies" {
   type = map(object({
-    ip   = string
-    port = string
+    ip      = string
+    port    = string
+    host    = optional(string)
+    to_port = optional(string)
   }))
 }

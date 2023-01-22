@@ -3,7 +3,7 @@ resource "helm_release" "nextcloud" {
   namespace    = var.namespace
   repository   = "https://nextcloud.github.io/helm/"
   chart        = "nextcloud"
-  timeout      = 60
+  timeout      = 120
   reuse_values = true
   version      = "3.3.6"
 

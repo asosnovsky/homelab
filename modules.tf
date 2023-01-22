@@ -2,7 +2,14 @@ variable "local_root_storage_path" {}
 variable "node_name_master" {}
 variable "node_name_nas" {}
 variable "root_dns" {}
-
+variable "reverse_proxies" {
+  type = map(object({
+    ip      = string
+    port    = string
+    host    = optional(string)
+    to_port = optional(string)
+  }))
+}
 module "infra" {
   source = "./infrastructure"
 
@@ -20,16 +27,7 @@ module "services" {
   db_user_secrets = module.infra.db_user_secrets
   pvcs            = module.infra.pvcs
   root_dns        = var.root_dns
-  reverse_proxies = {
-    home = {
-      port = 8123
-      ip   = "192.168.0.20"
-    }
-    yellow = {
-      port = 8123
-      ip   = "192.168.0.23"
-    }
-  }
+  reverse_proxies = var.reverse_proxies
 }
 
 output "infra" {

@@ -37,9 +37,9 @@ locals {
   reverse_proxies_ingress_def = {
     for k, v in kubernetes_service.rp :
     v.metadata[0].name => {
-      host = "${k}.${var.root_dns}",
+      host = coalesce(var.reverse_proxies[k].host, "${k}.${var.root_dns}"),
       port = {
-        number = 80
+        number = coalesce(var.reverse_proxies[k].to_port, 80)
       }
     }
   }
