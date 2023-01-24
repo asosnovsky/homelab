@@ -4,7 +4,7 @@ resource "helm_release" "cert-manager" {
   repository   = "https://charts.jetstack.io"
   chart        = "cert-manager"
   version      = "1.10.2"
-  timeout      = 60
+  timeout      = 240
   reuse_values = true
 
   values = [

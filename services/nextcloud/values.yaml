@@ -31,7 +31,6 @@ internalDatabase:
 externalDatabase:
   enabled: true
   type: postgresql
-  host: postgres.homelab.svc.cluster.local
   database: nextcloud
   existingSecret:
     enabled: true

@@ -13,3 +13,17 @@ resource "kubernetes_secret" "cert" {
 
   type = "kubernetes.io/tls"
 }
+
+
+
+resource "kubernetes_secret" "le" {
+  metadata {
+    name      = "ingress.letsencrypt"
+    namespace = var.namespace
+  }
+
+  data = {
+  }
+
+  type = "Opaque"
+}

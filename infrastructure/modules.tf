@@ -5,16 +5,18 @@ module "storage" {
   namespace                = local.namespace
   volumes = {
     postgres = {
-      storage     = "10Gi"
-      node_name   = var.node_name_master
-      data_path   = "${var.local_root_storage_path}/postgres"
-      access_mode = "ReadWriteOnce"
+      storage        = "10Gi"
+      node_name      = var.node_name_master
+      data_path      = "${var.local_root_storage_path}/postgres"
+      access_mode    = "ReadWriteOnce"
+      reclaim_policy = "Delete"
     }
     redis = {
-      storage     = "10Gi"
-      node_name   = var.node_name_master
-      data_path   = "${var.local_root_storage_path}/redis"
-      access_mode = "ReadWriteOnce"
+      storage        = "10Gi"
+      node_name      = var.node_name_master
+      data_path      = "${var.local_root_storage_path}/redis"
+      access_mode    = "ReadWriteOnce"
+      reclaim_policy = "Delete"
     }
     nextcloud = {
       storage     = "50Gi"
@@ -54,4 +56,9 @@ module "pg-users" {
   depends_on = [
     module.postgres
   ]
+}
+module "cert-manager" {
+  source = "./cert-manager"
+
+  namespace = kubernetes_namespace.cm.metadata.0.name
 }

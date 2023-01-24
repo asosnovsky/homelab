@@ -8,13 +8,11 @@ resource "helm_release" "users" {
   values = [
     file("${path.module}/values.yaml"),
     yamlencode({
-      "users" : local.users
+      "users" : local.users,
+      "postgres" : {
+        secretName = var.secret_db,
+        host = "postgres.${var.namespace}.svc.cluster.local"
+      }
     })
   ]
-
-  set {
-    name  = "postgres.secretName"
-    value = var.secret_db
-  }
-
 }

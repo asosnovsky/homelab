@@ -2,7 +2,7 @@ resource "kubernetes_persistent_volume_claim" "pvc" {
   for_each = var.volumes
   metadata {
     name      = each.key
-    namespace = var.namespace
+    namespace = coalesce(each.value.namespace, var.namespace)
   }
   spec {
     storage_class_name = kubernetes_storage_class.local-storage.metadata.0.name

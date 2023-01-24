@@ -10,6 +10,8 @@ variable "reverse_proxies" {
     to_port = optional(string)
   }))
 }
+variable "ingress_mode" {}
+
 module "infra" {
   source = "./infrastructure"
 
@@ -22,12 +24,13 @@ module "infra" {
 module "services" {
   source = "./services"
 
-  namespace       = module.infra.namespace
-  redis_secret    = module.infra.redis_secret
-  db_user_secrets = module.infra.db_user_secrets
-  pvcs            = module.infra.pvcs
-  root_dns        = var.root_dns
-  reverse_proxies = var.reverse_proxies
+  namespace         = module.infra.namespace
+  redis_secret      = module.infra.redis_secret
+  db_user_secrets   = module.infra.db_user_secrets
+  pvcs              = module.infra.pvcs
+  root_dns          = var.root_dns
+  reverse_proxies   = var.reverse_proxies
+  ingress_mode      = var.ingress_mode
 }
 
 output "infra" {

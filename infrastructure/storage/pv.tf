@@ -9,7 +9,7 @@ resource "kubernetes_persistent_volume" "pv" {
     }
     storage_class_name               = kubernetes_storage_class.local-storage.metadata.0.name
     access_modes                     = [each.value.access_mode]
-    persistent_volume_reclaim_policy = "Retain"
+    persistent_volume_reclaim_policy = each.value.reclaim_policy
     node_affinity {
       required {
         node_selector_term {

@@ -13,7 +13,7 @@ module "ingress" {
 
   namespace = var.namespace
   email     = "ariel@sosnovsky.ca"
-  mode      = "dev"
+  mode      = var.ingress_mode
   services = merge({
     "nextcloud" : {
       host = "nextcloud.${var.root_dns}"
