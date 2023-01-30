@@ -3,8 +3,3 @@ resource "kubernetes_namespace" "hl" {
     name = "homelab-services"
   }
 }
-resource "kubernetes_namespace" "cm" {
-  metadata {
-    name = "homelab-cert-manager"
-  }
-}

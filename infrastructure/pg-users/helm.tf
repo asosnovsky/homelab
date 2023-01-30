@@ -11,7 +11,7 @@ resource "helm_release" "users" {
       "users" : local.users,
       "postgres" : {
         secretName = var.secret_db,
-        host = "postgres.${var.namespace}.svc.cluster.local"
+        host       = "postgres.${var.namespace}.svc.cluster.local"
       }
     })
   ]

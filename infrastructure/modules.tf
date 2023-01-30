@@ -60,5 +60,5 @@ module "pg-users" {
 module "cert-manager" {
   source = "./cert-manager"
 
-  namespace = kubernetes_namespace.cm.metadata.0.name
+  namespace = local.namespace
 }
