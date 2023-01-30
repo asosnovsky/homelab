@@ -5,6 +5,7 @@ module "nextcloud" {
   host           = "nextcloud.${var.root_dns}"
   redis_secret   = var.redis_secret
   pvc            = var.pvcs.nextcloud.name
+  pvc_data            = var.pvcs.nextclouddata.name
   db_user_secret = var.db_user_secrets.nextcloud.name
 }
 

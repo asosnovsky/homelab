@@ -48,6 +48,8 @@ cronjob:
 
 persistence:
   enabled: true
+  nextcloudData:
+    enabled: true
 
 resources:
   requests:

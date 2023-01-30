@@ -19,9 +19,15 @@ module "storage" {
       reclaim_policy = "Delete"
     }
     nextcloud = {
-      storage     = "50Gi"
+      storage     = "10Gi"
       node_name   = var.node_name_master
       data_path   = "${var.local_root_storage_path}/nextcloud"
+      access_mode = "ReadWriteMany"
+    }
+    nextclouddata = {
+      storage     = "50Gi"
+      node_name   = var.node_name_master
+      data_path   = "${var.local_root_storage_path}/nextcloud-data"
       access_mode = "ReadWriteMany"
     }
   }

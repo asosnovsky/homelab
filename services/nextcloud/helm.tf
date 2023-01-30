@@ -53,4 +53,9 @@ resource "helm_release" "nextcloud" {
     name  = "persistence.existingClaim"
     value = var.pvc
   }
+
+  set {
+    name  = "persistence.nextcloudData.existingClaim"
+    value = var.pvc_data
+  }
 }
