@@ -6,12 +6,16 @@ metadata:
   name: "{{ $.Release.Name }}-{{ $serviceName }}"
   namespace: {{ $.Release.Namespace }}
   annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
+  {{  if $.Values.tlsEnable  }}
+    cert-manager.io/cluster-issuer: letsencrypt
+  {{- end }}
 spec:
-  # tls:
-  #   - secretName: "homelab.{{ $.Release.Name }}.cert.{{ $serviceName }}"
-  #     hosts:
-  #       - {{ $service.host }}
+  {{- if $.Values.tlsEnable }}
+  tls:
+    - secretName: "homelab.{{ $.Release.Name }}.cert.{{ $serviceName }}"
+      hosts:
+        - {{ $service.host }}
+  {{- end }}
   rules:
   - host: {{ $service.host }}
     http:
@@ -23,21 +27,4 @@ spec:
             {{- $service.port | default (dict "port" 80) | toYaml | nindent 14 }}
         path: {{ $service.path | default "/" }}
         pathType: Prefix
----
-# apiVersion: cert-manager.io/v1
-# kind: Issuer
-# metadata:
-#   name: "{{ $.Release.Name }}-{{ $serviceName }}"
-#   namespace: {{ $.Release.Namespace }}
-# spec:
-#   acme:
-#     server: {{ $.Values.acme_server }}
-#     email: {{ $.Values.email }}
-#     skipTLSVerify: {{ $.Values.skipTLSVerify }}
-#     privateKeySecretRef:
-#       name: "homelab.{{ $.Release.Name }}.cert.{{ $serviceName }}"
-#     solvers:
-#     - http01:
-#         ingress:
-#           name: "{{ $.Release.Name }}-{{ $serviceName }}"
 {{ end }}

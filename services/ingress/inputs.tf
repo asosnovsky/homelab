@@ -12,4 +12,9 @@ variable "services" {
   default = {}
 }
 variable "email" {}
-variable "mode" {}
+variable "staging_mode" {
+  type = bool
+}
+variable "tls_enabled" {
+  type = bool
+}

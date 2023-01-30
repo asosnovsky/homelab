@@ -7,16 +7,17 @@ resource "helm_release" "ingress" {
 
   values = [
     yamlencode({
-      services = var.services
-      # email         = var.email
-      # acme_server   = var.mode == "dev" ? "https://acme-staging-v02.api.letsencrypt.org/directory" : "https://acme-v02.api.letsencrypt.org/directory"
-      # skipTLSVerify = var.mode == "dev"
+      services      = var.services
+      email         = var.email
+      acmeServer    = var.staging_mode ? "https://acme-staging-v02.api.letsencrypt.org/directory" : "https://acme-v02.api.letsencrypt.org/directory"
+      skipTLSVerify = var.staging_mode
+      tlsEnable     = var.tls_enabled
     })
   ]
 
-  depends_on = [
-    kubernetes_secret.cert,
-    kubernetes_secret.le
-  ]
+  # depends_on = [
+  #   kubernetes_secret.cert,
+  #   kubernetes_secret.le
+  # ]
 
 }

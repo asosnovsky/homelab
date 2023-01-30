@@ -11,9 +11,10 @@ module "nextcloud" {
 module "ingress" {
   source = "./ingress"
 
-  namespace = var.namespace
-  email     = "ariel@sosnovsky.ca"
-  mode      = var.ingress_mode
+  namespace    = var.namespace
+  email        = "ariel@sosnovsky.ca"
+  staging_mode = var.ingress_staging_mode
+  tls_enabled  = var.tls_enabled
   services = merge({
     "nextcloud" : {
       host = "nextcloud.${var.root_dns}"

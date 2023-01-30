@@ -10,16 +10,16 @@ resource "helm_release" "nextcloud" {
   values = [
     file("${path.module}/values.yaml"),
     yamlencode({
-      "externalDatabase": {
+      "externalDatabase" : {
         host = "postgres.${var.namespace}.svc.cluster.local"
         existingSecret = {
           secretName = var.db_user_secret
         }
       },
       "nextcloud" : {
-        "host": var.host,
-        "existingSecret": {
-          secretName =  kubernetes_secret.password.metadata[0].name
+        "host" : var.host,
+        "existingSecret" : {
+          secretName = kubernetes_secret.password.metadata[0].name
         },
         "extraEnv" : [
           {

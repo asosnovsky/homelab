@@ -2,6 +2,9 @@ variable "local_root_storage_path" {}
 variable "node_name_master" {}
 variable "node_name_nas" {}
 variable "root_dns" {}
+variable "tls_enabled" {
+  type = bool
+}
 variable "reverse_proxies" {
   type = map(object({
     ip      = string
@@ -10,7 +13,9 @@ variable "reverse_proxies" {
     to_port = optional(string)
   }))
 }
-variable "ingress_mode" {}
+variable "ingress_staging_mode" {
+  type = bool
+}
 
 module "infra" {
   source = "./infrastructure"
@@ -24,13 +29,14 @@ module "infra" {
 module "services" {
   source = "./services"
 
-  namespace         = module.infra.namespace
-  redis_secret      = module.infra.redis_secret
-  db_user_secrets   = module.infra.db_user_secrets
-  pvcs              = module.infra.pvcs
-  root_dns          = var.root_dns
-  reverse_proxies   = var.reverse_proxies
-  ingress_mode      = var.ingress_mode
+  namespace            = module.infra.namespace
+  redis_secret         = module.infra.redis_secret
+  db_user_secrets      = module.infra.db_user_secrets
+  pvcs                 = module.infra.pvcs
+  root_dns             = var.root_dns
+  reverse_proxies      = var.reverse_proxies
+  ingress_staging_mode = var.ingress_staging_mode
+  tls_enabled          = var.tls_enabled
 }
 
 output "infra" {

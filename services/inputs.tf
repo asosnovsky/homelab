@@ -1,7 +1,12 @@
 variable "namespace" {}
 variable "redis_secret" {}
 variable "root_dns" {}
-variable "ingress_mode" {}
+variable "ingress_staging_mode" {
+  type = bool
+}
+variable "tls_enabled" {
+  type = bool
+}
 variable "db_user_secrets" {
   type = map(object({
     name      = string
