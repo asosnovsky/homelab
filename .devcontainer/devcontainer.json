@@ -1,0 +1,70 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm
+{
+	"name": "HomeLab",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"runArgs": ["--network=host"],
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+			"moby": true,
+			"version": "latest",
+			"dockerDashComposeVersion": "v2"
+		},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+			"version": "latest",
+			"helm": "latest",
+			"minikube": "none"
+		},
+		"./local-features/tweaks": {},
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": true,
+			"configureZshAsDefaultShell": true,
+			"installOhMyZsh": true,
+			"upgradePackages": true,
+			"username": "vscode",
+			"userUid": "automatic",
+			"userGid": "automatic"
+		},
+		"ghcr.io/mpriscella/features/helm-chart-testing:1": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers-contrib/features/argo-cd:1": {
+			"version": "latest"
+		},
+		"ghcr.io/eitsupi/devcontainer-features/jq-likes:1": {
+			"jqVersion": "os-provided",
+			"yqVersion": "latest",
+			"gojqVersion": "latest"
+		},
+		"ghcr.io/dhoeric/features/act:1": {},
+		"ghcr.io/rio/features/k3d:1": {}
+	},
+
+	// "remoteEnv": {
+	// 	"SYNC_LOCALHOST_KUBECONFIG": "true"
+	// },
+
+	// "initializeCommand": "cd .devcontainer && bash ensure-mount-sources",
+	"mounts": [
+		{
+			"source": "${env:HOME}${env:USERPROFILE}/.kube",
+			"target": "/home/vscode/kube-localhost",
+			"type": "bind"
+		},
+		{
+			"source": "${env:HOME}${env:USERPROFILE}/.gitconfig",
+			"target": "/home/vscode/.gitconfig",
+			"type": "bind"
+		}
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"inercia.vscode-k3d",
+				"tumido.crd-snippets",
+				"hilleer.yaml-plus-json"
+			]
+		}
+	}
+}
