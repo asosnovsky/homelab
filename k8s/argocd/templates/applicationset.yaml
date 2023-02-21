@@ -16,7 +16,7 @@ spec:
     metadata:
       name: '{{ `{{path.basename}}` }}'
     spec:
-      project: "infra"
+      project: "default"
       source:
         repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
         targetRevision: "{{ .Values.selfapp.commit }}"

@@ -3,12 +3,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: infra
+  name: services
   namespace: "{{ .Release.Namespace }}"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: Infrastructure
+  description: services
   sourceRepos:
   - '*'
   destinations:
