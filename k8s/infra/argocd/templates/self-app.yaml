@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ .Release.Name }}"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  project: default
+  source:
+    repoURL: "{{ .Values.selfapp.repo }}"
+    targetRevision: "{{ .Values.selfapp.commit }}"
+    path: k8s/infra/argocd
+    helm:
+      parameters:
+      - name: "selfapp.sshkey"
+        value: {{ .Values.selfapp.sshkey | quote }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: "{{ .Release.Namespace }}"
+  # syncPolicy:
+  #   automated: 
+  #     prune: false
+  #     selfHeal: true
+  #     allowEmpty: true
+      

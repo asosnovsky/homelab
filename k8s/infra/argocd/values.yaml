@@ -2,3 +2,8 @@ argo-cd:
   crds:
     install: true
     keep: false
+
+selfapp:
+  commit: "stable"
+  repo: "git@github.com:asosnovsky/homelab.git"
+  sshkey: ""
