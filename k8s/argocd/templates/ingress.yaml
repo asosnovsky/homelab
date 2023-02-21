@@ -1,35 +1,35 @@
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: argocd-server
-  namespace: "{{ .Release.Namespace }}"
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: {{ .Values.selfapp.traefikRule }}
-      priority: 10
-      services:
-        - name: argocd-server
-          port: 80
-          passHostHeader: true
-          responseForwarding:
-            flushInterval: 1ms
-          scheme: https
-        - name: argocd-server
-          port: 443
-          passHostHeader: true
-          responseForwarding:
-            flushInterval: 1ms
-          scheme: https
-    - kind: Rule
-      match: {{ .Values.selfapp.traefikRule }} && Headers(`Content-Type`, `application/grpc`)
-      priority: 11
-      services:
-        - name: argocd-server
-          port: 80
-          scheme: h2c
-  tls:
-    certResolver: default
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: argocd-server
+#   namespace: "{{ .Release.Namespace }}"
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - kind: Rule
+#       match: {{ .Values.selfapp.traefikRule }}
+#       priority: 10
+#       services:
+#         - name: argocd-server
+#           port: 80
+#           passHostHeader: true
+#           responseForwarding:
+#             flushInterval: 1ms
+#           scheme: https
+#         - name: argocd-server
+#           port: 443
+#           passHostHeader: true
+#           responseForwarding:
+#             flushInterval: 1ms
+#           scheme: https
+#     - kind: Rule
+#       match: {{ .Values.selfapp.traefikRule }} && Headers(`Content-Type`, `application/grpc`)
+#       priority: 11
+#       services:
+#         - name: argocd-server
+#           port: 80
+#           scheme: h2c
+#   tls:
+#     certResolver: default

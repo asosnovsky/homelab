@@ -2,7 +2,12 @@ argo-cd:
   crds:
     install: true
     keep: false
-
+  server:
+    ingress:
+      enabled: true
+      hosts: 
+        - "argocd.home.sosnovsky.ca"
+      ingressClassName: "traefik"
 selfapp:
   commit: "stable"
   repo: "asosnovsky/homelab"
