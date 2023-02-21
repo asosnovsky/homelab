@@ -1,30 +1,30 @@
 {{- if .Values.selfapp.enabled -}}
----
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: "infra"
-  namespace: "{{ .Release.Namespace }}"
-spec:
-  generators:
-  - git:
-      repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
-      revision: "{{ .Values.selfapp.commit }}"
-      directories:
-      - path: k8s/infra/*
-  template:
-    metadata:
-      name: '{{ `{{path.basename}}` }}'
-    spec:
-      project: "default"
-      source:
-        repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
-        targetRevision: "{{ .Values.selfapp.commit }}"
-        path: '{{ `{{path}}` }}'
-      destination:
-        server: https://kubernetes.default.svc
-        namespace: '{{ `{{path.basename}}` }}'
-      syncPolicy:
-        syncOptions:
-          - CreateNamespace=true
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: "infra"
+#   namespace: "{{ .Release.Namespace }}"
+# spec:
+#   generators:
+#   - git:
+#       repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
+#       revision: "{{ .Values.selfapp.commit }}"
+#       directories:
+#       - path: k8s/infra/*
+#   template:
+#     metadata:
+#       name: '{{ `{{path.basename}}` }}'
+#     spec:
+#       project: "default"
+#       source:
+#         repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
+#         targetRevision: "{{ .Values.selfapp.commit }}"
+#         path: '{{ `{{path}}` }}'
+#       destination:
+#         server: https://kubernetes.default.svc
+#         namespace: '{{ `{{path.basename}}` }}'
+#       syncPolicy:
+#         syncOptions:
+#           - CreateNamespace=true
 {{- end -}}
