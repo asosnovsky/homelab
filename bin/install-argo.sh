@@ -3,7 +3,7 @@ set -e
 
 pushd k8s/argocd
 
-helm dependency build
+helm dependency update
 
 popd
 
