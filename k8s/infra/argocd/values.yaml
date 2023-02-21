@@ -5,5 +5,6 @@ argo-cd:
 
 selfapp:
   commit: "stable"
-  repo: "git@github.com:asosnovsky/homelab.git"
+  repo: "asosnovsky/homelab"
   sshkey: ""
+  traefikRule: Host(`argocd.sosnovsky.ca`)

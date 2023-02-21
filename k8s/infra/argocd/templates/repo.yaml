@@ -6,7 +6,9 @@ metadata:
   namespace: "{{ .Release.Namespace }}"
   labels:
     argocd.argoproj.io/secret-type: repository
+  annotations:
+    link.argocd.argoproj.io/external-link: "https://github.com/{{ .Values.selfapp.repo }}"
 stringData:
   type: git
-  url: "{{ .Values.selfapp.repo }}"
+  url: "git@github.com:{{ .Values.selfapp.repo }}.git"
   sshPrivateKey: {{ .Values.selfapp.sshkey | quote }}
