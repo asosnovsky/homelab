@@ -1,0 +1,4 @@
+argo-cd:
+  crds:
+    install: true
+    keep: false
