@@ -7,7 +7,12 @@ argo-cd:
       enabled: true
       hosts: 
         - "argocd.home.sosnovsky.ca"
-      ingressClassName: "traefik"
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      tls:
+        - hosts:
+            - argocd.home.sosnovsky.ca
+          secretName: homelab.ingress.cert.argocd
 selfapp:
   commit: "stable"
   repo: "asosnovsky/homelab"
