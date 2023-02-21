@@ -4,11 +4,8 @@ argo-cd:
     keep: false
   server:
     ingress:
-      enabled: true
-      hosts: 
-        - "argocd.home.sosnovsky.ca"
+      enabled: false
 selfapp:
   commit: "stable"
   repo: "asosnovsky/homelab"
   sshkey: ""
-  traefikRule: Host(`argocd.home.sosnovsky.ca`)
