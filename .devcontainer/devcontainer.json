@@ -1,8 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm
+// README at: https://github.com/devcontainers/templates/tree/main/src/alpine
 {
 	"name": "HomeLab",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
 	"runArgs": ["--network=host"],
 	"features": {
@@ -14,7 +13,7 @@
 		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
 			"version": "latest",
 			"helm": "latest",
-			"minikube": "none"
+			"minikube": "latest"
 		},
 		"./local-features/tweaks": {},
 		"ghcr.io/devcontainers/features/common-utils:2": {
@@ -38,18 +37,11 @@
 			"gojqVersion": "latest"
 		},
 		"ghcr.io/dhoeric/features/act:1": {},
-		"ghcr.io/rio/features/k3d:1": {}
 	},
-
-	// "remoteEnv": {
-	// 	"SYNC_LOCALHOST_KUBECONFIG": "true"
-	// },
-
-	// "initializeCommand": "cd .devcontainer && bash ensure-mount-sources",
 	"mounts": [
 		{
 			"source": "${env:HOME}${env:USERPROFILE}/.kube",
-			"target": "/home/vscode/kube-localhost",
+			"target": "/home/vscode/.kube",
 			"type": "bind"
 		},
 		{

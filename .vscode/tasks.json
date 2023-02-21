@@ -6,7 +6,7 @@
         {
             "label": "Dev Server - Start",
             "type": "shell",
-            "command": "k3d cluster create -c k3d-default.yaml && docker logs -f k3d-k3s-default-server-0",
+            "command": "minikube start",
             "icon": {
                 "id": "play-circle"
             }
@@ -14,7 +14,7 @@
         {
             "label": "Dev Server - Logs",
             "type": "shell",
-            "command": "docker logs -f k3d-k3s-default-server-0",
+            "command": "docker logs -f minikube",
             "icon": {
                 "id": "tree-filter-on-type-off"
             }
@@ -22,7 +22,7 @@
         {
             "label": "Stop Dev Server",
             "type": "shell",
-            "command": "k3d cluster delete -c k3d-default.yaml",
+            "command": "minikube stop",
             "icon": {
                 "id": "stop-circle"
             }
