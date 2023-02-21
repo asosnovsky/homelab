@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "{{ .Values.selfapp.repo }}"
+    repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
     targetRevision: "{{ .Values.selfapp.commit }}"
     path: k8s/infra/argocd
     helm:
