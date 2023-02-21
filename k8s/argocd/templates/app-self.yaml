@@ -20,9 +20,4 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: "{{ .Release.Namespace }}"
-  # syncPolicy:
-  #   automated: 
-  #     prune: false
-  #     selfHeal: true
-  #     allowEmpty: true
 {{- end -}}
