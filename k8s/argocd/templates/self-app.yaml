@@ -14,7 +14,7 @@ spec:
     helm:
       parameters:
       - name: "selfapp.enabled"
-        value: true
+        value: "true"
       - name: "selfapp.sshkey"
         value: {{ .Values.selfapp.sshkey | quote }}
   destination:
