@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e 
 
 pushd k8s/argocd
 
@@ -12,3 +13,5 @@ helm install argocd k8s/argocd \
     --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)"
 
 watch -n1 "kubectl -n argocd get all"
+
+argocd admin initial-password

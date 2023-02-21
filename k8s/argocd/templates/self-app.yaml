@@ -1,3 +1,4 @@
+{{- if .Values.selfapp.enabled -}}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -12,6 +13,8 @@ spec:
     path: k8s/argocd
     helm:
       parameters:
+      - name: "selfapp.enabled"
+        value: true
       - name: "selfapp.sshkey"
         value: {{ .Values.selfapp.sshkey | quote }}
   destination:
@@ -22,3 +25,4 @@ spec:
   #     prune: false
   #     selfHeal: true
   #     allowEmpty: true
+{{- end -}}

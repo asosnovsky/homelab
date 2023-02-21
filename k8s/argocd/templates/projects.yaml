@@ -1,3 +1,4 @@
+{{- if .Values.selfapp.enabled -}}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -12,3 +13,4 @@ spec:
   - '*'
   destinations:
   - server: https://kubernetes.default.svc
+{{- end -}}
