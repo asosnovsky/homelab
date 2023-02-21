@@ -7,4 +7,5 @@ selfapp:
   commit: "stable"
   repo: "asosnovsky/homelab"
   sshkey: ""
-  traefikRule: Host(`argocd.sosnovsky.ca`)
+  # traefikRule: Host(`argocd.sosnovsky.ca`)
+  traefikRule: Path(`/argo`)
