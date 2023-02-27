@@ -4,8 +4,7 @@ module "nextcloud" {
   namespace      = var.namespace
   host           = "nextcloud.${var.root_dns}"
   redis_secret   = var.redis_secret
-  pvc            = var.pvcs.nextcloud.name
-  pvc_data            = var.pvcs.nextclouddata.name
+  pvc_data       = var.pvcs.nextclouddata.name
   db_user_secret = var.db_user_secrets.nextcloud.name
 }
 
@@ -22,6 +21,8 @@ module "ingress" {
       port = {
         number = 8080
       }
+      # annotations = local.nextcloud_ingress_annotations
+      tlsDisabled = true
     }
   }, local.reverse_proxies_ingress_def)
 }

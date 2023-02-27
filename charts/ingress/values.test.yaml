@@ -3,6 +3,11 @@ services:
     host: nextcloud.sosnovsky.ca
     port: 
       number: 8080
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "true"
+
     
   random:
     host: minim.sosnovsky.ca
+  
+

@@ -7,7 +7,9 @@ variable "services" {
       }), {
       number = 80
     })
-    path = optional(string, "/"),
+    path        = optional(string, "/"),
+    annotations = optional(map(string), {}),
+    tlsDisabled = optional(bool, false),
   }))
   default = {}
 }

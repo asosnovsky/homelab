@@ -6,11 +6,16 @@ metadata:
   name: "{{ $.Release.Name }}-{{ $serviceName }}"
   namespace: {{ $.Release.Namespace }}
   annotations:
-  {{  if $.Values.tlsEnable  }}
+  {{  if (and $.Values.tlsEnable (not $service.tlsDisabled) )  }}
     cert-manager.io/cluster-issuer: letsencrypt
   {{- end }}
+  {{- if $service.annotations -}}
+    {{- range $k, $v := $service.annotations }}
+    {{ $k -}}: "{{- $v -}}"
+    {{- end }}
+  {{ end }}
 spec:
-  {{- if $.Values.tlsEnable }}
+  {{- if (and $.Values.tlsEnable (not $service.tlsDisabled) ) }}
   tls:
     - secretName: "homelab.{{ $.Release.Name }}.cert.{{ $serviceName }}"
       hosts:
