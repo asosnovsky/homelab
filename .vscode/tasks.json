@@ -18,7 +18,7 @@
             "icon": {
                 "id": "tree-filter-on-type-off"
             }
-        }
+        },
         {
             "label": "Stop Dev Server",
             "type": "shell",
@@ -26,6 +26,11 @@
             "icon": {
                 "id": "stop-circle"
             }
+        },
+        {
+            "label": "Open Local Argo Port",
+            "type": "shell",
+            "command": "kubectl port-forward svc/argocd-server -n argocd 8080:443"
         }
     ]
 }

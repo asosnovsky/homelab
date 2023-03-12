@@ -14,5 +14,6 @@ helm install argocd k8s/argocd \
 
 watch -n1 "kubectl -n argocd get all"
 
-k config set-context --current --namespace argocd
+argocd login cd.argoproj.io --core
+kubectl config set-context --current --namespace argocd
 argocd admin initial-password

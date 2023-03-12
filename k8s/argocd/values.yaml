@@ -4,7 +4,7 @@ argo-cd:
     keep: false
   server:
     ingress:
-      enabled: false
+      enabled: true
 selfapp:
   commit: "stable"
   repo: "asosnovsky/homelab"
