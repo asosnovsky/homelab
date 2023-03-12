@@ -1,21 +1,19 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/alpine
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-outside-of-docker-compose
 {
-	"name": "HomeLab",
-	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
-	"runArgs": ["--network=host"],
+	"name": "Docker from Docker Compose",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	},
 	"features": {
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-			"moby": true,
 			"version": "latest",
-			"dockerDashComposeVersion": "v2"
+			"enableNonRootDocker": "true",
+			"moby": "true"
 		},
-		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
-			"version": "latest",
-			"helm": "latest",
-			"minikube": "latest"
-		},
-		"./local-features/tweaks": {},
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"installZsh": true,
 			"configureZshAsDefaultShell": true,
@@ -24,6 +22,11 @@
 			"username": "vscode",
 			"userUid": "automatic",
 			"userGid": "automatic"
+		},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+			"version": "latest",
+			"helm": "latest",
+			"minikube": "none"
 		},
 		"ghcr.io/mpriscella/features/helm-chart-testing:1": {
 			"version": "latest"
@@ -36,8 +39,9 @@
 			"yqVersion": "latest",
 			"gojqVersion": "latest"
 		},
-		"ghcr.io/dhoeric/features/act:1": {},
+		"ghcr.io/rio/features/k3d:1": {}
 	},
+	"postCreateCommand": ".devcontainer/postCreateCommand.sh",
 	"mounts": [
 		{
 			"source": "${env:HOME}${env:USERPROFILE}/.kube",
