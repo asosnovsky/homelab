@@ -10,6 +10,7 @@ popd
 helm install argocd k8s/argocd \
     --namespace argocd \
     --create-namespace \
+    --values k8s/argocd/values.yaml \
     --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)"
 
 watch -n1 "kubectl -n argocd get all"
@@ -21,5 +22,6 @@ argocd admin initial-password
 helm upgrade argocd k8s/argocd \
     --namespace argocd \
     --create-namespace \
+    --values k8s/argocd/values.yaml \
     --set selfapp.enabled="true" \
     --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)"

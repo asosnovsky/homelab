@@ -3,5 +3,6 @@
 helm upgrade argocd k8s/argocd \
     --namespace argocd \
     --create-namespace \
+    --values k8s/argocd/values.yaml \
     --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)" \
     --set selfapp.enabled="true"

@@ -12,6 +12,8 @@ spec:
     targetRevision: "{{ .Values.selfapp.commit }}"
     path: k8s/argocd
     helm:
+      values: |
+        selfapp: {{ .Values.selfapp | toYaml | nindent 10 }}
       parameters:
       - name: "selfapp.enabled"
         value: "true"
