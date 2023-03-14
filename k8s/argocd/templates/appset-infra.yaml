@@ -27,6 +27,10 @@ spec:
             destination:
                 server: https://kubernetes.default.svc
                 namespace: '{{ `{{path.basename}}` }}'
+
+            sync:
+                syncOptions:
+                    - CreateNamespace=true
 {{- end -}}
 
 

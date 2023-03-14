@@ -10,9 +10,12 @@ metadata:
 spec:
   description: infra
   sourceRepos:
-  - '*'
+    - "git@github.com:{{ .Values.selfapp.repo }}.git"
   destinations:
-  - server: https://kubernetes.default.svc
-    namespace: '*'
-    name: '*'
+    - server: "*"
+      namespace: '*'
+      name: '*'
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
 {{- end -}}
