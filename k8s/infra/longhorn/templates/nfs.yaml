@@ -1,4 +1,4 @@
-{{- if .custom.useDaemons -}}
+{{- if .Values.custom.useDaemons -}}
 ---
 # source:  https://raw.githubusercontent.com/longhorn/longhorn/v1.4.0/deploy/prerequisite/longhorn-nfs-installation.yaml
 apiVersion: apps/v1
