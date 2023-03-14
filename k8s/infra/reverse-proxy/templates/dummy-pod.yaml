@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dummy-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dummy
+        chart: "{{ .Chart.Name }}"
+        release: "{{ .Release.Name }}"
+        service: "{{ .Release.Service }}"
+    spec:
+      containers:
+        - name: name
+          image: nginxdemos/hello
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+          ports:
+            - name: http
+              port: 80
+              protocol: TCP

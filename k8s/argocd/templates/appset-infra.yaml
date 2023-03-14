@@ -20,6 +20,10 @@ spec:
                 repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
                 targetRevision: "{{ .Values.selfapp.commit }}"
                 path: '{{ `{{path}}` }}'
+                helm:
+                    valueFiles:
+                        - values.yaml
+                        - values-{{ .Values.selfapp.deployment }}.yaml
             destination:
                 server: https://kubernetes.default.svc
                 namespace: '{{ `{{path.basename}}` }}'

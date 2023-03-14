@@ -64,7 +64,8 @@
 			"extensions": [
 				"inercia.vscode-k3d",
 				"tumido.crd-snippets",
-				"hilleer.yaml-plus-json"
+				"hilleer.yaml-plus-json",
+				"ipedrazas.kubernetes-snippets"
 			]
 		}
 	}
