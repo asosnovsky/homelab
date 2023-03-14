@@ -6,13 +6,15 @@ metadata:
   namespace: "{{ .Release.Namespace }}"
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: dummy
+      release: "{{ .Release.Name }}"
   template:
     metadata:
       labels:
         app: dummy
-        chart: "{{ .Chart.Name }}"
         release: "{{ .Release.Name }}"
-        service: "{{ .Release.Service }}"
     spec:
       containers:
         - name: name
@@ -21,7 +23,7 @@ spec:
             limits:
               cpu: 1
               memory: 1Gi
-          ports:
-            - name: http
-              port: 80
-              protocol: TCP
+          # ports:
+          #   - name: http
+          #     port: 80
+          #     protocol: TCP
