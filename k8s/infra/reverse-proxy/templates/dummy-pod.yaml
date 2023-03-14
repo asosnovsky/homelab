@@ -3,7 +3,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: dummy-app
-  namespace: "{{ .Relase.Namespace }}"
+  namespace: "{{ .Release.Namespace }}"
 spec:
   replicas: 1
   template:
