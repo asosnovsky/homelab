@@ -4,12 +4,9 @@ argo-cd:
     keep: false
   server:
     ingress:
-      https: true
-      enabled: true
-      paths:
-        - "/argocd"
+      enabled: false
     ingressGrpc:
-      enabled: true
+      enabled: false
 selfapp:
   commit: "stable"
   repo: "asosnovsky/homelab"
