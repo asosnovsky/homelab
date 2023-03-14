@@ -32,24 +32,3 @@ spec:
                 syncOptions:
                     - CreateNamespace=true
 {{- end -}}
-
-
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: longhorn
-#   namespace: "{{ .Release.Namespace }}"
-# spec:
-#   project: default
-#   source:
-#     chart: longhorn
-#     repoURL: https://charts.longhorn.io
-#     targetRevision: v1.4.0
-#     helm:
-#       releaseName: longhorn
-#   destination:
-#     server: "https://kubernetes.default.svc"
-#     namespace: longhorn
-#   syncPolicy:
-#     syncOptions:
-#       - CreateNamespace=true
