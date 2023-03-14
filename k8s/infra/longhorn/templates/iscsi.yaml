@@ -19,19 +19,19 @@ spec:
       hostNetwork: true
       hostPID: true
       initContainers:
-      - name: iscsi-installation
-        command:
-          - nsenter
-          - --mount=/proc/1/ns/mnt
-          - --
-          - bash
-          - -c
-          - *cmd
-        image: alpine:3.12
-        securityContext:
-          privileged: true
+        - name: iscsi-installation
+          command:
+            - nsenter
+            - --mount=/proc/1/ns/mnt
+            - --
+            - bash
+            - -c
+            - *cmd
+          image: alpine:3.12
+          securityContext:
+            privileged: true
       containers:
-      - name: sleep
-        image: k8s.gcr.io/pause:3.1
+        - name: sleep
+          image: k8s.gcr.io/pause:3.1
   updateStrategy:
     type: RollingUpdate
