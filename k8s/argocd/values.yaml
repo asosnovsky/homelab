@@ -4,9 +4,13 @@ argo-cd:
     keep: false
   server:
     ingress:
-      enabled: false
+      https: true
+      enabled: true
+      paths:
+        - "/argocd"
+    ingressGrpc:
+      enabled: true
 selfapp:
   commit: "stable"
   repo: "asosnovsky/homelab"
   sshkey: ""
-  domain: "sosnovsky.ca"

@@ -1,0 +1,3 @@
+selfapp:
+  deployment: dev
+  domain: "me.local"
