@@ -1,5 +1,5 @@
 argo-cd:
-  config:
+  configs:
     params:
       server.insecure: true
       server.basehref: /
