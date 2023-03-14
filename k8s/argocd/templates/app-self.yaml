@@ -14,7 +14,7 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-        - values-{{ .Values.selfapp.deployment }}.yaml
+        - values-{{ .Values.global.deployment }}.yaml
       parameters:
       - name: "selfapp.enabled"
         value: "true"

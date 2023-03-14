@@ -5,14 +5,17 @@ pushd k8s/argocd
 
 helm dependency update
 
+DEPLOYMENT=dev
+
 popd
 
 helm install argocd k8s/argocd \
     --namespace argocd \
     --create-namespace \
     --values k8s/argocd/values.yaml \
-    --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)" \
-    --set selfapp.deployment=dev
+    --values k8s/argocd/values-$DEPLOYMENT.yaml \
+    --set selfapp.enabled="true" \
+    --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)" 
 
 watch -n1 "kubectl -n argocd get all"
 
@@ -24,6 +27,6 @@ helm upgrade argocd k8s/argocd \
     --namespace argocd \
     --create-namespace \
     --values k8s/argocd/values.yaml \
+    --values k8s/argocd/values-$DEPLOYMENT.yaml \
     --set selfapp.enabled="true" \
-    --set selfapp.deployment=dev \
-    --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)"
+    --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)" 
