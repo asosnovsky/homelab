@@ -2,8 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-server
-  namespace: argocd
+  name: longhorn
 spec:
   rules:
     - host: "longhorn.{{ .Values.global.domain }}"
