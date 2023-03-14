@@ -21,6 +21,9 @@ spec:
                 targetRevision: "{{ .Values.selfapp.commit }}"
                 path: '{{ `{{path}}` }}'
                 helm:
+                    values: |-
+                        global:
+                            domain: "{{ .Values.selfapp.domain }}" 
                     valueFiles:
                         - values.yaml
                         - values-{{ .Values.selfapp.deployment }}.yaml
