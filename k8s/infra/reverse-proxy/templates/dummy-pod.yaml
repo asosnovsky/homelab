@@ -1,7 +1,9 @@
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: dummy-app
+  namespace: "{{ .Relase.Namespace }}"
 spec:
   replicas: 1
   template:
