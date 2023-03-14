@@ -6,7 +6,8 @@ metadata:
   namespace: argocd
 spec:
   rules:
-    - http:
+    - host: "argocd.{{ .Values.global.domain }}"
+      http:
         paths:
           - backend:
               service:
@@ -23,12 +24,13 @@ metadata:
   namespace: argocd
 spec:
   rules:
-    - http:
+    - host: "argocd.{{ .Values.global.domain }}"
+      http:
         paths:
           - backend:
               service:
                 name: argocd-server
                 port:
                   number: 443
-            path: /argocd
+            path: /
             pathType: Prefix

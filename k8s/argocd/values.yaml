@@ -1,4 +1,9 @@
 argo-cd:
+  config:
+    params:
+      server.insecure: true
+      server.basehref: /
+      server.rootpath: ""
   crds:
     install: true
     keep: false
