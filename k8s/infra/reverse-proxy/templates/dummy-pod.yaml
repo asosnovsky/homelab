@@ -39,3 +39,22 @@ spec:
     - name: http
       port: 80
       targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dummy-app
+  labels:
+    name: dummy-app
+spec:
+  rules:
+    - host: "demo.{{ .Values.global.domain }}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: dummy-app
+                port:
+                  number: 80
