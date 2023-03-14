@@ -1,3 +1,4 @@
+{{- if .custom.useDaemons -}}
 ---
 # source:  https://raw.githubusercontent.com/longhorn/longhorn/v1.4.0/deploy/prerequisite/longhorn-nfs-installation.yaml
 apiVersion: apps/v1
@@ -37,3 +38,4 @@ spec:
           image: k8s.gcr.io/pause:3.1
   updateStrategy:
     type: RollingUpdate
+{{- end -}}
