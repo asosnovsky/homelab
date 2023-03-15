@@ -1,0 +1,17 @@
+postgres:
+  fullnameOverride: "postgres"
+  image:
+    tag: 15.1.0-debian-11-r19
+    repository: bitnami/postgresql
+    pullPolicy: IfNotPresent
+  auth:
+    secretKeys:
+      adminPasswordKey: password
+  architecture: standalone
+  postgresqlDataDir: /bitnami/postgresql/data
+  primary:
+    persistence:
+      enabled: true
+      mountPath: /bitnami/postgresql
+  readReplicas:
+    replicaCount: 0
