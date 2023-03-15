@@ -1,4 +1,4 @@
-{{- range $prefix, $data := .Values.reverseProxy -}}
+{{ range $prefix, $data := .Values.reverseProxy }}
 ---
 apiVersion: v1
 kind: Endpoints
@@ -38,4 +38,4 @@ spec:
               number: 80
         path: /
         pathType: Prefix
-{{- end -}}
+{{ end }}
