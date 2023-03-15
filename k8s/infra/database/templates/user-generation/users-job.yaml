@@ -32,16 +32,16 @@ spec:
             - name: TF_IN_AUTOMATION
               value: "1"
             - name: TF_VAR_db_host
-              value: "{{ .Values.postgres.host }}"
+              value: "postgres.{{ .Release.Namespace }}.svc.cluster.local"
             - name: TF_VAR_db_username
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.postgres.secretName }}"
-                  key: "{{ .Values.postgres.secretUserKey }}"
+                  name: "{{ .Values.postgresql.auth.existingSecret }}"
+                  key: "username"
             - name: TF_VAR_db_password
               valueFrom:
                 secretKeyRef:
-                  name: "{{ .Values.postgres.secretName }}"
-                  key: "{{ .Values.postgres.secretPasswordKey }}"
+                  name: "{{ .Values.postgresql.auth.existingSecret }}"
+                  key: "password"
       restartPolicy: Never
   backoffLimit: 4
