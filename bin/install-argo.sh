@@ -5,7 +5,7 @@ pushd k8s/argocd
 
 helm dependency update
 
-DEPLOYMENT=dev
+DEPLOYMENT=${1:-dev}
 
 popd
 

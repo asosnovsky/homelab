@@ -1,3 +1,3 @@
 global:
   deployment: prod
-  domain: "lab.sosnovsky.ca"
+  domain: "home.sosnovsky.ca"
