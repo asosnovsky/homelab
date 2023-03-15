@@ -3,4 +3,7 @@ name: redis
 description: An infra service for homelab
 type: application
 version: 0.1.0
-dependencies: []
+dependencies:
+  - name: redis
+    repository: "https://charts.bitnami.com/bitnami"
+    version: "17.4.2"
