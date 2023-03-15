@@ -65,7 +65,8 @@
 				"inercia.vscode-k3d",
 				"tumido.crd-snippets",
 				"hilleer.yaml-plus-json",
-				"ipedrazas.kubernetes-snippets"
+				"ipedrazas.kubernetes-snippets",
+				"sandipchitale.vscode-kubernetes-helm-extension-pack"
 			]
 		}
 	}
