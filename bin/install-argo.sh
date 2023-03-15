@@ -14,7 +14,6 @@ helm install argocd k8s/argocd \
     --create-namespace \
     --values k8s/argocd/values.yaml \
     --values k8s/argocd/values-$DEPLOYMENT.yaml \
-    --set selfapp.enabled="true" \
     --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)" 
 
 watch -n1 "kubectl -n argocd get all"

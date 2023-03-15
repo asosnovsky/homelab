@@ -6,6 +6,11 @@ metadata:
 servers: 1
 agents: 1
 image: docker.io/rancher/k3s:v1.25.6-k3s1
+volumes:
+  - volume: /tmp/longhorn:/var/lib/longhorn:shared
+    nodeFilters:
+      - server:*
+      - agent:*
 kubeAPI:
   hostPort: "6443"
 ports:
