@@ -1,5 +1,3 @@
 global: {}
 custom:
   useDaemons: true
-tags:
-  - longhorn
