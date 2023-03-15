@@ -52,7 +52,10 @@ resource "kubernetes_secret" "pg_users" {
   for_each = local.users
   metadata {
     name      = "password.pg.${each.key}"
-    namespace = var.namespace
+    namespace = "{{ .Release.Namespace }}"
+    annotations = {
+      "managed-by": "job/user-generation"
+    }
   }
 
   data = {
