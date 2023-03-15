@@ -27,7 +27,7 @@ spec:
             - nsenter
             - --mount=/proc/1/ns/mnt
             - --
-            - sh
+            - bash
             - -c
             - *cmd
           image: alpine:3.12
