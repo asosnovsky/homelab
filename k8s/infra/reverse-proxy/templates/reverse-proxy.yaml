@@ -8,7 +8,7 @@ subsets:
 - addresses:
   - ip: "{{ $data.ip }}"
   ports:
-  - port: "{{ $data.port }}"
+  - port: {{ $data.port }}
     protocol: TCP
 ---
 apiVersion: v1
@@ -20,7 +20,7 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: "{{ $data.port }}"
+    targetPort: {{ $data.port }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
