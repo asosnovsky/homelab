@@ -4,6 +4,6 @@ description: An infra service for homelab
 type: application
 version: 0.1.0
 dependencies:
-  - name: postgres
+  - name: postgresql
     version: "12.1.8"
     repository: "https://charts.bitnami.com/bitnami"
