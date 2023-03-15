@@ -29,3 +29,5 @@ helm upgrade argocd k8s/argocd \
     --values k8s/argocd/values-$DEPLOYMENT.yaml \
     --set selfapp.enabled="true" \
     --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)" 
+
+argocd app sync argocd/argocd

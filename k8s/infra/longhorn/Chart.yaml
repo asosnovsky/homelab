@@ -7,3 +7,5 @@ dependencies:
   - name: longhorn
     version: v1.4.0
     repository: https://charts.longhorn.io
+    tags:
+      - "longhorn"

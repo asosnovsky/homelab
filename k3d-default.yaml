@@ -11,6 +11,14 @@ volumes:
     nodeFilters:
       - server:*
       - agent:*
+  - volume: /etc/iscsi:/etc/iscsi:shared
+    nodeFilters:
+      - server:*
+      - agent:*
+  - volume: /sbin/iscsiadm:/sbin/iscsiadm:shared
+    nodeFilters:
+      - server:*
+      - agent:*
 kubeAPI:
   hostPort: "6443"
 ports:
