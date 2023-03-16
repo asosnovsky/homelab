@@ -33,7 +33,7 @@ spec:
   secretName: "tls-{{$prefix}}.{{$.Values.global.domain}}"
   issuerRef: 
     kind: Issuer
-    name: {{ .Values.global.tls.issuer }}
+    name: "{{ $.Values.global.tls.issuer }}"
   commonName: "{{$prefix}}.{{$.Values.global.domain}}"
   dnsNames:
     - "{{$prefix}}.{{$.Values.global.domain}}"
