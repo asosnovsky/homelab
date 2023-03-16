@@ -47,6 +47,7 @@ nextcloud:
     host: postgres.database.svc.cluster.local
     existingSecret:
       enabled: true
+      secretName: password.pg.nextcloud
       usernameKey: username
       passwordKey: password
 
