@@ -5,7 +5,7 @@ services:
     namespace: "argocd"
   - prefix: "nextcloud"
     service: "nextcloud"
-    namespace: "nextcloud"
+    namespace: "app-nextcloud"
 global: {}
 acmeServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
 skipTLSVerify: "false"
