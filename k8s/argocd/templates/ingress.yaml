@@ -1,5 +1,5 @@
 
-{{ if $.Values.global.tlsEnable }}
+{{ if $.Values.global.tls.enabled }}
 ---
 apiVersion: v1
 kind: Secret
@@ -18,7 +18,7 @@ metadata:
   name: argocd-server
   namespace: argocd
   annotations:
-    self/managed: "true"
+    homelab/ingress-type: "self-managed"
   {{ if $.Values.global.ingressAnnotations }}
     {{- range $k, $v := $.Values.global.ingressAnnotations }}
     {{ $k -}}: "{{- $v -}}"
@@ -36,9 +36,9 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
-  {{ if $.Values.global.tlsEnable }}
-  tls:
-    - secretName: "argo-cert"
-      hosts:
-        - "argocd.{{ $.Values.global.domain }}"
-  {{ end }}
+  # {{ if $.Values.global.tls.enabled }}
+  # tls:
+  #   - secretName: "argo-cert"
+  #     hosts:
+  #       - "argocd.{{ $.Values.global.domain }}"
+  # {{ end }}

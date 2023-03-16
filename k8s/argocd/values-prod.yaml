@@ -3,4 +3,7 @@ global:
   domain: "home.sosnovsky.ca"
   ingressAnnotations:
     cert-manager.io/cluster-issuer: letsencrypt
-  tlsEnable: true
+  tls:
+    enabled: true
+    issuer: "letsencrypt"
+    secretName: "tls-home.sosnovsky.ca"

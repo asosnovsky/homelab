@@ -1,4 +1,3 @@
 global:
   deployment: dev
   domain: "me.local"
-  tlsEnable: false

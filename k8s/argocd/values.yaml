@@ -19,5 +19,9 @@ selfapp:
 global:
   email: "ariel@sosnovsky.ca"
   ingressAnnotations: {}
-  tlsEnable: false
+  tls:
+    enabled: false
+    issuer: ""
+    secretName: ""
   domain: ""
+  deployment: ""
