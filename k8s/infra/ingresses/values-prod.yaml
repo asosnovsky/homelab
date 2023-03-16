@@ -5,3 +5,5 @@ reverseProxy:
   yellow:
     port: "8123"
     ip: "192.168.0.23"
+acmeServer: "https://acme-v02.api.letsencrypt.org/directory"
+skipTLSVerify: true
