@@ -1,10 +1,11 @@
 argo-cd:
   configs:
+    cm:
+      exec.enabled: true
     params:
       server.insecure: true
       server.basehref: /
       server.rootpath: ""
-      exec.enabled: true
   crds:
     install: true
     keep: false
