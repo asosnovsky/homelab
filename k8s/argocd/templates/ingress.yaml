@@ -18,11 +18,6 @@ metadata:
   namespace: argocd
   annotations:
     homelab/ingress-type: "self-managed"
-  # {{ if $.Values.global.ingressAnnotations }}
-  #   {{- range $k, $v := $.Values.global.ingressAnnotations }}
-  #   {{ $k -}}: "{{- $v -}}"
-  #   {{- end }}
-  # {{ end }}
 spec:
   rules:
     - host: "argocd.{{ .Values.global.domain }}"
@@ -35,9 +30,3 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
-  # {{ if $.Values.global.tls.enabled }}
-  # tls:
-  #   - secretName: "argo-cert"
-  #     hosts:
-  #       - "argocd.{{ $.Values.global.domain }}"
-  # {{ end }}
