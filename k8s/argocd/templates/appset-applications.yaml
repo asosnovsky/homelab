@@ -1,0 +1,37 @@
+{{- if .Values.selfapp.enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+    name: "applications"
+spec:
+    generators:
+        -   git:
+                repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
+                revision: "{{ .Values.selfapp.commit }}"
+                directories:
+                    -   path: k8s/applications/*
+    template:
+        metadata:
+            name: '{{ `{{path.basename}}` }}'
+        spec:
+            project: "applications"
+            source:
+                repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
+                targetRevision: "{{ .Values.selfapp.commit }}"
+                path: '{{ `{{path}}` }}'
+                helm:
+                    values: |-
+                        global: 
+                            {{- .Values.global | toYaml | nindent 28 }}
+                    valueFiles:
+                        - values.yaml
+                        - values-{{ .Values.global.deployment }}.yaml
+            destination:
+                server: https://kubernetes.default.svc
+                namespace: 'app-{{ `{{path.basename}}` }}'
+
+            syncPolicy:
+                syncOptions:
+                    - CreateNamespace=true
+{{- end -}}

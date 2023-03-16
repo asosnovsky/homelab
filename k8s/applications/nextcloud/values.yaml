@@ -1,0 +1,89 @@
+nextcloud:
+  image:
+    repository: nextcloud
+    tag: "25.0.3-fpm"
+    pullPolicy: IfNotPresent
+    flavor: fpm
+
+  replicaCount: 1
+
+
+  nextcloud:
+    existingSecret:
+      enabled: true
+      usernameKey: username
+      passwordKey: password
+    update: 0
+    defaultConfigs:
+      .htaccess: true
+      redis.config.php: true
+      apache-pretty-urls.config.php: true
+      apcu.config.php: true
+      apps.config.php: false
+      autoconfig.php: true
+      smtp.config.php: true
+      proxy.config.php: |-
+        <?php
+        $CONFIG = array (
+          'trusted_proxies' => array(
+            0 => '127.0.0.1',
+            1 => '10.0.0.0/8',
+          ),
+          'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+        );
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+
+  internalDatabase:
+    enabled: false
+
+  externalDatabase:
+    enabled: true
+    type: postgresql
+    database: nextcloud
+    host: postgres.${var.namespace}.svc.cluster.local
+    existingSecret:
+      enabled: true
+      usernameKey: username
+      passwordKey: password
+
+  exernalRedis:
+    enabled: false
+    auth:
+      enabled: true
+      existingSecretPasswordKey: password
+
+  cronjob:
+    enabled: true
+
+  persistence:
+    enabled: true
+    nextcloudData:
+      enabled: true
+
+  resources:
+    requests:
+    cpu: 100m
+    memory: 512Mi
+    limits:
+    cpu: 2
+    memory: 1Gi
+
+  hpa:
+    enabled: true
+    cputhreshold: 60
+    minPods: 1
+    maxPods: 5
+
+  nginx:
+    enabled: true
+
+  # service:
+  #   port: 80
+
+  # phpClientHttpsFix:
+  #   enabled: true
+  #   protocol: https
