@@ -5,7 +5,29 @@ metadata:
   name: nextcloud
   namespace: app-nextcloud
 spec:
+  chain:
+    middlewares:
+      - name: https-only
+      - name: well-known
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: well-known
+  namespace: app-nextcloud
+spec:
   redirectRegex:
     permanent: true
     regex: "https://(.*)/.well-known/(?:card|cal)dav"
     replacement: "https://${1}/remote.php/dav"
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: https-only
+  namespace: app-nextcloud
+spec:
+  redirectScheme:
+    scheme: https
