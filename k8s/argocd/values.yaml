@@ -18,7 +18,6 @@ selfapp:
   sshkey: ""
 global:
   email: "ariel@sosnovsky.ca"
-  ingressAnnotations: {}
   tls:
     enabled: false
     issuer: ""

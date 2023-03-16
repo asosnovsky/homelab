@@ -1,9 +1,6 @@
 global:
   deployment: prod
   domain: "home.sosnovsky.ca"
-  ingressAnnotations:
-    cert-manager.io/cluster-issuer: letsencrypt
   tls:
     enabled: true
     issuer: "letsencrypt"
-    secretName: "tls-home.sosnovsky.ca"
