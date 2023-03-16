@@ -51,7 +51,7 @@ nextcloud:
       usernameKey: username
       passwordKey: password
 
-  exernalRedis:
+  externalRedis:
     enabled: false
     existingSecret: "password.redis.nextcloud"
     auth:
