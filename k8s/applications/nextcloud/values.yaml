@@ -44,7 +44,7 @@ nextcloud:
     enabled: true
     type: postgresql
     database: nextcloud
-    host: postgres.${var.namespace}.svc.cluster.local
+    host: postgres.database.svc.cluster.local
     existingSecret:
       enabled: true
       usernameKey: username
