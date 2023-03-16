@@ -6,6 +6,7 @@ services:
   - prefix: "nextcloud"
     service: "nextcloud"
     namespace: "app-nextcloud"
+    port: 8080
 global: {}
 acmeServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
 skipTLSVerify: "false"
