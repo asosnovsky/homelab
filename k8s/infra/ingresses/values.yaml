@@ -2,6 +2,7 @@ reverseProxy: {}
 services:
   - prefix: "argocd.core"
     service: "argocd-server"
+    namespace: "argocd"
 global: {}
 acmeServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
 skipTLSVerify: "false"

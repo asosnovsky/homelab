@@ -1,7 +1,7 @@
 {{  if .Values.global.tls.enabled  }}
 ---
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
     name: {{ .Values.global.tls.issuer }}
 spec:
