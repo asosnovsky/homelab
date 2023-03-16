@@ -7,7 +7,8 @@ metadata:
 rules:
 - apiGroups: [""]
   resources: ["secrets"]
-  verbs: ["list", "create"]
+  verbs: ["get", "update", "create", "patch", "delete"]
+  resourceNames: ["password.pg.*"]
 - apiGroups: [""]
   resources: ["secrets"]
   verbs: ["get", "update", "create", "patch", "delete"]
