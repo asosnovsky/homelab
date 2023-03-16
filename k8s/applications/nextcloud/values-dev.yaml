@@ -1,0 +1,3 @@
+nextcloud:
+  nextcloud:
+    host: "nextcloud.me.local"
