@@ -1,15 +1,14 @@
-
-{{ if $.Values.global.tls.enabled }}
----
-apiVersion: v1
-kind: Secret
-type: "kubernetes.io/tls"
-metadata:
-  name: "argo-cert"
-data:
-    tls.key: 
-    tls.crt: 
-{{ end }}
+# {{ if $.Values.global.tls.enabled }}
+# ---
+# apiVersion: v1
+# kind: Secret
+# type: "kubernetes.io/tls"
+# metadata:
+#   name: "argo-cert"
+# data:
+#     tls.key:
+#     tls.crt:
+# {{ end }}
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -19,11 +18,11 @@ metadata:
   namespace: argocd
   annotations:
     homelab/ingress-type: "self-managed"
-  {{ if $.Values.global.ingressAnnotations }}
-    {{- range $k, $v := $.Values.global.ingressAnnotations }}
-    {{ $k -}}: "{{- $v -}}"
-    {{- end }}
-  {{ end }}
+  # {{ if $.Values.global.ingressAnnotations }}
+  #   {{- range $k, $v := $.Values.global.ingressAnnotations }}
+  #   {{ $k -}}: "{{- $v -}}"
+  #   {{- end }}
+  # {{ end }}
 spec:
   rules:
     - host: "argocd.{{ .Values.global.domain }}"

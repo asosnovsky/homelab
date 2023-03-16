@@ -15,25 +15,4 @@ spec:
         - http01:
             ingress:
                 class: traefik
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: tls-{{ .Values.global.tls.issuer }}
-spec:
-  secretName: {{ .Values.global.tls.secretName }}
-  issuerRef: 
-    kind: ClusterIssuer
-    name: {{ .Values.global.tls.issuer }}
-  commonName: "*.{{ .Values.global.domain }}"
-  dnsNames:
-    - "*.{{ .Values.global.domain }}"
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: TLSStore
-metadata:
-  name: tls-{{ .Values.global.tls.issuer }}
-spec:
-  defaultCertificate:
-    secretName: {{ .Values.global.tls.secretName }}
 {{ end }}
