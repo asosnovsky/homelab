@@ -24,3 +24,5 @@ helm template $app $full_path --namespace $app \
     --values $full_path/values.yaml \
     --values $full_path/values-$deployment.yaml \
     > $tmp_path
+
+echo $tmp_path

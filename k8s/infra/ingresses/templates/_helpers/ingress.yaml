@@ -33,6 +33,11 @@ kind: Ingress
 metadata:
   name: "{{.prefix}}.{{.global.domain}}"
   namespace: {{ .namespace }}
+  annotations:
+    homelab-ingress/managing-app-namespace: "ingresses"
+  {{ range $k, $v := (.annotations | default (dict )) }}
+    {{ $k }}: {{ $v }}
+  {{ end }}
 spec:
   rules:
   - host: "{{.prefix}}.{{.global.domain}}"
