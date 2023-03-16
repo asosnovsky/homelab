@@ -1,9 +1,28 @@
+
+{{ if $.Values.global.tlsEnable }}
+---
+apiVersion: v1
+kind: Secret
+type: "kubernetes.io/tls"
+metadata:
+  name: "argo-cert"
+data:
+  tls.key: ""
+  tls.crt: ""
+{{ end }}
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argocd-server
   namespace: argocd
+  annotations:
+  {{- if $.Values.global.ingressAnnotations -}}
+    {{- range $k, $v := $.Values.global.ingressAnnotations }}
+    {{ $k -}}: "{{- $v -}}"
+    {{- end }}
+  {{ end }}
 spec:
   rules:
     - host: "argocd.{{ .Values.global.domain }}"
@@ -16,3 +35,9 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
+    {{- if $.Values.global.tlsEnable }}
+    tls:
+      - secretName: "argo-cert"
+        hosts:
+          - "argocd.{{ $.Values.global.domain }}"
+    {{- end }}

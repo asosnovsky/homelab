@@ -20,3 +20,4 @@ global:
   email: "ariel@sosnovsky.ca"
   ingressAnnotations: {}
   tlsEnable: false
+  domain: ""
