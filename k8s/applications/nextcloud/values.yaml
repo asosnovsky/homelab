@@ -52,7 +52,7 @@ nextcloud:
       passwordKey: password
 
   externalRedis:
-    enabled: false
+    enabled: true
     existingSecret: "password.redis.nextcloud"
     auth:
       enabled: true
