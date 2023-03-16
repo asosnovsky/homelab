@@ -18,7 +18,8 @@ metadata:
   name: argocd-server
   namespace: argocd
   annotations:
-  {{- if $.Values.global.ingressAnnotations -}}
+    self/managed: "true"
+  {{ if $.Values.global.ingressAnnotations }}
     {{- range $k, $v := $.Values.global.ingressAnnotations }}
     {{ $k -}}: "{{- $v -}}"
     {{- end }}
@@ -35,9 +36,9 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
-    {{- if $.Values.global.tlsEnable }}
-    tls:
-      - secretName: "argo-cert"
-        hosts:
-          - "argocd.{{ $.Values.global.domain }}"
-    {{- end }}
+  {{ if $.Values.global.tlsEnable }}
+  tls:
+    - secretName: "argo-cert"
+      hosts:
+        - "argocd.{{ $.Values.global.domain }}"
+  {{ end }}
