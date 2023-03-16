@@ -22,47 +22,6 @@ spec:
     protocol: TCP
     targetPort: {{ $data.port }}
 
-
-{{  if $.Values.global.tls.enabled  }}
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: "tls-{{$prefix}}.{{$.Values.global.domain}}"
-spec:
-  secretName: "tls-{{$prefix}}.{{$.Values.global.domain}}"
-  issuerRef: 
-    kind: Issuer
-    name: "{{ $.Values.global.tls.issuer }}"
-  commonName: "{{$prefix}}.{{$.Values.global.domain}}"
-  dnsNames:
-    - "{{$prefix}}.{{$.Values.global.domain}}"
-{{ end }}
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: "reverse-proxy-{{$prefix}}"
-  annotations:
-    homelab/ingress-type: "reverse-proxy"
-spec:
-  rules:
-  - host: "{{$prefix}}.{{$.Values.global.domain}}"
-    http:
-      paths:
-      - backend:
-          service:
-            name: "reverse-proxy-{{$prefix}}"
-            port:
-              number: 80
-        path: /
-        pathType: Prefix
-  {{ if $.Values.global.tls.enabled }}
-  tls:
-    - secretName: "tls-{{$prefix}}.{{$.Values.global.domain}}"
-      hosts:
-        - "{{$prefix}}.{{$.Values.global.domain}}"
-  {{ end }}
+{{ include "homelab.ingress" (dict "service" (printf "reverse-proxy-%s" $prefix) "prefix" $prefix "global" $.Values.global)}}
 
 {{ end }}
