@@ -37,23 +37,6 @@ nextcloud:
         maxSurge: 1
         maxUnavailable: 0
 
-    # extraEnv:
-    #   # - name: VIRTUAL_HOST
-    #   #   value: var.host
-    #   # - name: NEXTCLOUD_HOSTNAME
-    #   #   value: var.host
-    #   - name: REDIS_HOST
-    #     value: redis-master.redis.svc.cluster.local
-    #   - name: REDIS_HOST_PORT
-    #     value: "6379"
-    #   - name: REDIS_HOST_PASSWORD
-    #     valueFrom:
-    #       secretKeyRef:
-    #         name: "password.redis.nextcloud"
-    #         key: password
-    #   # - name: TRUSTED_PROXIES
-    #   #   value: traefik.traefik
-
   internalDatabase:
     enabled: false
 
@@ -72,12 +55,6 @@ nextcloud:
     enabled: true
     auth:
       enabled: true
-  # externalRedis:
-  #   enabled: true
-  #   existingSecret: "password.redis.nextcloud"
-  #   auth:
-  #     enabled: true
-  #     existingSecretPasswordKey: password
 
   cronjob:
     enabled: true
@@ -103,10 +80,3 @@ nextcloud:
 
   nginx:
     enabled: true
-
-  # service:
-  #   port: 80
-
-  # phpClientHttpsFix:
-  #   enabled: true
-  #   protocol: https
