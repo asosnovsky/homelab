@@ -1,9 +1,0 @@
----
-kind: Secret
-apiVersion: v1
-metadata:
-  name: homelab.ingress.cert.argocd
-  namespace: "{{ .Release.Namespace }}"
-type: kubernetes.io/tls
-data:
-  empty: ""
