@@ -53,6 +53,7 @@ nextcloud:
 
   exernalRedis:
     enabled: false
+    existingSecret: "password.redis.nextcloud"
     auth:
       enabled: true
       existingSecretPasswordKey: password
