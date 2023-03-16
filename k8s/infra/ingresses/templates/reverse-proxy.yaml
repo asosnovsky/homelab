@@ -62,7 +62,7 @@ spec:
   tls:
     - secretName: "tls-{{$prefix}}.{{$.Values.global.domain}}"
       hosts:
-        - "tls-{{$prefix}}.{{$.Values.global.domain}}"
+        - "{{$prefix}}.{{$.Values.global.domain}}"
   {{ end }}
 
 {{ end }}
