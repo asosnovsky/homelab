@@ -6,6 +6,11 @@ metadata:
   namespace: "{{ .Release.Namespace }}"
 spec:
   template:
+    metadata:
+      annotations:
+        checksum/run-sh: "{{ include "pg-users.entry" . | sha256sum }}"
+        checksum/main-tf: "{{ include "pg-users.terraform" . | sha256sum }}"
+        checksum/users-tfvars: "{{ (print "db_users = " ( .Values.userGeneration.users | toJson  )) | sha256sum }}"
     spec:
       serviceAccount: "{{ .Release.Name }}"
       serviceAccountName: "{{ .Release.Name }}"
