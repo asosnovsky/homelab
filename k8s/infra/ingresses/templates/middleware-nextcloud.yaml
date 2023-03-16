@@ -8,6 +8,7 @@ spec:
   chain:
     middlewares:
       - name: https-only
+      - name: strict-transport
       - name: well-known
 
 ---
@@ -31,3 +32,15 @@ metadata:
 spec:
   redirectScheme:
     scheme: https
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strict-transport
+spec:
+  headers:
+    customRequestHeaders:
+      "Strict-Transport-Security": "max-age=15552000; includeSubDomains"
+    customResponseHeaders:
+      "Strict-Transport-Security": "max-age=15552000; includeSubDomains"
