@@ -7,7 +7,6 @@ nextcloud:
 
   replicaCount: 1
 
-
   nextcloud:
     existingSecret:
       enabled: true
@@ -37,7 +36,7 @@ nextcloud:
       rollingUpdate:
         maxSurge: 1
         maxUnavailable: 0
-      
+
     # extraEnv:
     #   # - name: VIRTUAL_HOST
     #   #   value: var.host
@@ -71,7 +70,7 @@ nextcloud:
 
   redis:
     enabled: true
-    auth: 
+    auth:
       enabled: true
   # externalRedis:
   #   enabled: true
@@ -79,7 +78,6 @@ nextcloud:
   #   auth:
   #     enabled: true
   #     existingSecretPasswordKey: password
-
 
   cronjob:
     enabled: true
@@ -91,11 +89,11 @@ nextcloud:
 
   resources:
     requests:
-    cpu: 100m
-    memory: 512Mi
+      cpu: 100m
+      memory: 512Mi
     limits:
-    cpu: 2
-    memory: 1Gi
+      cpu: 2
+      memory: 1Gi
 
   hpa:
     enabled: true
