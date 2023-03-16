@@ -16,3 +16,5 @@ selfapp:
   commit: "stable"
   repo: "asosnovsky/homelab"
   sshkey: ""
+global:
+  email: "ariel@sosnovsky.ca"
