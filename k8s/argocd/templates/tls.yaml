@@ -6,5 +6,4 @@ metadata:
   namespace: "{{ .Release.Namespace }}"
 type: kubernetes.io/tls
 data:
-    tls.crt: 
-    tls.key: 
+  empty: ""
