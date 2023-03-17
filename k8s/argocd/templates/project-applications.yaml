@@ -10,7 +10,7 @@ metadata:
 spec:
   description: "homelab applications"
   orphanedResources:
-    warn: true
+    warn: false
   sourceRepos:
     - "git@github.com:{{ .Values.selfapp.repo }}.git"
   destinations:
