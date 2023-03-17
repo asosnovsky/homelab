@@ -18,10 +18,10 @@ metadata:
   name: well-known
   namespace: app-nextcloud
 spec:
-  replacePathRegex:
-    # permanent: true
-    regex: "^/.well-known/ca(l|rd)dav"
-    replacement: "/remote.php/dav/"
+  redirectRegex:
+    permanent: true
+    regex: "https://(.*)/.well-known/(?:card|cal)dav"
+    replacement: "https://${1}/remote.php/dav"
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -38,8 +38,13 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: strict-transport
+  namespace: app-nextcloud
 spec:
   headers:
     hostsProxyHeaders:
       - "X-Forwarded-Host"
     referrerPolicy: "same-origin"
+    stsSeconds: 15552000
+    stsIncludeSubdomains: true
+    stsPreload: true
+    forceSTSHeader: true
