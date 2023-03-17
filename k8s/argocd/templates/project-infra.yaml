@@ -9,6 +9,8 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   description: "infrastructure services"
+  orphanedResources:
+    warn: true
   sourceRepos:
     - "git@github.com:{{ .Values.selfapp.repo }}.git"
   destinations:

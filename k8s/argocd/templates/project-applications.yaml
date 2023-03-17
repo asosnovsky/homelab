@@ -9,6 +9,8 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   description: "homelab applications"
+  orphanedResources:
+    warn: true
   sourceRepos:
     - "git@github.com:{{ .Values.selfapp.repo }}.git"
   destinations:
