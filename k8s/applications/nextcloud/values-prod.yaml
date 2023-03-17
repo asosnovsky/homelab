@@ -2,7 +2,7 @@ nextcloud:
   nextcloud:
     host: "nextcloud.home.sosnovsky.ca"
 
-    defaultConfigs:
+    configs:
       proxy.config.php: |-
         <?php
         $CONFIG = array (

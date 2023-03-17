@@ -22,6 +22,7 @@ nextcloud:
       apps.config.php: false
       autoconfig.php: true
       smtp.config.php: true
+    configs:
       proxy.config.php: |-
         <?php
         $CONFIG = array (
