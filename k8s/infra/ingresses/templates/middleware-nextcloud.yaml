@@ -19,7 +19,7 @@ metadata:
   namespace: app-nextcloud
 spec:
   replacePathRegex:
-    permanent: true
+    # permanent: true
     regex: "^/.well-known/ca(l|rd)dav"
     replacement: "/remote.php/dav/"
 
