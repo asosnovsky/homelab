@@ -1,6 +1,7 @@
 postgresql:
-  gloabl:
-    storageClass: "truenas-scale-nfs-k3s-cluster-general"
   primary:
     persistence:
+      existingClaim: database-postgres
       storageClass: "truenas-scale-nfs-k3s-cluster-general"
+      accessModes:
+        - ReadWriteMany
