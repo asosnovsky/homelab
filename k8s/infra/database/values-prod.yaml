@@ -1,0 +1,2 @@
+gloabl:
+  storageClass: "truenas-scale-nfs-k3s-cluster-general"
