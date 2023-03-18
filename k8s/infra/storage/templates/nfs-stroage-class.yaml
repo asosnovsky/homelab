@@ -5,7 +5,7 @@ metadata:
   name: truenas-scale-nfs-family-storage
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: truenas.local
+  server: "192.168.8.107"
   share: /mnt/EightTerra/FamilyStorage
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
@@ -19,7 +19,7 @@ metadata:
   name: truenas-scale-nfs-k3s-cluster-general
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: truenas.local
+  server: "192.168.8.107"
   share: /mnt/EightTerra/k3s-cluster
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
