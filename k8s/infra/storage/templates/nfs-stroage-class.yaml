@@ -20,7 +20,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: http://truenas.local/
-  share: /k3s-cluster-general
+  share: k3s-cluster-general
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
