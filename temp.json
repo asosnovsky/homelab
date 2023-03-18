@@ -2,15 +2,17 @@
   "apiVersion": "v1",
   "kind": "Namespace",
   "metadata": {
-    "creationTimestamp": "2023-03-15T19:06:12Z",
-    "deletionTimestamp": "2023-03-16T01:21:58Z",
-    "labels": {
-      "kubernetes.io/metadata.name": "argocd",
-      "name": "argocd"
+    "annotations": {
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"creationTimestamp\":null,\"name\":\"kubernetes-dashboard\"},\"spec\":{},\"status\":{}}\n"
     },
-    "name": "argocd",
-    "resourceVersion": "2102061",
-    "uid": "ba44729d-fddb-4c59-b039-f0d5b206709f"
+    "creationTimestamp": "2023-03-18T02:33:43Z",
+    "deletionTimestamp": "2023-03-18T02:56:42Z",
+    "labels": {
+      "kubernetes.io/metadata.name": "kubernetes-dashboard"
+    },
+    "name": "kubernetes-dashboard",
+    "resourceVersion": "2178986",
+    "uid": "d8d91bf1-db57-4add-b1e1-28e237cb9f2d"
   },
   "spec": {
     "finalizers": []
@@ -18,38 +20,38 @@
   "status": {
     "conditions": [
       {
-        "lastTransitionTime": "2023-03-16T01:22:05Z",
+        "lastTransitionTime": "2023-03-18T02:56:48Z",
         "message": "All resources successfully discovered",
         "reason": "ResourcesDiscovered",
         "status": "False",
         "type": "NamespaceDeletionDiscoveryFailure"
       },
       {
-        "lastTransitionTime": "2023-03-16T01:22:05Z",
+        "lastTransitionTime": "2023-03-18T02:56:48Z",
         "message": "All legacy kube types successfully parsed",
         "reason": "ParsedGroupVersions",
         "status": "False",
         "type": "NamespaceDeletionGroupVersionParsingFailure"
       },
       {
-        "lastTransitionTime": "2023-03-16T01:22:05Z",
-        "message": "All content successfully deleted, may be waiting on finalization",
-        "reason": "ContentDeleted",
-        "status": "False",
+        "lastTransitionTime": "2023-03-18T02:57:26Z",
+        "message": "Failed to delete all resource types, 1 remaining: unexpected items still remain in namespace: kubernetes-dashboard for gvr: /v1, Resource=pods",
+        "reason": "ContentDeletionFailed",
+        "status": "True",
         "type": "NamespaceDeletionContentFailure"
       },
       {
-        "lastTransitionTime": "2023-03-16T01:22:05Z",
-        "message": "Some resources are remaining: applications.argoproj.io has 6 resource instances, appprojects.argoproj.io has 1 resource instances",
+        "lastTransitionTime": "2023-03-18T02:56:48Z",
+        "message": "Some resources are remaining: pods. has 1 resource instances",
         "reason": "SomeResourcesRemain",
         "status": "True",
         "type": "NamespaceContentRemaining"
       },
       {
-        "lastTransitionTime": "2023-03-16T01:22:05Z",
-        "message": "Some content in the namespace has finalizers remaining: resources-finalizer.argocd.argoproj.io in 7 resource instances",
-        "reason": "SomeFinalizersRemain",
-        "status": "True",
+        "lastTransitionTime": "2023-03-18T02:56:48Z",
+        "message": "All content-preserving finalizers finished",
+        "reason": "ContentHasNoFinalizers",
+        "status": "False",
         "type": "NamespaceFinalizersRemaining"
       }
     ],
