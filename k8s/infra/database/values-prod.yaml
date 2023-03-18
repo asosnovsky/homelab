@@ -1,3 +1,6 @@
 postgresql:
   gloabl:
     storageClass: "truenas-scale-nfs-k3s-cluster-general"
+  primary:
+    persistence:
+      storageClass: "truenas-scale-nfs-k3s-cluster-general"
