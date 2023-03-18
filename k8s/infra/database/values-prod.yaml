@@ -1,2 +1,3 @@
-gloabl:
-  storageClass: "truenas-scale-nfs-k3s-cluster-general"
+postgresql:
+  gloabl:
+    storageClass: "truenas-scale-nfs-k3s-cluster-general"
