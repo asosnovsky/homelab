@@ -1,0 +1,22 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "csi-driver-nfs"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  project: meta-infrastructure
+  source:
+    chart: csi-driver-nfs
+    repoURL: "https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts"
+    targetRevision: "v4.2.0"
+    helm:
+      releaseName: csi-driver-nfs
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: "csi-driver-nfs"
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
