@@ -1,0 +1,24 @@
+{{- if .Values.selfapp.enabled -}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "charts"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  project: default
+  source:
+    repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
+    targetRevision: "{{ .Values.selfapp.commit }}"
+    path: k8s/charts
+    helm:
+        values: |-
+            global: 
+                {{- .Values.global | toYaml | nindent 28 }}
+        valueFiles:
+            - values.yaml
+            - values-{{ .Values.global.deployment }}.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: "{{ .Release.Namespace }}"
+{{- end -}}
