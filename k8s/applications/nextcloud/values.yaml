@@ -68,7 +68,6 @@ nextcloud:
     nextcloudData:
       storageClass: "nfs-generic"
       enabled: true
-    storageClass: "nfs-generic"
   resources:
     requests:
       cpu: 100m
