@@ -8,9 +8,6 @@ nextcloud:
   replicaCount: 1
 
   nextcloud:
-    securityContext:
-      runAsUser: 65534
-      runAsGroup: 65534
     existingSecret:
       enabled: true
       secretName: "password.nextcloud.admin-initial"
