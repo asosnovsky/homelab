@@ -9,15 +9,16 @@ spec:
   source:
     chart: nfs-subdir-external-provisioner
     repoURL: "https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
-    targetRevision: "v4.0.2"
+    targetRevision: " "
     helm:
       releaseName: nfs-subdir-external-provisioner
-      values: |-
-        nfs:
-          server: {{ .Values.nfs.server }}
-          path: {{ .Values.nfs.share }}
-        storageClass:
-          name: "nfs-generic"
+      parameters:
+        - name: nfs.server
+          value: "{{ .Values.nfs.server }}"
+        - name: nfs.path
+          value: "{{ .Values.nfs.share }}"
+        - name: storageClass.name
+          value: "nfs-generic"
   destination:
     server: https://kubernetes.default.svc
     namespace: "nfs-subdir-external-provisioner"
