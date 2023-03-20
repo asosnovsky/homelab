@@ -68,6 +68,7 @@ nextcloud:
 
   persistence:
     enabled: true
+    storageClass: "nfs-generic"
     nextcloudData:
       storageClass: "nfs-generic"
       enabled: true
