@@ -9,7 +9,7 @@ spec:
   source:
     chart: nfs-subdir-external-provisioner
     repoURL: "https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
-    targetRevision: "v4.2.0"
+    targetRevision: "4.2.0"
     helm:
       releaseName: nfs-subdir-external-provisioner
       values: |-
