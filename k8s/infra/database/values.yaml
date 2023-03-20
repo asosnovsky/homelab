@@ -17,7 +17,6 @@ postgresql:
       storageClass: "nfs-generic"
       accessModes:
         - ReadWriteMany
-
   readReplicas:
     replicaCount: 0
 userGeneration:
