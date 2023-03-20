@@ -2,19 +2,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "csi-driver-nfs"
+  name: "nfs-generic"
   namespace: "{{ .Release.Namespace }}"
 spec:
   project: meta-infrastructure
   source:
-    chart: csi-driver-nfs
-    repoURL: "https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts"
+    chart: nfs-subdir-external-provisioner
+    repoURL: "https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
     targetRevision: "v4.2.0"
     helm:
-      releaseName: csi-driver-nfs
+      releaseName: nfs-subdir-external-provisioner
+      values: |-
+        nfs:
+          server: {{ .Values.nfs.server }}
+          path: {{ .Values.nfs.share }}
+        storageClass:
+          name: "nfs-generic"
   destination:
     server: https://kubernetes.default.svc
-    namespace: "csi-driver-nfs"
+    namespace: "nfs-subdir-external-provisioner"
   syncPolicy:
     automated:
       selfHeal: true
