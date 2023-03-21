@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         k8s-app: debugger
+    spec:
       serviceAccount: default
       restartPolicy: Always
       containers:
