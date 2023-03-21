@@ -4,3 +4,5 @@ global:
   tls:
     enabled: true
     issuer: "letsencrypt"
+debugger:
+  enabled: true
