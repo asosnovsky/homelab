@@ -28,10 +28,10 @@ spec:
           resources:
             limits:
               cpu: "1"
-              memory: 500Mb
+              memory: "500MiB"
             requests:
               cpu: "1"
-              memory: 500Mb
+              memory: "500MiB"
           image: ghcr.io/headlamp-k8s/headlamp:latest
           args:
             - "-in-cluster"
