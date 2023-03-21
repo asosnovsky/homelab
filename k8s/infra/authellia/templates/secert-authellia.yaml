@@ -2,14 +2,14 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: "{{ .Values.nextcloud.externalDatabase.existingSecret.secretName }}"
+  name: "{{ .Values.authelia.secret.existingSecret }}"
 spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
     name: database
   target:
-    name: "{{ .Values.nextcloud.externalDatabase.existingSecret.secretName }}"
+    name: "{{ .Values.authelia.secret.existingSecret }}"
   data:
     - secretKey: "{{ .Values.nextcloud.externalDatabase.existingSecret.usernameKey }}"
       remoteRef:
