@@ -5,7 +5,7 @@ nextcloud:
     pullPolicy: IfNotPresent
     flavor: fpm
 
-  replicaCount: 1
+  replicaCount: 2
 
   nextcloud:
     existingSecret:
@@ -70,11 +70,11 @@ nextcloud:
       enabled: true
   resources:
     requests:
-      cpu: 100m
-      memory: 512Mi
+      cpu: "500m"
+      memory: "1Gi"
     limits:
-      cpu: "2"
-      memory: 1Gi
+      cpu: "3"
+      memory: 5Gi
 
   hpa:
     enabled: true
