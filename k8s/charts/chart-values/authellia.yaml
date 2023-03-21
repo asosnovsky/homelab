@@ -1,0 +1,93 @@
+image:
+  registry: ghcr.io
+  repository: authelia/authelia
+  tag: ""
+  pullPolicy: IfNotPresent
+
+ingress:
+  enabled: true
+  annotations: {}
+  certManager: true
+  className: traefik
+  subdomain: auth
+  tls:
+    enabled: true
+    secret: authelia-tls
+  traefikCRD:
+    enabled: true
+    disableIngressRoute: false
+    sticky: true
+
+pod:
+  kind: DaemonSet
+  replicas: 1
+  revisionHistoryLimit: 5
+  env:
+    - name: TZ
+      value: America/Toronto
+
+  resources:
+    limits:
+      cpu: "4.00"
+      memory: 125Mi
+    requests:
+      cpu: "0.25"
+      memory: 50Mi
+
+configMap:
+  enabled: true
+  theme: dark
+
+  ## The available providers are: `local`, `mysql`, `postgres`. You must use one and only one of these providers.
+  storage:
+    postgres:
+      enabled: true
+      host: postgres.database.svc.cluster.local
+      port: 5432
+      database: authelia
+      schema: public
+      username: authelia
+      timeout: 5s
+
+  notifier:
+    disable_startup_check: false
+    smtp:
+      enabled: false
+      enabledSecret: false
+      host: smtp.mail.svc.cluster.local
+      port: 25
+      timeout: 5s
+      username: test
+      sender: admin@example.com
+      identifier: localhost
+      startup_check_address: test@authelia.com
+      disable_require_tls: false
+      disable_starttls: false
+      tls:
+        server_name: ""
+        skip_verify: false
+    filesystem:
+      enabled: true
+      filename: /config/notification.txt
+
+secret:
+  existingSecret: authelia
+  mountPath: /secrets
+  excludeVolumeAndMounts: false
+
+  storage:
+    key: STORAGE_PASSWORD
+    value: ""
+    filename: STORAGE_PASSWORD
+  session:
+    key: SESSION_ENCRYPTION_KEY
+    value: ""
+    filename: SESSION_ENCRYPTION_KEY
+  redis:
+    key: REDIS_PASSWORD
+    value: ""
+    filename: REDIS_PASSWORD
+  smtp:
+    key: SMTP_PASSWORD
+    value: ""
+    filename: SMTP_PASSWORD
