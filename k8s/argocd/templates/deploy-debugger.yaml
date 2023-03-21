@@ -1,0 +1,30 @@
+{{ if .Values.debugger.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debugger
+spec:
+  selector:
+    matchLabels:
+      k8s-app: debugger
+  template:
+    metadata:
+      labels:
+        k8s-app: debugger
+      serviceAccount: default
+      restartPolicy: Always
+      containers:
+        - image: bitnami/kubectl
+          name: debugger
+          command:
+            - sleep
+            - infinity
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "500M"
+            requests:
+              cpu: "200m"
+              memory: "500M"
+{{- end -}}
