@@ -1,5 +1,6 @@
 {
     "yaml.schemas": {
-        "https://raw.githubusercontent.com/rancher/k3d/main/pkg/config/config.versions.schema.json": "file:///workspaces/HomelabV2/k3d-default.yaml"
+        "https://raw.githubusercontent.com/rancher/k3d/main/pkg/config/config.versions.schema.json": "file:///workspaces/HomelabV2/k3d-default.yaml",
+        "https://json.schemastore.org/helmfile.json": "file:///home/ari/Projects/HomelabV2/k8s/infra/database/templates/user-generation/users-job.yaml"
     }
 }
