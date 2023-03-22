@@ -11,12 +11,7 @@ spec:
   target:
     name: "{{ .Values.authelia.secret.existingSecret }}"
   data:
-    - secretKey: "{{ .Values.nextcloud.externalDatabase.existingSecret.usernameKey }}"
+    - secretKey: "password"
       remoteRef:
-        key: "{{ .Values.nextcloud.externalDatabase.existingSecret.secretName }}"
-        property: username
-
-    - secretKey: "{{ .Values.nextcloud.externalDatabase.existingSecret.passwordKey }}"
-      remoteRef:
-        key: "{{ .Values.nextcloud.externalDatabase.existingSecret.secretName }}"
+        key: "password.pg.authelia"
         property: password
