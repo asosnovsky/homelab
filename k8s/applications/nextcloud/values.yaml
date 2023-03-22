@@ -13,7 +13,7 @@ nextcloud:
       secretName: "password.nextcloud.admin-initial"
       usernameKey: username
       passwordKey: password
-    update: 0
+    update: 1
     defaultConfigs:
       .htaccess: true
       redis.config.php: true
