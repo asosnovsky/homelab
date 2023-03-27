@@ -23,7 +23,7 @@ authelia:
   pod:
     kind: DaemonSet
     replicas: 1
-    revisionHistoryLimit: 2
+    revisionHistoryLimit: 1
     env:
       - name: TZ
         value: America/Toronto
