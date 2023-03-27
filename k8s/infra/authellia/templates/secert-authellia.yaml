@@ -10,6 +10,7 @@ spec:
     name: database
   target:
     name: "{{ .Values.authelia.secret.existingSecret }}"
+    creationPolicy: Owner
   data:
     - secretKey: "STORAGE_PASSWORD"
       remoteRef:
@@ -27,6 +28,7 @@ spec:
     name: secrets
   target:
     name: "{{ .Values.authelia.secret.existingSecret }}"
+    creationPolicy: Merge
   data:
     - secretKey: "SMTP_PASSWORD"
       remoteRef:
