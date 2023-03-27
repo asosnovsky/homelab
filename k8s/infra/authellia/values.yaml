@@ -77,7 +77,7 @@ redis:
     repository: bitnami/redis
     tag: 7.0.10-debian-11-r2
     pullPolicy: IfNotPresent
-  nameOverride: "redis-authelia"
+  fullnameOverride: "redis-authelia"
   architecture: replication
   auth:
     enabled: true
