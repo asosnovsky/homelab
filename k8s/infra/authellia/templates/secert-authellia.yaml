@@ -2,7 +2,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: "{{ .Values.authelia.secret.existingSecret }}"
+  name: "{{ .Values.authelia.secret.existingSecret }}-db"
 spec:
   refreshInterval: 1h
   secretStoreRef:
@@ -19,7 +19,7 @@ spec:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: "{{ .Values.authelia.secret.existingSecret }}"
+  name: "{{ .Values.authelia.secret.existingSecret }}-smtp"
 spec:
   refreshInterval: 1h
   secretStoreRef:
