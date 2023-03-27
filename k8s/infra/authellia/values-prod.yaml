@@ -10,6 +10,7 @@ authelia:
         username: ariel.sosnovsky@gmail.com
         sender: ariel.sosnovsky@gmail.com
         identifier: ariel.sosnovsky@gmail.com
+        startup_check_address: ariel@sosnovsky.ca
         host: smtp.gmail.com
         port: 465
       filesystem:
