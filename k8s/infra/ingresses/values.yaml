@@ -3,6 +3,11 @@ services:
   - prefix: "argocd.core"
     service: "argocd-server"
     namespace: "argocd"
+  - prefix: "demo"
+    service: "dummy-app"
+    namespace: "ingresses"
+    annotations:
+      traefik.ingress.kubernetes.io/router.middlewares: ingresses-forwardauth-authelia@kubernetescrd
   - prefix: "nextcloud"
     service: "nextcloud"
     namespace: "app-nextcloud"

@@ -39,6 +39,3 @@ spec:
     - name: http
       port: 80
       targetPort: 80
-
-
-{{ include "homelab.ingress" (dict "service" "dummy-app" "prefix" "demo" "global" $.Values.global "namespace" $.Release.Namespace)}}
