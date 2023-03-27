@@ -50,7 +50,7 @@ authelia:
       ldap:
         enabled: false
       file:
-        enabled: false
+        enabled: true
         path: /config/users_database.yml
         watch: true
         search:
