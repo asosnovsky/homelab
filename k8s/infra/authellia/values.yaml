@@ -88,7 +88,8 @@ authelia:
       key: SMTP_PASSWORD
     jwt:
       key: JWT_TOKEN
-
+    storageEncryptionKey:
+      key: STORAGE_ENCRYPTION_KEY
 redis:
   image:
     registry: docker.io
