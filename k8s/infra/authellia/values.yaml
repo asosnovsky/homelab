@@ -90,6 +90,8 @@ authelia:
       key: JWT_TOKEN
     storageEncryptionKey:
       key: STORAGE_ENCRYPTION_KEY
+    ldap:
+      key: LDAP_PASSWORD
 redis:
   image:
     registry: docker.io
