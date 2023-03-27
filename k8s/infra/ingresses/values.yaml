@@ -9,12 +9,6 @@ services:
     port: 8080
     annotations:
       traefik.ingress.kubernetes.io/router.middlewares: app-nextcloud-nextcloud@kubernetescrd
-  - prefix: "vault.core"
-    service: "vault"
-    namespace: "hashicorp-vault"
-    port: 8200
-    annotations:
-      traefik.ingress.kubernetes.io/router.middlewares: hashicorp-vault-login@kubernetescrd
 global: {}
 acmeServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
 skipTLSVerify: "false"
