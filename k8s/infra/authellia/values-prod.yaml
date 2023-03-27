@@ -5,15 +5,15 @@ authelia:
     notifier:
       disable_startup_check: false
       smtp:
-        enabled: false
+        enabled: true
         enabledSecret: true
         username: ariel.sosnovsky@gmail.com
         sender: ariel.sosnovsky@gmail.com
         identifier: ariel.sosnovsky@gmail.com
         host: smtp.gmail.com
-        port: 587
+        port: 465
       filesystem:
-        enabled: true
+        enabled: false
   ingress:
     enabled: true
     certManager: true
