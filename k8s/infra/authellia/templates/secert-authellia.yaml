@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: secretName
+  name: "{{ .Values.authelia.secret.existingSecret }}"
   annotations:
     secret-generator.v1.mittwald.de/autogenerate: SESSION_ENCRYPTION_KEY
 data:
