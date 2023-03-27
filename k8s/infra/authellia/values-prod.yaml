@@ -1,5 +1,6 @@
 authelia:
   domain: "sosnovsky.ca"
+  default_redirection_url: "home.sosnovsky.ca"
   notifier:
     disable_startup_check: false
     smtp:
