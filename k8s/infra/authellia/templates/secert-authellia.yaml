@@ -4,7 +4,7 @@ kind: Secret
 metadata:
   name: "{{ .Values.authelia.secret.existingSecret }}"
   annotations:
-    secret-generator.v1.mittwald.de/autogenerate: SESSION_ENCRYPTION_KEY,REDIS_PASSWORD
+    secret-generator.v1.mittwald.de/autogenerate: SESSION_ENCRYPTION_KEY,REDIS_PASSWORD,JWT_TOKEN
 data:
   dummy_values: ""
 type: Opaque
