@@ -1,4 +1,4 @@
-{{  if .global.tls.enabled  }}
+{{  if .Values.global.tls.enabled  }}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
