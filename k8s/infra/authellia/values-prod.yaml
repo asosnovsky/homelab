@@ -7,9 +7,9 @@ authelia:
       smtp:
         enabled: true
         enabledSecret: true
-        username: arielsosnovsky@gmail.com
-        sender: authellia@sosnovsky.ca
-        identifier: arielsosnovsky@gmail.com
+        username: ariel.sosnovsky@gmail.com
+        sender: ariel.sosnovsky@gmail.com
+        identifier: ariel.sosnovsky@gmail.com
         host: smtp.gmail.com
         port: 587
       filesystem:
