@@ -1,4 +1,5 @@
 authelia:
+  nameOverride: main-authelia
   image:
     registry: ghcr.io
     repository: authelia/authelia
