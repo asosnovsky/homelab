@@ -1,3 +1,4 @@
 authelia:
   domain: "me.local"
-  default_redirection_url: "me.local"
+  configMap:
+    default_redirection_url: "me.local"
