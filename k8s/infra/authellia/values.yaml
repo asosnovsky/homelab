@@ -46,6 +46,7 @@ authelia:
   configMap:
     enabled: true
     theme: dark
+    default_2fa_method: totp
 
     access_control:
       secret:
