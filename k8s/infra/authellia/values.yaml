@@ -39,7 +39,8 @@ authelia:
   configMap:
     enabled: true
     theme: dark
-
+    ldap:
+      enabled: false
     storage:
       postgres:
         enabled: true
@@ -90,8 +91,6 @@ authelia:
       key: JWT_TOKEN
     storageEncryptionKey:
       key: STORAGE_ENCRYPTION_KEY
-    ldap:
-      key: LDAP_PASSWORD
 redis:
   image:
     registry: docker.io
