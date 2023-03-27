@@ -64,17 +64,71 @@ authelia:
 
     storage:
       key: STORAGE_PASSWORD
-      value: ""
-      filename: STORAGE_PASSWORD
     session:
       key: SESSION_ENCRYPTION_KEY
-      value: ""
-      filename: SESSION_ENCRYPTION_KEY
     redis:
       key: REDIS_PASSWORD
-      value: ""
-      filename: REDIS_PASSWORD
     smtp:
       key: SMTP_PASSWORD
-      value: ""
-      filename: SMTP_PASSWORD
+
+redis:
+  image:
+    registry: docker.io
+    repository: bitnami/redis
+    tag: 7.0.10-debian-11-r2
+    pullPolicy: IfNotPresent
+
+  architecture: replication
+  auth:
+    enabled: true
+    existingSecret: "authelia"
+    existingSecretPasswordKey: "REDIS_PASSWORD"
+    usePasswordFiles: false
+
+  master:
+    count: 1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    persistence:
+      enabled: true
+      size: "8Gi"
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+    service:
+      type: ClusterIP
+      ports:
+        redis: 6379
+
+  replica:
+    replicaCount: 1
+    containerPorts:
+      redis: 6379
+    resources:
+      limits:
+        cpu: 250m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 8Gi
+    service:
+      type: ClusterIP
+      ports:
+        redis: 6379
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 4
+      targetCPU: "80"
+      targetMemory: "80"
