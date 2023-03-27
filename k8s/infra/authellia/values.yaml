@@ -6,68 +6,6 @@ authelia:
     tag: ""
     pullPolicy: IfNotPresent
 
-  access_control:
-    secret:
-      enabled: true
-      key: configuration.acl.yaml
-    ## Default policy can either be 'bypass', 'one_factor', 'two_factor' or 'deny'. It is the policy applied to any
-    default_policy: two_factor
-    networks: []
-    # networks:
-    # - name: private
-    #   networks:
-    #   - 10.0.0.0/8
-    #   - 172.16.0.0/12
-    #   - 192.168.0.0/16
-    # - name: vpn
-    #   networks:
-    #   - 10.9.0.0/16
-    rules: []
-    # rules:
-    # - domain_regex: '^.*\.example.com$'
-    #   policy: bypass
-    # - domain: public.example.com
-    #   policy: bypass
-    # - domain: "*.example.com"
-    #   policy: bypass
-    #   methods:
-    #   - OPTIONS
-    # - domain: secure.example.com
-    #   policy: one_factor
-    #   networks:
-    #   - private
-    #   - vpn
-    #   - 192.168.1.0/24
-    #   - 10.0.0.1
-    # - domain:
-    #   - secure.example.com
-    #   - private.example.com
-    #   policy: two_factor
-    # - domain: singlefactor.example.com
-    #   policy: one_factor
-    # - domain: "mx2.mail.example.com"
-    #   subject: "group:admins"
-    #   policy: deny
-    # - domain: "*.example.com"
-    #   subject:
-    #   - "group:admins"
-    #   - "group:moderators"
-    #   policy: two_factor
-    # - domain: dev.example.com
-    #   resources:
-    #   - "^/groups/dev/.*$"
-    #   subject: "group:dev"
-    #   policy: two_factor
-    # - domain: dev.example.com
-    #   resources:
-    #   - "^/users/john/.*$"
-    #   subject:
-    #   - ["group:dev", "user:john"]
-    #   - "group:admins"
-    #   policy: two_factor
-    # - domain: "{user}.example.com"
-    #   policy: bypass
-
   ingress:
     enabled: true
     annotations: {}
@@ -108,6 +46,69 @@ authelia:
   configMap:
     enabled: true
     theme: dark
+
+    access_control:
+      secret:
+        enabled: true
+        key: configuration.acl.yaml
+      ## Default policy can either be 'bypass', 'one_factor', 'two_factor' or 'deny'. It is the policy applied to any
+      default_policy: two_factor
+      networks: []
+      # networks:
+      # - name: private
+      #   networks:
+      #   - 10.0.0.0/8
+      #   - 172.16.0.0/12
+      #   - 192.168.0.0/16
+      # - name: vpn
+      #   networks:
+      #   - 10.9.0.0/16
+      rules: []
+      # rules:
+      # - domain_regex: '^.*\.example.com$'
+      #   policy: bypass
+      # - domain: public.example.com
+      #   policy: bypass
+      # - domain: "*.example.com"
+      #   policy: bypass
+      #   methods:
+      #   - OPTIONS
+      # - domain: secure.example.com
+      #   policy: one_factor
+      #   networks:
+      #   - private
+      #   - vpn
+      #   - 192.168.1.0/24
+      #   - 10.0.0.1
+      # - domain:
+      #   - secure.example.com
+      #   - private.example.com
+      #   policy: two_factor
+      # - domain: singlefactor.example.com
+      #   policy: one_factor
+      # - domain: "mx2.mail.example.com"
+      #   subject: "group:admins"
+      #   policy: deny
+      # - domain: "*.example.com"
+      #   subject:
+      #   - "group:admins"
+      #   - "group:moderators"
+      #   policy: two_factor
+      # - domain: dev.example.com
+      #   resources:
+      #   - "^/groups/dev/.*$"
+      #   subject: "group:dev"
+      #   policy: two_factor
+      # - domain: dev.example.com
+      #   resources:
+      #   - "^/users/john/.*$"
+      #   subject:
+      #   - ["group:dev", "user:john"]
+      #   - "group:admins"
+      #   policy: two_factor
+      # - domain: "{user}.example.com"
+      #   policy: bypass
+
     authentication_backend:
       ldap:
         enabled: false
@@ -118,6 +119,7 @@ authelia:
         search:
           email: true
           case_insensitive: true
+
     storage:
       postgres:
         enabled: true
