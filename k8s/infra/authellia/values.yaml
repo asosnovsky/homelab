@@ -13,7 +13,7 @@ authelia:
     className: traefik
     subdomain: auth.core
     tls:
-      enabled: true
+      enabled: false
       secret: authelia-tls
     traefikCRD:
       enabled: true

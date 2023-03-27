@@ -15,6 +15,14 @@ authelia:
       filesystem:
         enabled: true
   ingress:
+    enabled: true
+    certManager: true
+    className: traefik
+    subdomain: auth.core
     tls:
-      enabled: false
+      enabled: true
       secret: authelia-tls
+    traefikCRD:
+      enabled: true
+      disableIngressRoute: false
+      sticky: true
