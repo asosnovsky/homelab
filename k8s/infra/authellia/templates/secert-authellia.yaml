@@ -1,4 +1,14 @@
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secretName
+  annotations:
+    secret-generator.v1.mittwald.de/autogenerate: SESSION_ENCRYPTION_KEY
+data:
+  dummy_values: ""
+type: Opaque
+---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
@@ -10,7 +20,7 @@ spec:
     name: database
   target:
     name: "{{ .Values.authelia.secret.existingSecret }}"
-    creationPolicy: Owner
+    creationPolicy: Merge
   data:
     - secretKey: "STORAGE_PASSWORD"
       remoteRef:
