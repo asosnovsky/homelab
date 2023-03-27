@@ -87,7 +87,7 @@ authelia:
     smtp:
       key: SMTP_PASSWORD
     jwt:
-    key: JWT_TOKEN
+      key: JWT_TOKEN
 
 redis:
   image:
