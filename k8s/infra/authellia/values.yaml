@@ -35,12 +35,27 @@ authelia:
       requests:
         cpu: "0.25"
         memory: 50Mi
+  persistence:
+    enabled: true
+    readOnly: false
+    storageClass: "nfs-generic"
+    accessModes:
+      - ReadWriteMany
+    size: 100Mi
 
   configMap:
     enabled: true
     theme: dark
-    ldap:
-      enabled: false
+    authentication_backend:
+      ldap:
+        enabled: false
+      file:
+        enabled: false
+        path: /config/users_database.yml
+        watch: true
+        search:
+          email: true
+          case_insensitive: true
     storage:
       postgres:
         enabled: true
