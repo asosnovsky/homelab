@@ -1,4 +1,5 @@
 authelia:
+  domain: "sosnovsky.ca"
   notifier:
     disable_startup_check: false
     smtp:

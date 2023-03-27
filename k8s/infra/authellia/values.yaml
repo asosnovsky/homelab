@@ -11,7 +11,7 @@ authelia:
     annotations: {}
     certManager: true
     className: traefik
-    subdomain: auth
+    subdomain: auth.core
     tls:
       enabled: true
       secret: authelia-tls
