@@ -39,7 +39,6 @@ authelia:
     enabled: true
     theme: dark
 
-    ## The available providers are: `local`, `mysql`, `postgres`. You must use one and only one of these providers.
     storage:
       postgres:
         enabled: true
@@ -54,19 +53,6 @@ authelia:
       disable_startup_check: false
       smtp:
         enabled: false
-        enabledSecret: false
-        host: smtp.mail.svc.cluster.local
-        port: 25
-        timeout: 5s
-        username: test
-        sender: admin@example.com
-        identifier: localhost
-        startup_check_address: test@authelia.com
-        disable_require_tls: false
-        disable_starttls: false
-        tls:
-          server_name: ""
-          skip_verify: false
       filesystem:
         enabled: true
         filename: /config/notification.txt

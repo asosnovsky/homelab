@@ -11,7 +11,24 @@ spec:
   target:
     name: "{{ .Values.authelia.secret.existingSecret }}"
   data:
-    - secretKey: "password"
+    - secretKey: "STORAGE_PASSWORD"
       remoteRef:
         key: "password.pg.authelia"
+        property: password
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: "{{ .Values.authelia.secret.existingSecret }}"
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets
+  target:
+    name: "{{ .Values.authelia.secret.existingSecret }}"
+  data:
+    - secretKey: "SMTP_PASSWORD"
+      remoteRef:
+        key: "smtp"
         property: password
