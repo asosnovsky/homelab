@@ -13,7 +13,7 @@ spec:
       labels:
         k8s-app: debugger
     spec:
-      serviceAccount: default
+      serviceAccount: argocd-application-controller
       restartPolicy: Always
       containers:
         - image: bitnami/kubectl
