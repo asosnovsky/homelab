@@ -1,0 +1,15 @@
+{{  if .global.tls.enabled  }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "tls-{{.Values.authelia.ingress.subdomain}}.{{.Values.authelia.domain}}"
+spec:
+  secretName: "{{.Values.authelia.ingress.tls.secret}}"
+  issuerRef: 
+    kind: ClusterIssuer
+    name: "{{ .Values.global.tls.issuer }}"
+  commonName: "{{.Values.authelia.ingress.subdomain}}.{{.Values.authelia.domain}}"
+  dnsNames:
+    - "{{.Values.authelia.ingress.subdomain}}.{{.Values.authelia.domain}}"
+{{ end }}

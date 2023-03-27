@@ -14,3 +14,7 @@ authelia:
         port: 587
       filesystem:
         enabled: true
+  ingress:
+    tls:
+      enabled: false
+      secret: authelia-tls
