@@ -9,6 +9,9 @@ services:
     port: 8080
     annotations:
       traefik.ingress.kubernetes.io/router.middlewares: app-nextcloud-nextcloud@kubernetescrd
+  - prefix: "dashboard"
+    service: "headlamp"
+    namespace: "dashboard"
 global: {}
 acmeServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
 skipTLSVerify: "false"
