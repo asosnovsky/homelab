@@ -9,7 +9,7 @@ spec:
   issuerRef: 
     kind: ClusterIssuer
     name: "{{ .Values.global.tls.issuer }}"
-  commonName: "authentik.core.{{.Values.authelia.domain}}"
+  commonName: "authentik.core.{{.Values.global.domain}}"
   dnsNames:
-    - "authentik.core.{{.Values.authelia.domain}}"
+    - "authentik.core.{{.Values.global.domain}}"
 {{ end }}

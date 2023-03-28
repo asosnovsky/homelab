@@ -17,6 +17,12 @@ pushd $full_path &> /dev/null
 helm dependency update &> /dev/null
 popd &> /dev/null
 
+if [ -f "$tmp_path" ]; then
+    echo "found existing file"
+    echo "renaming old file to "$tmp_path".old"
+    mv $tmp_path $tmp_path".old"
+fi
+
 helm template $app $full_path --namespace $app \
     --debug \
     --values $argocd_values_path \

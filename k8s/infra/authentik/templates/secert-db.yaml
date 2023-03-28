@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: "authentik-env"
-  # annotations:
+  annotations:
     secret-generator.v1.mittwald.de/autogenerate: AUTHENTIK_SECRET_KEY
 data:
   AUTHENTIK_POSTGRESQL__USER: "authentik"
