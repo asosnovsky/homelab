@@ -1,5 +1,10 @@
 authentik: {}
 auth:
+  authentik:
+    postgresql:
+      host: postgres.database.svc.cluster.local
+      name: authentik
+      user: authentik
   nameOverride: "authentik"
   fullnameOverride: "authentik"
   postgresql:
