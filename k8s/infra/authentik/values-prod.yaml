@@ -1,7 +1,8 @@
 auth:
   authentik:
-    from: "ariel.sosnovsky@gmail.com"
-    host: smtp.gmail.com
-    port: 465
-    username: ariel.sosnovsky@gmail.com
-    use_ssl: true
+    email:
+      from: "ariel.sosnovsky@gmail.com"
+      host: smtp.gmail.com
+      port: 465
+      username: ariel.sosnovsky@gmail.com
+      use_ssl: true
