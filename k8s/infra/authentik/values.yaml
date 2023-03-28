@@ -1,0 +1,26 @@
+authentik:
+  authentik:
+    secret_key: "changeme"
+    error_reporting:
+      enabled: true
+    envFrom:
+      - secretRef:
+          name: authentik-env
+
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hosts:
+      - host: authentik.core.home.sosnovsky.ca
+        paths:
+          - path: "/"
+            pathType: Prefix
+        tls:
+          - hosts:
+              - authentik.core.home.sosnovsky.ca
+            secretName: authentik-tls
+
+  postgresql:
+    enabled: false
+  redis:
+    enabled: true

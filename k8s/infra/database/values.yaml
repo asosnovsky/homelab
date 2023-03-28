@@ -24,3 +24,4 @@ userGeneration:
   users:
     - nextcloud
     - authelia
+    - authentik

@@ -1,0 +1,15 @@
+{{  if .Values.global.tls.enabled  }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "authentik-tls"
+spec:
+  secretName: "authentik-tls"
+  issuerRef: 
+    kind: ClusterIssuer
+    name: "{{ .Values.global.tls.issuer }}"
+  commonName: "authentik.core.{{.Values.authelia.domain}}"
+  dnsNames:
+    - "authentik.core.{{.Values.authelia.domain}}"
+{{ end }}
