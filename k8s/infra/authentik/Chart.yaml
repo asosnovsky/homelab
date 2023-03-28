@@ -7,4 +7,4 @@ dependencies:
   - name: authentik
     repository: https://charts.goauthentik.io
     version: "2023.3.1"
-    alias: authentikSettings
+    alias: auth

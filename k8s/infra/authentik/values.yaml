@@ -1,6 +1,7 @@
 authentik: {}
-authentikSettings:
+auth:
   nameOverride: "authentik"
+  fullnameOverride: "authentik"
   postgresql:
     enabled: false
   redis:
