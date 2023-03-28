@@ -1,7 +1,0 @@
-# ---
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: phpldapadmin-config
-# data:
-#   PHPLDAPADMIN_LDAP_HOSTS: "#PYTHON2BASH:[{ '{{ template "global.server" . }}'  : [{'server': [{'tls': True},{'port':{{ .Values.global.ldapPort }}}]},{'login': [{'bind_id': '{{ template "global.bindDN" . }}'  }]}]}]"
