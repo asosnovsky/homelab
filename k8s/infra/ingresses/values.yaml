@@ -7,7 +7,7 @@ services:
     service: "dummy-app"
     namespace: "ingresses"
     annotations:
-      traefik.ingress.kubernetes.io/router.middlewares: ingresses-forwardauth-authelia@kubernetescrd
+      traefik.ingress.kubernetes.io/router.middlewares: ingresses-forwardauth-authentik@kubernetescrd
   - prefix: "nextcloud"
     service: "nextcloud"
     namespace: "app-nextcloud"
