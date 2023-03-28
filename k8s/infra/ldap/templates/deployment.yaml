@@ -64,6 +64,8 @@ spec:
         env:
           - name: PHPLDAPADMIN_LDAP_HOSTS
             value: ldap.{{.Release.Namespace}}.svc.cluster.local
+          - name: PHPLDAPADMIN_HTTPS
+            value: "false"
         ports:
         - name: http
           containerPort: 80
