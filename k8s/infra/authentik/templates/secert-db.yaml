@@ -6,9 +6,9 @@ metadata:
   annotations:
     secret-generator.v1.mittwald.de/autogenerate: AUTHENTIK_SECRET_KEY
 data:
-  AUTHENTIK_POSTGRESQL__USER: "authentik"
-  AUTHENTIK_POSTGRESQL__NAME: "authentik"
-  AUTHENTIK_POSTGRESQL__HOST: "postgres.database.svc.cluster.local"
+  AUTHENTIK_POSTGRESQL__USER: {{"authentik" | b64enc }}
+  AUTHENTIK_POSTGRESQL__NAME: {{"authentik" | b64enc }}
+  AUTHENTIK_POSTGRESQL__HOST: {{"postgres.database.svc.cluster.local" | b64enc }}
 type: Opaque
 ---
 apiVersion: external-secrets.io/v1beta1
