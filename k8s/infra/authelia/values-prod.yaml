@@ -3,7 +3,7 @@ authelia:
   configMap:
     default_redirection_url: "https://auth.core.home.sosnovsky.ca"
     notifier:
-      disable_startup_check: true
+      disable_startup_check: false
       smtp:
         enabled: true
         enabledSecret: true
