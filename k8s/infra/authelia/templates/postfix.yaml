@@ -54,6 +54,8 @@ spec:
       containers:
         - image: juanluisbaptiste/postfix:alpine
           name: postfix
+          restartPolicy: Always
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: "20m"
@@ -67,8 +69,6 @@ spec:
           ports:
             - containerPort: 25
               name: smtp
-      restartPolicy: Always
-      imagePullPolicy: IfNotPresent
 ---
 kind: Service
 apiVersion: v1

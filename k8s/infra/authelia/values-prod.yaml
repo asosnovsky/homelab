@@ -10,10 +10,10 @@ authelia:
         host: postfix.authelia.svc.cluster.local
         port: 25
         sender: ariel.sosnovsky@gmail.com
+        startup_check_address: ariel.sosnovsky@gmail.com
         disable_require_tls: true
         # username: ariel.sosnovsky@gmail.com
         # identifier: ariel.sosnovsky@gmail.com
-        # startup_check_address: ariel.sosnovsky@gmail.com
         # host: smtp.gmail.com
         # port: 587
       filesystem:
