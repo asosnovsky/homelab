@@ -31,6 +31,6 @@ authelia:
       disableIngressRoute: true
       sticky: true
 smtp_configs:
-  SMTP_SERVER: "smtp-relay.gmail.com"
+  SMTP_SERVER: "smtp.gmail.com"
   SMTP_PORT: "587"
   SMTP_USERNAME: "ariel.sosnovsky@gmail.com"
