@@ -34,18 +34,17 @@ kind: Deployment
 metadata:
   name: postfix
   labels:
-    name: postfix
+    app: postfix
 spec:
   strategy:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
     type: RollingUpdate
-  serviceName: "postfix"
   template:
     metadata:
       labels:
-        name: postfix
+        app: postfix
       annotations:
         postfix/env-checksum: "{{ .Values.smtp_configs | toJson | sha256sum }}"
     spec:
@@ -67,4 +66,17 @@ spec:
               name: smtp
       restartPolicy: Always
       imagePullPolicy: IfNotPresent
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  postfix
+spec:
+  selector:
+    app:  postfix
+  type:  ClusterIP
+  ports:
+  - name: smtp
+    port:  25
+    targetPort:  25
 {{ end }}
