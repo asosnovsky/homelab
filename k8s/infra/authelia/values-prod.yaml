@@ -3,16 +3,16 @@ authelia:
   configMap:
     default_redirection_url: "https://auth.core.home.sosnovsky.ca"
     notifier:
-      disable_startup_check: true
+      disable_startup_check: false
       smtp:
         enabled: true
         enabledSecret: true
         username: ariel.sosnovsky@gmail.com
         sender: ariel.sosnovsky@gmail.com
         identifier: ariel.sosnovsky@gmail.com
-        startup_check_address: ariel@sosnovsky.ca
+        startup_check_address: ariel.sosnovsky@gmail.com
         host: smtp.gmail.com
-      port: 587
+        port: 587
       filesystem:
         enabled: false
   ingress:
