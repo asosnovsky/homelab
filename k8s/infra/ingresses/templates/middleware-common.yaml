@@ -23,6 +23,22 @@ spec:
     stsPreload: true
     forceSTSHeader: true
 ---
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: chain-authelia
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  chain:
+    middlewares:
+      - name: https-redirect
+        namespace: "{{ .Release.Namespace }}"
+      - name:  forwardauth-authelia
+        namespace: "{{ .Release.Namespace }}"
+
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:

@@ -6,7 +6,7 @@ services:
   - prefix: "demo"
     service: "dummy-app"
     namespace: "ingresses"
-    middleware: "ingresses-forwardauth-authelia"
+    middleware: "ingresses-chain-authelia"
   - prefix: "nextcloud"
     service: "nextcloud"
     namespace: "app-nextcloud"
