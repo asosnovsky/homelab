@@ -1,0 +1,5 @@
+nfs:
+  server: "changeme"
+  shares:  
+    torrents: "/mnt/EightTerra/DownloadedTorrents"
+    torrents: "/mnt/EightTerra/FamilyStorage/Video"
