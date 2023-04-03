@@ -35,8 +35,8 @@ spec:
               protocol: UDP
             - containerPort: 32469
           volumeMounts:
-            - name: familyVideos
-              mountPath: /mnt/familyVideos
+            - name: family-videos
+              mountPath: /mnt/family-videos
             - name: torrents
               mountPath: /mnt/torrents
           env:
@@ -52,7 +52,7 @@ spec:
           server: "{{.Values.nfs.server}}"
           path: "{{ .Values.nfs.shares.torrent }}"
           readOnly: true
-        - name: familyVideos
+        - name: family-videos
           nfs:
           server: "{{.Values.nfs.server}}"
           path: "{{ .Values.nfs.shares.familyVideos }}"
