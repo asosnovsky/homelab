@@ -16,6 +16,10 @@ services:
     service: "authentik"
     namespace: "authentik"
     port: 80
+  - prefix: "plex"
+    service: "plex"
+    namespace: "videohosting"
+    port: 32400
 global: {}
 acmeServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
 skipTLSVerify: "false"
