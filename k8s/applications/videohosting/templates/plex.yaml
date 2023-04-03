@@ -98,7 +98,7 @@ spec:
         - name: torrents
           nfs:
             server: "{{.Values.nfs.server}}"
-            path: "{{ .Values.nfs.shares.torrent }}"
+            path: "{{ .Values.nfs.shares.torrents }}"
             readOnly: true
         - name: family-videos
           nfs:
