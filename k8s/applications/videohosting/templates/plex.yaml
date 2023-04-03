@@ -46,14 +46,14 @@ spec:
               value: "1000"
             - name: TZ
               value: America/Toronto
-    volumes:
-      - name: torrents
-        nfs:
-        server: "{{.Values.nfs.server}}"
-        path: "{{ .Values.nfs.shares.torrent }}"
-        readOnly: true
-      - name: familyVideos
-        nfs:
-        server: "{{.Values.nfs.server}}"
-        path: "{{ .Values.nfs.shares.familyVideos }}"
-        readOnly: true
+      volumes:
+        - name: torrents
+          nfs:
+          server: "{{.Values.nfs.server}}"
+          path: "{{ .Values.nfs.shares.torrent }}"
+          readOnly: true
+        - name: familyVideos
+          nfs:
+          server: "{{.Values.nfs.server}}"
+          path: "{{ .Values.nfs.shares.familyVideos }}"
+          readOnly: true
