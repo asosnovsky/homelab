@@ -97,11 +97,11 @@ spec:
       volumes:
         - name: torrents
           nfs:
-          server: "{{.Values.nfs.server}}"
-          path: "{{ .Values.nfs.shares.torrent }}"
-          readOnly: true
+            server: "{{.Values.nfs.server}}"
+            path: "{{ .Values.nfs.shares.torrent }}"
+            readOnly: true
         - name: family-videos
           nfs:
-          server: "{{.Values.nfs.server}}"
-          path: "{{ .Values.nfs.shares.familyVideos }}"
-          readOnly: true
+            server: "{{.Values.nfs.server}}"
+            path: "{{ .Values.nfs.shares.familyVideos }}"
+            readOnly: true
