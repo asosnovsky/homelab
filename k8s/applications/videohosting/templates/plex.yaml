@@ -8,6 +8,7 @@ spec:
       app: plex
   serviceName: plex
   replicas: 2
+  revisionHistoryLimit: 2
   template:
     metadata:
       labels:
