@@ -21,14 +21,18 @@ authelia:
   ingress:
     enabled: true
     certManager: true
-    annotations:
-      traefik.ingress.kubernetes.io/router.middlewares: ingresses-https-redirect@kubernetescrd
     tls:
       enabled: true
     traefikCRD:
       enabled: true
       disableIngressRoute: true
       sticky: true
+      middlewares:
+        chains:
+          ingressRoute:
+            before:
+              - name: "https-redirect"
+                namespace: "ingresses"
 smtp_configs:
   SMTP_SERVER: "smtp.gmail.com"
   SMTP_PORT: "587"
