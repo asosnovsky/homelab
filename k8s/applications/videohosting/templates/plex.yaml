@@ -5,7 +5,7 @@ metadata:
   name: plex
 spec:
   selector:
-    app: Selector Label
+    app: plex
   type: ClusterIP
   ports:
     - port: 32400
