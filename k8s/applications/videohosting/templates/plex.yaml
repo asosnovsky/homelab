@@ -10,7 +10,6 @@ spec:
   ports:
     - port: 32400
       targetPort: 32400
-      name: plex
     - port: 1900
       targetPort: 1900
       protocol: UDP
