@@ -21,11 +21,10 @@ authelia:
   ingress:
     enabled: true
     certManager: true
-    className: traefik
-    subdomain: auth.core
+    annotations:
+      traefik.ingress.kubernetes.io/router.middlewares: ingresses-https-redirect@kubernetescrd
     tls:
       enabled: true
-      secret: authelia-tls
     traefikCRD:
       enabled: true
       disableIngressRoute: true

@@ -6,14 +6,12 @@ services:
   - prefix: "demo"
     service: "dummy-app"
     namespace: "ingresses"
-    annotations:
-      traefik.ingress.kubernetes.io/router.middlewares: ingresses-forwardauth-authentik@kubernetescrd
+    middleware: "ingresses-forwardauth-authelia"
   - prefix: "nextcloud"
     service: "nextcloud"
     namespace: "app-nextcloud"
     port: 8080
-    annotations:
-      traefik.ingress.kubernetes.io/router.middlewares: app-nextcloud-nextcloud@kubernetescrd
+    middleware: "app-nextcloud-nextcloud"
   - prefix: "authentik.core"
     service: "authentik"
     namespace: "authentik"

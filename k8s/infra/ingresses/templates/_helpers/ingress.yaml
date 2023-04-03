@@ -8,6 +8,7 @@
 #   global: map (should be .global)
 #   port: int = 80
 #   path: str = "/"
+#   middleware: str = "https-redirect"
 # 
 
 {{  if .global.tls.enabled  }}
@@ -35,6 +36,7 @@ metadata:
   namespace: {{ .namespace }}
   annotations:
     homelab-ingress/managing-app-namespace: "ingresses"
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .middleware | default "ingresses-https-redirect"}}@kubernetescrd
   {{ range $k, $v := (.annotations | default (dict )) }}
     {{ $k }}: {{ $v }}
   {{ end }}
