@@ -20,8 +20,6 @@ spec:
           envFrom:
             - configMapRef: 
                 name: transmission-envs
-            - secretRef: 
-                name: transmission-envs
           resources:
             limits:
               cpu: 2
