@@ -146,9 +146,16 @@ spec:
             - name: torrents
               mountPath: /movies
               subPath: movies
+            - name: family-videos
+              mountPath: /family-videos
       volumes:
         - name: torrents
           nfs:
             server: "{{ $.Values.global.nfs.server }}"
             path: "{{ $.Values.nfs.shares.torrents  }}"
+            readOnly: true
+        - name: family-videos
+          nfs:
+            server: "{{ $.Values.global.nfs.server }}"
+            path: "{{ $.Values.nfs.shares.family-videos  }}"
             readOnly: true
