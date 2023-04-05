@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: plex
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 2
   template:
     metadata:
@@ -17,6 +17,13 @@ spec:
       containers:
         - name: plex
           image: "{{ .Values.plex.repo }}:{{ .Values.plex.tag }}"
+          resources:
+            limits:
+              cpu: "1"
+              memory: "500M"
+            requests:
+              cpu: "2"
+              memory: "2Gi"
           ports:
             - containerPort: 32400
               name: plex
