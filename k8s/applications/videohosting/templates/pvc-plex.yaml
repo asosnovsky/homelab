@@ -10,8 +10,6 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
-    limits:
       storage: 100Gi
 ---
 apiVersion: v1
@@ -25,6 +23,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
-    limits:
-      storage: 100Gi
+      storage: 8Gi
