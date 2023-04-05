@@ -9,7 +9,7 @@ data:
   PGID: "1000"
   TZ: {{ $.Values.global.timezone }}
 {{- range $envName, $envValue := ($v.envVars | default (dict )) }}
-  {{ $envName }}: {{$envValue}}
+  {{ $envName }}: "{{$envValue}}"
 {{ end }}
 
 ---
