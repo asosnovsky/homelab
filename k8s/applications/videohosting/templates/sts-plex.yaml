@@ -157,5 +157,5 @@ spec:
         - name: family-videos
           nfs:
             server: "{{ $.Values.global.nfs.server }}"
-            path: "{{ $.Values.nfs.shares.family-videos  }}"
+            path: "{{ .Values.nfs.shares.familyvideos }}"
             readOnly: true
