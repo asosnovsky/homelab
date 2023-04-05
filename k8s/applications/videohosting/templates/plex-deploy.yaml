@@ -18,7 +18,8 @@ spec:
         - name: plex
           image: "{{ .Values.plex.repo }}:{{ .Values.plex.tag }}"
           envFrom:
-            - configMapRef: plex-envs
+            - configMapRef: 
+                name: plex-envs
           resources:
             limits:
               cpu: 2
