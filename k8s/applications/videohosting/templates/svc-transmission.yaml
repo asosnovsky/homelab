@@ -5,12 +5,12 @@ metadata:
   name: transmission
 spec:
   selector:
-    app: plex
+    app: transmission
   type: ClusterIP
   ports:
     - port: 9091
       targetPort: 9091
-      name: "9091"
+      name: "web"
     - port: 51413
       targetPort: 51413
       name: "51413"
