@@ -1,3 +1,2 @@
 nfs:
-  server: "192.168.8.107"
   share: "/mnt/EightTerra/k3s-cluster"

@@ -14,7 +14,7 @@ spec:
       releaseName: nfs-subdir-external-provisioner
       parameters:
         - name: nfs.server
-          value: "{{ .Values.nfs.server }}"
+          value: "{{ .Values.global.nfs.server }}"
         - name: nfs.path
           value: "{{ .Values.nfs.share }}"
         - name: storageClass.name

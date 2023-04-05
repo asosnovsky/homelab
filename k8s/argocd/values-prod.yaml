@@ -4,5 +4,7 @@ global:
   tls:
     enabled: true
     issuer: "letsencrypt"
+  nfs:
+    server: "192.168.8.107"
 debugger:
   enabled: true

@@ -65,7 +65,7 @@ spec:
       {{ range $k, $v := .Values.nfs.shares }}
         - name: {{ $k }}
           nfs:
-            server: "{{ $.Values.nfs.server }}"
+            server: "{{ $.Values.global.nfs.server }}"
             path: "{{ $v  }}"
             readOnly: true
       {{ end }}
