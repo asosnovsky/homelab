@@ -10,21 +10,6 @@ spec:
   serviceName: plex
   replicas: 2
   revisionHistoryLimit: 2
-  volumeClaimTemplates:
-    - metadata:
-        name: plex-config
-      spec:
-        accessModes: [ "ReadWriteMany" ]
-        resources:
-          requests:
-            storage: 8Gi
-    - metadata:
-        name: plex-transcode
-      spec:
-        accessModes: [ "ReadWriteMany" ]
-        resources:
-          requests:
-            storage: 8Gi
   template:
     metadata:
       labels:
@@ -70,6 +55,12 @@ spec:
             - name: ADVERTISE_IP
               value: "https://plex.{{ .Values.global.domain }}"
       volumes:
+        - name: plex-config
+          persistentVolumeClaim:
+            claimName: plex-config
+        - name: plex-transcode
+          persistentVolumeClaim:
+            claimName: plex-transcode
       {{ range $k, $v := .Values.nfs.shares }}
         - name: {{ $k }}
           nfs:
