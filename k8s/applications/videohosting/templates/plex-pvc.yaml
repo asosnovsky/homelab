@@ -7,7 +7,7 @@ metadata:
   name: plex-config
 spec:
   accessModes:
-    - ReadWriteOne
+    - ReadWriteOnce
   resources:
     requests:
       storage: 8Gi
@@ -20,7 +20,7 @@ metadata:
   name: plex-transcode
 spec:
   accessModes:
-    - ReadWriteOne
+    - ReadWriteOnce
   resources:
     requests:
       storage: 8Gi
