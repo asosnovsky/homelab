@@ -6,7 +6,6 @@ metadata:
     - kubernetes.io/pvc-protection
   name: plex-config
 spec:
-  persistentVolumeReclaimPolicy: Retain
   accessModes:
     - ReadWriteOnce
   resources:
@@ -22,7 +21,6 @@ metadata:
     - kubernetes.io/pvc-protection
   name: plex-transcode
 spec:
-  persistentVolumeReclaimPolicy: Retain
   accessModes:
     - ReadWriteOnce
   resources:
