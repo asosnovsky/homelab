@@ -142,10 +142,10 @@ spec:
               mountPath: /transcode
             - name: torrents
               mountPath: /tv
-              subpath: tv
+              subPath: tv
             - name: torrents
               mountPath: /movies
-              subpath: movies
+              subPath: movies
       volumes:
         - name: torrents
           nfs:
