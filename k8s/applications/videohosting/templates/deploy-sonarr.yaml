@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: sonarr
+spec:
+  selector:
+    matchLabels:
+      app: sonarr
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+        - name: sonarr
+          image: "{{ .Values.sonarr.repo }}:{{ .Values.sonarr.tag }}"
+          envFrom:
+            - configMapRef: 
+                name: sonarr-envs
+          resources:
+            limits:
+              cpu: 2
+              memory: "2Gi"
+            requests:
+              cpu: 1
+              memory: "500M"
+          ports:
+            - containerPort: 8989
+          volumeMounts:
+            - name: sonarr-config
+              mountPath: /config
+            - name: torrents
+              mountPath: /data
+
+      volumes:
+        - name: sonarr-config
+          persistentVolumeClaim:
+            claimName: sonarr-config
+        - name: torrents
+          nfs:
+            server: "{{ $.Values.global.nfs.server }}"
+            path: "{{ .Values.nfs.shares.torrents  }}"
+            readOnly: false
