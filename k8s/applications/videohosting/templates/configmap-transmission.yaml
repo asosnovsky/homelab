@@ -7,5 +7,4 @@ data:
   PUID: "1000"
   PGID: "1000"
   TZ: {{ .Values.global.timezone }}
-  ADVERTISE_IP: "https://plex.{{ .Values.global.domain }}"
   
