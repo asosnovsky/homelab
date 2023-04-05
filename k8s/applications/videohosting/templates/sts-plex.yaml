@@ -130,11 +130,11 @@ spec:
             - containerPort: 32469
           resources: 
             limits:
-              cpu: 2
-              memory: "2Gi"
+              cpu: 4
+              memory: "8Gi"
             requests:
               cpu: 1
-              memory: "500M"
+              memory: "1Gi"
           volumeMounts:
             - name: config
               mountPath: /config
