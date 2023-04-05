@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: plex
+spec:
+  selector:
+    matchLabels:
+      app: plex
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      containers:
+        - name: plex
+          image: "{{ .Values.plex.repo }}:{{ .Values.plex.tag }}"
+          resources:
+            limits:
+              cpu: 2
+              memory: "2Gi"
+            requests:
+              cpu: 1
+              memory: "500M"
+          ports:
+            - containerPort: 32400
+              name: plex
+            - containerPort: 1900
+              protocol: UDP
+            - containerPort: 3005
+            - containerPort: 5353
+              protocol: UDP
+            - containerPort: 8324
+            - containerPort: 32410
+              protocol: UDP
+            - containerPort: 32412
+              protocol: UDP
+            - containerPort: 32413
+              protocol: UDP
+            - containerPort: 32414
+              protocol: UDP
+            - containerPort: 32469
+          volumeMounts:
+            - name: plex-config
+              mountPath: /config
+            - name: plex-transcode
+              mountPath: /transcode
+          {{ range $k, $v := .Values.nfs.shares }}
+            - name: {{ $k }}
+              mountPath: /mnt/{{ $k }}
+          {{ end }}
+          envFrom:
+            - configMapRef: plex-envs
+      volumes:
+        - name: plex-config
+          persistentVolumeClaim:
+            claimName: plex-config
+        - name: plex-transcode
+          persistentVolumeClaim:
+            claimName: plex-transcode
+      {{ range $k, $v := .Values.nfs.shares }}
+        - name: {{ $k }}
+          nfs:
+            server: "{{ $.Values.nfs.server }}"
+            path: "{{ $v  }}"
+            readOnly: true
+      {{ end }}
