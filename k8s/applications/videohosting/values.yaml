@@ -2,7 +2,7 @@ nfs:
   server: "changeme"
   shares:
     torrents: "/mnt/EightTerra/DownloadedTorrents"
-    # family-Videos: "/mnt/EightTerra/FamilyStorage/Video"
+    family-Videos: "/mnt/EightTerra/FamilyStorage/Video"
 plex:
   repo: "plexinc/pms-docker"
   tag: "1.31.3.6868-28fc46b27"
