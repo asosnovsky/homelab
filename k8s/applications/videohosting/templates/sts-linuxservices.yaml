@@ -1,0 +1,76 @@
+{{ range $k, $v := .Values.linuxserverServices }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{$k}}-envs
+data:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: {{ $.Values.global.timezone }}
+{{- range $envName, $envValue := ($v.envVars | default (dict )) }}
+  {{ $envName }}: {{$envValue}}
+{{ end }}
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ $k }}
+spec:
+  selector:
+    app: {{ $k }}
+  type: ClusterIP
+  ports:
+    {{- $v.ports | toYaml | nindent 4 }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+    name: {{$k}}
+spec:
+  selector:
+    matchLabels:
+      app: {{$k}}
+  replicas: 1
+  revisionHistoryLimit: 2
+  volumeClaimTemplates:
+    - metadata:
+        finalizers:
+          - kubernetes.io/pvc-protection
+        name: config
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources: 
+          {{- $v.configVolumesResources | toYaml | nindent 10 }}
+  template:
+    metadata:
+      labels:
+        app: {{$k}}
+    spec:
+      containers:
+        - name: {{$k}}
+          image: "{{ $v.repo }}:{{ $v.tag }}"
+          envFrom:
+            - configMapRef: 
+                name: {{$k}}-envs
+          resources: 
+            {{- $v.podResources | toYaml | nindent 12 }}
+          ports:
+          {{ range $port := $v.ports}}
+            - containerPort: {{ $port.targetPort }}
+              protocol: {{ $port.protocol | default "TCP" }}
+          {{ end }}
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: torrents
+              mountPath: /torrents
+      volumes:
+        - name: torrents
+          nfs:
+            server: "{{ $.Values.global.nfs.server }}"
+            path: "{{ $.Values.nfs.shares.torrents  }}"
+            readOnly: false
+{{ end }}

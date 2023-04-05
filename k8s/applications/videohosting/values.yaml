@@ -5,9 +5,71 @@ nfs:
 plex:
   repo: "plexinc/pms-docker"
   tag: "1.31.3.6868-28fc46b27"
-transmission:
-  repo: lscr.io/linuxserver/transmission
-  tag: "4.0.2"
-sonarr:
-  repo: lscr.io/linuxserver/sonarr
-  tag: "3.0.10"
+
+linuxserverServices:
+  transmission:
+    repo: lscr.io/linuxserver/transmission
+    tag: "4.0.2"
+    ports:
+      - port: 9091
+        targetPort: 9091
+        name: "web"
+      - port: 51413
+        targetPort: 51413
+        name: "51413"
+      - port: 51413
+        targetPort: 51413
+        protocol: UDP
+        name: "51413-udp"
+    podResources:
+      limits:
+        cpu: 2
+        memory: "2Gi"
+      requests:
+        cpu: 1
+        memory: "500M"
+    configVolumesResources:
+      requests:
+        storage: 10Gi
+      limits:
+        storage: 100Gi
+  sonarr:
+    repo: lscr.io/linuxserver/sonarr
+    tag: "3.0.10"
+    podResources:
+      limits:
+        cpu: 2
+        memory: "2Gi"
+      requests:
+        cpu: 1
+        memory: "500M"
+    configVolumesResources:
+      requests:
+        storage: 10Gi
+      limits:
+        storage: 100Gi
+    ports:
+      - port: 8989
+        targetPort: 8989
+        name: "web"
+  sonarr:
+    repo: lscr.io/linuxserver/jackett
+    tag: "0.20.3772"
+    envVars:
+      AUTO_UPDATE: "true"
+    podResources:
+      limits:
+        cpu: 2
+        memory: "2Gi"
+      requests:
+        cpu: 1
+        memory: "500M"
+    configVolumesResources:
+      requests:
+        storage: 10Gi
+      limits:
+        storage: 100Gi
+    ports:
+      - port: 9117
+        targetPort: 9117
+        name: "web"
