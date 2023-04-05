@@ -8,3 +8,6 @@ plex:
 transmission:
   repo: lscr.io/linuxserver/transmission
   tag: "4.0.2"
+sonarr:
+  repo: lscr.io/linuxserver/sonarr
+  tag: "3.0.10"
