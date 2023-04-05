@@ -17,6 +17,8 @@ spec:
       containers:
         - name: plex
           image: "{{ .Values.plex.repo }}:{{ .Values.plex.tag }}"
+          envFrom:
+            - configMapRef: plex-envs
           resources:
             limits:
               cpu: 2
@@ -51,8 +53,7 @@ spec:
             - name: {{ $k }}
               mountPath: /mnt/{{ $k }}
           {{ end }}
-          envFrom:
-            - configMapRef: plex-envs
+
       volumes:
         - name: plex-config
           persistentVolumeClaim:
