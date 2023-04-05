@@ -6,5 +6,5 @@ metadata:
 data:
   PUID: "1000"
   PGID: "1000"
-  TZ: America/Toronto
+  TZ: {{ .Values.global.timezone }}
   ADVERTISE_IP: "https://plex.{{ .Values.global.domain }}"

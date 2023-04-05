@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: transmission
+spec:
+  selector:
+    matchLabels:
+      app: transmission
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: transmission
+    spec:
+      containers:
+        - name: transmission
+          image: "{{ .Values.transmission.repo }}:{{ .Values.transmission.tag }}"
+          envFrom:
+            - configMapRef: 
+                name: transmission-envs
+            - secretRef: 
+                name: transmission-envs
+          resources:
+            limits:
+              cpu: 2
+              memory: "2Gi"
+            requests:
+              cpu: 1
+              memory: "500M"
+          ports:
+            - containerPort: 9091
+            - containerPort: 51413
+            - containerPort: 51413
+              protocol: UDP
+          volumeMounts:
+            - name: transmission-config
+              mountPath: /config
+            - name: torrents
+              mountPath: /downloads
+              subPath: "downloads"
+            - name: torrents
+              mountPath: /watch
+              subPath: "torrents"
+
+      volumes:
+        - name: transmission-config
+          persistentVolumeClaim:
+            claimName: transmission-config
+        - name: torrents
+          nfs:
+            server: "{{ $.Values.global.nfs.server }}"
+            path: "{{ .Values.nfs.shares.torrents  }}"
+            readOnly: false

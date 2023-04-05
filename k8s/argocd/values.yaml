@@ -30,3 +30,4 @@ global:
   deployment: ""
   nfs:
     server: "changme"
+  timezone: America/Toronto
