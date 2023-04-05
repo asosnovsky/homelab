@@ -5,3 +5,6 @@ nfs:
 plex:
   repo: "plexinc/pms-docker"
   tag: "1.31.3.6868-28fc46b27"
+transmission:
+  repo: lscr.io/linuxserver/transmission
+  tag: "4.0.2"
