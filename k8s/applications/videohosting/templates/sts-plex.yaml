@@ -103,13 +103,6 @@ spec:
           envFrom:
             - configMapRef: 
                 name: plex-envs
-          resources:
-            limits:
-              cpu: 2
-              memory: "2Gi"
-            requests:
-              cpu: 1
-              memory: "500M"
           ports:
             - containerPort: 32400
               name: plex
@@ -133,8 +126,8 @@ spec:
               cpu: 4
               memory: "8Gi"
             requests:
-              cpu: 1
-              memory: "1Gi"
+              cpu: 2
+              memory: "4Gi"
           volumeMounts:
             - name: config
               mountPath: /config
