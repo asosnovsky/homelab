@@ -40,10 +40,11 @@ spec:
             enabled: true
             ingressClassName: traefik
             annotations: {}
-            hosts: 
-              - "{{$prometheusHost}}.{{ .Values.global.domain }}"
-            path: /alertmanager
-            pathType: Prefix
+            hosts:
+              - host: "{{$prometheusHost}}.{{ .Values.global.domain }}"
+                paths:
+                  - path: /alertmanager
+                  pathType: Prefix
 {{  if .Values.global.tls.enabled  }}
             tls: 
               - secretName: "tls-{{$prometheusHost}}.{{.Values.global.domain}}"
