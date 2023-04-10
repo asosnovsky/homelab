@@ -31,6 +31,24 @@ spec:
     helm:
       releaseName: prometheus
       values: |-
+        alertmanager: 
+          persistentVolume:
+            enabled: true
+            size: 8Gi
+            storageClass: "{{ .Values.global.nfsStorageClass }}"
+          ingress:
+            enabled: true
+            ingressClassName: traefik
+            annotations: {}
+            hosts: 
+              - "{{$prometheusHost}}.{{ .Values.global.domain }}"
+            path: /alertmanager
+            pathType: Prefix
+{{  if .Values.global.tls.enabled  }}
+            tls: 
+              - secretName: "tls-{{$prometheusHost}}.{{.Values.global.domain}}"
+                hosts:
+                  - "{{$prometheusHost}}.{{ .Values.global.domain }}"
         server: 
           baseURL: "{{$prometheusHost}}.{{ .Values.global.domain }}"
           persistentVolume:
@@ -43,7 +61,7 @@ spec:
             annotations: {}
             hosts: 
               - "{{$prometheusHost}}.{{ .Values.global.domain }}"
-            path: /
+            path: /prometheus
             pathType: Prefix
 {{  if .Values.global.tls.enabled  }}
             tls: 
