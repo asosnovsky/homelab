@@ -32,7 +32,7 @@ spec:
       releaseName: prometheus
       values: |-
         alertmanager: 
-          persistentVolume:
+          persistence:
             enabled: true
             size: 8Gi
             storageClass: "{{ .Values.global.nfsStorageClass }}"
