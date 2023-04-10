@@ -49,6 +49,7 @@ spec:
               - secretName: "tls-{{$prometheusHost}}.{{.Values.global.domain}}"
                 hosts:
                   - "{{$prometheusHost}}.{{ .Values.global.domain }}"
+{{ end }}
         server: 
           baseURL: "{{$prometheusHost}}.{{ .Values.global.domain }}"
           persistentVolume:
