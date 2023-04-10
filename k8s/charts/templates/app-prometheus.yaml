@@ -1,3 +1,21 @@
+{{- $prometheusHost := "monitor.core" -}}
+{{  if .Values.global.tls.enabled  }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "tls-{{$prometheusHost}}.{{.Values.global.domain}}"
+  namespace: {{ .namespace }}
+spec:
+  secretName: "tls-{{$prometheusHost}}.{{.Values.global.domain}}"
+  issuerRef: 
+    kind: ClusterIssuer
+    name: "{{ .Values.global.tls.issuer }}"
+  commonName: "{{$prometheusHost}}.{{.Values.global.domain}}"
+  dnsNames:
+    - "{{$prometheusHost}}.{{.Values.global.domain}}"
+{{ end }}
+
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -12,6 +30,27 @@ spec:
     targetRevision: "{{ .Values.chartVersions.prometheus }}"
     helm:
       releaseName: prometheus
+      values: |-
+        server: 
+          baseURL: "{{$prometheusHost}}.{{ .Values.global.domain }}"
+          persistentVolume:
+            enabled: true
+            size: 8Gi
+            storageClass: "{{ .Values.global.nfsStorageClass }}"
+          ingress:
+            enabled: true
+            ingressClassName: traefik
+            annotations: {}
+            hosts: 
+              - "{{$prometheusHost}}.{{ .Values.global.domain }}"
+            path: /
+            pathType: Prefix
+{{  if .Values.global.tls.enabled  }}
+            tls: 
+              - secretName: "tls-{{$prometheusHost}}.{{.Values.global.domain}}"
+                hosts:
+                  - "{{$prometheusHost}}.{{ .Values.global.domain }}"
+{{ end }}
   destination:
     server: https://kubernetes.default.svc
     namespace: "monitoring"

@@ -6,3 +6,5 @@ chartVersions:
   nfs: "v4.0.2"
   externalSecrets: "0.7.2"
   certManager: "1.10.2"
+global:
+  nfsStorageClass: "nfs-generic"

@@ -18,7 +18,7 @@ spec:
         - name: nfs.path
           value: "{{ .Values.nfs.share }}"
         - name: storageClass.name
-          value: "nfs-generic"
+          value: "{{ .Values.global.nfsStorageClass }}"
   destination:
     server: https://kubernetes.default.svc
     namespace: "nfs-subdir-external-provisioner"
