@@ -1,2 +1,8 @@
 nfs:
   share: "/"
+chartVersions:
+  prometheus: "20.2.0"
+  kubernetesSecretGenerator: "v3.4.0"
+  nfs: "v4.0.2"
+  externalSecrets: "0.7.2"
+  certManager: "1.10.2"

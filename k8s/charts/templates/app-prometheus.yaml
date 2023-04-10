@@ -2,21 +2,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "cert-manager"
+  name: "monitoring-prometheus"
   namespace: "{{ .Release.Namespace }}"
 spec:
-  project: default
+  project: meta-infrastructure
   source:
-    chart: cert-manager
-    repoURL: "https://charts.jetstack.io"
-    targetRevision: "{{ .Values.chartVersions.certManager }}"
+    chart: prometheus
+    repoURL: "https://prometheus-community.github.io/helm-charts"
+    targetRevision: "{{ .Values.chartVersions.prometheus }}"
     helm:
-      values: |-
-        installCRDs: true
-      releaseName: cert-manager
+      releaseName: prometheus
   destination:
     server: https://kubernetes.default.svc
-    namespace: "cert-manager"
+    namespace: "monitoring"
   syncPolicy:
     automated:
       selfHeal: true
