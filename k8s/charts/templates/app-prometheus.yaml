@@ -38,6 +38,9 @@ spec:
     helm:
       releaseName: prometheus
       values: |-
+        configmapReload:
+            prometheus:
+                enabled: false
         alertmanager: 
           persistence:
             enabled: true
