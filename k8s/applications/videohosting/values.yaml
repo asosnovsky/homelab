@@ -23,10 +23,10 @@ linuxserverServices:
         name: "51413-udp"
     podResources:
       limits:
-        cpu: 2
+        cpu: 1
         memory: "2Gi"
       requests:
-        cpu: 1
+        cpu: 800m
         memory: "500M"
     configVolumesResources:
       requests:
@@ -38,10 +38,10 @@ linuxserverServices:
     tag: "3.0.10"
     podResources:
       limits:
-        cpu: 2
+        cpu: 1
         memory: "2Gi"
       requests:
-        cpu: 1
+        cpu: 500m
         memory: "500M"
     configVolumesResources:
       requests:
@@ -57,10 +57,10 @@ linuxserverServices:
     tag: "4.3.2"
     podResources:
       limits:
-        cpu: 2
+        cpu: 1
         memory: "2Gi"
       requests:
-        cpu: 1
+        cpu: 500m
         memory: "500M"
     configVolumesResources:
       requests:
@@ -78,10 +78,10 @@ linuxserverServices:
       AUTO_UPDATE: "true"
     podResources:
       limits:
-        cpu: 2
+        cpu: 1
         memory: "2Gi"
       requests:
-        cpu: 1
+        cpu: 500m
         memory: "500M"
     configVolumesResources:
       requests:
