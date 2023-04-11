@@ -47,7 +47,7 @@ spec:
             size: 8Gi
             storageClass: "local-path"
           ingress:
-            enabled: true
+            enabled: false
             ingressClassName: traefik
             annotations: {}
             hosts:
