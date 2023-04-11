@@ -69,9 +69,7 @@ spec:
             ingressClassName: traefik
             annotations: {}
             hosts: 
-              - host: "{{$prometheusHost}}.{{ .Values.global.domain }}"
-                path: /prometheus
-                pathType: Prefix
+              - "{{$prometheusHost}}.{{ .Values.global.domain }}"
 {{  if .Values.global.tls.enabled  }}
             tls: 
               - secretName: "tls-{{$prometheusHost}}.{{.Values.global.domain}}"
