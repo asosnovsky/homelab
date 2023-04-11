@@ -67,6 +67,8 @@ spec:
       app: plex
   replicas: 1
   revisionHistoryLimit: 2
+  updateStrategy:
+    type: RollingUpdate
   volumeClaimTemplates:
     - metadata:
         finalizers:
@@ -97,6 +99,8 @@ spec:
       labels:
         app: plex
     spec:
+      nodeSelector:
+        homelab/type: highcapacity
       containers:
         - name: plex
           image: "{{ .Values.plex.repo }}:{{ .Values.plex.tag }}"
