@@ -62,7 +62,11 @@ spec:
                   - "{{$prometheusHost}}.{{ .Values.global.domain }}"
 {{ end }}
         server: 
-          baseURL: "{{$prometheusHost}}.{{ .Values.global.domain }}"
+{{  if .Values.global.tls.enabled  }}
+          baseURL: "http://{{$prometheusHost}}.{{ .Values.global.domain }}"
+{{ else }}
+          baseURL: "https://{{$prometheusHost}}.{{ .Values.global.domain }}"
+{{ end }}
           persistentVolume:
             enabled: true
             size: 8Gi
@@ -70,7 +74,8 @@ spec:
           ingress:
             enabled: true
             ingressClassName: traefik
-            annotations: {}
+            annotations: 
+                traefik.ingress.kubernetes.io/router.middlewares: ingresses-chain-authelia
             hosts: 
               - "{{$prometheusHost}}.{{ .Values.global.domain }}"
 {{  if .Values.global.tls.enabled  }}
