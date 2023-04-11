@@ -82,6 +82,6 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ $prometheusNamespace }}
-  syncPolicy:
-    automated:
-      selfHeal: true
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
