@@ -51,7 +51,7 @@ spec:
               - host: "{{$prometheusHost}}.{{ .Values.global.domain }}"
                 paths:
                   - path: /alertmanager
-                  pathType: Prefix
+                    pathType: Prefix
 {{  if .Values.global.tls.enabled  }}
             tls: 
               - secretName: "tls-{{$prometheusHost}}.{{.Values.global.domain}}"
