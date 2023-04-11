@@ -92,31 +92,31 @@ linuxserverServices:
       - port: 9117
         targetPort: 9117
         name: "web"
-  qbittorrent:
-    repo: lscr.io/linuxserver/qbittorrent
-    tag: "4.5.2"
-    envVars:
-      AUTO_UPDATE: "true"
-    podResources:
-      limits:
-        cpu: 2
-        memory: "2Gi"
-      requests:
-        cpu: 1
-        memory: "500M"
-    configVolumesResources:
-      requests:
-        storage: 10Gi
-      limits:
-        storage: 100Gi
-    ports:
-      - port: 8080
-        targetPort: 8080
-        name: "web"
-      - port: 6881
-        targetPort: 6881
-        name: "6881"
-      - port: 6881
-        targetPort: 6881
-        protocol: UDP
-        name: "6881-udp"
+  # qbittorrent:
+  #   repo: lscr.io/linuxserver/qbittorrent
+  #   tag: "4.5.2"
+  #   envVars:
+  #     AUTO_UPDATE: "true"
+  #   podResources:
+  #     limits:
+  #       cpu: 2
+  #       memory: "2Gi"
+  #     requests:
+  #       cpu: 1
+  #       memory: "500M"
+  #   configVolumesResources:
+  #     requests:
+  #       storage: 10Gi
+  #     limits:
+  #       storage: 100Gi
+  #   ports:
+  #     - port: 8080
+  #       targetPort: 8080
+  #       name: "web"
+  #     - port: 6881
+  #       targetPort: 6881
+  #       name: "6881"
+  #     - port: 6881
+  #       targetPort: 6881
+  #       protocol: UDP
+  #       name: "6881-udp"
