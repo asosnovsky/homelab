@@ -51,6 +51,8 @@ spec:
       labels:
         app: {{$k}}
     spec:
+      nodeSelector:
+        homelab/type: lowcapacity
       containers:
         - name: {{$k}}
           image: "{{ $v.repo }}:{{ $v.tag }}"
