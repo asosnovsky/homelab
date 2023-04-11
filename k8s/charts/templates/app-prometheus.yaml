@@ -63,9 +63,9 @@ spec:
 {{ end }}
         server: 
 {{  if .Values.global.tls.enabled  }}
-          baseURL: "http://{{$prometheusHost}}.{{ .Values.global.domain }}"
-{{ else }}
           baseURL: "https://{{$prometheusHost}}.{{ .Values.global.domain }}"
+{{ else }}
+          baseURL: "http://{{$prometheusHost}}.{{ .Values.global.domain }}"
 {{ end }}
           persistentVolume:
             enabled: true
