@@ -49,6 +49,8 @@ spec:
       valueFiles:
         - values.yaml
       parameters:
+      - name: "selfapp.deployment"
+        value: {{ .Values.selfapp.deployment | quote }}
       - name: "selfapp.enabled"
         value: "true"
       - name: "selfapp.sshkey"
@@ -57,6 +59,11 @@ spec:
     server: https://kubernetes.default.svc
     namespace: "{{ .Release.Namespace }}"
 
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "argoapps"
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -77,6 +84,6 @@ spec:
         {{- $appvalues | toYaml | nindent 8 }} 
   destination:
     server: https://kubernetes.default.svc
-    namespace: "{{ .Release.Namespace }}"
+    namespace: "argoapps"
 
 {{- end -}}
