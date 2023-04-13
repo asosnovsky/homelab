@@ -1,18 +1,17 @@
-{{- if .Values.selfapp.enabled -}}
+{{ define "homelab.argo.project" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: infrastructure
-  namespace: "{{ .Release.Namespace }}"
+  name: {{ .name }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: "infrastructure services"
+  description: {{ .description }}
   orphanedResources:
     warn: false
   sourceRepos:
-    - "git@github.com:{{ .Values.selfapp.repo }}.git"
+    - "git@github.com:{{ .Values.gitops.repo }}.git"
   destinations:
     - server: "*"
       namespace: '*'
@@ -20,4 +19,4 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
-{{- end -}}
+{{ end }}

@@ -14,6 +14,20 @@ argo-cd:
       enabled: false
     ingressGrpc:
       enabled: false
+debugger:
+  enabled: false
 selfapp:
-  deployment: ""
+  commit: "stable"
+  repo: "asosnovsky/homelab"
   sshkey: ""
+global:
+  email: "ariel@sosnovsky.ca"
+  tls:
+    enabled: false
+    issuer: ""
+    secretName: ""
+  domain: ""
+  deployment: ""
+  nfs:
+    server: "changme"
+  timezone: America/Toronto

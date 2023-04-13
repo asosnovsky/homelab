@@ -8,7 +8,6 @@ typeofapp=$(basename $location)
 
 mkdir -p $full_path/templates
 touch $full_path/values.yaml
-touch $full_path/values-{dev,prod}.yaml
 cat <<EOT >> $full_path/Chart.yaml
 apiVersion: v2
 name: $app

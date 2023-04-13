@@ -1,0 +1,10 @@
+global:
+  deployment: prod
+  ingress:
+    domain: "home.sosnovsky.ca"
+    tls:
+      enabled: true
+      issuer: "letsencrypt"
+  nfs:
+    server: "192.168.8.107"
+    share: "/mnt/EightTerra/k3s-cluster"

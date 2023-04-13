@@ -1,4 +1,38 @@
-{{- if .Values.selfapp.enabled -}}
+---
+{{ $currentScope := .}}
+{{- $appvalues := dict -}}
+{{ range $path, $_ :=  .Files.Glob  "values/shared/**.yaml" }}
+  {{- with $currentScope }}
+    {{ $newobj := .Files.Get $path | fromYaml }}
+    {{ $appvalues := merge $appvalues $newobj }}
+  {{- end -}}
+{{ end }}
+
+{{- $deploymentPath := printf "values/%s/**.yaml" .Values.selfapp.deployment  -}}
+{{ range $path, $_ :=  .Files.Glob $deploymentPath }}
+  {{- with $currentScope }}
+    {{ $newobj := .Files.Get $path | fromYaml }}
+    {{ $appvalues := merge $appvalues $newobj }}
+  {{- end -}}
+{{ end }}
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: argo-repo-main
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  annotations:
+    link.argocd.argoproj.io/external-link: "https://github.com/{{ $appvalues.gitops.repo }}"
+stringData:
+  type: git
+  url: "git@github.com:{{ $appvalues.gitops.repo }}.git"
+  sshPrivateKey: {{ .Values.selfapp.sshkey | quote }}
+
+
+{{ if .Values.selfapp.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -8,13 +42,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "git@github.com:{{ .Values.selfapp.repo }}.git"
-    targetRevision: "{{ .Values.selfapp.commit }}"
+    repoURL: "git@github.com:{{ $appvalues.gitops.repo }}.git"
+    targetRevision: "{{ $appvalues.gitops.commit }}"
     path: k8s/argocd
     helm:
       valueFiles:
         - values.yaml
-        - values-{{ .Values.global.deployment }}.yaml
       parameters:
       - name: "selfapp.enabled"
         value: "true"
@@ -23,4 +56,27 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: "{{ .Release.Namespace }}"
+
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "argoapps"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  project: default
+  source:
+    repoURL: "git@github.com:{{ $appvalues.gitops.repo }}.git"
+    targetRevision: "{{ $appvalues.gitops.commit }}"
+    path: k8s/argoapps
+    helm:
+      valueFiles:
+        - values.yaml
+      values: |-
+        {{- $appvalues | toYaml | nindent 8 }} 
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: "{{ .Release.Namespace }}"
+
 {{- end -}}

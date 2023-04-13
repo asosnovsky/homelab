@@ -1,0 +1,16 @@
+global:
+  deployment: ""
+  email: "ariel@sosnovsky.ca"
+  timezone: America/Toronto
+  ingress:
+    domain: ""
+    tls:
+      enabled: false
+      issuer: ""
+  nfs:
+    storageClass: "nfs-generic"
+    server: "changme"
+    share: "changeme"
+gitops:
+  commit: "stable"
+  repo: "asosnovsky/homelab"

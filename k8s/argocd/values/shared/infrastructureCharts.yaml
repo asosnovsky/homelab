@@ -1,0 +1,24 @@
+infrastructureCharts:
+    cert-manager:
+        repoURL: "https://charts.jetstack.io"
+        targetRevision: 1.10.2"
+        values: |-
+            installCRDs: true
+    external-secrets:
+        repoURL: "https://charts.external-secrets.io"
+        targetRevision: "0.7.2"
+        values: |-
+            installCRDs: true
+    nfs-generic-storageclass:
+        chart: nfs-subdir-external-provisioner
+        repoURL: "https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
+        targetRevision: "v4.0.2"
+        values: |-
+            storageClass:
+                name: "{{ .Values.global.nfs.storageClass }}"
+            nfs:
+                server: "{{ .Values.global.nfs.server }}"
+                path: "{{ .Values.global.nfs.share }}"
+    kubernetes-secret-generator:
+        repoURL: "https://helm.mittwald.de"
+        targetRevision: "v3.4.0"

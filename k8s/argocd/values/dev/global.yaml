@@ -1,0 +1,4 @@
+global:
+  deployment: dev
+  ingress:
+    domain: "me.local"

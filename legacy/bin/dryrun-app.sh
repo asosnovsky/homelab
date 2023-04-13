@@ -6,8 +6,11 @@ deployment=${2:-dev}
 app=$(basename $full_path)
 location=$(dirname $full_path)
 tmp_path=".tmp/$location/$deployment-$app.yaml"
-
-
+argocd_values_path=$(realpath k8s/argocd/values.yaml)
+argocd_values_deployment_path=$(realpath k8s/argocd/values-$deployment.yaml)
+echo "> writing $location/$app to $tmp_path"
+echo "> using argo values of $argocd_values_path"
+cat $argocd_values_path | yq
 mkdir -p $(dirname $tmp_path)
 
 pushd $full_path &> /dev/null
@@ -20,28 +23,12 @@ if [ -f "$tmp_path" ]; then
     mv $tmp_path $tmp_path".old"
 fi
 
-extraArgs=""
-for f in k8s/argocd/values/shared/*.yaml; do
-    full_file_path=$(realpath $f)
-    extraArgs=$extraArgs" --values ${full_file_path}"
-done
-for f in k8s/argocd/values/$deployment/*.yaml; do
-    full_file_path=$(realpath $f)
-    extraArgs=$extraArgs" --values ${full_file_path}"
-done
-
-echo $extraArgs
-
 helm template $app $full_path --namespace $app \
     --debug \
+    --values $argocd_values_path \
+    --values $argocd_values_deployment_path \
     --values $full_path/values.yaml \
-    $extraArgs \
+    --values $full_path/values-$deployment.yaml \
     > $tmp_path
 
-echo "Wrote Template! --> $tmp_path"
-echo "==============="
-
-if [ -f "$tmp_path.old" ]; then
-    echo " -> creating diff -- $tmp_path.diff"
-    diff -u $tmp_path".old" $tmp_path > "$tmp_path.diff"
-fi
+echo $tmp_path
