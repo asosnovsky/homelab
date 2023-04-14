@@ -1,10 +1,11 @@
 global:
   deployment: prod
-  ingress:
-    domain: "home.sosnovsky.ca"
-    tls:
-      enabled: true
-      issuer: "letsencrypt"
+  domain: "home.sosnovsky.ca"
+  tls:
+    enabled: true
+    issuer: "letsencrypt"
+    acmeServer: "https://acme-v02.api.letsencrypt.org/directory"
+    skipTLSVerify: true
   nfs:
     server: "192.168.8.107"
     share: "/mnt/EightTerra/k3s-cluster"

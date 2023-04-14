@@ -2,11 +2,12 @@ global:
   deployment: ""
   email: "ariel@sosnovsky.ca"
   timezone: America/Toronto
-  ingress:
-    domain: ""
-    tls:
-      enabled: false
-      issuer: ""
+  domain: ""
+  tls:
+    enabled: false
+    issuer: ""
+    acmeServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+    skipTLSVerify: "false"
   nfs:
     storageClass: "nfs-generic"
     server: "changme"
