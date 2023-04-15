@@ -6,7 +6,7 @@ services:
   - prefix: "demo"
     service: "dummy-app"
     namespace: "ingresses"
-    middleware: "ingresses-chain-authelia"
+    # middleware: "ingresses-chain-authelia"
 #   - prefix: "client.torrent"
 #     service: "transmission"
 #     namespace: "app-videohosting"
