@@ -6,6 +6,8 @@ apps:
   ingresses: {}
   users:
     namespace: chart-database
+    values: |-
+      postgresSecret: "{{ .Values.secrets.database.secrets.dbmain.name }}"
 
 global:
   email: "ariel@sosnovsky.ca"

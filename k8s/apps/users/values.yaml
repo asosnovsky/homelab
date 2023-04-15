@@ -4,3 +4,5 @@ userGeneration:
     - nextcloud
     - authelia
     - authentik
+
+postgresSecret: ""
