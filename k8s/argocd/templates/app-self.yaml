@@ -57,14 +57,6 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-        {{ range $path, $_ :=  .Files.Glob  "../argoapps/values/shared/**.yaml" }}
-        - {{ $path }}
-        {{ end }}
-
-        {{- $deploymentPath := printf "../argoapps/values/%s/**.yaml" .Values.deployment  -}}
-        {{ range $path, $_ :=  .Files.Glob  $deploymentPath }}
-        - {{ $path }}
-        {{ end }}
       parameters:
         - name: "deployment"
           value: {{ .Values.selfapp.deployment | quote }}
