@@ -20,18 +20,18 @@ metadata:
 spec:
   project: {{ $argoappsetApps }}
   source:
-  repoURL: "git@github.com:{{ $.Values.gitops.repo }}.git"
-  targetRevision: "{{ $.Values.gitops.commit }}"
-  path: 'k8s/apps/{{ $appName }}'
-  helm:
-      valueFiles:
-          - values.yaml
-          - values-{{$.Values.global.deployment}}.yaml
-      values: |-
-        {{- tpl $appProps $ | nindent 8 }}
-        global: 
-            {{- $.Values.global | toYaml | nindent 10 }}
-      releaseName: {{ $appName }}
+    repoURL: "git@github.com:{{ $.Values.gitops.repo }}.git"
+    targetRevision: "{{ $.Values.gitops.commit }}"
+    path: 'k8s/apps/{{ $appName }}'
+    helm:
+        valueFiles:
+            - values.yaml
+            - values-{{$.Values.global.deployment}}.yaml
+        values: |-
+          {{- tpl $appProps $ | nindent 10 }}
+          global: 
+              {{- $.Values.global | toYaml | nindent 12 }}
+        releaseName: {{ $appName }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ $namespace }}
