@@ -1,9 +1,0 @@
-storage:
-  database:
-    name: primary-database
-    namespace: chart-database
-    accessModes:
-      - ReadWriteMany
-    resources:
-      requests:
-        storage: 8Gi

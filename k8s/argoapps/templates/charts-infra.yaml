@@ -1,7 +1,8 @@
+---
 {{- $infraChartProjectName := "infrastructure-charts" -}}
 {{ include "homelab.argo.project" (dict "name" $infraChartProjectName "description" "infrastructure helm charts")}}
 
-{{ range $chartName, $chartProps := $appvalues.infrastructureCharts }}
+{{ range $chartName, $chartProps := .Values.infrastructureCharts }}
 
 {{- $namespace := (printf "chart-%s" $chartName) -}}
 
@@ -24,7 +25,7 @@ spec:
     targetRevision: {{ $chartProps.targetRevision }}
     helm:
       values: |-
-        {{- tpl ($chartProps.values | default "") $appvalues | nindent 8}}
+        {{- tpl ($chartProps.values | default "") $ | nindent 8}}
       releaseName: {{ $chartName }}
   destination:
     server: https://kubernetes.default.svc

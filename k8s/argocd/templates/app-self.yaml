@@ -57,9 +57,8 @@ spec:
     helm:
       valueFiles:
         - values.yaml
+        - values-{{ .Values.selfapp.deployment }}.yaml
       parameters:
-        - name: "deployment"
-          value: {{ .Values.selfapp.deployment | quote }}
         - name: "gitops.repo"
           value: {{ .Values.gitops.repo | quote }}
         - name: "gitops.commit"

@@ -1,4 +1,4 @@
-{{ range $key, $value := $appvalues.storage }}
+{{ range $key, $value := .Values.storage }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -6,7 +6,7 @@ metadata:
   name: {{ $value.name }}
   namespace: {{ $value.namespace }}
 spec:
-  storageClassName: {{ $appvalues.global.nfs.storageClass }}
+  storageClassName: {{ $.Values.global.nfs.storageClass }}
   accessModes: 
     {{- $value.accessModes | toYaml | nindent 4 }}
   resources:

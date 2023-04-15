@@ -20,22 +20,12 @@ if [ -f "$tmp_path" ]; then
     mv $tmp_path $tmp_path".old"
 fi
 
-extraArgs=""
-for f in k8s/argocd/values/shared/*.yaml; do
-    full_file_path=$(realpath $f)
-    extraArgs=$extraArgs" --values ${full_file_path}"
-done
-for f in k8s/argocd/values/$deployment/*.yaml; do
-    full_file_path=$(realpath $f)
-    extraArgs=$extraArgs" --values ${full_file_path}"
-done
-
 echo $extraArgs
 
 helm template $app $full_path --namespace $app \
     --debug \
     --values $full_path/values.yaml \
-    $extraArgs \
+    --values $full_path/values-$deployment.yaml \
     > $tmp_path
 
 echo "Wrote Template! --> $tmp_path"
