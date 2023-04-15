@@ -4,13 +4,15 @@
 
 {{ range $appName, $appProps := .Values.apps }}
 
-{{- $namespace := (printf "apps-%s" $appName) -}}
+{{- $genNamespace := (printf "apps-%s" $appName) -}}
 
+{{ if (not $appProps.namespace) }}
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: "{{ $namespace }}"
+  name: "{{ $genNamespace }}"
+{{ end }}
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -28,11 +30,11 @@ spec:
             - values.yaml
             - values-{{$.Values.global.deployment}}.yaml
         values: |-
-          {{- tpl $appProps $ | nindent 10 }}
+          {{- tpl ($appProps.values | default "") $ | nindent 10 }}
           global: 
               {{- $.Values.global | toYaml | nindent 12 }}
         releaseName: {{ $appName }}
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ $namespace }}
+    namespace: {{ $appProps.namespace | default $genNamespace }}
 {{ end }}

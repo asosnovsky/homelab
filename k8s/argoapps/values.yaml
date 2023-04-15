@@ -1,8 +1,12 @@
 gitops:
   repo: ""
   commit: ""
+
 apps:
-  ingresses: ""
+  ingresses: {}
+  users:
+    namespace: chart-database
+
 global:
   email: "ariel@sosnovsky.ca"
   timezone: America/Toronto
@@ -16,6 +20,7 @@ global:
     storageClass: "nfs-generic"
     server: "changme"
     share: "changeme"
+
 infrastructureCharts:
   cert-manager:
     repoURL: "https://charts.jetstack.io"
@@ -66,40 +71,7 @@ infrastructureCharts:
                   - ReadWriteMany
       readReplicas:
           replicaCount: 0
-  # monitoring:
-  #     chart: prometheus
-  #     repoURL: "https://prometheus-community.github.io/helm-charts"
-  #     targetRevision: "20.2.0"
-  #     values: |-
-  #         configmapReload:
-  #             prometheus:
-  #                 enabled: false
-  #         alertmanager:
-  #         persistence:
-  #             enabled: true
-  #             size: 8Gi
-  #             storageClass: "local-path"
-  #         ingress:
-  #             enabled: false
-  #             ingressClassName: traefik
-  #             annotations: {}
-  #             hosts:
-  #             - host: "{{$prometheusHost}}.{{ .Values.global.domain }}"
-  #                 paths:
-  #                 - path: /alertmanager
-  #                     pathType: Prefix
-  #         server:
-  # {{  if .Values.global.tls.enabled  }}
-  #         baseURL: "https://{{$prometheusHost}}.{{ .Values.global.domain }}"
-  # {{ else }}
-  #         baseURL: "http://{{$prometheusHost}}.{{ .Values.global.domain }}"
-  # {{ end }}
-  #         persistentVolume:
-  #             enabled: true
-  #             size: 8Gi
-  #             storageClass: "local-path"
-  #         ingress:
-  #             enabled: false
+
 secrets:
   database:
     namespace: chart-database
