@@ -43,6 +43,7 @@ infrastructureCharts:
                     enabled: true
                     mountPath: /bitnami/postgresql
                     storageClass: "{{ .Values.global.nfs.storageClass }}"
+                    existingClaim: "{{ .Values.storage.database.name }}"
                     accessModes:
                         - ReadWriteMany
             readReplicas:
