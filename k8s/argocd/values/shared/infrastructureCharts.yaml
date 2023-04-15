@@ -1,7 +1,7 @@
 infrastructureCharts:
     cert-manager:
         repoURL: "https://charts.jetstack.io"
-        targetRevision: 1.10.2"
+        targetRevision: "1.10.2"
         values: |-
             installCRDs: true
     external-secrets:
@@ -30,7 +30,7 @@ infrastructureCharts:
     #         configmapReload:
     #             prometheus:
     #                 enabled: false
-    #         alertmanager: 
+    #         alertmanager:
     #         persistence:
     #             enabled: true
     #             size: 8Gi
@@ -44,7 +44,7 @@ infrastructureCharts:
     #                 paths:
     #                 - path: /alertmanager
     #                     pathType: Prefix
-    #         server: 
+    #         server:
     # {{  if .Values.global.tls.enabled  }}
     #         baseURL: "https://{{$prometheusHost}}.{{ .Values.global.domain }}"
     # {{ else }}
