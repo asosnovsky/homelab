@@ -13,9 +13,7 @@ rules:
   verbs: ["get", "update", "create", "patch", "delete"]
   resourceNames: 
     - "tfstate-default-{{ .Release.Name }}"
-  {{ range $user := .Values.userGeneration.users }}
-    - "password.pg.{{ $user }}"
-  {{ end }}
+    - "password.pg.*"
 - apiGroups: ["coordination.k8s.io"]
   resources: ["leases"]
   verbs: ["get", "update", "create", "patch", "delete"]
