@@ -4,7 +4,7 @@
 {{ range $path, $_ :=  .Files.Glob  "values/shared/**.yaml" }}
   {{- with $currentScope }}
     {{ $newobj := .Files.Get $path | fromYaml }}
-    {{ $appvalues := merge $appvalues $newobj }}
+    {{ $appvalues := mergeOverwrite $appvalues $newobj }}
   {{- end -}}
 {{ end }}
 
@@ -12,7 +12,7 @@
 {{ range $path, $_ :=  .Files.Glob $deploymentPath }}
   {{- with $currentScope }}
     {{ $newobj := .Files.Get $path | fromYaml }}
-    {{ $appvalues := merge $appvalues $newobj }}
+    {{ $appvalues := mergeOverwrite $appvalues $newobj }}
   {{- end -}}
 {{ end }}
 
