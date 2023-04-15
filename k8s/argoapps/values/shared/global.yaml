@@ -1,5 +1,4 @@
 global:
-  deployment: ""
   email: "ariel@sosnovsky.ca"
   timezone: America/Toronto
   domain: ""
@@ -12,6 +11,3 @@ global:
     storageClass: "nfs-generic"
     server: "changme"
     share: "changeme"
-gitops:
-  commit: "stable"
-  repo: "asosnovsky/homelab"

@@ -1,22 +1,4 @@
 ---
-{{ $currentScope := .}}
-{{- $appvalues := dict -}}
-{{ range $path, $_ :=  .Files.Glob  "values/shared/**.yaml" }}
-  {{- with $currentScope }}
-    {{ $newobj := .Files.Get $path | fromYaml }}
-    {{ $appvalues := mergeOverwrite $appvalues $newobj }}
-  {{- end -}}
-{{ end }}
-
-{{- $deploymentPath := printf "values/%s/**.yaml" .Values.selfapp.deployment  -}}
-{{ range $path, $_ :=  .Files.Glob $deploymentPath }}
-  {{- with $currentScope }}
-    {{ $newobj := .Files.Get $path | fromYaml }}
-    {{ $appvalues := mergeOverwrite $appvalues $newobj }}
-  {{- end -}}
-{{ end }}
-
----
 apiVersion: v1
 kind: Secret
 metadata:
@@ -25,10 +7,10 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
   annotations:
-    link.argocd.argoproj.io/external-link: "https://github.com/{{ $appvalues.gitops.repo }}"
+    link.argocd.argoproj.io/external-link: "https://github.com/{{ .Values.gitops.repo }}"
 stringData:
   type: git
-  url: "git@github.com:{{ $appvalues.gitops.repo }}.git"
+  url: "git@github.com:{{ .Values.gitops.repo }}.git"
   sshPrivateKey: {{ .Values.selfapp.sshkey | quote }}
 
 
@@ -42,8 +24,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "git@github.com:{{ $appvalues.gitops.repo }}.git"
-    targetRevision: "{{ $appvalues.gitops.commit }}"
+    repoURL: "git@github.com:{{ .Values.gitops.repo }}.git"
+    targetRevision: "{{ .Values.gitops.commit }}"
     path: k8s/argocd
     helm:
       valueFiles:
@@ -69,14 +51,19 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "git@github.com:{{ $appvalues.gitops.repo }}.git"
-    targetRevision: "{{ $appvalues.gitops.commit }}"
+    repoURL: "git@github.com:{{ .Values.gitops.repo }}.git"
+    targetRevision: "{{ .Values.gitops.commit }}"
     path: k8s/argoapps
     helm:
       valueFiles:
         - values.yaml
-      values: |-
-        {{- $appvalues | toYaml | nindent 8 }} 
+      parameters:
+        - name: "deployment"
+          value: {{ .Values.selfapp.deployment | quote }}
+        - name: "gitops.repo"
+          value: {{ .Values.gitops.repo | quote }}
+        - name: "gitops.commit"
+          value: {{ .Values.gitops.commit | quote }}
   destination:
     server: https://kubernetes.default.svc
     namespace: "{{ .Release.Namespace }}"

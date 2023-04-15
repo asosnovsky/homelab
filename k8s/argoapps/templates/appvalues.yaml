@@ -1,0 +1,18 @@
+---
+{{ $currentScope := .}}
+{{- $appvalues := dict -}}
+{{ range $path, $_ :=  .Files.Glob  "values/shared/**.yaml" }}
+  {{- with $currentScope }}
+    {{ $newobj := .Files.Get $path | fromYaml }}
+    {{ $appvalues := mergeOverwrite $appvalues $newobj }}
+  {{- end -}}
+{{ end }}
+
+{{- $deploymentPath := printf "values/%s/**.yaml" .Values.deployment  -}}
+{{ range $path, $_ :=  .Files.Glob $deploymentPath }}
+  {{- with $currentScope }}
+    {{ $newobj := .Files.Get $path | fromYaml }}
+    {{ $appvalues := mergeOverwrite $appvalues $newobj }}
+  {{- end -}}
+{{ end }}
+---

@@ -2,7 +2,7 @@
 {{ include "homelab.argo.project" (dict "name" $argoappsetApps "description" "common applications")}}
 
 
-{{ range $appName, $appProps := .Values.apps }}
+{{ range $appName, $appProps := $appvalues.apps }}
 
 {{- $namespace := (printf "apps-%s" $appName) -}}
 
@@ -26,7 +26,7 @@ spec:
     helm:
         valueFiles:
             - values.yaml
-            - values-{{$.Values.global.deployment}}.yaml
+            - values-{{$.Values.deployment}}.yaml
         values: |-
           {{- tpl $appProps $ | nindent 10 }}
           global: 

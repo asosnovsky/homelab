@@ -17,3 +17,6 @@ argo-cd:
 selfapp:
   deployment: ""
   sshkey: ""
+gitops:
+  commit: "stable"
+  repo: "asosnovsky/homelab"
