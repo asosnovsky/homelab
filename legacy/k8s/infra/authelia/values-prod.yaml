@@ -32,7 +32,7 @@ authelia:
           ingressRoute:
             before:
               - name: "https-redirect"
-                namespace: "ingresses"
+                namespace: "apps-ingresses"
 smtp_configs:
   SMTP_SERVER: "smtp.gmail.com"
   SMTP_PORT: "587"

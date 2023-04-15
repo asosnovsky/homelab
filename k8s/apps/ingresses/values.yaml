@@ -5,7 +5,7 @@ services:
     namespace: "argocd"
   - prefix: "demo"
     service: "dummy-app"
-    namespace: "ingresses"
+    namespace: "apps-ingresses"
     # middleware: "ingresses-chain-authelia"
 #   - prefix: "client.torrent"
 #     service: "transmission"

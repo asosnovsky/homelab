@@ -35,7 +35,7 @@ metadata:
   name: "{{.prefix}}.{{.global.domain}}"
   namespace: {{ .namespace }}
   annotations:
-    homelab-ingress/managing-app-namespace: "ingresses"
+    homelab-ingress/managing-app-namespace: "apps-ingresses"
     traefik.ingress.kubernetes.io/router.middlewares: {{ .middleware | default "ingresses-https-redirect"}}@kubernetescrd
   {{ range $k, $v := (.annotations | default (dict )) }}
     {{ $k }}: {{ $v }}
