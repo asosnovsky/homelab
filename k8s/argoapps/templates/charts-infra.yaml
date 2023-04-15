@@ -1,5 +1,5 @@
 {{- $infraChartProjectName := "infrastructure-charts" -}}
-{{ include "homelab.argo.project" (dict "Values" $.Values "name" $infraChartProjectName "description" "infrastructure helm charts")}}
+{{ include "homelab.argo.project" (dict "name" $infraChartProjectName "description" "infrastructure helm charts")}}
 
 {{ range $chartName, $chartProps := .Values.infrastructureCharts }}
 
