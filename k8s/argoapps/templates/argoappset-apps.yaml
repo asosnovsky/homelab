@@ -1,0 +1,37 @@
+{{- $argoappsetApps := "apps" -}}
+{{ include "homelab.argo.project" (dict "name" $argoappsetApps "description" "common applications")}}
+
+
+{{ range $appName, $appProps := .Values.apps }}
+
+{{- $namespace := (printf "apps-%s" $appName) -}}
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "{{ $namespace }}"
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-{{ $appName }}
+spec:
+  project: {{ $argoappsetApps }}
+  source:
+  repoURL: "git@github.com:{{ .Values.gitops.repo }}.git"
+  targetRevision: "{{ .Values.gitops.commit }}"
+  path: 'k8s/apps/{{ $appName }}'
+  helm:
+      valueFiles:
+          - values.yaml
+      values: |-
+        global: 
+            {{- .Values.global | toYaml | nindent 28 }}
+        {{- tpl ($appProps | default "") $ | nindent 8}}
+      releaseName: {{ $appName }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ $namespace }}
+{{ end }}
