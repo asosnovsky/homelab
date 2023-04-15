@@ -4,7 +4,7 @@ gitops:
 
 apps:
   ingresses: {}
-  users:
+  db-users:
     namespace: chart-database
     values: |-
       postgresSecret: "{{ .Values.secrets.database.secrets.dbmain.name }}"
