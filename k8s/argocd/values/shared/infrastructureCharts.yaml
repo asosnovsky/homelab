@@ -35,7 +35,7 @@ infrastructureCharts:
             auth:
                 secretKeys:
                     adminPasswordKey: password
-                existingSecret: "{{ .Values.secrets.named.dbmain.name }}"
+                existingSecret: "{{ .Values.secrets.chart-database.dbmain.name }}"
             architecture: standalone
             postgresqlDataDir: /bitnami/postgresql/data
             primary:
