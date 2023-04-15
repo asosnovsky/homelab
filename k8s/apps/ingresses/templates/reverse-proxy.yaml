@@ -1,0 +1,27 @@
+{{ range $prefix, $data := .Values.reverseProxy }}
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: "reverse-proxy-{{$prefix}}"
+subsets:
+- addresses:
+  - ip: "{{ $data.ip }}"
+  ports:
+  - port: {{ $data.port }}
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "reverse-proxy-{{$prefix}}"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: {{ $data.port }}
+
+{{ include "homelab.ingress" (dict "service" (printf "reverse-proxy-%s" $prefix) "prefix" $prefix "global" $.Values.global "namespace" $.Release.Namespace )}}
+
+{{ end }}

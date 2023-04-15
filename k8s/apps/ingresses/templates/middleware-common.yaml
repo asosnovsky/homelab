@@ -1,0 +1,82 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: https-redirect
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  redirectScheme:
+    scheme: https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strict-transport
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  headers:
+    hostsProxyHeaders:
+      - "X-Forwarded-Host"
+    referrerPolicy: "same-origin"
+    stsSeconds: 15552000
+    stsIncludeSubdomains: true
+    stsPreload: true
+    forceSTSHeader: true
+---
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: chain-authelia
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  chain:
+    middlewares:
+      - name: https-redirect
+        namespace: "{{ .Release.Namespace }}"
+      - name:  forwardauth-authelia
+        namespace: "{{ .Release.Namespace }}"
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: forwardauth-authelia
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    app.kubernetes.io/instance: authelia
+    app.kubernetes.io/name: authelia
+spec:
+  forwardAuth:
+    address: http://main-authelia.authelia.svc.cluster.local/api/verify?rd=https%3A%2F%2Fauth.core.{{.Values.global.domain}}%2F
+    authResponseHeaders:
+      - Remote-User
+      - Remote-Name
+      - Remote-Email
+      - Remote-Groups
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: forwardauth-authentik
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    app.kubernetes.io/instance: authentik
+    app.kubernetes.io/name: authentik
+spec:
+  forwardAuth:
+    address: http://authentik.core.{{.Values.global.domain}}/outpost.goauthentik.io/auth/traefik
+    trustForwardHeader: true
+    authResponseHeaders:
+      - X-authentik-username
+      - X-authentik-groups
+      - X-authentik-email
+      - X-authentik-name
+      - X-authentik-uid
+      - X-authentik-jwt
+      - X-authentik-meta-jwks
+      - X-authentik-meta-outpost
+      - X-authentik-meta-provider
+      - X-authentik-meta-app
+      - X-authentik-meta-version

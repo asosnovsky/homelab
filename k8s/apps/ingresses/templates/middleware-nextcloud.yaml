@@ -1,0 +1,39 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nextcloud
+  namespace: app-nextcloud
+spec:
+  chain:
+    middlewares:
+      - name: https-redirect
+        namespace: "{{ .Release.Namespace }}"
+      - name: app-nextcloud-well-known
+      - name: app-nextcloud-well-known-web-finger
+      - name: strict-transport
+        namespace: "{{ .Release.Namespace }}"
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: app-nextcloud-well-known
+  namespace: app-nextcloud
+spec:
+  redirectRegex:
+    permanent: true
+    regex: "https://(.*)/.well-known/(?:card|cal)dav"
+    replacement: "https://${1}/remote.php/dav"
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: app-nextcloud-well-known-web-finger
+  namespace: app-nextcloud
+spec:
+  redirectRegex:
+    permanent: true
+    regex: "https://(.*)/.well-known/webfinger"
+    replacement: "https://${1}/public.php?service=webfinger"

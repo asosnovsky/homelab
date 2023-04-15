@@ -1,0 +1,63 @@
+{{- define "homelab.ingress" }}
+
+# 
+# Input:
+#   prefix: str
+#   service: str
+#   namespace: str
+#   global: map (should be .global)
+#   port: int = 80
+#   path: str = "/"
+#   middleware: str = "https-redirect"
+# 
+
+{{  if .global.tls.enabled  }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "tls-{{.prefix}}.{{.global.domain}}"
+  namespace: {{ .namespace }}
+spec:
+  secretName: "tls-{{.prefix}}.{{.global.domain}}"
+  issuerRef: 
+    kind: ClusterIssuer
+    name: "{{ .global.tls.issuer }}"
+  commonName: "{{.prefix}}.{{.global.domain}}"
+  dnsNames:
+    - "{{.prefix}}.{{.global.domain}}"
+{{ end }}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{.prefix}}.{{.global.domain}}"
+  namespace: {{ .namespace }}
+  annotations:
+    homelab-ingress/managing-app-namespace: "ingresses"
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .middleware | default "ingresses-https-redirect"}}@kubernetescrd
+  {{ range $k, $v := (.annotations | default (dict )) }}
+    {{ $k }}: {{ $v }}
+  {{ end }}
+spec:
+  rules:
+  - host: "{{.prefix}}.{{.global.domain}}"
+    http:
+      paths:
+      - backend:
+          service:
+            name: "{{.service}}"
+            port:
+              number: {{.port | default 80}}
+        path: {{ .path | default "/" }}
+        pathType: Prefix
+  {{ if .global.tls.enabled }}
+  tls:
+    - secretName: "tls-{{.prefix}}.{{.global.domain}}"
+      hosts:
+        - "{{.prefix}}.{{.global.domain}}"
+  {{ end }}
+
+
+{{- end -}}
