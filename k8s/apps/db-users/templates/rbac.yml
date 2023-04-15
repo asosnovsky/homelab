@@ -12,8 +12,7 @@ rules:
   resources: ["secrets"]
   verbs: ["get", "update", "create", "patch", "delete"]
   resourceNames: 
-    - "tfstate-default-{{ .Release.Name }}"
-    - "password.pg.*"
+    - "*"
 - apiGroups: ["coordination.k8s.io"]
   resources: ["leases"]
   verbs: ["get", "update", "create", "patch", "delete"]
