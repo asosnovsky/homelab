@@ -11,7 +11,7 @@ spec:
   orphanedResources:
     warn: false
   sourceRepos:
-    - "git@github.com:{{ .Values.gitops.repo }}.git"
+    - "*"
   destinations:
     - server: "*"
       namespace: '*'
