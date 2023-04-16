@@ -6,6 +6,11 @@ services:
   - prefix: "demo"
     service: "dummy-app"
     namespace: "apps-ingresses"
+  - prefix: "nextcloud"
+    service: "nextcloud"
+    namespace: "app-nextcloud"
+    port: 8080
+    middleware: "app-nextcloud-nextcloud"
     # middleware: "ingresses-chain-authelia"
 #   - prefix: "client.torrent"
 #     service: "transmission"
@@ -32,11 +37,6 @@ services:
 #     namespace: "app-videohosting"
 #     port: "9117"
 #     middleware: "ingresses-chain-authelia"
-#   - prefix: "nextcloud"
-#     service: "nextcloud"
-#     namespace: "app-nextcloud"
-#     port: 8080
-#     middleware: "app-nextcloud-nextcloud"
 #   - prefix: "authentik.core"
 #     service: "authentik"
 #     namespace: "authentik"
