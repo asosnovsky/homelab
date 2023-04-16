@@ -44,7 +44,7 @@ videohosting:
 apps:
   videohosting:
     values: |-
-    {{ .Values.videohosting | toYaml }}
+      {{ .Values.videohosting | toYaml }}
   nextcloud:
     values: |-
       nextcloud:
@@ -58,31 +58,30 @@ apps:
           nextcloudData:
             storageClass: {{ .Values.global.nfs.storageClass }}
             existingClaim: {{ .Values.storage.nextcloudData.name }}
-  ingresses: 
+  ingresses:
     values: |-
-    services:
-      - prefix: "argocd.core"
-        service: "argocd-server"
-        namespace: "argocd"
-      - prefix: "demo"
-        service: "dummy-app"
-        namespace: "apps-ingresses"
-      - prefix: "nextcloud"
-        service: "nextcloud"
-        namespace: "apps-nextcloud"
-        port: 8080
-        middleware: "apps-nextcloud-nextcloud"
-      {{ range $name, $data := .Values.videohosting.linuxserverServices }}
-      - prefix: "{{ $name }}.vh"
-        service: {{ $name }}
-        namespace: "apps-videohosting"
-        port: {{ $data.tcp.web }}
-        middleware: "ingresses-chain-authelia"
-      {{ end }}
-      - prefix: "plex"
-        service: "plex"
-        namespace: "apps-videohosting"
-        port: 32400
+      services:
+        - prefix: "argocd.core"
+          service: "argocd-server"
+          namespace: "argocd"
+        - prefix: "demo"
+          service: "dummy-app"
+          namespace: "apps-ingresses"
+        - prefix: "nextcloud"
+          service: "nextcloud"
+          namespace: "apps-nextcloud"
+          port: 8080
+          middleware: "apps-nextcloud-nextcloud"
+        - prefix: "plex"
+          service: "plex"
+          namespace: "apps-videohosting"
+          port: 32400
+        {{- range $k, $v := .Values.videohosting.linuxserverServices }}
+        - prefix: "{{ $k }}.vh"
+          service: "{{ $k }}"
+          namespace: "apps-videohosting"
+          port: {{ $v.ports.tcp.web }}
+        {{- end }}
 
   db-users:
     namespace: chart-database

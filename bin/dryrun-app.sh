@@ -7,20 +7,22 @@ app=$(basename $full_path)
 location=$(dirname $full_path)
 tmp_path=".tmp/$location/$deployment-$app.yaml"
 
+echo "Running for $app:$deployment"
 
 mkdir -p $(dirname $tmp_path)
 
+echo "  > updating dependencies..."
 pushd $full_path &> /dev/null
-helm dependency update &> /dev/null
+helm dependency update 
 popd &> /dev/null
 
 if [ -f "$tmp_path" ]; then
-    echo "found existing file"
-    echo "renaming old file to "$tmp_path".old"
+    echo "  > found existing file"
+    echo "  > renaming old file to "$tmp_path".old"
     mv $tmp_path $tmp_path".old"
 fi
 
-echo $extraArgs
+echo "  > running..."
 
 helm template $app $full_path --namespace $app \
     --debug \
