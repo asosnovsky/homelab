@@ -15,8 +15,36 @@ global:
     storageClass: "nfs-generic"
     server: "changme"
     share: "changeme"
+    additionalShares:
+      torrents: "changeme"
+      familyvideos: "changeme"
+
+videohosting:
+  linuxserverServices:
+    transmission:
+      ports:
+        tcp:
+          web: 9091
+          51413: 51413
+        udp:
+          51413: 51413
+    sonarr:
+      ports:
+        tcp:
+          web: 8989
+    radarr:
+      ports:
+        tcp:
+          web: 7878
+    jackett:
+      ports:
+        tcp:
+          web: 9117
 
 apps:
+  videohosting:
+    values: |-
+    {{ .Values.videohosting | toYaml }}
   nextcloud:
     values: |-
       nextcloud:
@@ -30,7 +58,32 @@ apps:
           nextcloudData:
             storageClass: {{ .Values.global.nfs.storageClass }}
             existingClaim: {{ .Values.storage.nextcloudData.name }}
-  ingresses: {}
+  ingresses: 
+    values: |-
+    services:
+      - prefix: "argocd.core"
+        service: "argocd-server"
+        namespace: "argocd"
+      - prefix: "demo"
+        service: "dummy-app"
+        namespace: "apps-ingresses"
+      - prefix: "nextcloud"
+        service: "nextcloud"
+        namespace: "apps-nextcloud"
+        port: 8080
+        middleware: "apps-nextcloud-nextcloud"
+      {{ range $name, $data := .Values.videohosting.linuxserverServices }}
+      - prefix: "{{ $name }}.vh"
+        service: {{ $name }}
+        namespace: "apps-videohosting"
+        port: {{ $data.tcp.web }}
+        middleware: "ingresses-chain-authelia"
+      {{ end }}
+      - prefix: "plex"
+        service: "plex"
+        namespace: "apps-videohosting"
+        port: 32400
+
   db-users:
     namespace: chart-database
     values: |-

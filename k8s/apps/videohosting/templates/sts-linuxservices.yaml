@@ -22,7 +22,18 @@ spec:
     app: {{ $k }}
   type: ClusterIP
   ports:
-    {{- $v.ports | toYaml | nindent 4 }}
+    {{ range $portName, $portValue := $v.ports.tcp }}
+    - port: {{ $portValue }}
+      targetPort: {{ $portValue }}
+      name: "{{ $portName }}"
+      protocol: TCP
+    {{ end }}
+    {{ range $portName, $portValue := $v.ports.udp }}
+    - port: {{ $portValue }}
+      targetPort: {{ $portValue }}
+      name: "{{ $portName }}"
+      protocol: UDP
+    {{ end }}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -66,6 +77,15 @@ spec:
             - containerPort: {{ $port.targetPort }}
               protocol: {{ $port.protocol | default "TCP" }}
           {{ end }}
+
+          {{ range $portName, $portValue := $v.ports.tcp }}
+            - containerPort: {{ $portValue }}
+              protocol: TCP
+          {{ end }}
+          {{ range $portName, $portValue := $v.ports.udp }}
+            - containerPort: {{ $portValue }}
+              protocol: UDP
+          {{ end }}
           volumeMounts:
             - name: config
               mountPath: /config
@@ -75,6 +95,6 @@ spec:
         - name: torrents
           nfs:
             server: "{{ $.Values.global.nfs.server }}"
-            path: "{{ $.Values.nfs.shares.torrents  }}"
+            path: "{{ $.Values.global.nfs.additionalShares.torrents  }}"
             readOnly: false
 {{ end }}

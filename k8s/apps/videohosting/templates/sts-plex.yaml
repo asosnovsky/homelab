@@ -149,10 +149,10 @@ spec:
         - name: torrents
           nfs:
             server: "{{ $.Values.global.nfs.server }}"
-            path: "{{ $.Values.nfs.shares.torrents  }}"
+            path: "{{ $.Values.global.nfs.additionalShares.torrents  }}"
             readOnly: true
         - name: family-videos
           nfs:
             server: "{{ $.Values.global.nfs.server }}"
-            path: "{{ .Values.nfs.shares.familyvideos }}"
+            path: "{{ .Values.global.nfs.additionalShares.familyvideos }}"
             readOnly: true
