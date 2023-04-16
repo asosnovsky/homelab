@@ -31,7 +31,7 @@ spec:
     {{ range $portName, $portValue := $v.ports.udp }}
     - port: {{ $portValue }}
       targetPort: {{ $portValue }}
-      name: "{{ $portName }}"
+      name: "{{ $portName }}-udp"
       protocol: UDP
     {{ end }}
 ---
