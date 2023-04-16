@@ -104,3 +104,10 @@ storage:
   nextcloudData:
     name: nextcloud-data
     namespace: apps-nextcloud
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 100Gi
+      requests:
+        storage: 10Gi
