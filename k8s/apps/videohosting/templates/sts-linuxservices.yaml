@@ -75,11 +75,6 @@ spec:
           resources: 
             {{- $v.podResources | toYaml | nindent 12 }}
           ports:
-          {{ range $port := $v.ports}}
-            - containerPort: {{ $port.targetPort }}
-              protocol: {{ $port.protocol | default "TCP" }}
-          {{ end }}
-
           {{ range $portName, $portValue := $v.ports.tcp }}
             - containerPort: {{ $portValue }}
               protocol: TCP
