@@ -25,6 +25,8 @@ apps:
         externalDatabase:
           host: postgres.chart-database.svc.cluster.local
         persistence:
+          storageClass: {{ .Values.global.nfs.storageClass }}
+          existingClaim: {{ .Values.storage.nextcloudConfig.name }}
           nextcloudData:
             storageClass: {{ .Values.global.nfs.storageClass }}
             existingClaim: {{ .Values.storage.nextcloudData.name }}
@@ -103,6 +105,16 @@ storage:
         storage: 8Gi
   nextcloudData:
     name: nextcloud-data
+    namespace: apps-nextcloud
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 100Gi
+      requests:
+        storage: 10Gi
+  nextcloudConfig:
+    name: nextcloud-config
     namespace: apps-nextcloud
     accessModes:
       - ReadWriteMany
