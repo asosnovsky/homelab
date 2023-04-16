@@ -5,7 +5,10 @@ nextcloud:
     pullPolicy: IfNotPresent
     flavor: fpm
 
-  replicaCount: 2
+  replicaCount: 1
+
+  nodeSelector:
+    homelab/capacity: high
 
   nextcloud:
     existingSecret:
