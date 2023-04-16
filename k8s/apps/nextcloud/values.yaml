@@ -22,19 +22,6 @@ nextcloud:
       apps.config.php: false
       autoconfig.php: true
       smtp.config.php: true
-    configs:
-      proxy.config.php: |-
-        <?php
-        $CONFIG = array (
-          'trusted_proxies' => array(
-            0 => '127.0.0.1',
-            1 => '10.0.0.0/8',
-          ),
-          'overwritehost'     => 'ssl-proxy.tld',
-          'overwriteprotocol' => 'https',
-          'overwritewebroot'  => '/domain.tld/nextcloud',
-          'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
-        );
     strategy:
       type: RollingUpdate
       rollingUpdate:
@@ -48,7 +35,7 @@ nextcloud:
     enabled: true
     type: postgresql
     database: nextcloud
-    host: postgres.database.svc.cluster.local
+    host: changeme
     existingSecret:
       enabled: true
       secretName: password.pg.nextcloud
@@ -66,7 +53,6 @@ nextcloud:
   persistence:
     enabled: true
     nextcloudData:
-      storageClass: "nfs-generic"
       enabled: true
   resources:
     requests:

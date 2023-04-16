@@ -1,7 +1,5 @@
 nextcloud:
   nextcloud:
-    host: "nextcloud.home.sosnovsky.ca"
-
     configs:
       proxy.config.php: |-
         <?php

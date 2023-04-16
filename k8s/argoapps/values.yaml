@@ -2,17 +2,10 @@ gitops:
   repo: ""
   commit: ""
 
-apps:
-  ingresses: {}
-  db-users:
-    namespace: chart-database
-    values: |-
-      postgresSecret: "{{ .Values.secrets.database.secrets.dbmain.name }}"
-
 global:
   email: "ariel@sosnovsky.ca"
   timezone: America/Toronto
-  domain: ""
+  domain: "changeme"
   tls:
     enabled: false
     issuer: ""
@@ -22,6 +15,24 @@ global:
     storageClass: "nfs-generic"
     server: "changme"
     share: "changeme"
+
+apps:
+  nextcloud:
+    values: |-
+      nextcloud:
+        nextcloud:
+          host: "nextcloud.{{ .Values.global.domain }}"
+        externalDatabase:
+          host: postgres.chart-database.svc.cluster.local
+        persistence:
+          nextcloudData:
+            storageClass: {{ .Values.global.nfs.storageClass }}
+            existingClaim: {{ .Values.storage.nextcloudData.name }}
+  ingresses: {}
+  db-users:
+    namespace: chart-database
+    values: |-
+      postgresSecret: "{{ .Values.secrets.database.secrets.dbmain.name }}"
 
 infrastructureCharts:
   cert-manager:
@@ -80,6 +91,7 @@ secrets:
     secrets:
       dbmain:
         name: "pg.password"
+
 storage:
   database:
     name: primary-database
@@ -89,3 +101,6 @@ storage:
     resources:
       requests:
         storage: 8Gi
+  nextcloudData:
+    name: nextcloud-data
+    namespace: apps-nextcloud
