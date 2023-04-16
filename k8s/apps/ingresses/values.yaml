@@ -8,9 +8,9 @@ services:
     namespace: "apps-ingresses"
   - prefix: "nextcloud"
     service: "nextcloud"
-    namespace: "app-nextcloud"
+    namespace: "apps-nextcloud"
     port: 8080
-    middleware: "app-nextcloud-nextcloud"
+    middleware: "apps-nextcloud-nextcloud"
     # middleware: "ingresses-chain-authelia"
 #   - prefix: "client.torrent"
 #     service: "transmission"

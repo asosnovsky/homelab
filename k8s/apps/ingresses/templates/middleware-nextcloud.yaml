@@ -3,14 +3,14 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: nextcloud
-  namespace: app-nextcloud
+  namespace: apps-nextcloud
 spec:
   chain:
     middlewares:
       - name: https-redirect
         namespace: "{{ .Release.Namespace }}"
-      - name: app-nextcloud-well-known
-      - name: app-nextcloud-well-known-web-finger
+      - name: apps-nextcloud-well-known
+      - name: apps-nextcloud-well-known-web-finger
       - name: strict-transport
         namespace: "{{ .Release.Namespace }}"
 
@@ -18,8 +18,8 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: app-nextcloud-well-known
-  namespace: app-nextcloud
+  name: apps-nextcloud-well-known
+  namespace: apps-nextcloud
 spec:
   redirectRegex:
     permanent: true
@@ -30,8 +30,8 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: app-nextcloud-well-known-web-finger
-  namespace: app-nextcloud
+  name: apps-nextcloud-well-known-web-finger
+  namespace: apps-nextcloud
 spec:
   redirectRegex:
     permanent: true
