@@ -28,12 +28,14 @@ spec:
       name: "{{ $portName }}"
       protocol: TCP
     {{ end }}
+    {{- if $v.ports.udp -}}
     {{ range $portName, $portValue := $v.ports.udp }}
     - port: {{ $portValue }}
       targetPort: {{ $portValue }}
       name: "{{ $portName }}-udp"
       protocol: UDP
     {{ end }}
+    {{- end -}}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -82,9 +84,11 @@ spec:
             - containerPort: {{ $portValue }}
               protocol: TCP
           {{ end }}
+          {{- if $v.ports.udp -}}
           {{ range $portName, $portValue := $v.ports.udp }}
             - containerPort: {{ $portValue }}
               protocol: UDP
+          {{ end }}
           {{ end }}
           volumeMounts:
             - name: config
