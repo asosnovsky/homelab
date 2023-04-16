@@ -99,8 +99,17 @@ spec:
       labels:
         app: plex
     spec:
-      nodeSelector:
-        homelab/type: highcapacity
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: homelab/capacity
+                  operator: In
+                  values:
+                    - med
+                    - high
       containers:
         - name: plex
           image: "{{ .Values.plex.repo }}:{{ .Values.plex.tag }}"

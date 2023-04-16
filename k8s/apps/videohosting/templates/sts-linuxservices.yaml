@@ -64,8 +64,17 @@ spec:
       labels:
         app: {{$k}}
     spec:
-      nodeSelector:
-        homelab/type: lowcapacity
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: homelab/capacity
+                  operator: In
+                  values:
+                    - med
+                    - low
       containers:
         - name: {{$k}}
           image: "{{ $v.repo }}:{{ $v.tag }}"
