@@ -6,12 +6,6 @@ linuxserverServices:
   transmission:
     repo: lscr.io/linuxserver/transmission
     tag: "4.0.2"
-    ports:
-      tcp:
-        web: 9091
-        51413: 51413
-      udp:
-        51413: 51413
     podResources:
       limits:
         cpu: 1
@@ -39,9 +33,6 @@ linuxserverServices:
         storage: 10Gi
       limits:
         storage: 100Gi
-    ports:
-      tcp:
-        web: 8989
   radarr:
     repo: lscr.io/linuxserver/radarr
     tag: "4.3.2"
@@ -57,9 +48,6 @@ linuxserverServices:
         storage: 10Gi
       limits:
         storage: 100Gi
-    ports:
-      tcp:
-        web: 7878
   jackett:
     repo: lscr.io/linuxserver/jackett
     tag: "0.20.3772"
@@ -77,6 +65,3 @@ linuxserverServices:
         storage: 10Gi
       limits:
         storage: 100Gi
-    ports:
-      tcp:
-        web: 9117
