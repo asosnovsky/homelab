@@ -32,11 +32,11 @@ spec:
         values: |-
 {{- $values := ($appProps.values| default "")  -}}
 {{ if $appProps.valuesFile }}
-{{- $valuesFilePath := (printf "chart-values/%s" $appProps.valuesFile) -}}
+{{- $valuesFilePath := (printf "apps-values/%s" $appProps.valuesFile) -}}
 {{- $values := $.Files.Get $valuesFilePath -}}
-        {{- tpl $values $ | nindent 10 }}
-{{ else }}
-        {{- tpl $values $ | nindent 10 }}
+        {{- tpl $values $ | nindent 10 -}}
+{{- else -}}
+        {{- tpl $values $ | nindent 10 -}}
 {{- end }}
           global: 
               {{- $.Values.global | toYaml | nindent 12 }}
