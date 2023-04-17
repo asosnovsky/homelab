@@ -156,7 +156,7 @@ storage:
         storage: 8Gi
   authelia:
     name: authelia
-    namespace: chart-authelia
+    namespace: apps-authelia
     accessModes:
       - ReadWriteMany
     resources:
