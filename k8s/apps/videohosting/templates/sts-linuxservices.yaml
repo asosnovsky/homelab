@@ -105,7 +105,7 @@ spec:
               mountPath: /config
             - name: torrents
               mountPath: /torrents
-        {{- include "homelab.openvpn.container" . | nindent 8 }}
+        {{- include "homelab.nordvpn" . | nindent 8 }}
       volumes:
         - name: torrents
           nfs:
