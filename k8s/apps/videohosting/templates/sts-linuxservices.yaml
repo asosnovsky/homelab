@@ -55,6 +55,7 @@ spec:
           - kubernetes.io/pvc-protection
         name: config
       spec:
+        storageClassName: {{ .Values.global.nfs.storageClass }}
         accessModes:
           - ReadWriteOnce
         resources: 
