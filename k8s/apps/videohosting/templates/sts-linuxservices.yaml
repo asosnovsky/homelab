@@ -75,12 +75,6 @@ spec:
                   values:
                     - med
                     - low
-      dnsConfig:
-        nameservers:
-          - 8.8.8.8
-          - 8.8.4.4
-      initContainers:
-        {{- include "homelab.openvpn.initContainer" . | nindent 8 }}
       containers:
         - name: {{$k}}
           image: "{{ $v.repo }}:{{ $v.tag }}"
@@ -105,12 +99,10 @@ spec:
               mountPath: /config
             - name: torrents
               mountPath: /torrents
-        {{- include "homelab.nordvpn" $ | nindent 8 }}
       volumes:
         - name: torrents
           nfs:
             server: "{{ $.Values.global.nfs.server }}"
             path: "{{ $.Values.global.nfs.additionalShares.torrents  }}"
             readOnly: false
-        {{- include "homelab.openvpn.volumes" . | nindent 8 }}
 {{ end }}
