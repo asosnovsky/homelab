@@ -26,21 +26,4 @@ spec:
       remoteRef:
         key: "password.pg.authelia"
         property: password
----
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: "{{ .Values.authelia.secret.existingSecret }}-smtp"
-spec:
-  refreshInterval: 1h
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: secrets
-  target:
-    name: "{{ .Values.authelia.secret.existingSecret }}"
-    creationPolicy: Merge
-  data:
-    - secretKey: "SMTP_PASSWORD"
-      remoteRef:
-        key: "smtp"
-        property: password
+
