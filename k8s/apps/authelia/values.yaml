@@ -27,7 +27,7 @@ authelia:
     revisionHistoryLimit: 1
     env:
       - name: TZ
-        value: America/Toronto
+        value: "America/Toronto"
 
     resources:
       limits:
