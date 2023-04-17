@@ -83,6 +83,7 @@ apps:
           service: "{{ $k }}"
           namespace: "apps-videohosting"
           port: {{ $v.ports.tcp.web }}
+          middleware: "apps-ingresses-chain-authelia"
         {{- end }}
 
   db-users:
