@@ -1,6 +1,5 @@
-{{ define "homelab.nordvpn "}}
+{{ define "homelab.nordvpn" }}
 -   name: vpn
-    image: ghcr.io/bubuntux/nordvpn
     stdin: true
     tty: true
     securityContext:
@@ -9,9 +8,6 @@
             add:
                 - NET_ADMIN
                 - NET_RAW                
-    env:
-        -   name: TZ
-            value: "{{ .Values.global.timezone }}"
     volumeMounts:
         -   name: vpn-config
             mountPath: /vpn/client.ovpn
@@ -23,6 +19,8 @@
             mountPath: /tmp/route
     image: ghcr.io/bubuntux/nordvpn
     env:
+        -   name: TZ
+            value: "{{ .Values.global.timezone }}"
         -   name: TOKEN
             valueFrom:
                 secretKeyRef:
