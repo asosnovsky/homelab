@@ -49,7 +49,7 @@ metadata:
     app.kubernetes.io/name: authelia
 spec:
   forwardAuth:
-    address: http://main-authelia.authelia.svc.cluster.local/api/verify?rd=https%3A%2F%2Fauth.core.{{.Values.global.domain}}%2F
+    address: http://main-authelia.apps-authelia.svc.cluster.local/api/verify?rd=https%3A%2F%2Fauth.core.{{.Values.global.domain}}%2F
     authResponseHeaders:
       - Remote-User
       - Remote-Name
