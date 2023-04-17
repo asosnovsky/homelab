@@ -17,7 +17,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: database
+    name: chart-database
   target:
     name: "{{ .Values.authelia.secret.existingSecret }}"
     creationPolicy: Merge
