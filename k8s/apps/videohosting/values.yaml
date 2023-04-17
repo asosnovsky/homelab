@@ -96,3 +96,15 @@ linuxserverServices:
         6881: 6881
       udp:
         6881: 6881
+    podResources:
+      limits:
+        cpu: 1
+        memory: "2Gi"
+      requests:
+        cpu: 800m
+        memory: "500M"
+    configVolumesResources:
+      requests:
+        storage: 10Gi
+      limits:
+        storage: 100Gi
