@@ -1,0 +1,71 @@
+{{ if .Values.smtp_configs }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name:  "postfix-smtp-env"
+type: Opaque
+data:
+  SERVER_HOSTNAME: "{{ .Values.global.domain | b64enc }}"
+{{ range $k, $v := .Values.smtp_configs }}
+  {{ $k }}: "{{ $v | b64enc }}"
+{{ end }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postfix
+  labels:
+    app: postfix
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: postfix
+  template:
+    metadata:
+      labels:
+        app: postfix
+      annotations:
+        postfix/env-checksum: "{{ .Values.smtp_configs | toJson | sha256sum }}"
+    spec:
+      containers:
+        - image: juanluisbaptiste/postfix:alpine
+          name: postfix
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "55M"
+            limits:
+              cpu: "20m"
+              memory: "55M"
+          env:
+            - name: "SMTP_PASSWORD"
+              valueFrom:
+                secretKeyRef: 
+                  name: {{ .Values.smtp_password_secret }}
+                  key: {{ .Values.smtp_password_secret_key }}
+          envFrom:
+            - secretRef:
+                name: postfix-smtp-env
+          ports:
+            - containerPort: 25
+              name: smtp
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  postfix
+spec:
+  selector:
+    app:  postfix
+  type:  ClusterIP
+  ports:
+  - name: smtp
+    port:  25
+    targetPort:  25
+{{ end }}

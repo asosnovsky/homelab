@@ -30,7 +30,14 @@ spec:
             - values.yaml
             - values-{{$.Values.global.deployment}}.yaml
         values: |-
-          {{- tpl ($appProps.values | default "") $ | nindent 10 }}
+{{- $values := ($appProps.values| default "")  -}}
+{{ if $appProps.valuesFile }}
+{{- $valuesFilePath := (printf "chart-values/%s" $appProps.valuesFile) -}}
+{{- $values := $.Files.Get $valuesFilePath -}}
+        {{- tpl $values $ | nindent 10 }}
+{{ else }}
+        {{- tpl $values $ | nindent 10 }}
+{{- end }}
           global: 
               {{- $.Values.global | toYaml | nindent 12 }}
         releaseName: {{ $appName }}

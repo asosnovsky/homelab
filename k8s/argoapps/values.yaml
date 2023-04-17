@@ -18,6 +18,8 @@ global:
     additionalShares:
       torrents: "changeme"
       familyvideos: "changeme"
+  smtp:
+    email: "ariel.sosnovsky@gmail.com"
 
 videohosting:
   linuxserverServices:
@@ -87,6 +89,17 @@ apps:
     namespace: chart-database
     values: |-
       postgresSecret: "{{ .Values.secrets.database.secrets.dbmain.name }}"
+  postfix:
+    namespace: email
+    values: |-
+      smtp_configs:
+        SMTP_SERVER: "smtp.gmail.com"
+        SMTP_PORT: "587"
+        SMTP_USERNAME: "{{.Values.global.smtp.email}}"
+      smtp_password_secret: {{ .Values.secrets.smtp.secrets.smtp.name }}
+      smtp_password_secret_key: password
+  authelia:
+    valuesFile: authelia.yaml
 
 infrastructureCharts:
   cert-manager:
@@ -116,28 +129,7 @@ infrastructureCharts:
     chart: postgresql
     repoURL: "https://charts.bitnami.com/bitnami"
     targetRevision: "12.1.8"
-    values: |-
-      fullnameOverride: "postgres"
-      image:
-          tag: 15.1.0-debian-11-r19
-          repository: bitnami/postgresql
-          pullPolicy: IfNotPresent
-      auth:
-          secretKeys:
-              adminPasswordKey: password
-          existingSecret: "{{ .Values.secrets.database.secrets.dbmain.name }}"
-      architecture: standalone
-      postgresqlDataDir: /bitnami/postgresql/data
-      primary:
-          persistence:
-              enabled: true
-              mountPath: /bitnami/postgresql
-              storageClass: "{{ .Values.global.nfs.storageClass }}"
-              existingClaim: "{{ .Values.storage.database.name }}"
-              accessModes:
-                  - ReadWriteMany
-      readReplicas:
-          replicaCount: 0
+    valuesFile: database.yaml
 
 secrets:
   database:
@@ -145,6 +137,13 @@ secrets:
     secrets:
       dbmain:
         name: "pg.password"
+  smtp:
+    namespace: email
+    secrets:
+      smtp:
+        name: "smtp.creds"
+        data: |-
+          username: "{{.Values.global.smtp.email}}"
 
 storage:
   database:
@@ -155,6 +154,16 @@ storage:
     resources:
       requests:
         storage: 8Gi
+  authelia:
+    name: authelia
+    namespace: chart-authelia
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 5Gi
+      requests:
+        storage: 5Gi
   nextcloudData:
     name: nextcloud-data
     namespace: apps-nextcloud

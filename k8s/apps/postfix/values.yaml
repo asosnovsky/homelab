@@ -1,0 +1,5 @@
+global:
+    domain: changme
+smtp_configs: {}
+smtp_password_secret: "changeme"
+smtp_password_secret_key: "changeme"

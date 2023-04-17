@@ -4,13 +4,15 @@
 
 {{ range $chartName, $chartProps := .Values.infrastructureCharts }}
 
-{{- $namespace := (printf "chart-%s" $chartName) -}}
+{{- $namespace := $chartProps.namespace | default (printf "chart-%s" $chartName) -}}
 
+{{ if (not $chartProps.namespace) }}
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: "{{ $namespace }}"
+{{ end }}
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -25,7 +27,14 @@ spec:
     targetRevision: {{ $chartProps.targetRevision }}
     helm:
       values: |-
-        {{- tpl ($chartProps.values | default "") $ | nindent 8}}
+{{- $values := ($chartProps.values | default "")  -}}
+{{ if $chartProps.valuesFile }}
+{{- $valuesFilePath := (printf "chart-values/%s" $chartProps.valuesFile) -}}
+{{- $values := $.Files.Get $valuesFilePath -}}
+        {{- tpl $values $ | nindent 8 }}
+{{ else }}
+        {{- tpl $values $ | nindent 8 }}
+{{ end }}
       releaseName: {{ $chartName }}
   destination:
     server: https://kubernetes.default.svc
