@@ -42,6 +42,14 @@ videohosting:
       ports:
         tcp:
           web: 9117
+    qbittorrent:
+      ports:
+        tcp:
+          web: 8080
+          6881: 6881
+        udp:
+          6881: 6881
+
 
 apps:
   videohosting:
