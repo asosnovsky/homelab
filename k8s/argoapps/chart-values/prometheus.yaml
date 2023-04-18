@@ -10,9 +10,9 @@ alertmanager:
         enabled: false
 server: 
 {{  if .Values.global.tls.enabled  }}
-    baseURL: "https://{{$prometheusHost}}.{{ .Values.global.domain }}"
+    baseURL: "https://monitoring.core.{{ .Values.global.domain }}"
 {{ else }}
-    baseURL: "http://{{$prometheusHost}}.{{ .Values.global.domain }}"
+    baseURL: "http://monitoring.core.{{ .Values.global.domain }}"
 {{ end }}
     persistentVolume:
         enabled: true

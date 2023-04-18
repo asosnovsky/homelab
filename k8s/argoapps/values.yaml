@@ -175,7 +175,11 @@ infrastructureCharts:
     repoURL: "https://charts.bitnami.com/bitnami"
     targetRevision: "12.1.8"
     valuesFile: database.yaml
-
+  prometheus:
+    chart: prometheus
+    repoURL: "https://prometheus-community.github.io/helm-charts"
+    targetRevision: "20.2.0"
+    valuesFile: prometheus.yaml
 secrets:
   database:
     namespace: chart-database
