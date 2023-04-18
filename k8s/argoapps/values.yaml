@@ -243,13 +243,3 @@ storage:
         storage: 100Gi
       requests:
         storage: 10Gi
-  alertmanager:
-    name: alertmanager
-    namespace: chart-prometheus
-    accessModes:
-      - ReadWriteMany
-    resources:
-      limits:
-        storage: 100Gi
-      requests:
-        storage: 10Gi

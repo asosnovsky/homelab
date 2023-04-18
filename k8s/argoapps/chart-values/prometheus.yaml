@@ -5,7 +5,6 @@ alertmanager:
     persistence:
         enabled: true
         storageClass: "{{ .Values.global.nfs.storageClass }}"
-        existingClaim: "{{ .Values.storage.alertmanager.name }}"
     ingress:
         enabled: false
 server: 
