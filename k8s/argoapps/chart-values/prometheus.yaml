@@ -1,4 +1,4 @@
-cleanPrometheusOperatorObjectNames: true
+cleanPrometheusOperatorObjectNames: false
 alertmanager:
   alertmanagerSpec:
     storage: 
