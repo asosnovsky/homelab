@@ -11,7 +11,6 @@ alertmanager:
                         storage: 50Gi
                     limits:
                         storage: 100Gi
-                selector: {}
 
 {{-  if .Values.global.tls.enabled  }}
     externalUrl: "https://alerts.core.{{ .Values.global.domain }}"
@@ -52,4 +51,3 @@ prometheus:
                         storage: 50Gi
                     limits:
                         storage: 100Gi
-                selector: {}
