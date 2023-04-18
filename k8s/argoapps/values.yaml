@@ -195,8 +195,8 @@ infrastructureCharts:
     valuesFile: prometheus.yaml
   grafana:
     chart: grafana
-    repoURL: "https://prometheus-community.github.io/helm-charts"
-    targetRevision: "20.2.0"
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: "6.53.0"
     values: |-
       persistence: 
         enabled: true
