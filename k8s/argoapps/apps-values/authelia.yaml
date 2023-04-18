@@ -11,6 +11,23 @@ authelia:
         startup_check_address: {{ .Values.global.email }}
         disable_require_tls: true
 
+    identity_providers:
+      oidc:
+        clients: 
+          - id: nextcloud
+            description: NextCloud
+            secret: '$pbkdf2-sha512$310000$flG99HwC8BHSZSFdao0WfA$iBEXWiKkPN7mrd57NrYXTd6MA1/gExEaJfyF3yFPXd3YWMAdHWXtgw7JXfu44w0qCFkzq7fYuJdD9GX2SdH/sA'
+            public: false
+            authorization_policy: two_factor
+            redirect_uris:
+              - https://nextcloud.{{ .Values.global.domain }}/apps/oidc_login/oidc
+            scopes:
+              - openid
+              - profile
+              - email
+              - groups
+            userinfo_signing_algorithm: none
+
   persistence:
     storageClass: "{{ .Values.global.nfs.storageClass }}"
 
