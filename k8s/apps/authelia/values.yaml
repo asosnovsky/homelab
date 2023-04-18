@@ -104,7 +104,7 @@ authelia:
     
     identity_providers:
       oidc:
-        enabled: true
+        enabled: false
         access_token_lifespan: 8h
         authorize_code_lifespan: 1m
         id_token_lifespan: 1h
