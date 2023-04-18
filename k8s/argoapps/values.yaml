@@ -110,6 +110,15 @@ apps:
         - prefix: "argocd.core"
           service: "argocd-server"
           namespace: "argocd"
+        - prefix: "monitoring.core"
+          service: prometheus-server
+          namespace: chart-prometheus
+          middleware: "apps-ingresses-chain-authelia"
+        - prefix: "alerts.core"
+          service: prometheus-alertmanager
+          namespace: chart-prometheus
+          middleware: "apps-ingresses-chain-authelia"
+          port: 9093
         - prefix: "demo"
           service: "dummy-app"
           namespace: "apps-ingresses"
