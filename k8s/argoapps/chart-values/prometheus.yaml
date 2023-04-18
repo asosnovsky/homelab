@@ -47,9 +47,9 @@ prometheus:
             spec:
                 storageClassName: {{ .Values.global.nfs.storageClass }}
                 accessModes: ["ReadWriteOnce"]
-                    resources:
-                        requests:
-                            storage: 50Gi
-                        limits:
-                            storage: 100Gi
+                resources:
+                    requests:
+                        storage: 50Gi
+                    limits:
+                        storage: 100Gi
                 selector: {}
