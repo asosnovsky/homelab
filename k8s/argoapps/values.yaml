@@ -191,7 +191,7 @@ infrastructureCharts:
   prometheus:
     chart: kube-prometheus-stack
     repoURL: "https://prometheus-community.github.io/helm-charts"
-    targetRevision: "20.2.0"
+    targetRevision: "45.10.1"
     valuesFile: prometheus.yaml
 secrets:
   database:
