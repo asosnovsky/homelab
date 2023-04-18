@@ -1,26 +1,23 @@
-## Configuration for alertmanager
-## ref: https://prometheus.io/docs/alerting/alertmanager/
-##
+cleanPrometheusOperatorObjectNames: true
 alertmanager:
-
   alertmanagerSpec:
     storage: 
         volumeClaimTemplate:
             spec:
                 storageClassName: {{ .Values.global.nfs.storageClass }}
                 accessModes: ["ReadWriteOnce"]
-                    resources:
-                        requests:
-                            storage: 50Gi
-                        limits:
-                            storage: 100Gi
+                resources:
+                    requests:
+                        storage: 50Gi
+                    limits:
+                        storage: 100Gi
                 selector: {}
 
-{{  if .Values.global.tls.enabled  }}
+{{-  if .Values.global.tls.enabled  }}
     externalUrl: "https://alerts.core.{{ .Values.global.domain }}"
-{{ else }}
+{{- else }}
     externalUrl: "http://alerts.core.{{ .Values.global.domain }}"
-{{ end }}
+{{- end }}
     resources: 
         requests:
             memory: 400Mi
@@ -29,24 +26,22 @@ alertmanager:
 
 grafana:
   defaultDashboardsTimezone: {{ .Values.global.timezone }}
-
   adminPassword: prom-operator
 
 prometheus:
   prometheusSpec:
     enableAdminAPI: false
 
-{{  if .Values.global.tls.enabled  }}
-    externalUrl: "https://prometheus.core.{{ .Values.global.domain }}"
-{{ else }}
-    externalUrl: "http://prometheus.core.{{ .Values.global.domain }}"
-{{ end }}
+{{-  if .Values.global.tls.enabled  }}
+    externalUrl: "https://monitoring.core.{{ .Values.global.domain }}"
+{{- else }}
+    externalUrl: "http://monitoring.core.{{ .Values.global.domain }}"
+{{- end }}
     resources: 
         requests:
             memory: 400Mi
         limits:
             memory: 2Gi
-
     storageSpec: 
         volumeClaimTemplate:
             spec:
@@ -58,6 +53,3 @@ prometheus:
                         limits:
                             storage: 100Gi
                 selector: {}
-
-
-cleanPrometheusOperatorObjectNames: true
