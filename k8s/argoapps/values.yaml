@@ -119,6 +119,10 @@ apps:
           namespace: chart-prometheus
           middleware: "apps-ingresses-chain-authelia"
           port: 9093
+        - prefix: "grafana.core"
+          service: grafana
+          namespace: chart-grafana
+          middleware: "apps-ingresses-chain-authelia"
         - prefix: "demo"
           service: "dummy-app"
           namespace: "apps-ingresses"
@@ -189,6 +193,14 @@ infrastructureCharts:
     repoURL: "https://prometheus-community.github.io/helm-charts"
     targetRevision: "20.2.0"
     valuesFile: prometheus.yaml
+  grafana:
+    chart: grafana
+    repoURL: "https://prometheus-community.github.io/helm-charts"
+    targetRevision: "20.2.0"
+    values: |-
+      persistence: 
+        enabled: true
+        existingClaim: "{{ .Values.storage.grafana.name }}"
 secrets:
   database:
     namespace: chart-database
@@ -245,6 +257,16 @@ storage:
   prometheus:
     name: prometheus
     namespace: chart-prometheus
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 100Gi
+      requests:
+        storage: 10Gi
+  grafana:
+    name: grafana
+    namespace: chart-grafana
     accessModes:
       - ReadWriteMany
     resources:
