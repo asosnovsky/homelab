@@ -1,4 +1,0 @@
-authelia:
-  domain: "me.local"
-  configMap:
-    default_redirection_url: "http://me.local"

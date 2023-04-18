@@ -1,9 +1,0 @@
-auth:
-  authentik:
-    cookie_domain: authentik.core.home.sosnovsky.ca
-    email:
-      from: "ariel.sosnovsky@gmail.com"
-      host: smtp.gmail.com
-      port: 465
-      username: ariel.sosnovsky@gmail.com
-      use_ssl: true

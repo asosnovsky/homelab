@@ -1,2 +1,0 @@
-nfs:
-  share: "/mnt/EightTerra/k3s-cluster"
