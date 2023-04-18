@@ -23,6 +23,16 @@ alertmanager:
         limits:
             memory: 2Gi
 
+  config:
+    global:
+        smtp_from: '{{.Values.global.smtp.email }}'
+        smtp_smarthost: 'postfix.email.svc.cluster.local:25'
+        smtp_hello: 'alerts.core.{{ .Values.global.domain }}'
+    receivers:
+        -   name: '{{ .Values.global.email }}'
+            email_configs: 
+                -   to: '{{ .Values.global.email }}'
+
 grafana:
   defaultDashboardsTimezone: {{ .Values.global.timezone }}
   adminPassword: prom-operator
