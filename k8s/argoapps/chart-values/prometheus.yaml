@@ -1,21 +1,63 @@
-configmapReload:
-    prometheus:
-        enabled: false
-alertmanager: 
-    persistence:
-        enabled: true
-        storageClass: "{{ .Values.global.nfs.storageClass }}"
-    ingress:
-        enabled: false
-server: 
+## Configuration for alertmanager
+## ref: https://prometheus.io/docs/alerting/alertmanager/
+##
+alertmanager:
+
+  alertmanagerSpec:
+    storage: 
+        volumeClaimTemplate:
+            spec:
+                storageClassName: {{ .Values.global.nfs.storageClass }}
+                accessModes: ["ReadWriteOnce"]
+                    resources:
+                        requests:
+                            storage: 50Gi
+                        limits:
+                            storage: 100Gi
+                selector: {}
+
 {{  if .Values.global.tls.enabled  }}
-    baseURL: "https://monitoring.core.{{ .Values.global.domain }}"
+    externalUrl: "https://alerts.core.{{ .Values.global.domain }}"
 {{ else }}
-    baseURL: "http://monitoring.core.{{ .Values.global.domain }}"
+    externalUrl: "http://alerts.core.{{ .Values.global.domain }}"
 {{ end }}
-    persistentVolume:
-        enabled: true
-        storageClass: "{{ .Values.global.nfs.storageClass }}"
-        existingClaim: "{{ .Values.storage.prometheus.name }}"
-    ingress:
-        enabled: false
+    resources: 
+        requests:
+            memory: 400Mi
+        limits:
+            memory: 2Gi
+
+grafana:
+  defaultDashboardsTimezone: {{ .Values.global.timezone }}
+
+  adminPassword: prom-operator
+
+prometheus:
+  prometheusSpec:
+    enableAdminAPI: false
+
+{{  if .Values.global.tls.enabled  }}
+    externalUrl: "https://prometheus.core.{{ .Values.global.domain }}"
+{{ else }}
+    externalUrl: "http://prometheus.core.{{ .Values.global.domain }}"
+{{ end }}
+    resources: 
+        requests:
+            memory: 400Mi
+        limits:
+            memory: 2Gi
+
+    storageSpec: 
+        volumeClaimTemplate:
+            spec:
+                storageClassName: {{ .Values.global.nfs.storageClass }}
+                accessModes: ["ReadWriteOnce"]
+                    resources:
+                        requests:
+                            storage: 50Gi
+                        limits:
+                            storage: 100Gi
+                selector: {}
+
+
+cleanPrometheusOperatorObjectNames: true

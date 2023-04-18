@@ -121,7 +121,7 @@ apps:
           port: 9093
         - prefix: "grafana.core"
           service: grafana
-          namespace: chart-grafana
+          namespace: chart-prometheus
           middleware: "apps-ingresses-chain-authelia"
         - prefix: "demo"
           service: "dummy-app"
@@ -189,18 +189,10 @@ infrastructureCharts:
     targetRevision: "12.1.8"
     valuesFile: database.yaml
   prometheus:
-    chart: prometheus
+    chart: kube-prometheus-stack
     repoURL: "https://prometheus-community.github.io/helm-charts"
     targetRevision: "20.2.0"
     valuesFile: prometheus.yaml
-  grafana:
-    chart: grafana
-    repoURL: https://grafana.github.io/helm-charts
-    targetRevision: "6.53.0"
-    values: |-
-      persistence: 
-        enabled: true
-        existingClaim: "{{ .Values.storage.grafana.name }}"
 secrets:
   database:
     namespace: chart-database
@@ -247,26 +239,6 @@ storage:
   nextcloudConfig:
     name: nextcloud-config
     namespace: apps-nextcloud
-    accessModes:
-      - ReadWriteMany
-    resources:
-      limits:
-        storage: 100Gi
-      requests:
-        storage: 10Gi
-  prometheus:
-    name: prometheus
-    namespace: chart-prometheus
-    accessModes:
-      - ReadWriteMany
-    resources:
-      limits:
-        storage: 100Gi
-      requests:
-        storage: 10Gi
-  grafana:
-    name: grafana
-    namespace: chart-grafana
     accessModes:
       - ReadWriteMany
     resources:
