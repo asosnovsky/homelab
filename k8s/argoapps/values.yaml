@@ -229,11 +229,12 @@ infrastructureCharts:
     chart: "frigate"
     targetRevision: "7.0.0"
     values: |-
-        mqtt:
-          host: "{{ .Values.global.mqtt.host }}"
-          port: {{ .Values.global.mqtt.port }}
-          user: "{{ .Values.global.mqtt.username }}"
-          password: "{{ .Values.global.mqtt.password }}"
+      config: |
+          mqtt:
+            host: "{{ .Values.global.mqtt.host }}"
+            port: {{ .Values.global.mqtt.port }}
+            user: "{{ .Values.global.mqtt.username }}"
+            password: "{{ .Values.global.mqtt.password }}"
   prometheus:
     chart: kube-prometheus-stack
     repoURL: "https://prometheus-community.github.io/helm-charts"
