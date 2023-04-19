@@ -1,0 +1,19 @@
+global:
+    timezone: "changeme"
+
+
+common:
+    storageClaimName: "changeme"
+    resources:
+        limits:
+            cpu: "3"
+            memory: "2Gi"
+        requests:
+            cpu: "1"
+            memory: "200Mi"
+
+cameras:
+    -   name: "Baby Room"
+        rtsp:
+            url_main: ""
+            url_sub: ""

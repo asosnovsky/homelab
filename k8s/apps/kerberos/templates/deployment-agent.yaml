@@ -1,0 +1,83 @@
+{{ range $camera := .Values.cameras }}
+
+{{ $cameraSlug := ($camera.name | replace " " "_" | lower )}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $cameraSlug }}-config
+data:
+  AGENT_NAME: "{{ $camera.name }}"
+  AGENT_KEY: "{{ $cameraSlug }}"
+  AGENT_TIMEZONE: "{{ $.Values.global.timezone }}"
+  AGENT_AUTO_CLEAN_MAX_SIZE: "250" #MB
+  {{ if $camera.rtsp }}
+  AGENT_CAPTURE_IPCAMERA_RTSP: "{{ $camera.rtsp.url_main }}"
+  AGENT_CAPTURE_IPCAMERA_SUB_RTSP: "{{ $camera.rtsp.url_sub }}"
+  {{- end }}
+  AGENT_CAPTURE_CONTINUOUS: "true"
+  AGENT_CAPTURE_MAXLENGTH: "120" #seconds
+  {{ if $.Values.common.mqtt }}
+  AGENT_MQTT_URI: "{{ $.Values.common.mqtt.uri }}"
+  AGENT_MQTT_USERNAME: "{{ $.Values.common.mqtt.username }}"
+  AGENT_MQTT_PASSWORD: "{{ $.Values.common.mqtt.password }}"
+  {{ end }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $cameraSlug }}-deployment
+spec:
+  selector:
+    matchLabels:
+      kerberos/app: {{ $cameraSlug }}-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        kerberos/app: {{ $cameraSlug }}-app
+    spec:
+      volumes:
+        -   name: kerberos-data
+            persistentVolumeClaim:
+              claimName: {{ $.Values.common.storageClaimName }}
+      containers:
+        -   name: agent
+            image: "kerberos/agent:{{ $.Chart.AppVersion }}"
+            resources: 
+              {{- $.Values.common.resources | toYaml | nindent 14 }}
+            envFrom:
+              - secretRef:
+                  name: agent-secret-envs
+              - configMapRef:
+                  name: {{ $cameraSlug }}-config
+            volumeMounts:
+              -   name: kerberos-data
+                  mountPath: /home/agent/data/config
+                  subPath: {{ $cameraSlug }}/config
+              -   name: kerberos-data
+                  mountPath: /home/agent/data/recordings
+                  subPath: {{ $cameraSlug }}/recordings
+              -   name: kerberos-data
+                  mountPath: /home/agent/data/snapshots
+                  subPath: {{ $cameraSlug }}/snapshots
+              -   name: kerberos-data
+                  mountPath: /home/agent/data/cloud
+                  subPath: {{ $cameraSlug }}/cloud
+            ports:
+              -   containerPort: 80
+                  protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $cameraSlug }}
+spec:
+  selector:
+    kerberos/app: {{ $cameraSlug }}-app
+  ports:
+  - port: 80
+    targetPort: 80
+
+{{ end }}
