@@ -50,7 +50,6 @@ videohosting:
         udp:
           6881: 6881
 
-
 apps:
   videohosting:
     values: |-
@@ -104,6 +103,7 @@ apps:
                   'oidc_login_well_known_caching_time' => 86400,
                   'oidc_login_update_avatar' => false,
               );
+
   ingresses:
     values: |-
       services:
@@ -148,6 +148,7 @@ apps:
     namespace: chart-database
     values: |-
       postgresSecret: "{{ .Values.secrets.database.secrets.dbmain.name }}"
+
   postfix:
     namespace: email
     values: |-
@@ -157,8 +158,14 @@ apps:
         SMTP_USERNAME: "{{.Values.global.smtp.email}}"
       smtp_password_secret: {{ .Values.secrets.smtp.secrets.smtp.name }}
       smtp_password_secret_key: password
+
   authelia:
     valuesFile: authelia.yaml
+
+  kerberos:
+    values: |-
+      common:
+        storageClaimName: {{ .Values.global.nfs.storageClass }}
 
 infrastructureCharts:
   cert-manager:
