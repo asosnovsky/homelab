@@ -3,5 +3,5 @@ name: kerberos
 description: An apps service for homelab
 type: application
 version: 0.1.0
-appVersion: "4352d99"
+appVersion: "1.0.669719463"
 dependencies: []

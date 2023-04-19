@@ -1,0 +1,32 @@
+architecture: replicaset
+
+replicaCount: 1
+
+auth:
+    enabled: true
+    existingSecret: "{{ .Values.secrets.mongodb.secrets.auth.name }}"
+
+persistence:
+    enabled: true
+    resourcePolicy: "keep"
+    storageClass: {{ .Values.global.nfs.storageClass }}
+
+resources:
+    limits:
+        cpu: 3
+        memory: 3Gi
+    requests:
+        cpu: 0.5
+        memory: 1Gi	
+
+affinity:
+    nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                    -   key: homelab/capacity
+                        operator: In
+                        values:
+                            - med
+                            - low

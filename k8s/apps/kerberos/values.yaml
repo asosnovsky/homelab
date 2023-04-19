@@ -1,18 +1,17 @@
 global:
-    timezone: "changeme"
+    domain: "change.me"
 
-common:
-    storageClaimName: "changeme"
-    resources:
-        limits:
-            cpu: "3"
-            memory: "2Gi"
-        requests:
-            cpu: "1"
-            memory: "200Mi"
+agent:
+    version: "9d70778"
+    memory: "256Mi"
 
-cameras:
-    - name: "Baby Room"
-      rtsp:
-          url_main: "rtsp://motioneye:v1eWme123@192.168.0.11:554/cam/realmonitor?channel=1&subtype=0"
-          url_sub: "rtsp://motioneye:v1eWme123@192.168.0.11:554/cam/realmonitor?channel=1&subtype=1"
+mongodb:
+    host: "?"
+    secret:
+        store: "?"
+        name: "?"
+        keys:
+            credentials: "?"
+            username: "?"
+            password: "?"
+            storage: "?"

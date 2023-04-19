@@ -12,3 +12,6 @@ global:
     additionalShares:
       torrents: "/mnt/EightTerra/DownloadedTorrents"
       familyvideos: "/mnt/EightTerra/FamilyStorage/Video"
+  mqtt:
+    username: k3s
+    password: fZ!HauNB9%
