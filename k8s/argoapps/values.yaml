@@ -165,7 +165,7 @@ apps:
   kerberos:
     values: |-
       common:
-        storageClaimName: {{ .Values.global.nfs.storageClass }}
+        storageClaimName: {{ .Values.storage.kerberos.name }}
 
 infrastructureCharts:
   cert-manager:
@@ -247,6 +247,16 @@ storage:
   nextcloudConfig:
     name: nextcloud-config
     namespace: apps-nextcloud
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 100Gi
+      requests:
+        storage: 10Gi
+  kerberos:
+    name: kerberos
+    namespace: apps-kerberos
     accessModes:
       - ReadWriteMany
     resources:
