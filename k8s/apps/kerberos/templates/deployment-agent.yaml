@@ -1,6 +1,6 @@
 {{ range $camera := .Values.cameras }}
 
-{{ $cameraSlug := ($camera.name | replace " " "_" | lower )}}
+{{ $cameraSlug := ($camera.name | replace " " "-" | lower )}}
 ---
 apiVersion: v1
 kind: ConfigMap
