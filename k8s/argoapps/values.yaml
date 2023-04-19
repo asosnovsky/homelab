@@ -147,14 +147,18 @@ apps:
           port: {{ $v.ports.tcp.web }}
           middleware: "apps-ingresses-chain-authelia"
         {{- end }}
-        - prefix: "kerberos"
-          service: "factory"
-          namespace: "apps-kerberos"
-          port: 80
-        - prefix: "api.kerberos"
-          service: "factory"
-          namespace: "apps-kerberos"
-          port: 8082
+        # - prefix: "kerberos"
+        #   service: "factory"
+        #   namespace: "apps-kerberos"
+        #   port: 80
+        # - prefix: "api.kerberos"
+        #   service: "factory"
+        #   namespace: "apps-kerberos"
+        #   port: 8082
+        - prefix: "frigate"
+          service: "frigate"
+          namespace: "chart-frigate"
+          port: 5000
 
   db-users:
     namespace: chart-database
