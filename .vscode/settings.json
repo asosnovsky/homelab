@@ -1,8 +1,1 @@
-{
-    "yaml.schemas": {
-        "https://json.schemastore.org/helmfile.json": [
-            "file:///workspaces/homelab/k8s/argocd/templates/configurations.yaml",
-            "file:///Users/asosnovsky/git/personal/homelab/k8s/apps/kerberos/templates/deployment-agent-volume.yaml"
-        ]
-    }
-}
+{}
