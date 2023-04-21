@@ -181,6 +181,9 @@ apps:
         media_path:
             enabled: true
             claimName: {{ .Values.storage.motioneyeMedia.name }}
+        conf_path:
+            enabled: true
+            claimName: {{ .Values.storage.motioneyeConf.name }}
 
 infrastructureCharts:
   cert-manager:
@@ -291,3 +294,13 @@ storage:
         storage: 100Gi
       requests:
         storage: 10Gi
+  motioneyeConf:
+    name: motioneye-conf
+    namespace: apps-motioneye
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 1Gi
+      requests:
+        storage: 100Mi

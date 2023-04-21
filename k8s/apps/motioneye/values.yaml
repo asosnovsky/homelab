@@ -6,6 +6,9 @@ persistence:
     media_path:
         enabled: false
         claimName: ""
+    conf_path:
+        enabled: false
+        claimName: ""
 
 resources:
     requests:
@@ -16,7 +19,7 @@ resources:
         cpu: "2"
 conf:
     server_name: motionEye
-    conf_path: /etc/motioneye
+    conf_path: /etc/motioneye/extra/conf
     run_path: /var/run
     log_path: /var/log
     media_path: /var/lib/motioneye
