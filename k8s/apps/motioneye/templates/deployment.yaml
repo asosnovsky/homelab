@@ -5,11 +5,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      "{{ .Release.Name }}/app": motioneye
+      {{ .Release.Name }}/app: motioneye
   template:
     metadata:
       labels:
-        "{{ .Release.Name }}/app": motioneye
+        {{ .Release.Name }}/app: motioneye
+        {{ .Release.Name }}/config-checksum: "{{ .Values.conf | toJson | sha256sum }}"
     spec:
       volumes:
         -   name: config
