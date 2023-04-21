@@ -17,7 +17,7 @@ spec:
               name: {{ .Release.Name }}-configs
               defaultMode: 420
         {{- if .Values.persistence.media_path.enabled }}
-        -   name: media_path
+        -   name: media-path
             persistentVolumeClaim:
               claimName: {{ .Values.persistence.media_path.claimName }}
         {{- end }}
@@ -36,6 +36,6 @@ spec:
                   mountPath: /etc/motioneye/motioneye.conf
                   subPath: "motioneye.conf"
         {{- if .Values.persistence.media_path.enabled }}
-              -   name: media_path
+              -   name: media-path
                   mountPath: {{ .Values.conf.media_path }}
         {{ end }}
