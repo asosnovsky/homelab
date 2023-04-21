@@ -10,6 +10,7 @@ spec:
     metadata:
       labels:
         {{ .Release.Name }}/app: motioneye
+      annotations:
         {{ .Release.Name }}/config-checksum: "{{ .Values.conf | toJson | sha256sum }}"
     spec:
       volumes:
