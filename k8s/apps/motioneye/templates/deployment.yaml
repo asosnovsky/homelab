@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}"
+spec:
+  selector:
+    matchLabels:
+      "{{ .Release.Name }}/app": motioneye
+  template:
+    metadata:
+      labels:
+        "{{ .Release.Name }}/app": motioneye
+    spec:
+      volumes:
+        -   name: config
+            configMap:
+              name: {{ .Release.Name }}-configs
+              defaultMode: 420
+        {{- if .Values.persistence.media_path.enabled }}
+        -   name: media_path
+            persistentVolumeClaim:
+              claimName: {{ .Values.persistence.media_path.claimName }}
+        {{- end }}
+      containers:
+        -   name: main
+            image: "{{ .Values.image }}:{{ .Values.tag | default .Chart.AppVersion }}"
+            resources: 
+              {{- .Values.resources | toYaml | nindent 14}}
+            ports:
+              -   containerPort: {{ .Values.conf.port }}
+                  name: http
+              -   containerPort: {{ .Values.conf.motion_control_port }}
+                  name: control_port
+            volumeMounts:
+              -   name: config
+                  mountPath: /etc/motioneye/motioneye.conf
+                  subPath: "motioneye.conf"
+        {{- if .Values.persistence.media_path.enabled }}
+              -   name: media_path
+                  mountPath: {{ .Values.conf.media_path }}
+        {{ end }}

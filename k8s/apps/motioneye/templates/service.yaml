@@ -1,0 +1,18 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  selector:
+    "{{ .Release.Name }}/app": motioneye
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: {{ .Values.conf.port }}
+      name: http
+      protocol: TCP
+    - port: {{ .Values.conf.motion_control_port }}
+      targetPort: {{ .Values.conf.motion_control_port }}
+      name: control_port
+      protocol: TCP

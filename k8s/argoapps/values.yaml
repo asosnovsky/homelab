@@ -169,6 +169,13 @@ apps:
 
   authelia:
     valuesFile: authelia.yaml
+  
+  motioneye:
+    values: |- 
+      persistence:
+        media_path:
+            enabled: true
+            claimName: {{ .Values.storage.motioneyeMedia.name }}
 
 infrastructureCharts:
   cert-manager:
@@ -262,6 +269,16 @@ storage:
   nextcloudConfig:
     name: nextcloud-config
     namespace: apps-nextcloud
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 100Gi
+      requests:
+        storage: 10Gi
+  motioneyeMedia:
+    name: motioneye-media
+    namespace: apps-motioneye
     accessModes:
       - ReadWriteMany
     resources:
