@@ -30,7 +30,7 @@ spec:
               -   containerPort: {{ .Values.conf.port }}
                   name: http
               -   containerPort: {{ .Values.conf.motion_control_port }}
-                  name: control_port
+                  name: control-port
             volumeMounts:
               -   name: config
                   mountPath: /etc/motioneye/motioneye.conf

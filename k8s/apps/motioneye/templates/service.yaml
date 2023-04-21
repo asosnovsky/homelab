@@ -14,5 +14,5 @@ spec:
       protocol: TCP
     - port: {{ .Values.conf.motion_control_port }}
       targetPort: {{ .Values.conf.motion_control_port }}
-      name: control_port
+      name: control-port
       protocol: TCP
