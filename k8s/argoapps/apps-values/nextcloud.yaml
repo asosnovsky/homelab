@@ -4,11 +4,11 @@ nextcloud:
   externalDatabase:
     host: postgres.chart-database.svc.cluster.local
   persistence:
-    storageClass: { { .Values.global.nfs.storageClass } }
-    existingClaim: { { .Values.storage.nextcloudConfig.name } }
+    storageClass: {{ .Values.global.nfs.storageClass }}
+    existingClaim: {{ .Values.storage.nextcloudConfig.name }}
     nextcloudData:
-      storageClass: { { .Values.global.nfs.storageClass } }
-      existingClaim: { { .Values.storage.nextcloudData.name } }
+      storageClass: {{ .Values.global.nfs.storageClass }}
+      existingClaim: {{ .Values.storage.nextcloudData.name }}
   configs:
     authelia.config.php: |-
       <?php
