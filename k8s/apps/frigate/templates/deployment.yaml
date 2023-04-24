@@ -27,6 +27,23 @@ spec:
             image: "{{ .Values.image }}:{{ .Values.tag | default .Chart.AppVersion }}"
             resources: 
               {{- .Values.resources | toYaml | nindent 14}}
+
+            livenessProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              initialDelaySeconds: 10
+              failureThreshold: 10
+              timeoutSeconds: 30
+            readinessProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              initialDelaySeconds: 10
+              failureThreshold: 10
+              timeoutSeconds: 30
             ports:
               -   containerPort: 5000
                   name: http
