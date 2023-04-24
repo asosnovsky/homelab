@@ -1,0 +1,41 @@
+services:
+  - prefix: "argocd.core"
+    service: "argocd-server"
+    namespace: "argocd"
+  - prefix: "monitoring.core"
+    service: prometheus-kube-prometheus-prometheus
+    namespace: chart-prometheus
+    middleware: "apps-ingresses-chain-authelia"
+    port: 9090
+  - prefix: "alerts.core"
+    service: prometheus-kube-prometheus-alertmanager
+    namespace: chart-prometheus
+    middleware: "apps-ingresses-chain-authelia"
+    port: 9093
+  - prefix: "grafana.core"
+    service: prometheus-grafana
+    namespace: chart-prometheus
+    middleware: "apps-ingresses-chain-authelia"
+  - prefix: "demo"
+    service: "dummy-app"
+    namespace: "apps-ingresses"
+  - prefix: "nextcloud"
+    service: "nextcloud"
+    namespace: "apps-nextcloud"
+    port: 8080
+    middleware: "apps-nextcloud-nextcloud"
+  - prefix: "plex"
+    service: "plex"
+    namespace: "apps-videohosting"
+    port: 32400
+  {{- range $k, $v := .Values.videohosting.linuxserverServices }}
+  - prefix: "{{ $k }}.vh"
+    service: "{{ $k }}"
+    namespace: "apps-videohosting"
+    port: {{ $v.ports.tcp.web }}
+    middleware: "apps-ingresses-chain-authelia"
+  {{- end }}
+  - prefix: "frigate"
+    service: "frigate"
+    namespace: "apps-frigate"
+    middleware: "apps-ingresses-chain-authelia"

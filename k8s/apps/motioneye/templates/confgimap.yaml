@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Release.Name }}-configs
-data:
-  motioneye.conf: |-
-    {{ range $k, $v := .Values.conf }}
-    {{- $k}} {{$v}}
-    {{ end }}

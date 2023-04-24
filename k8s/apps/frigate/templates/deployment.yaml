@@ -5,19 +5,13 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{ .Release.Name }}/app: motioneye
+      {{ .Release.Name }}/app: frigate
   template:
     metadata:
       labels:
-        {{ .Release.Name }}/app: motioneye
-      annotations:
-        {{ .Release.Name }}/config-checksum: "{{ .Values.conf | toJson | sha256sum }}"
+        {{ .Release.Name }}/app: frigate
     spec:
       volumes:
-        -   name: config
-            configMap:
-              name: {{ .Release.Name }}-configs
-              defaultMode: 420
         {{- if .Values.persistence.media_path.enabled }}
         -   name: media-path
             persistentVolumeClaim:
@@ -34,19 +28,22 @@ spec:
             resources: 
               {{- .Values.resources | toYaml | nindent 14}}
             ports:
-              -   containerPort: {{ .Values.conf.port }}
+              -   containerPort: 5000
                   name: http
-              -   containerPort: {{ .Values.conf.motion_control_port }}
-                  name: control-port
+              -   containerPort: 8554
+                  name: rtsp
+              -   containerPort: 8555
+                  name: webrtc-tcp
+                  protocol: TCP
+              -   containerPort: 8555
+                  name: webrtc-udp
+                  protocol: UDP
             volumeMounts:
-              -   name: config
-                  mountPath: /etc/motioneye/motioneye.conf
-                  subPath: "motioneye.conf"
         {{- if .Values.persistence.media_path.enabled }}
               -   name: media-path
-                  mountPath: {{ .Values.conf.media_path }}
+                  mountPath: /media/frigate
         {{ end }}
         {{- if .Values.persistence.conf_path.enabled }}
               -   name: conf-path
-                  mountPath: {{ .Values.conf.conf_path }}
+                  mountPath: /config
         {{ end }}

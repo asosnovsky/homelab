@@ -1,0 +1,18 @@
+image: "ghcr.io/blakeblackshear/frigate"
+tag: "0.12.0"
+
+persistence:
+    media_path:
+        enabled: false
+        claimName: ""
+    conf_path:
+        enabled: false
+        claimName: ""
+
+resources:
+    requests:
+        memory: "128Mi"
+        cpu: "500m"
+    limits:
+        memory: "1Gi"
+        cpu: "2"
