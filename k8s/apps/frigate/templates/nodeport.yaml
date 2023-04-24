@@ -8,19 +8,23 @@ spec:
     {{ .Release.Name }}/app: frigate
   type: NodePort
   ports:
-    - nodePort: 5000
-      targetPort: 5000
-      name: http
-      protocol: TCP
-    - nodePort: 8554
-      targetPort: 8554
-      name: rtsp
-      protocol: TCP
-    - nodePort: 8555
-      targetPort: 8555
-      name: webrtc-tcp
-      protocol: TCP
-    - nodePort: 8555
-      targetPort: 8555
-      name: webrtc-udp
-      protocol: UDP
+    -   port: 5000
+        nodePort: 30000
+        targetPort: 5000
+        name: http
+        protocol: TCP
+    -   port: 8554
+        nodePort: 30554
+        targetPort: 8554
+        name: rtsp
+        protocol: TCP
+    -   port: 8555
+        nodePort: 30555
+        targetPort: 8555
+        name: webrtc-tcp
+        protocol: TCP
+    -   port: 8555
+        nodePort: 30555
+        targetPort: 8555
+        name: webrtc-udp
+        protocol: UDP
