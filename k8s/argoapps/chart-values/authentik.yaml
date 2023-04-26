@@ -7,7 +7,7 @@ authentik:
     username: {{ .Values.global.smtp.email }}
     use_ssl: false
   postgresql:
-    host: postgres.database.svc.cluster.local
+    host: postgres.chart-database.svc.cluster.local
     name: authentik
     user: authentik
 postgresql:
