@@ -99,10 +99,10 @@ linuxserverServices:
     podResources:
       limits:
         cpu: 1
-        memory: "2Gi"
+        memory: "4Gi"
       requests:
         cpu: 800m
-        memory: "500M"
+        memory: "1.5Gi"
     configVolumesResources:
       requests:
         storage: 10Gi

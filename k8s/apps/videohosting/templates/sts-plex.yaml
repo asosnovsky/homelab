@@ -136,10 +136,10 @@ spec:
             - containerPort: 32469
           resources: 
             limits:
-              cpu: 4
-              memory: "8Gi"
+              cpu: 8
+              memory: "10Gi"
             requests:
-              cpu: 2
+              cpu: 4
               memory: "4Gi"
           volumeMounts:
             - name: config
