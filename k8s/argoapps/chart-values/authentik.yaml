@@ -1,0 +1,21 @@
+authentik:
+  cookie_domain: authentik.core.{{ .Values.global.domain }}
+  email:
+    from: {{ .Values.global.smtp.email }}
+    host: postfix.email.svc.cluster.local
+    port: 25
+    username: {{ .Values.global.smtp.email }}
+    use_ssl: false
+  postgresql:
+    host: postgres.database.svc.cluster.local
+    name: authentik
+    user: authentik
+postgresql:
+  enabled: false
+redis:
+  enabled: true
+envFrom:
+  - secretRef:
+      name: {{ .Values.secrets.authentik.secrets.env.name }}
+
+
