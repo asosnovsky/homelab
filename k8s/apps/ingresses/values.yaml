@@ -6,6 +6,7 @@ services:
   - prefix: "demo"
     service: "dummy-app"
     namespace: "apps-ingresses"
+    middleware: "apps-ingresses-forwardauth-authentik"
   - prefix: "nextcloud"
     service: "nextcloud"
     namespace: "apps-nextcloud"
