@@ -39,3 +39,6 @@ services:
     service: "frigate"
     namespace: "apps-frigate"
     middleware: "apps-ingresses-chain-authelia"
+  - prefix: "authentik.core"
+    service: "authentik"
+    namespace: "chart-authentik"
