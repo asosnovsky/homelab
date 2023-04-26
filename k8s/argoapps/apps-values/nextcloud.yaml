@@ -51,7 +51,7 @@ nextcloud:
     master:
       persistence:
         storageClass: {{ .Values.global.nfs.storageClass }}
-        existingClaim: {{ .Values.storate.nextcloudRedisMaster.name }}
+        existingClaim: {{ .Values.storage.nextcloudRedisMaster.name }}
     replica:
       persistence:
         storageClass: local-path
