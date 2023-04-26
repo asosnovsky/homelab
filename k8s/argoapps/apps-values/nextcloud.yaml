@@ -1,3 +1,5 @@
+global:
+  storageClass: {{ .Values.global.nfs.storageClass }}
 nextcloud:
   nextcloud:
     host: "nextcloud.{{ .Values.global.domain }}"
@@ -45,3 +47,11 @@ nextcloud:
             'oidc_login_well_known_caching_time' => 86400,
             'oidc_login_update_avatar' => false,
         );
+  redis:
+    master:
+      persistence:
+        storageClass: {{ .Values.global.nfs.storageClass }}
+        existingClaim: {{ .Values.storate.nextcloudRedisMaster.name }}
+    replica:
+      persistence:
+        storageClass: local-path

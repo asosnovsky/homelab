@@ -197,6 +197,16 @@ storage:
         storage: 100Gi
       requests:
         storage: 10Gi
+  nextcloudRedisMaster:
+    name: redis-master
+    namespace: apps-nextcloud
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 20Gi
+      requests:
+        storage: 1Gi
   frigateMedia:
     name: frigate-media
     namespace: apps-frigate
