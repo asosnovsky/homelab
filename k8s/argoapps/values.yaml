@@ -158,10 +158,6 @@ secrets:
             store: chart-database
             secretName: "password.pg.authentik"
             secretKey: "password"
-          AUTHENTIK_POSTGRESQL__PASSWORD:
-            store: email
-            secretName: "password.pg.authentik"
-            secretKey: "password"
 storage:
   database:
     name: primary-database
