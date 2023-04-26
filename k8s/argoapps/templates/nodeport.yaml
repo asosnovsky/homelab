@@ -15,4 +15,4 @@ spec:
         port: 5432
         protocol: TCP
         targetPort: tcp-postgresql
-        nodePort: 35432
+        nodePort: 30543
