@@ -55,6 +55,22 @@ spec:
       - Remote-Name
       - Remote-Email
       - Remote-Groups
+
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: chain-authentik
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  chain:
+    middlewares:
+      - name: https-redirect
+        namespace: "{{ .Release.Namespace }}"
+      - name:  forwardauth-authentik
+        namespace: "{{ .Release.Namespace }}"
+
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware

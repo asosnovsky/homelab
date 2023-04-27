@@ -19,7 +19,7 @@ services:
   - prefix: "demo"
     service: "dummy-app"
     namespace: "apps-ingresses"
-    middleware: "apps-ingresses-forwardauth-authentik"
+    middleware: "apps-ingresses-chain-authentik"
   - prefix: "nextcloud"
     service: "nextcloud"
     namespace: "apps-nextcloud"
@@ -34,7 +34,7 @@ services:
     service: "{{ $k }}"
     namespace: "apps-videohosting"
     port: {{ $v.ports.tcp.web }}
-    middleware: "apps-ingresses-chain-authelia"
+    middleware: "apps-ingresses-chain-authentik"
   {{- end }}
   - prefix: "frigate"
     service: "frigate"
