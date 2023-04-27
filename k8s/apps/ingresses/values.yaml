@@ -7,8 +7,3 @@ services:
     service: "dummy-app"
     namespace: "apps-ingresses"
     middleware: "apps-ingresses-forwardauth-authentik"
-  - prefix: "nextcloud"
-    service: "nextcloud"
-    namespace: "apps-nextcloud"
-    port: 8080
-    middleware: "apps-nextcloud-nextcloud"
