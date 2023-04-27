@@ -9,6 +9,15 @@ nextcloud:
 
   nodeSelector:
     homelab/capacity: high
+  
+  cronjob:
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "1Gi"
+      limits:
+        cpu: "1"
+        memory: 5Gi
 
   nextcloud:
     existingSecret:
