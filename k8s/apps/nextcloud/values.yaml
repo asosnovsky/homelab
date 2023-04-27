@@ -15,9 +15,11 @@ nextcloud:
       requests:
         cpu: "500m"
         memory: "1Gi"
+        ephemeral-storage: "40Ki"
       limits:
         cpu: "1"
         memory: 5Gi
+        ephemeral-storage: "40Mi"
 
   nextcloud:
     existingSecret:
@@ -70,9 +72,11 @@ nextcloud:
     requests:
       cpu: "500m"
       memory: "1Gi"
+      ephemeral-storage: "20Mi"
     limits:
       cpu: "3"
       memory: 5Gi
+      ephemeral-storage: "200Mi"
 
   hpa:
     enabled: true
@@ -86,6 +90,8 @@ nextcloud:
       requests:
         cpu: "100m"
         memory: "256Mi"
+        ephemeral-storage: "100Ki"
       limits:
         cpu: "250m"
         memory: 1Gi
+        ephemeral-storage: "100Mi"
