@@ -146,6 +146,11 @@ secrets:
         name: "smtp.creds"
         data: |-
           username: "{{.Values.global.smtp.email | b64enc }}"
+  prometheus:
+    namespace: chart-prometheus
+    configmaps:
+      auth:
+        name: authentick-config-envs
   authentik:
     namespace: chart-authentik
     secrets:

@@ -41,7 +41,7 @@ grafana:
     enabled: true
     storageClassName: {{ .Values.global.nfs.storageClass }}
   envFromConfigMaps:
-    -   name: authentick-config-envs
+    -   name: {{ .Values.secrets.prometheus.configmaps.auth.name }}
         optional: true
 
 prometheus:
