@@ -36,6 +36,13 @@ alertmanager:
 grafana:
   defaultDashboardsTimezone: {{ .Values.global.timezone }}
   adminPassword: prom-operator
+  persistence:
+    type: pvc
+    enabled: true
+    storageClassName: {{ .Values.global.nfs.storageClass }}
+  envFromConfigMaps:
+    -   name: authentick-config-envs
+        optional: true
 
 prometheus:
   prometheusSpec:
