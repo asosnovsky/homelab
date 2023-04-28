@@ -169,16 +169,6 @@ storage:
     resources:
       requests:
         storage: 8Gi
-  authelia:
-    name: authelia
-    namespace: apps-authelia
-    accessModes:
-      - ReadWriteMany
-    resources:
-      limits:
-        storage: 5Gi
-      requests:
-        storage: 5Gi
   nextcloudData:
     name: nextcloud-data
     namespace: apps-nextcloud
