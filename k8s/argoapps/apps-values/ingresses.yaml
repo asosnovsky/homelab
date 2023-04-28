@@ -5,12 +5,12 @@ services:
   - prefix: "monitoring.core"
     service: prometheus-kube-prometheus-prometheus
     namespace: chart-prometheus
-    middleware: "apps-ingresses-chain-authelia"
+    middleware: "apps-ingresses-chain-authentik"
     port: 9090
   - prefix: "alerts.core"
     service: prometheus-kube-prometheus-alertmanager
     namespace: chart-prometheus
-    middleware: "apps-ingresses-chain-authelia"
+    middleware: "apps-ingresses-chain-authentik"
     port: 9093
   - prefix: "grafana.core"
     service: prometheus-grafana
