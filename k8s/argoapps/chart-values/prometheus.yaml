@@ -34,15 +34,20 @@ alertmanager:
                 -   to: '{{ .Values.global.email }}'
 
 grafana:
-  defaultDashboardsTimezone: {{ .Values.global.timezone }}
-  adminPassword: prom-operator
-  persistence:
-    type: pvc
-    enabled: true
-    storageClassName: {{ .Values.global.nfs.storageClass }}
-  envFromConfigMaps:
-    -   name: {{ .Values.secrets.prometheus.configmaps.auth.name }}
-        optional: true
+    defaultDashboardsTimezone: {{ .Values.global.timezone }}
+    adminPassword: prom-operator
+    persistence:
+        type: pvc
+        enabled: true
+        storageClassName: {{ .Values.global.nfs.storageClass }}
+    envFromConfigMaps:
+        -   name: {{ .Values.secrets.prometheus.configmaps.auth.name }}
+            optional: true
+    grafana.ini:
+        server:
+            domain: grafana.core.{{ .Values.global.domain }}
+        server:
+           root_url: https://grafana.core.{{ .Values.global.domain }}
 
 prometheus:
   prometheusSpec:
