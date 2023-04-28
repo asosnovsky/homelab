@@ -79,9 +79,6 @@ apps:
       smtp_password_secret: {{ .Values.secrets.smtp.secrets.smtp.name }}
       smtp_password_secret_key: password
 
-  authelia:
-    valuesFile: authelia.yaml
-
   frigate:
     values: |-
       persistence:
