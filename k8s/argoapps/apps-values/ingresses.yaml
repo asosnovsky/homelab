@@ -15,7 +15,7 @@ services:
   - prefix: "grafana.core"
     service: prometheus-grafana
     namespace: chart-prometheus
-    middleware: "apps-ingresses-chain-authelia"
+    middleware: "apps-ingresses-chain-authentik"
   - prefix: "demo"
     service: "dummy-app"
     namespace: "apps-ingresses"
