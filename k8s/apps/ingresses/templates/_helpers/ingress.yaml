@@ -29,7 +29,7 @@ spec:
     creationPolicy: Owner
     deletionPolicy: Delete
   data:
-    - secretKey: cloudflare-wildcard.{{ .Values.global.domain }}
+    - secretKey: cloudflare-wildcard.{{ .global.domain }}
       remoteRef:
         key: tls.key
         property: tls.key
