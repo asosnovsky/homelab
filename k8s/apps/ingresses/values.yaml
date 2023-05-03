@@ -1,3 +1,7 @@
+global:
+  domain: "me.local"
+  tls:
+    enabled: false
 reverseProxy: {}
 services:
   - prefix: "argocd.core"

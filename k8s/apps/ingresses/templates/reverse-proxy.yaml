@@ -22,6 +22,9 @@ spec:
     protocol: TCP
     targetPort: {{ $data.port }}
 
-{{ include "homelab.ingress" (dict "service" (printf "reverse-proxy-%s" $prefix) "prefix" $prefix "global" $.Values.global "namespace" $.Release.Namespace )}}
+{{- $ingressDef := (dict "service" (printf "reverse-proxy-%s" $prefix) "prefix" $prefix "global" $.Values.global "namespace" $.Release.Namespace ) -}}
+{{- $ingressDef := (merge $ingressDef ($data.overrides | default (dict))) -}}
+
+{{ include "homelab.ingress" $ingressDef}}
 
 {{ end }}

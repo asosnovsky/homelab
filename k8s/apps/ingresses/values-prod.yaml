@@ -11,6 +11,9 @@ reverseProxy:
   uptime:
     ip: "192.168.0.20"
     port: "3001"
-  koriecore:
+  glrouter:
     ip: "192.168.8.1"
     port: "80"
+    overrides:
+      prefix: "gl.core"
+      middleware: "apps-ingresses-forwardauth-authentik"
