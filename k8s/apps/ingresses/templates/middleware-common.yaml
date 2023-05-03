@@ -23,41 +23,6 @@ spec:
     stsPreload: true
     forceSTSHeader: true
 ---
-
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: chain-authelia
-  namespace: "{{ .Release.Namespace }}"
-spec:
-  chain:
-    middlewares:
-      - name: https-redirect
-        namespace: "{{ .Release.Namespace }}"
-      - name:  forwardauth-authelia
-        namespace: "{{ .Release.Namespace }}"
-
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: forwardauth-authelia
-  namespace: "{{ .Release.Namespace }}"
-  labels:
-    app.kubernetes.io/instance: authelia
-    app.kubernetes.io/name: authelia
-spec:
-  forwardAuth:
-    address: http://main-authelia.apps-authelia.svc.cluster.local/api/verify?rd=https%3A%2F%2Fauth.core.{{.Values.global.domain}}%2F
-    authResponseHeaders:
-      - Remote-User
-      - Remote-Name
-      - Remote-Email
-      - Remote-Groups
-
-
----
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
