@@ -20,4 +20,4 @@ secrets:
   ingresses:
     secrets:
       cloudflare:
-        name: "cloudflare.apikey"
+        name: "cloudflare-apitoken"

@@ -1,8 +1,8 @@
 {{ if .Values.secrets.ingresses.secrets.cloudflare }}
 cloudflare:
   enabled: true
-  apiKeySecretName: {{ .Values.secrets.ingresses.secrets.cloudflare.name }}
-  apiKeySecretKey: api-token
+  tokenSecretName: {{ .Values.secrets.ingresses.secrets.cloudflare.name }}
+  tokenSecretKey: api-token
 {{ end }}
 
 services:

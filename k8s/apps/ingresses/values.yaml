@@ -9,5 +9,5 @@ services:
     middleware: "apps-ingresses-forwardauth-authentik"
 cloudflare:
   enabled: false
-  apiKeySecretName: ~
-  apiKeySecretKey: ~
+  tokenSecretName: ~
+  tokenSecretKey: ~
