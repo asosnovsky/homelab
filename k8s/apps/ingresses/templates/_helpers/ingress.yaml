@@ -13,7 +13,7 @@
 # 
 
 {{  if .global.tls.enabled  }}
-{{ if .useWildCard }}
+{{ if (.useWildCard | default .global.tls.useWildCard) }}
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
