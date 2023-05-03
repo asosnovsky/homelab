@@ -58,9 +58,22 @@ spec:
   issuerRef:
     name: cloudflare
     kind: Issuer
-  commonName: '*.{{ .Values.global.domain }}'
+  commonName: '*.core.{{ .Values.global.domain }}'
   dnsNames:
-    -   "*.{{ .Values.global.domain }}"
+    -   "*.core.{{ .Values.global.domain }}"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cloudflare-wildcard.vh.{{ .Values.global.domain }}
+spec:
+  secretName: cloudflare-wildcard.vh.{{ .Values.global.domain }}
+  issuerRef:
+    name: cloudflare
+    kind: Issuer
+  commonName: '*.vh.{{ .Values.global.domain }}'
+  dnsNames:
+    -   "*.vh.{{ .Values.global.domain }}"
 
 {{ end }}
 {{ end }}

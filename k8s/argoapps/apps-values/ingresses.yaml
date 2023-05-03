@@ -1,11 +1,11 @@
-{{ if .Values.secrets.ingresses.secrets.cloudflare }}
+{{- if .Values.secrets.ingresses.secrets.cloudflare }}
 cloudflare:
   enabled: true
   tokenSecretName: {{ .Values.secrets.ingresses.secrets.cloudflare.name }}
   tokenSecretKey: api-token
-{{ end }}
-
+{{- end }}
 services:
+  # core services
   - prefix: "argocd.core"
     service: "argocd-server"
     namespace: "argocd"
@@ -23,6 +23,10 @@ services:
     service: prometheus-grafana
     namespace: chart-prometheus
     middleware: "apps-ingresses-chain-authentik"
+  - prefix: "authentik.core"
+    service: "authentik"
+    namespace: "chart-authentik"
+  # root services
   - prefix: "demo"
     service: "dummy-app"
     namespace: "apps-ingresses"
@@ -36,6 +40,11 @@ services:
     service: "plex"
     namespace: "apps-videohosting"
     port: 32400
+  - prefix: "frigate"
+    service: "frigate"
+    namespace: "apps-frigate"
+    middleware: "apps-ingresses-chain-authentik"
+  # vh services
   {{- range $k, $v := .Values.videohosting.linuxserverServices }}
   - prefix: "{{ $k }}.vh"
     service: "{{ $k }}"
@@ -43,10 +52,3 @@ services:
     port: {{ $v.ports.tcp.web }}
     middleware: "apps-ingresses-chain-authentik"
   {{- end }}
-  - prefix: "frigate"
-    service: "frigate"
-    namespace: "apps-frigate"
-    middleware: "apps-ingresses-chain-authentik"
-  - prefix: "authentik.core"
-    service: "authentik"
-    namespace: "chart-authentik"
