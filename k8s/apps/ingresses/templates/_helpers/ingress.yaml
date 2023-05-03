@@ -19,7 +19,6 @@ apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: {{ printf "%s-%s" $value.name $ekey | lower | replace "_" "-" }}
-  namespace: {{ $secretsData.namespace }}
 spec:
   refreshInterval: 1h
   secretStoreRef:
