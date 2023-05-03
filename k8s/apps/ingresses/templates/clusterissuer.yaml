@@ -35,6 +35,19 @@ spec:
                     apiTokenSecretRef:
                         name: {{ .Values.cloudflare.apiKeySecretName }}
                         key: {{ .Values.cloudflare.apiKeySecretKey }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cloudflare-wildcard.{{ .Values.global.domain }}
+spec:
+  secretName: cloudflare-wildcard.{{ .Values.global.domain }}
+  issuerRef:
+    name: cloudflare
+    kind: ClusterIssuer
+  commonName: '*.{{ .Values.global.domain }}'
+  dnsNames:
+    -   "*.{{ .Values.global.domain }}"
 
 {{ end }}
 {{ end }}
