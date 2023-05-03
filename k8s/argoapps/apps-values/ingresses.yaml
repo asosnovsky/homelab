@@ -1,3 +1,10 @@
+{{ if .Values.secrets.ingresses.secrets.cloudflare }}
+cloudflare:
+  enabled: true
+  apiKeySecretName: {{ .Values.secrets.ingresses.secrets.cloudflare.name }}
+  apiKeySecretKey: api-token
+{{ end }}
+
 services:
   - prefix: "argocd.core"
     service: "argocd-server"

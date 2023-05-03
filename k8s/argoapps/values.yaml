@@ -129,6 +129,9 @@ infrastructureCharts:
     valuesFile: authentik.yaml
 
 secrets:
+  ingresses:
+    namespace: apps-ingresses
+    secrets: {}
   database:
     enableClusterStore: true
     namespace: chart-database

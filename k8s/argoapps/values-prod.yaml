@@ -15,3 +15,9 @@ global:
   mqtt:
     username: k3s
     password: fZ!HauNB9%
+
+secrets:
+  ingresses:
+    secrets:
+      cloudflare:
+        name: "cloudflare.apikey"

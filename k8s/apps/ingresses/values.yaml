@@ -7,3 +7,7 @@ services:
     service: "dummy-app"
     namespace: "apps-ingresses"
     middleware: "apps-ingresses-forwardauth-authentik"
+cloudflare:
+  enabled: false
+  apiKeySecretName: ~
+  apiKeySecretKey: ~
