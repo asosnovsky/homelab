@@ -27,6 +27,7 @@ services:
     service: "dummy-app"
     namespace: "apps-ingresses"
     middleware: "apps-ingresses-chain-authentik"
+    useWildCard: true
   - prefix: "nextcloud"
     service: "nextcloud"
     namespace: "apps-nextcloud"

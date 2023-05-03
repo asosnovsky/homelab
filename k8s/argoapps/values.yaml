@@ -130,6 +130,7 @@ infrastructureCharts:
 
 secrets:
   ingresses:
+    enableClusterStore: true
     namespace: apps-ingresses
     secrets: {}
   database:

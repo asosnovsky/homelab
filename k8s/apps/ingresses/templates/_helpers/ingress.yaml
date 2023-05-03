@@ -8,10 +8,33 @@
 #   global: map (should be .global)
 #   port: int = 80
 #   path: str = "/"
+#   useWildCard: bool = False
 #   middleware: str = "https-redirect"
 # 
 
 {{  if .global.tls.enabled  }}
+{{ if .useWildCard }}
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: {{ printf "%s-%s" $value.name $ekey | lower | replace "_" "-" }}
+  namespace: {{ $secretsData.namespace }}
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: apps-ingresses
+  target:
+    name: tls-{{.prefix}}.{{.global.domain}}
+    creationPolicy: Owner
+    deletionPolicy: Delete
+  data:
+    - secretKey: cloudflare-wildcard.{{ .Values.global.domain }}
+      remoteRef:
+        key: tls.key
+        property: tls.key
+{{ else }}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -26,6 +49,7 @@ spec:
   commonName: "{{.prefix}}.{{.global.domain}}"
   dnsNames:
     - "{{.prefix}}.{{.global.domain}}"
+{{ end }}
 {{ end }}
 
 ---
