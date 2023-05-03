@@ -19,7 +19,7 @@ spec:
 {{ if .Values.cloudflare.enabled }}
 ---
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+kind: Issuer
 metadata:
   name: cloudflare
 spec:
@@ -44,7 +44,7 @@ spec:
   secretName: cloudflare-wildcard.{{ .Values.global.domain }}
   issuerRef:
     name: cloudflare
-    kind: ClusterIssuer
+    kind: Issuer
   commonName: '*.{{ .Values.global.domain }}'
   dnsNames:
     -   "*.{{ .Values.global.domain }}"
