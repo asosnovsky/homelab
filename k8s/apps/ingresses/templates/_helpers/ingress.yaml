@@ -39,13 +39,12 @@ spec:
       {{ end }}
         property: tls.crt
     - secretKey: tls.key
+      remoteRef:
       {{ if hasSuffix ".core" .prefix }}
         key: cloudflare-wildcard.core.{{ .global.domain }}
       {{ else }}
         key: cloudflare-wildcard.{{ .global.domain }}
       {{ end }}
-      remoteRef:
-        key: cloudflare-wildcard.{{ .global.domain }}
         property: tls.key
 {{ else }}
 ---
