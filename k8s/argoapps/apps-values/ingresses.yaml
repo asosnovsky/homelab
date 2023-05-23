@@ -9,6 +9,9 @@ services:
   - prefix: "argocd.core"
     service: "argocd-server"
     namespace: "argocd"
+  - prefix: "rancher.core"
+    service: "rancher"
+    namespace: "chart-rancher"
   - prefix: "monitoring.core"
     service: prometheus-kube-prometheus-prometheus
     namespace: chart-prometheus
