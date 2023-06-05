@@ -132,7 +132,7 @@ infrastructureCharts:
     valuesFile: prometheus.yaml
   authentik:
     repoURL: https://charts.goauthentik.io
-    targetRevision: "2023.4.1"
+    targetRevision: "2023.5.3"
     valuesFile: authentik.yaml
 
 secrets:
