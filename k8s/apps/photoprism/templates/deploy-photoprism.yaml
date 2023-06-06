@@ -1,0 +1,103 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: photoprism
+spec:
+  selector:
+    matchLabels:
+      app: photoprism
+  replicas: 1
+  revisionHistoryLimit: 2
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: photoprism
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: homelab/capacity
+                  operator: In
+                  values:
+                    - med
+                    - hight
+      containers:
+        - name: app
+          image: "{{ .Values.photoprism.image.repo }}:{{ .Values.photoprism.image.tag }}"
+          envFrom:
+            - configMapRef: 
+                name: photoprism-envs
+          env:
+            - name: PHOTOPRISM_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.photoprism.auth.secretName }}
+                  key: {{ .Values.photoprism.auth.secretKeys.username }}
+            - name: PHOTOPRISM_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.photoprism.auth.secretName }}
+                  key: {{ .Values.photoprism.auth.secretKeys.password }}
+            - name: PHOTOPRISM_AUTH_MODE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.photoprism.auth.secretName }}
+                  key: {{ .Values.photoprism.auth.secretKeys.mode }}
+            - name: PHOTOPRISM_DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.auth.secretName }}
+                  key: {{ .Values.photoprism.auth.secretKeys.username }}
+            - name: PHOTOPRISM_DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.auth.secretName }}
+                  key: {{ .Values.photoprism.auth.secretKeys.database }}
+            - name: PHOTOPRISM_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.auth.secretName }}
+                  key: {{ .Values.photoprism.auth.secretKeys.password }}
+          resources: {}
+          ports:
+            - containerPort: 2342
+              protocol: TCP
+          volumeMounts:
+            {{ if .Values.photoprism.volumes.originals }}
+            - name: originals
+              mountPath: /photoprism/originals
+            {{- end }}
+            {{ if .Values.photoprism.volumes.import }}
+            - name: import
+              mountPath: /photoprism/import
+            {{- end }}
+            {{ if .Values.photoprism.volumes.storage }}
+            - name: storage
+              mountPath: /photoprism/storage
+            {{- end }}
+      volumes:
+        {{ if .Values.photoprism.volumes.originals }}
+        - name: originals
+          nfs:
+            server: "{{ $.Values.global.nfs.server }}"
+            path: "{{ .Values.photoprism.volumes.originals }}"
+            readOnly: true
+        {{- end }}
+        {{ if .Values.photoprism.volumes.import }}
+        - name: import
+          nfs:
+            server: "{{ $.Values.global.nfs.server }}"
+            path: "{{ .Values.photoprism.volumes.import }}"
+            readOnly: true
+        {{- end }}
+        {{ if .Values.photoprism.volumes.storage }}
+        - name: storage
+          persistentVolumeClaim: 
+            claimName: "{{ .Values.photoprism.volumes.storage }}"
+        {{- end }}

@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: photoprism-envs
+data:
+  PHOTOPRISM_SITE_CAPTION: {{ .Values.photoprism.site.caption }}
+  PHOTOPRISM_SITE_DESCRIPTION: {{ .Values.photoprism.site.description }}
+  PHOTOPRISM_SITE_AUTHOR: {{ .Values.photoprism.site.authtor }}
+  PHOTOPRISM_SITE_URL: {{ .Values.photoprism.site.url }}
+  PHOTOPRISM_DATABASE_DRIVER: "mysql"
+  PHOTOPRISM_DATABASE_SERVER: "{{ .Values.database.service.name }}.{{ .Release.Namespace }}.svc.cluster.local:3306"
+{{- range $envName, $envValue := (.Values.photoprism.env | default (dict )) }}
+  {{ $envName }}: "{{$envValue}}"
+{{- end }}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: database-envs
+data:
+{{- range $envName, $envValue := (.Values.database.env | default (dict )) }}
+  {{ $envName }}: "{{$envValue}}"
+{{- end }}

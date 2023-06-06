@@ -1,0 +1,79 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+    name: database
+spec:
+  selector:
+    matchLabels:
+      app: database
+  replicas: 1
+  revisionHistoryLimit: 2
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: storage
+        finalizers:
+          - kubernetes.io/pvc-protection
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClass: {{ .Values.database.storageClass }}
+        resources: 
+          requests:
+            storage: 10Gi
+          limits:
+            storage: 100Gi
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: homelab/capacity
+                  operator: In
+                  values:
+                    - med
+                    - low
+      containers:
+        - name: app
+          image: "{{ .Values.database.image.repo }}:{{ .Values.database.image.tag }}"
+          command: |-
+            mariadbd --innodb-buffer-pool-size=512M --transaction-isolation=READ-COMMITTED --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max-connections=512 --innodb-rollback-on-timeout=OFF --innodb-lock-wait-timeout=120
+          envFrom:
+            - configMapRef: 
+                name: database-envs
+          env:
+            - name: MARIADB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.auth.secretName }}
+                  key: {{ .Values.database.auth.secretKeys.username }}
+            - name: MARIADB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.auth.secretName }}
+                  key: {{ .Values.database.auth.secretKeys.database }}
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.auth.secretName }}
+                  key: {{ .Values.database.auth.secretKeys.password }}
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.auth.secretName }}
+                  key: {{ .Values.database.auth.secretKeys.password }}
+          resources: {}
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - name: storage
+              mountPath: /var/lib/mysql
