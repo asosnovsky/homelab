@@ -79,6 +79,7 @@ spec:
       containers:
         - name: {{$k}}
           image: "{{ $v.repo }}:{{ $v.tag }}"
+          imagePullPolicy: Always
           envFrom:
             - configMapRef: 
                 name: {{$k}}-envs
