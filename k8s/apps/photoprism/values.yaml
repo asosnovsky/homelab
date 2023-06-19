@@ -9,7 +9,7 @@ photoprism:
       url: "http://photoprism.me:2342/"
     image: 
       repo: photoprism/photoprism
-      tag: latest
+      tag: "230603"
     env:
       PHOTOPRISM_ORIGINALS_LIMIT: 5000               # file size limit for originals in MB (increase for high-res video)
       PHOTOPRISM_HTTP_COMPRESSION: "gzip"            # improves transfer speed and bandwidth utilization (none or gzip)
@@ -44,7 +44,7 @@ database:
     name: "database"
   image:
     repo: mariadb
-    tag: 10.11
+    tag: "10.11"
   storageClass: ~
   auth:
     secretName: ""

@@ -51,7 +51,7 @@ linuxserverServices:
         web: 8989
   radarr:
     repo: lscr.io/linuxserver/radarr
-    tag: "4.3.2"
+    tag: "latest"
     podResources:
       limits:
         cpu: 1
