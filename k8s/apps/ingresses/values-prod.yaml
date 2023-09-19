@@ -1,19 +1,7 @@
 reverseProxy:
-  main:
-    ip: "192.168.0.20"
-    port: "8123"
   yellow:
     ip: "192.168.0.23"
     port: "8123"
-  nas:
-    ip: "192.168.8.107"
-    port: "80"
   uptime:
     ip: "192.168.0.20"
     port: "3001"
-  glrouter:
-    ip: "192.168.8.1"
-    port: "80"
-    overrides:
-      prefix: "gl.core"
-      middleware: "apps-ingresses-forwardauth-authentik"
