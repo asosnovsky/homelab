@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      {{ .Release.Name }}/app: scrypted
+  template:
+    metadata:
+      labels:
+        {{ .Release.Name }}/app: scrypted
+    spec:
+      volumes:
+        {{- if .Values.persistence.media_path.enabled }}
+        -   name: media-path
+            persistentVolumeClaim:
+              claimName: {{ .Values.persistence.media_path.claimName }}
+        {{- end }}
+      containers:
+        -   name: main
+            imagePullPolicy: "IfNotPresent"
+            securityContext:
+              privileged: true
+            image: "{{ .Values.image }}:{{ .Values.tag | default .Chart.AppVersion }}"
+            resources: 
+              {{- .Values.resources | toYaml | nindent 14}}
+            livenessProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              initialDelaySeconds: 10
+              failureThreshold: 10
+              timeoutSeconds: 30
+            readinessProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              initialDelaySeconds: 10
+              failureThreshold: 10
+              timeoutSeconds: 30
+            startupProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              failureThreshold: 60
+              periodSeconds: 15
+            env:
+              - name: SCRYPTED_NVR_VOLUME
+                value: /media/nvr
+            ports:
+              -   containerPort: 10443
+                  name: http
+            volumeMounts:
+        {{- if .Values.persistence.media_path.enabled }}
+              -   name: media-path
+                  mountPath: /media/nvr
+        {{ end }}

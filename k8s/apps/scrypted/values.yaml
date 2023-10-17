@@ -1,0 +1,18 @@
+image: "koush/scrypted"
+tag: "latest"
+
+persistence:
+    media_path:
+        enabled: false
+        claimName: ""
+    conf_path:
+        enabled: false
+        claimName: ""
+
+resources:
+    requests:
+        memory: "128Mi"
+        cpu: "500m"
+    limits:
+        memory: "1Gi"
+        cpu: "2"
