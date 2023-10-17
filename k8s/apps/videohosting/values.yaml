@@ -10,27 +10,27 @@ plex:
   tag: "1.31.3.6868-28fc46b27"
 
 linuxserverServices:
-  transmission:
-    repo: lscr.io/linuxserver/transmission
-    tag: "4.0.2"
-    ports:
-      tcp:
-        web: 9091
-        51413: 51413
-      udp:
-        51413: 51413
-    podResources:
-      limits:
-        cpu: 1
-        memory: "2Gi"
-      requests:
-        cpu: 800m
-        memory: "500M"
-    configVolumesResources:
-      requests:
-        storage: 10Gi
-      limits:
-        storage: 100Gi
+  # transmission:
+  #   repo: lscr.io/linuxserver/transmission
+  #   tag: "4.0.2"
+  #   ports:
+  #     tcp:
+  #       web: 9091
+  #       51413: 51413
+  #     udp:
+  #       51413: 51413
+  #   podResources:
+  #     limits:
+  #       cpu: 1
+  #       memory: "2Gi"
+  #     requests:
+  #       cpu: 800m
+  #       memory: "500M"
+  #   configVolumesResources:
+  #     requests:
+  #       storage: 10Gi
+  #     limits:
+  #       storage: 100Gi
   sonarr:
     repo: lscr.io/linuxserver/sonarr
     tag: "3.0.10"
