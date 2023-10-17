@@ -9,7 +9,7 @@ spec:
     {{ .Release.Name }}/app: scrypted
   type: NodePort
   ports:
-      - port: 443
+    -   port: 443
         nodePort: 30001
         targetPort: 10443
         name: https
