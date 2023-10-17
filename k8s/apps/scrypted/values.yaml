@@ -1,5 +1,5 @@
 image: "koush/scrypted"
-tag: "latest"
+tag: "20-jammy-thin.s6-v0.57.0"
 
 persistence:
     media_path:
@@ -15,4 +15,4 @@ resources:
         cpu: "500m"
     limits:
         memory: "1Gi"
-        cpu: "2"
+        cpu: "1"

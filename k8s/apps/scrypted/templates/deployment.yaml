@@ -29,34 +29,36 @@ spec:
             image: "{{ .Values.image }}:{{ .Values.tag | default .Chart.AppVersion }}"
             resources: 
               {{- .Values.resources | toYaml | nindent 14}}
-            livenessProbe:
-              httpGet:
-                path: /
-                port: http
-                scheme: HTTP
-              initialDelaySeconds: 10
-              failureThreshold: 10
-              timeoutSeconds: 30
-            readinessProbe:
-              httpGet:
-                path: /
-                port: http
-                scheme: HTTP
-              initialDelaySeconds: 10
-              failureThreshold: 10
-              timeoutSeconds: 30
-            startupProbe:
-              httpGet:
-                path: /
-                port: http
-                scheme: HTTP
-              failureThreshold: 60
-              periodSeconds: 15
+            # livenessProbe:
+            #   httpGet:
+            #     path: /
+            #     port: http
+            #     scheme: HTTP
+            #   initialDelaySeconds: 10
+            #   failureThreshold: 10
+            #   timeoutSeconds: 30
+            # readinessProbe:
+            #   httpGet:
+            #     path: /
+            #     port: http
+            #     scheme: HTTP
+            #   initialDelaySeconds: 10
+            #   failureThreshold: 10
+            #   timeoutSeconds: 30
+            # startupProbe:
+            #   httpGet:
+            #     path: /
+            #     port: http
+            #     scheme: HTTP
+            #   failureThreshold: 60
+            #   periodSeconds: 15
             env:
               - name: SCRYPTED_NVR_VOLUME
                 value: /media/nvr
             ports:
               -   containerPort: 10443
+                  name: https
+              -   containerPort: 11080
                   name: http
             volumeMounts:
         {{- if .Values.persistence.media_path.enabled }}
