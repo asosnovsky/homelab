@@ -62,8 +62,8 @@ apps:
   nextcloud:
     valuesFile: nextcloud.yaml
 
-  photoprism:
-    valuesFile: photoprism.yaml
+  # photoprism:
+  #   valuesFile: photoprism.yaml
 
   ingresses:
     valuesFile: ingresses.yaml
@@ -83,6 +83,12 @@ apps:
       smtp_password_secret: {{ .Values.secrets.smtp.secrets.smtp.name }}
       smtp_password_secret_key: password
 
+  scrypted:
+    values: |-
+      persistence:
+        media_path:
+            enabled: true
+            claimName: {{ .Values.storage.scrypted.name }}
   frigate:
     values: |-
       persistence:
@@ -248,6 +254,16 @@ storage:
   frigateMedia:
     name: frigate-media
     namespace: apps-frigate
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 100Gi
+      requests:
+        storage: 10Gi
+  scrypted:
+    name: scrypted-media
+    namespace: apps-scrypted
     accessModes:
       - ReadWriteMany
     resources:
