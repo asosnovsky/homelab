@@ -1,6 +1,9 @@
 image: "koush/scrypted"
 tag: "20-jammy-thin.s6-v0.57.0"
 
+flags:
+    enableNodePort: false
+
 persistence:
     media_path:
         enabled: false

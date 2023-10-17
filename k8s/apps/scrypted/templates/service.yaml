@@ -8,7 +8,11 @@ spec:
     {{ .Release.Name }}/app: scrypted
   type: ClusterIP
   ports:
-    - port: 80
+    - port: 443
       targetPort: 10443
+      name: https
+      protocol: TCP
+    - port: 80
+      targetPort: 11080
       name: http
       protocol: TCP
