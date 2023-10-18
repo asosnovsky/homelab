@@ -24,6 +24,9 @@ spec:
         -   name: data-path
             persistentVolumeClaim:
               claimName: {{ .Values.persistence.data_path.claimName }}
+        -   name: configuration
+            configMap:
+              name: z2m-config
       containers:
         -   name: main
             imagePullPolicy: "IfNotPresent"
@@ -66,3 +69,6 @@ spec:
                   mountPath: /dev/ttyUSB0
               -   name: data-path
                   mountPath: /app/data
+              -   name: configuration
+                  mountPath: /app/data/configuration.yaml
+                  subPath: configuration.yaml
