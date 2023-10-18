@@ -6,6 +6,8 @@ metadata:
 data:
   configuration.yaml: |-
         permit_join: true
+        advanced:
+            log_level: debug
         mqtt:
             base_topic: "zigbee2mqtt"
             server: "mqtt://{{.Values.global.mqtt.host}}:{{.Values.global.mqtt.port}}"
