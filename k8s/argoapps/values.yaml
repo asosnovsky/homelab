@@ -23,7 +23,7 @@ global:
     email: "ariel.sosnovsky@gmail.com"
   mqtt:
     port: 1883
-    host: 192.168.0.20
+    host: 192.168.0.23
 
 videohosting:
   linuxserverServices:
