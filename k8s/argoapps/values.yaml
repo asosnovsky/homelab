@@ -209,16 +209,16 @@ secrets:
             secretName: "password.pg.authentik"
             secretKey: "password"
 storage:
-  photoprism:
-    name: photoprism
-    namespace: apps-photoprism
-    accessModes:
-      - ReadWriteMany
-    resources:
-      requests:
-        storage: 8Gi
-      limits:
-        storage: 500Gi
+  # photoprism:
+  #   name: photoprism
+  #   namespace: apps-photoprism
+  #   accessModes:
+  #     - ReadWriteMany
+  #   resources:
+  #     requests:
+  #       storage: 8Gi
+  #     limits:
+  #       storage: 500Gi
   database:
     name: primary-database
     namespace: chart-database
