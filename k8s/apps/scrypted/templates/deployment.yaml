@@ -21,6 +21,11 @@ spec:
             persistentVolumeClaim:
               claimName: {{ .Values.persistence.media_path.claimName }}
         {{- end }}
+        {{- if .Values.persistence.conf_path.enabled }}
+        -   name: conf-path
+            persistentVolumeClaim:
+              claimName: {{ .Values.persistence.conf_path.claimName }}
+        {{- end }}
       containers:
         -   name: main
             imagePullPolicy: "IfNotPresent"
@@ -64,4 +69,8 @@ spec:
         {{- if .Values.persistence.media_path.enabled }}
               -   name: media-path
                   mountPath: /media/nvr
+        {{ end }}
+        {{- if .Values.persistence.conf_path.enabled }}
+              -   name: conf-path
+                  mountPath: /server/volume
         {{ end }}

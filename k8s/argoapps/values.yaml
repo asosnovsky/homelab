@@ -89,6 +89,10 @@ apps:
         media_path:
             enabled: true
             claimName: {{ .Values.storage.scrypted.name }}
+      persistence:
+        conf_path:
+            enabled: truescryptedConf
+            claimName: {{ .Values.storage.scryptedConf.name }}
   z2m:
     values: |-
       persistence:
@@ -269,6 +273,16 @@ storage:
         storage: 10Gi
   scrypted:
     name: scrypted-media
+    namespace: apps-scrypted
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 100Gi
+      requests:
+        storage: 10Gi
+  scryptedConf:
+    name: scrypted-conf
     namespace: apps-scrypted
     accessModes:
       - ReadWriteMany
