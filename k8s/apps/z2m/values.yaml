@@ -7,10 +7,10 @@ flags:
 affinity:
     nodeAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
+            -   weight: 1
                 preference:
                 matchExpressions:
-                    - key: hardware/zigbee
+                    -   key: hardware/zigbee
                         operator: In
                         values:
                             - "yes"
