@@ -18,6 +18,9 @@ spec:
       affinity:
         {{- .Values.affinity | toYaml | nindent 12}}
       volumes:
+        -   name: udev
+            hostPath:
+              path: /run/udev
         -   name: zigbee-stick
             hostPath:
               path: "{{ .Values.devicePath }}"
@@ -35,29 +38,27 @@ spec:
             image: "{{ .Values.image }}:{{ .Values.tag | default .Chart.AppVersion }}"
             resources: 
               {{- .Values.resources | toYaml | nindent 14}}
-            # livenessProbe:
-            #   httpGet:
-            #     path: /
-            #     port: http
-            #     scheme: HTTP
-            #   initialDelaySeconds: 10
-            #   failureThreshold: 10
-            #   timeoutSeconds: 30
-            # readinessProbe:
-            #   httpGet:
-            #     path: /
-            #     port: http
-            #     scheme: HTTP
-            #   initialDelaySeconds: 10
-            #   failureThreshold: 10
-            #   timeoutSeconds: 30
-            # startupProbe:
-            #   httpGet:
-            #     path: /
-            #     port: http
-            #     scheme: HTTP
-            #   failureThreshold: 60
-            #   periodSeconds: 15
+            livenessProbe:
+              tcpSocket:
+                port: http
+              initialDelaySeconds: 0
+              failureThreshold: 3
+              timeoutSeconds: 1
+              periodSeconds: 10
+            readinessProbe:
+              tcpSocket:
+                port: http
+              initialDelaySeconds: 0
+              failureThreshold: 3
+              timeoutSeconds: 1
+              periodSeconds: 10
+            startupProbe:
+              tcpSocket:
+                port: http
+              initialDelaySeconds: 0
+              failureThreshold: 30
+              timeoutSeconds: 1
+              periodSeconds: 5
             env:
               - name: TZ
                 value: "{{ .Values.global.timezone }}"
@@ -72,3 +73,6 @@ spec:
               -   name: configuration
                   mountPath: /app/data/configuration.yaml
                   subPath: configuration.yaml
+              -   name: udev
+                  mountPath: /run/udev
+                  

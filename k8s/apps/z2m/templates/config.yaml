@@ -6,6 +6,7 @@ metadata:
 data:
   configuration.yaml: |-
         permit_join: true
+        homeassistant: true
         advanced:
             log_level: debug
         mqtt:
