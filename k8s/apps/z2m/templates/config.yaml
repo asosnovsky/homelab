@@ -7,13 +7,13 @@ data:
   configuration.yaml: |-
         permit_join: true
         mqtt:
-            base_topic: zigbee2mqtt
+            base_topic: "zigbee2mqtt"
             server: "mqtt://{{.Values.global.mqtt.host}}:{{.Values.global.mqtt.port}}"
-            user: {{.Values.global.mqtt.username}}
-            password: {{.Values.global.mqtt.password}}
+            user: "{{.Values.global.mqtt.username}}"
+            password: "{{.Values.global.mqtt.password}}"
         serial:
-            port: /dev/ttyUSB0
+            port: "/dev/ttyUSB0"
         frontend:
-            port: 8080
+            port: "8080"
         advanced:
-            network_key: GENERATE
+            network_key: "GENERATE"
