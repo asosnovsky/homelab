@@ -43,9 +43,17 @@ services:
     service: "plex"
     namespace: "apps-videohosting"
     port: 32400
+  - prefix: "scrypted"
+    service: "scrypted"
+    namespace: "apps-scrypted"
+    port: 80
   - prefix: "frigate"
     service: "frigate"
     namespace: "apps-frigate"
+    middleware: "apps-ingresses-chain-authentik"
+  - prefix: "z2m"
+    service: "z2m"
+    namespace: "apps-z2m"
     middleware: "apps-ingresses-chain-authentik"
   # vh services
   {{- range $k, $v := .Values.videohosting.linuxserverServices }}
