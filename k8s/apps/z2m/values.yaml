@@ -1,0 +1,29 @@
+image: "koenkk/zigbee2mqtt"
+tag: "latest"
+
+flags:
+    enableNodePort: false
+
+affinity:
+    nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+                preference:
+                matchExpressions:
+                    - key: hardware/zigbee
+                        operator: In
+                        values:
+                            - "yes"
+persistence:
+    data_path:
+        claimName: ""
+
+devicePath: /dev/ttyUSB0
+
+resources:
+    requests:
+        memory: "64Mi"
+        cpu: "50m"
+    limits:
+        memory: "64Mi"
+        cpu: "50m"

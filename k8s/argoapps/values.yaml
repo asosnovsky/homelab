@@ -89,6 +89,12 @@ apps:
         media_path:
             enabled: true
             claimName: {{ .Values.storage.scrypted.name }}
+  z2m:
+    values: |-
+      persistence:
+        data_path:
+            enabled: true
+            claimName: {{ .Values.storage.z2mData.name }}
   frigate:
     values: |-
       persistence:
@@ -271,6 +277,16 @@ storage:
         storage: 100Gi
       requests:
         storage: 10Gi
+  z2mData:
+    name: z2m-data
+    namespace: apps-z2m
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 2Gi
+      requests:
+        storage: 2Gi
   frigateConf:
     name: frigate-conf
     namespace: apps-frigate

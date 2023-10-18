@@ -1,0 +1,14 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  selector:
+    {{ .Release.Name }}/app: scrypted
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http
+      protocol: TCP

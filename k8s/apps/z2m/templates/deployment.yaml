@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      {{ .Release.Name }}/app: z2m
+  template:
+    metadata:
+      labels:
+        {{ .Release.Name }}/app: z2m
+    spec:
+      affinity:
+        {{- .Values.affinity | toYaml | nindent 12}}
+      volumes:
+        -   name: zigbee-stick
+            hostPath:
+              path: "{{ .Values.devicePath }}"
+        -   name: data-path
+            persistentVolumeClaim:
+              claimName: {{ .Values.persistence.data_path.claimName }}
+      containers:
+        -   name: main
+            imagePullPolicy: "IfNotPresent"
+            securityContext:
+              privileged: true
+            image: "{{ .Values.image }}:{{ .Values.tag | default .Chart.AppVersion }}"
+            resources: 
+              {{- .Values.resources | toYaml | nindent 14}}
+            # livenessProbe:
+            #   httpGet:
+            #     path: /
+            #     port: http
+            #     scheme: HTTP
+            #   initialDelaySeconds: 10
+            #   failureThreshold: 10
+            #   timeoutSeconds: 30
+            # readinessProbe:
+            #   httpGet:
+            #     path: /
+            #     port: http
+            #     scheme: HTTP
+            #   initialDelaySeconds: 10
+            #   failureThreshold: 10
+            #   timeoutSeconds: 30
+            # startupProbe:
+            #   httpGet:
+            #     path: /
+            #     port: http
+            #     scheme: HTTP
+            #   failureThreshold: 60
+            #   periodSeconds: 15
+            env:
+              - name: TZ
+                value: "{{ .Values.global.timezone }}"
+            ports:
+              -   containerPort: 8080
+                  name: http
+            volumeMounts:
+              -   name: zigbee-stick
+                  mountPath: /dev/ttyUSB0
+              -   name: data-path
+                  mountPath: /app/data
