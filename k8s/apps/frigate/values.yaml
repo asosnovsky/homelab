@@ -11,7 +11,7 @@ persistence:
 
 resources:
     requests:
-        memory: "128Mi"
+        memory: "1Gi"
         cpu: "500m"
     limits:
         memory: "1Gi"
