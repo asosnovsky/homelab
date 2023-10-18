@@ -9,11 +9,11 @@ affinity:
         preferredDuringSchedulingIgnoredDuringExecution:
             -   weight: 1
                 preference:
-                matchExpressions:
-                    -   key: hardware/zigbee
-                        operator: In
-                        values:
-                            - "yes"
+                    matchExpressions:
+                        -   key: hardware/zigbee
+                            operator: In
+                            values:
+                                - "yes"
 persistence:
     data_path:
         claimName: ""
