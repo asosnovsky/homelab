@@ -71,7 +71,7 @@ spec:
               -   name: data-path
                   mountPath: /app/data
               -   name: configuration
-                  mountPath: /app/data/configuration.yaml
+                  mountPath: /app/configuration.yaml
                   subPath: configuration.yaml
               -   name: udev
                   mountPath: /run/udev
