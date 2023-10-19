@@ -32,7 +32,7 @@ spec:
               -   name: ser2sock-config
                   mountPath: /config
               -   name: zigbee-usb
-                  mountPath: /dev/ttyACM0
+                  mountPath: "{{ .Values.devicePath }}"
       volumes:
         -   name: ser2sock-config
             configMap:
@@ -51,7 +51,7 @@ metadata:
 data:
   ser2sock.conf: |
     [ser2sock]
-    device = /dev/ttyACM0
+    device = "{{ .Values.devicePath }}"
     baudrate = 115200
     port = 10000
 ---
