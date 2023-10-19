@@ -75,6 +75,9 @@ spec:
               -   name: configuration
                   mountPath: /app/configuration.yaml
                   subPath: configuration.yaml
+              -   name: configuration
+                  mountPath: /config/configuration.yaml
+                  subPath: configuration.yaml
               -   name: udev
                   mountPath: /run/udev
                   

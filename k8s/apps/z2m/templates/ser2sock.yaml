@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "ser2sock"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{ .Release.Name }}/app: ser2sock
+  template:
+    metadata:
+      labels:
+        {{ .Release.Name }}/app: ser2sock
+    spec:
+      affinity:
+        {{- .Values.affinity | toYaml | nindent 12}}
+      containers:
+        - name: ser2sock
+          image: lansible/ser2sock:latest
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+            readOnlyRootFilesystem: true
+          ports:
+            - containerPort: 10000
+              name: zigbee
+          volumeMounts:
+            - name: ser2sock-config
+              mountPath: /config
+            - name: zigbee-usb
+              mountPath: /dev/ttyACM0
+      volumes:
+        - name: ser2sock-config
+          configMap:
+            name: ser2sock-config
+        - name: zigbee-usb
+          hostPath:
+            path: "{{ .Values.devicePath }}"
+            type: CharDevice
+---
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: ser2sock-config
+    labels:
+      app: ser2sock
+  data:
+    ser2sock.conf: |
+      [ser2sock]
+      device = /dev/ttyACM0
+      baudrate = 115200
+      port = 10000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ser2sock
+  labels:
+    {{ .Release.Name }}/app: ser2sock
+spec:
+  type: ClusterIP
+  selector:
+    {{ .Release.Name }}/app: ser2sock
+  ports:
+    - port: 10000
+      targetPort: 10000
+      name: zigbee
+      protocol: TCP

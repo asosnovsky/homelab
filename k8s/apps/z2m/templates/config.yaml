@@ -15,7 +15,7 @@ data:
             user: "{{.Values.global.mqtt.username}}"
             password: "{{.Values.global.mqtt.password}}"
         serial:
-            port: "{{ .Values.devicePath }}"
+            port: "tcp://ser2sock.{{ .Release.Namespace }}.svc.cluster.local:10000"
         frontend:
             port: "8080"
         advanced:
