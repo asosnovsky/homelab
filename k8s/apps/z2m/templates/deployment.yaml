@@ -60,10 +60,10 @@ spec:
               timeoutSeconds: 1
               periodSeconds: 5
             env:
-              - name: TZ
-                value: "{{ .Values.global.timezone }}"
-              - name: "ZIGBEE2MQTT_DATA"
-                value: "/data"
+              -   name: TZ
+                  value: "{{ .Values.global.timezone }}"
+              -   name: "ZIGBEE2MQTT_DATA"
+                  value: "/data"
             ports:
               -   containerPort: 8080
                   name: http

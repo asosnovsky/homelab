@@ -1,6 +1,9 @@
 image: "koenkk/zigbee2mqtt"
 tag: "latest-dev"
-
+global:
+    timezone: changeme
+    mqtt:
+        host: ""
 flags:
     enableNodePort: false
 
