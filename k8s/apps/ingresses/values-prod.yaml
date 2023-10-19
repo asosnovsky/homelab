@@ -3,6 +3,6 @@ reverseProxy:
     ip: "192.168.0.23"
     port: "80"
 
-  kuma.core:
+  kuma:
     ip: "192.168.0.23"
     port: "3001"
