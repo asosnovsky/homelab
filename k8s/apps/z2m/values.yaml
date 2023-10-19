@@ -1,5 +1,5 @@
 image: "koenkk/zigbee2mqtt"
-tag: "latest"
+tag: "latest-dev"
 
 flags:
     enableNodePort: false

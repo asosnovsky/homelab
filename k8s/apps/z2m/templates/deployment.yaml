@@ -4,9 +4,9 @@ metadata:
   name: "{{ .Release.Name }}"
 spec:
   replicas: 1
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 2
   strategy:
-    type: RollingUpdate
+    type: Recreate
   selector:
     matchLabels:
       {{ .Release.Name }}/app: z2m
@@ -62,14 +62,16 @@ spec:
             env:
               - name: TZ
                 value: "{{ .Values.global.timezone }}"
+              - name: "ZIGBEE2MQTT_DATA"
+                value: "/data"
             ports:
               -   containerPort: 8080
                   name: http
             volumeMounts:
               -   name: zigbee-stick
-                  mountPath: /dev/ttyUSB0
+                  mountPath: "{{ .Values.devicePath }}"
               -   name: data-path
-                  mountPath: /app/data
+                  mountPath: /data
               -   name: configuration
                   mountPath: /app/configuration.yaml
                   subPath: configuration.yaml

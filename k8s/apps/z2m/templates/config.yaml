@@ -15,8 +15,10 @@ data:
             user: "{{.Values.global.mqtt.username}}"
             password: "{{.Values.global.mqtt.password}}"
         serial:
-            port: "/dev/ttyUSB0"
+            port: "{{ .Values.devicePath }}"
         frontend:
             port: "8080"
         advanced:
             network_key: "GENERATE"
+        devices: /data/devices.yaml
+        groups: /data/groups.yaml
