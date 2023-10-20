@@ -55,6 +55,10 @@ services:
     service: "z2m"
     namespace: "apps-z2m"
     middleware: "apps-ingresses-chain-authentik"
+  - prefix: "basement"
+    service: "basement-assistant"
+    namespace: "apps-basement-assistant"
+    middleware: "apps-ingresses-chain-authentik"
   # vh services
   {{- range $k, $v := .Values.videohosting.linuxserverServices }}
   - prefix: "{{ $k }}.vh"

@@ -1,0 +1,29 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  selector:
+    homelab/app: {{ .Release.Name }}
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8123
+      name: http
+      protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-node-port
+spec:
+  selector:
+    homelab/app: {{ .Release.Name }}
+  type: NodePort
+  ports:
+    - port: 80
+      nodePort: 30101
+      targetPort: 8123
+      name: http
+      protocol: TCP

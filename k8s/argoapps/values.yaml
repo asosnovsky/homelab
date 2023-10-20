@@ -99,6 +99,12 @@ apps:
         data_path:
             enabled: true
             claimName: {{ .Values.storage.z2mData.name }}
+  basement-assistant:
+    values: |-
+      persistence:
+        config:
+            enabled: true
+            claimName: {{ .Values.storage.basementConfig.name }}
   frigate:
     values: |-
       persistence:
@@ -294,6 +300,16 @@ storage:
   z2mData:
     name: z2m-data
     namespace: apps-z2m
+    accessModes:
+      - ReadWriteMany
+    resources:
+      limits:
+        storage: 2Gi
+      requests:
+        storage: 2Gi
+  basementConfig:
+    name: basement-assistent-config
+    namespace: apps-basement-assistent
     accessModes:
       - ReadWriteMany
     resources:
