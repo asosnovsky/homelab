@@ -308,8 +308,8 @@ storage:
       requests:
         storage: 2Gi
   basementConfig:
-    name: basement-assistent-config
-    namespace: apps-basement-assistent
+    name: basement-assistant-config
+    namespace: apps-basement-assistant
     accessModes:
       - ReadWriteMany
     resources:
