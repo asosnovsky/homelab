@@ -4,8 +4,6 @@ global:
     timezone: changeme
     mqtt:
         host: ""
-flags:
-    enableNodePort: false
 
 affinity:
     nodeAffinity:
