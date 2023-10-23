@@ -28,7 +28,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: frigate
+  name: go2rtc
 spec:
   selector:
     homelab/app: frigate
