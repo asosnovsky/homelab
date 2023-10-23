@@ -24,29 +24,7 @@ spec:
       targetPort: 8555
       name: webrtc-udp
       protocol: UDP
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: go2rtc
-spec:
-  selector:
-    homelab/app: go2rtc
-  type: ClusterIP
-  ports:
     - port: 1984
       targetPort: 1984
-      name: http
+      name: go2rtc
       protocol: TCP
-    - port: 8554
-      targetPort: 8554
-      name: rtsp
-      protocol: TCP
-    - port: 8555
-      targetPort: 8555
-      name: webrtc-tcp
-      protocol: TCP
-    - port: 8555
-      targetPort: 8555
-      name: webrtc-udp
-      protocol: UDP

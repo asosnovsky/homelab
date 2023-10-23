@@ -8,6 +8,11 @@ spec:
     homelab/app: frigate
   type: NodePort
   ports:
+    -   port: 1984
+        nodePort: 30001
+        targetPort: 1984
+        name: go2rtc
+        protocol: TCP
     -   port: 5000
         nodePort: 30000
         targetPort: 5000
@@ -28,33 +33,3 @@ spec:
         targetPort: 8555
         name: webrtc-udp
         protocol: UDP
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: go2rtc-nodeport
-spec:
-  selector:
-    homelab/app: go2rtc
-  type: NodePort
-  ports:
-    - port: 1984
-      nodePort: 31000
-      targetPort: 1984
-      name: http
-      protocol: TCP
-    - port: 8554
-      nodePort: 31554
-      targetPort: 8554
-      name: rtsp
-      protocol: TCP
-    - port: 8555
-      nodePort: 31555
-      targetPort: 8555
-      name: webrtc-tcp
-      protocol: TCP
-    - port: 8555
-      nodePort: 31555
-      targetPort: 8555
-      name: webrtc-udp
-      protocol: UDP

@@ -28,7 +28,7 @@ spec:
               claimName: {{ .Values.persistence.conf_path.claimName }}
         {{- end }}
       containers:
-        -   name: main
+        -   name: frigate
             imagePullPolicy: "IfNotPresent"
             securityContext:
               privileged: true
@@ -61,14 +61,14 @@ spec:
             ports:
               -   containerPort: 5000
                   name: http
-              -   containerPort: 8554
-                  name: rtsp
-              -   containerPort: 8555
-                  name: webrtc-tcp
-                  protocol: TCP
-              -   containerPort: 8555
-                  name: webrtc-udp
-                  protocol: UDP
+              # -   containerPort: 8554
+              #     name: rtsp
+              # -   containerPort: 8555
+              #     name: webrtc-tcp
+              #     protocol: TCP
+              # -   containerPort: 8555
+              #     name: webrtc-udp
+              #     protocol: UDP
             volumeMounts:
         {{- if .Values.persistence.media_path.enabled }}
               -   name: media-path
@@ -79,32 +79,7 @@ spec:
                   mountPath: /config
                   subPath: frigate
         {{ end }}
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: "go2rtc"
-spec:
-  replicas: 1
-  revisionHistoryLimit: 3
-  strategy:
-    type: RollingUpdate
-  selector:
-    matchLabels:
-      homelab/app: go2rtc
-  template:
-    metadata:
-      labels:
-        homelab/app: go2rtc
-    spec:
-      volumes:
-        {{- if .Values.persistence.conf_path.enabled }}
-        -   name: conf-path
-            persistentVolumeClaim:
-              claimName: {{ .Values.persistence.conf_path.claimName }}
-        {{- end }}
-      containers:
-        -   name: main
+        -   name: go2rtc
             imagePullPolicy: "IfNotPresent"
             securityContext:
               privileged: true
@@ -136,7 +111,7 @@ spec:
               periodSeconds: 15
             ports:
               -   containerPort: 1984
-                  name: http
+                  name: go2rtc
               -   containerPort: 8554
                   name: rtsp
               -   containerPort: 8555
