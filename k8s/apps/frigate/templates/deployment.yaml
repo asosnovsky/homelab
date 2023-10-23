@@ -29,7 +29,7 @@ spec:
         {{- end }}
       containers:
         -   name: frigate
-            imagePullPolicy: "IfNotPresent"
+            imagePullPolicy: "Always"
             securityContext:
               privileged: true
             image: "{{ .Values.images.frigate.repo }}:{{ .Values.images.frigate.tag | default .Chart.AppVersion }}"
@@ -80,7 +80,7 @@ spec:
                   subPath: frigate
         {{ end }}
         -   name: go2rtc
-            imagePullPolicy: "IfNotPresent"
+            imagePullPolicy: "Always"
             securityContext:
               privileged: true
             image: "{{ .Values.images.go2rtc.repo }}:{{ .Values.images.go2rtc.tag | default .Chart.AppVersion }}"
