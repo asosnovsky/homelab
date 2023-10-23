@@ -47,6 +47,10 @@ services:
     service: "frigate"
     namespace: "apps-frigate"
     middleware: "apps-ingresses-chain-authentik"
+  - prefix: "go2rtc"
+    service: "go2rtc"
+    namespace: "apps-frigate"
+    middleware: "apps-ingresses-chain-authentik"
   # vh services
   {{- range $k, $v := .Values.videohosting.linuxserverServices }}
   - prefix: "{{ $k }}.vh"
