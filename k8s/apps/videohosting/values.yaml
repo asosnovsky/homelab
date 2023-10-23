@@ -10,36 +10,15 @@ plex:
   tag: "1.31.3.6868-28fc46b27"
 
 linuxserverServices:
-  # transmission:
-  #   repo: lscr.io/linuxserver/transmission
-  #   tag: "4.0.2"
-  #   ports:
-  #     tcp:
-  #       web: 9091
-  #       51413: 51413
-  #     udp:
-  #       51413: 51413
-  #   podResources:
-  #     limits:
-  #       cpu: 1
-  #       memory: "2Gi"
-  #     requests:
-  #       cpu: 800m
-  #       memory: "500M"
-  #   configVolumesResources:
-  #     requests:
-  #       storage: 10Gi
-  #     limits:
-  #       storage: 100Gi
   sonarr:
     repo: lscr.io/linuxserver/sonarr
-    tag: "3.0.10"
+    tag: "latest"
     podResources:
       limits:
         cpu: 1
         memory: "2Gi"
       requests:
-        cpu: 500m
+        cpu: 250m
         memory: "500M"
     configVolumesResources:
       requests:
@@ -57,7 +36,7 @@ linuxserverServices:
         cpu: 1
         memory: "2Gi"
       requests:
-        cpu: 500m
+        cpu: 250m
         memory: "500M"
     configVolumesResources:
       requests:
@@ -69,7 +48,7 @@ linuxserverServices:
         web: 7878
   jackett:
     repo: lscr.io/linuxserver/jackett
-    tag: "0.20.3772"
+    tag: "latest"
     envVars:
       AUTO_UPDATE: "true"
     podResources:
@@ -77,7 +56,7 @@ linuxserverServices:
         cpu: 1
         memory: "2Gi"
       requests:
-        cpu: 500m
+        cpu: 250m
         memory: "500M"
     configVolumesResources:
       requests:
@@ -89,7 +68,7 @@ linuxserverServices:
         web: 9117
   qbittorrent:
     repo: linuxserver/qbittorrent
-    tag: 4.5.2-libtorrentv1
+    tag: libtorrentv1
     ports:
       tcp:
         web: 8080

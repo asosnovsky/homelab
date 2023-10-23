@@ -113,6 +113,7 @@ spec:
       containers:
         - name: plex
           image: "{{ .Values.plex.repo }}:{{ .Values.plex.tag }}"
+          imagePullPolicy: "Always"
           envFrom:
             - configMapRef: 
                 name: plex-envs
