@@ -45,21 +45,21 @@ spec:
   ports:
     - port: 8554
       targetPort: 8554
-      nodePort: 31554
+      nodePort: 31054
       name: rtsp
       protocol: TCP
     - port: 8555
       targetPort: 8555
-      nodePort: 31555
+      nodePort: 31055
       name: webrtc-tcp
       protocol: TCP
     - port: 8555
       targetPort: 8555
-      nodePort: 31555
+      nodePort: 31055
       name: webrtc-udp
       protocol: UDP
     - port: 80
       targetPort: 1984
-      nodePort: 31984
+      nodePort: 31084
       name: http
       protocol: TCP
