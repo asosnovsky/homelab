@@ -53,7 +53,7 @@ services:
     middleware: "apps-ingresses-chain-authentik"
   - prefix: "homepage"
     service: "homepage"
-    namespace: "apps-homepage"
+    namespace: "chart-homepage"
     middleware: "apps-ingresses-chain-authentik"
   # vh services
   {{- range $k, $v := .Values.videohosting.linuxserverServices }}
