@@ -36,7 +36,7 @@ metadata:
 spec:
   selector:
     homelab/app: go2rtc
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 1984
       nodePort: 31000
