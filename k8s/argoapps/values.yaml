@@ -136,6 +136,11 @@ infrastructureCharts:
     repoURL: https://charts.goauthentik.io
     targetRevision: "2023.8.3"
     valuesFile: authentik.yaml
+  homepage:
+    repoURL: https://jameswynn.github.io/helm-charts
+    chart: homepage
+    targetRevision: "1.2.3"
+    valuesFile: homepage.yaml
 
 secrets:
   ingresses:

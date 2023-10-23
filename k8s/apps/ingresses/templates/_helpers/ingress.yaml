@@ -77,6 +77,11 @@ metadata:
   annotations:
     homelab-ingress/managing-app-namespace: "apps-ingresses"
     traefik.ingress.kubernetes.io/router.middlewares: {{ .middleware | default "apps-ingresses-https-redirect"}}@kubernetescrd
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
+    gethomepage.dev/description: ""
+    gethomepage.dev/group: "Dynamic"
+    gethomepage.dev/icon: "homepage.png"
   {{ range $k, $v := (.annotations | default (dict )) }}
     {{ $k }}: {{ $v }}
   {{ end }}
