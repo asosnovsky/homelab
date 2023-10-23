@@ -34,7 +34,7 @@ spec:
               privileged: true
             image: "{{ .Values.images.frigate.repo }}:{{ .Values.images.frigate.tag | default .Chart.AppVersion }}"
             resources: 
-              {{- .Values.resources | toYaml | nindent 14}}
+              {{- .Values.frigate.resources | toYaml | nindent 14}}
             livenessProbe:
               httpGet:
                 path: /
@@ -110,7 +110,7 @@ spec:
               privileged: true
             image: "{{ .Values.images.go2rtc.repo }}:{{ .Values.images.go2rtc.tag | default .Chart.AppVersion }}"
             resources: 
-              {{- .Values.resources | toYaml | nindent 14}}
+              {{- .Values.go2rtc.resources | toYaml | nindent 14}}
             livenessProbe:
               httpGet:
                 path: /
