@@ -1,5 +1,12 @@
-image: "ghcr.io/blakeblackshear/frigate"
-tag: "0.12.0"
+
+
+images:
+    frigate:
+        repo: "ghcr.io/blakeblackshear/frigate"
+        tag: "latest"
+    go2rtc:
+        repo: "alexxit/go2rtc"
+        tag: "latest"
 
 persistence:
     media_path:

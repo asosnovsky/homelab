@@ -1,7 +1,8 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{ .Release.Name }}"
+  name: "frigate"
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -9,11 +10,11 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      {{ .Release.Name }}/app: frigate
+      homelab/app: frigate
   template:
     metadata:
       labels:
-        {{ .Release.Name }}/app: frigate
+        homelab/app: frigate
     spec:
       volumes:
         {{- if .Values.persistence.media_path.enabled }}
@@ -31,10 +32,9 @@ spec:
             imagePullPolicy: "IfNotPresent"
             securityContext:
               privileged: true
-            image: "{{ .Values.image }}:{{ .Values.tag | default .Chart.AppVersion }}"
+            image: "{{ .Values.images.frigate.repo }}:{{ .Values.images.frigate.tag | default .Chart.AppVersion }}"
             resources: 
               {{- .Values.resources | toYaml | nindent 14}}
-
             livenessProbe:
               httpGet:
                 path: /
@@ -77,4 +77,77 @@ spec:
         {{- if .Values.persistence.conf_path.enabled }}
               -   name: conf-path
                   mountPath: /config
+                  subPath: frigate
+        {{ end }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "go2rtc"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      homelab/app: go2rtc
+  template:
+    metadata:
+      labels:
+        homelab/app: go2rtc
+    spec:
+      volumes:
+        {{- if .Values.persistence.conf_path.enabled }}
+        -   name: conf-path
+            persistentVolumeClaim:
+              claimName: {{ .Values.persistence.conf_path.claimName }}
+        {{- end }}
+      containers:
+        -   name: main
+            imagePullPolicy: "IfNotPresent"
+            securityContext:
+              privileged: true
+            image: "{{ .Values.images.go2rtc.repo }}:{{ .Values.images.go2rtc.tag | default .Chart.AppVersion }}"
+            resources: 
+              {{- .Values.resources | toYaml | nindent 14}}
+            livenessProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              initialDelaySeconds: 10
+              failureThreshold: 10
+              timeoutSeconds: 30
+            readinessProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              initialDelaySeconds: 10
+              failureThreshold: 10
+              timeoutSeconds: 30
+            startupProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              failureThreshold: 60
+              periodSeconds: 15
+            ports:
+              -   containerPort: 1984
+                  name: http
+              -   containerPort: 8554
+                  name: rtsp
+              -   containerPort: 8555
+                  name: webrtc-tcp
+                  protocol: TCP
+              -   containerPort: 8555
+                  name: webrtc-udp
+                  protocol: UDP
+            volumeMounts:
+        {{- if .Values.persistence.conf_path.enabled }}
+              -   name: conf-path
+                  mountPath: /config
+                  subPath: go2rtc
         {{ end }}
