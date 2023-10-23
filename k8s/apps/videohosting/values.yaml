@@ -7,7 +7,7 @@ global:
       familyvideos: "changeme"
 plex:
   repo: "plexinc/pms-docker"
-  tag: "1.31.3.6868-28fc46b27"
+  tag: "latest"
 
 linuxserverServices:
   sonarr:
