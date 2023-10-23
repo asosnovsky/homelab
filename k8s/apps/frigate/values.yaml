@@ -3,7 +3,7 @@
 images:
     frigate:
         repo: "ghcr.io/blakeblackshear/frigate"
-        tag: "latest"
+        tag: "0.12.1"
     go2rtc:
         repo: "alexxit/go2rtc"
         tag: "latest"
