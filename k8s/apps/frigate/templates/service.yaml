@@ -24,7 +24,29 @@ spec:
       targetPort: 8555
       name: webrtc-udp
       protocol: UDP
-    - port: 1984
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: frigate
+spec:
+  selector:
+    homelab/app: frigate
+  type: ClusterIP
+  ports:
+    - port: 8554
+      targetPort: 8554
+      name: rtsp
+      protocol: TCP
+    - port: 8555
+      targetPort: 8555
+      name: webrtc-tcp
+      protocol: TCP
+    - port: 8555
+      targetPort: 8555
+      name: webrtc-udp
+      protocol: UDP
+    - port: 80
       targetPort: 1984
-      name: go2rtc
+      name: http
       protocol: TCP
