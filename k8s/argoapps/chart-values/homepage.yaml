@@ -15,8 +15,11 @@ config:
     - search:
         provider: duckduckgo
         target: _blank
+    services: []
+    bookmarks: []
   kubernetes:
     mode: cluster
+
 
 serviceAccount:
   create: true
