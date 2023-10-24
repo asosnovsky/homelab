@@ -82,7 +82,7 @@ metadata:
     # gethomepage.dev/description: {{ .description | default "" }}
     gethomepage.dev/group: {{ .group | default "Unassigned" }}
     {{ if .icon }}
-    gethomepage.dev/icon: "{{.service}}.{{.namespace}}.svc.cluster.local:{{.port | default 80}}{{ .path | default "/" }}{{.icon}}"
+    gethomepage.dev/icon: "{{.icon}}"
     {{ else }}
     gethomepage.dev/icon: "homepage.png"
     {{ end }}

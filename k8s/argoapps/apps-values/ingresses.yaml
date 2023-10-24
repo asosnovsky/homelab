@@ -10,7 +10,7 @@ services:
     service: "argocd-server"
     namespace: "argocd"
     group: "Core"
-    icon: "assets/favicon/favicon-32x32.png"
+    icon: "https://argocd.core.home.sosnovsky.ca/assets/favicon/favicon-32x32.png"
   - prefix: "rancher.core"
     service: "rancher"
     namespace: "chart-rancher"

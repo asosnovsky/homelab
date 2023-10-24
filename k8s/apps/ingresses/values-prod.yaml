@@ -3,7 +3,7 @@ reverseProxy:
     ip: "192.168.0.23"
     port: "80"
     overrides:
-      icon: /static/icons/favicon.ico
+      icon: https://castle.home.sosnovsky.ca/static/icons/favicon.ico
 
   kuma:
     ip: "192.168.0.23"
@@ -13,6 +13,6 @@ reverseProxy:
     ip: "192.168.1.10"
     port: "8123"
     overrides:
-      icon: /static/icons/favicon.ico
+      icon: https://basement.home.sosnovsky.ca/static/icons/favicon.ico
 
   
