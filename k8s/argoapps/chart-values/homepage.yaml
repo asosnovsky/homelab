@@ -15,8 +15,8 @@ config:
     - search:
         provider: duckduckgo
         target: _blank
-    services: []
-    bookmarks: []
+  services: []
+  bookmarks: []
   kubernetes:
     mode: cluster
 
