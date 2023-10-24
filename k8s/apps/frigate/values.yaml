@@ -20,7 +20,7 @@ resources:
     frigate:
         requests:
             memory: "1Gi"
-            cpu: "2"
+            cpu: "4"
         limits:
             memory: "4Gi"
             cpu: "4"
