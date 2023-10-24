@@ -51,10 +51,11 @@ services:
     service: "go2rtc"
     namespace: "apps-frigate"
     middleware: "apps-ingresses-chain-authentik"
-  - prefix: "homepage"
+  - prefix: "main"
     service: "homepage"
     namespace: "chart-homepage"
     middleware: "apps-ingresses-chain-authentik"
+    port: 3000
   # vh services
   {{- range $k, $v := .Values.videohosting.linuxserverServices }}
   - prefix: "{{ $k }}.vh"

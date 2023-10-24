@@ -27,13 +27,6 @@ global:
 
 videohosting:
   linuxserverServices:
-    transmission:
-      ports:
-        tcp:
-          web: 9091
-          51413: 51413
-        udp:
-          51413: 51413
     sonarr:
       ports:
         tcp:
