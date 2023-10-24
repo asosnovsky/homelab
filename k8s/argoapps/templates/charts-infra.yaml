@@ -42,4 +42,8 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+    {{ if $chartProps.enableServerSideApply}}
+    syncOptions:
+    - ServerSideApply=true
+    {{ end }}
 {{ end }}

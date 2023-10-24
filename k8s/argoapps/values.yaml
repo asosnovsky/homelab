@@ -123,8 +123,9 @@ infrastructureCharts:
   prometheus:
     chart: kube-prometheus-stack
     repoURL: "https://prometheus-community.github.io/helm-charts"
-    targetRevision: "45.10.1"
+    targetRevision: "51.10.0"
     valuesFile: prometheus.yaml
+    enableServerSideApply: true
   authentik:
     repoURL: https://charts.goauthentik.io
     targetRevision: "2023.8.3"
