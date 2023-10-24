@@ -36,6 +36,7 @@ services:
     service: "authentik"
     namespace: "chart-authentik"
     group: "Core"
+    icon: "https://authentik.core.home.sosnovsky.ca/static/dist/assets/icons/icon.png"
   # root services
   - prefix: "demo"
     service: "dummy-app"
@@ -48,11 +49,13 @@ services:
     port: 8080
     middleware: "apps-nextcloud-nextcloud"
     group: "Apps"
+    icon: "https://nextcloud.home.sosnovsky.ca/core/img/favicon.ico"
   - prefix: "plex"
     service: "plex"
     namespace: "apps-videohosting"
     port: 32400
     group: "Apps"
+    icon: "https://plex.home.sosnovsky.ca/web/favicon.ico"
   - prefix: "frigate"
     service: "frigate"
     namespace: "apps-frigate"
