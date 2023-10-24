@@ -15,11 +15,13 @@ services:
     service: "rancher"
     namespace: "chart-rancher"
     group: "Core"
+    icon: "https://rancher.core.home.sosnovsky.ca/favicon.png"
   - prefix: "monitoring.core"
     service: prometheus-kube-prometheus-prometheus
     namespace: chart-prometheus
     middleware: "apps-ingresses-chain-authentik"
     group: "Core"
+    icon: "https://monitoring.core.home.sosnovsky.ca/favicon.ico"
     port: 9090
   - prefix: "alerts.core"
     service: prometheus-kube-prometheus-alertmanager
@@ -32,6 +34,7 @@ services:
     namespace: chart-prometheus
     middleware: "apps-ingresses-chain-authentik"
     group: "Core"
+    icon: "https://grafana.core.home.sosnovsky.ca/public/img/fav32.png"
   - prefix: "authentik.core"
     service: "authentik"
     namespace: "chart-authentik"
