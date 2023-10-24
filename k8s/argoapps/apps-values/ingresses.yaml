@@ -11,11 +11,6 @@ services:
     namespace: "argocd"
     group: "Core"
     icon: "https://argocd.core.home.sosnovsky.ca/assets/favicon/favicon-32x32.png"
-  - prefix: "rancher.core"
-    service: "rancher"
-    namespace: "chart-rancher"
-    group: "Core"
-    icon: "https://rancher.core.home.sosnovsky.ca/favicon.png"
   - prefix: "monitoring.core"
     service: prometheus-kube-prometheus-prometheus
     namespace: chart-prometheus

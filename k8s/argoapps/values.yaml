@@ -89,14 +89,6 @@ infrastructureCharts:
     targetRevision: "1.10.2"
     values: |-
       installCRDs: true
-  rancher:
-    repoURL: "https://releases.rancher.com/server-charts/latest"
-    targetRevision: "2.7.5-rc1"
-    values: |-
-      hostname: "rancher.core.{{ .Values.global.domain }}"
-      ingress: 
-          enabled: false
-      tls: none
   external-secrets:
     repoURL: "https://charts.external-secrets.io"
     targetRevision: "0.7.2"
