@@ -2,6 +2,8 @@ reverseProxy:
   castle:
     ip: "192.168.0.23"
     port: "80"
+    overrides:
+      icon: /static/icons/favicon.ico
 
   kuma:
     ip: "192.168.0.23"
@@ -10,5 +12,6 @@ reverseProxy:
   basement:
     ip: "192.168.1.10"
     port: "8123"
+      icon: /static/icons/favicon.ico
 
   
