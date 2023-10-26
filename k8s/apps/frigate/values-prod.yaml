@@ -1,2 +1,12 @@
 coral:
     enabled: true
+
+affinity:
+    nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+            -   weight: 1
+                preference:
+                matchExpressions:
+                    -   key: "homelab/coral_device"
+                        operator: In
+                        values: ["true"]

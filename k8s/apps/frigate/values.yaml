@@ -16,6 +16,8 @@ persistence:
         enabled: false
         claimName: ""
 
+affinity: {}
+
 coral:
     enabled: false
     hostPath: /dev/bus/usb
