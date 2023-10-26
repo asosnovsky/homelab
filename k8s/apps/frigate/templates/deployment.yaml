@@ -15,11 +15,11 @@ spec:
     metadata:
       labels:
         homelab/app: frigate
-    {{- if .Values.affinity }}
-    affinity: 
-      {{- .Values.affinity | toYaml | nindent 6}}
-    {{- end }}
     spec:
+      {{- if .Values.affinity }}
+      affinity: 
+        {{- .Values.affinity | toYaml | nindent 6}}
+      {{- end }}
       volumes:
         {{- if .Values.persistence.media_path.enabled }}
         -   name: media-path
