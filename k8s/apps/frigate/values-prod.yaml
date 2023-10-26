@@ -3,10 +3,10 @@ coral:
 
 affinity:
     nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-            -   weight: 1
-                preference:
-                matchExpressions:
+        requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+                -   matchExpressions:
                     -   key: "homelab/coral_device"
                         operator: In
-                        values: ["true"]
+                        values:
+                            - "true"
