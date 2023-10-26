@@ -18,7 +18,7 @@ spec:
     spec:
       {{- if .Values.affinity }}
       affinity: 
-        {{- .Values.affinity | toYaml | nindent 6}}
+        {{- .Values.affinity | toYaml | nindent 8}}
       {{- end }}
       volumes:
         {{- if .Values.persistence.media_path.enabled }}
