@@ -16,6 +16,10 @@ persistence:
         enabled: false
         claimName: ""
 
+coral:
+    enabled: false
+    hostPath: /dev/bus/usb
+
 resources:
     frigate:
         requests:
