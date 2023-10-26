@@ -1,12 +1,5 @@
 coral:
     enabled: true
 
-affinity:
-    nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-                -   matchExpressions:
-                    -   key: "homelab/coral_device"
-                        operator: In
-                        values:
-                            - "true"
+nodeSelector: 
+   "homelab.device/coral": "yes"
