@@ -7,7 +7,7 @@ spec:
   replicas: 1
   revisionHistoryLimit: 3
   strategy:
-    type: Recreate
+    type: RollingUpdate
   selector:
     matchLabels:
       homelab/app: frigate

@@ -2,4 +2,4 @@ coral:
     enabled: true
 
 nodeSelector: 
-   "homelab.device/coral": "yes"
+   "homelab.device/coral": "usb"
