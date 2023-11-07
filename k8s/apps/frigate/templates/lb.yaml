@@ -18,7 +18,6 @@ spec:
       protocol: TCP
     - port: 8555
       targetPort: 8555
-      nodePort: 31055
       name: webrtc-udp
       protocol: UDP
     - port: 1984
