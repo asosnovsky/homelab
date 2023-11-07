@@ -15,7 +15,7 @@ linuxserverServices:
     tag: "latest"
     podResources:
       limits:
-        cpu: 1
+        cpu: 2
         memory: "2Gi"
       requests:
         cpu: 250m
@@ -33,7 +33,7 @@ linuxserverServices:
     tag: "latest"
     podResources:
       limits:
-        cpu: 1
+        cpu: 2
         memory: "2Gi"
       requests:
         cpu: 250m
@@ -53,8 +53,8 @@ linuxserverServices:
       AUTO_UPDATE: "true"
     podResources:
       limits:
-        cpu: 1
-        memory: "2Gi"
+        cpu: 250m
+        memory: "500M"
       requests:
         cpu: 250m
         memory: "500M"
@@ -77,11 +77,11 @@ linuxserverServices:
         6881: 6881
     podResources:
       limits:
-        cpu: 1
-        memory: "4Gi"
+        cpu: 2
+        memory: "8Gi"
       requests:
         cpu: 800m
-        memory: "1.5Gi"
+        memory: "4Gi"
     configVolumesResources:
       requests:
         storage: 10Gi
