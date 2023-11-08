@@ -1,9 +1,9 @@
 reverseProxy:
-  rock:
+  castle:
     ip: "192.168.0.23"
     port: "80"
     overrides:
-      icon: https://rock.home.sosnovsky.ca/static/icons/favicon.ico
+      icon: https://castle.home.sosnovsky.ca/static/icons/favicon.ico
 
   kuma:
     ip: "192.168.0.23"

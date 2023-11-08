@@ -12,7 +12,21 @@ config:
           cpu: true
           memory: true
           showLabel: true
-  services: []
+  services: 
+    - Local Cameras:
+        - Korie:
+            href: http://korie.amc.cam.local/
+        - Eddie:
+            href: http://eddie.amc.cam.local/
+        - Living Room:
+            href: http://lr.tapo.cam.local/
+    - Routers:
+        - GL Main:
+            href: http://gl.router.local
+        - GL Basement:
+            href: http://basement.router.local
+        - TPlink Main:
+            href: http://tp.router.local
   bookmarks: []
   kubernetes:
     mode: cluster
