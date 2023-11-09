@@ -97,7 +97,6 @@ spec:
           {{ range $portName, $portValue := $v.ports.udp }}
             - containerPort: {{ $portValue }}
               protocol: UDP
-              name: "UDP-{{ $portName }}"
           {{ end }}
           {{ end }}
           volumeMounts:
