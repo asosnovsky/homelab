@@ -78,8 +78,8 @@ services:
       AUTO_UPDATE: "true"
     podResources:
       limits:
-        cpu: 250m
-        memory: "500M"
+        cpu: 500m
+        memory: "1Gi"
       requests:
         cpu: 250m
         memory: "500M"
