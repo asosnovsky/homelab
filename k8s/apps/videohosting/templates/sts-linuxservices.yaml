@@ -91,13 +91,13 @@ spec:
           {{ range $portName, $portValue := $v.ports.tcp }}
             - containerPort: {{ $portValue }}
               protocol: TCP
-              name: {{$portName}}
+              name: TCP-{{$portName}}
           {{ end }}
           {{- if $v.ports.udp -}}
           {{ range $portName, $portValue := $v.ports.udp }}
             - containerPort: {{ $portValue }}
               protocol: UDP
-              name: {{$portName}}
+              name: UDP-{{$portName}}
           {{ end }}
           {{ end }}
           volumeMounts:
@@ -109,7 +109,7 @@ spec:
           livenessProbe:
             httpGet:
               path: {{$v.health.liveness}}
-              port: web
+              port: TCP-web
               scheme: HTTP
             initialDelaySeconds: 10
             failureThreshold: 10
@@ -119,7 +119,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{$v.health.readiness}}
-              port: web
+              port: TCP-web
               scheme: HTTP
             initialDelaySeconds: 10
             failureThreshold: 10
@@ -127,7 +127,7 @@ spec:
           {{ end }}
           startupProbe:
             tcpSocket:
-              port: web
+              port: TCP-web
             initialDelaySeconds: 10
             failureThreshold: 10
             timeoutSeconds: 30
