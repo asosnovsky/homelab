@@ -135,13 +135,8 @@ spec:
             - containerPort: 32414
               protocol: UDP
             - containerPort: 32469
-          resources: 
-            limits:
-              cpu: 8
-              memory: "10Gi"
-            requests:
-              cpu: 4
-              memory: "4Gi"
+          resources:
+          {{- .Values.plex.resources | toYaml | nindent 12 }}
           volumeMounts:
             - name: config
               mountPath: /config
@@ -155,6 +150,12 @@ spec:
               subPath: movies
             - name: family-videos
               mountPath: /family-videos
+          startupProbe:
+            tcpSocket:
+              port: plex
+            initialDelaySeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 30
       volumes:
         - name: torrents
           nfs:

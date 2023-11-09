@@ -26,7 +26,7 @@ global:
     host: 192.168.0.23
 
 videohosting:
-  linuxserverServices:
+  services:
     sonarr:
       ports:
         tcp:

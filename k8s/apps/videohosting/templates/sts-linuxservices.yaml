@@ -1,4 +1,4 @@
-{{ range $k, $v := .Values.linuxserverServices }}
+{{ range $k, $v := .Values.services }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -48,6 +48,8 @@ spec:
   replicas: 1
   revisionHistoryLimit: 2
   updateStrategy:
+    rollingUpdate:
+      partition: 0
     type: RollingUpdate
   volumeClaimTemplates:
     - metadata:
@@ -101,6 +103,32 @@ spec:
               mountPath: /config
             - name: torrents
               mountPath: /torrents
+          {{- if $v.health.liveness }}
+          livenessProbe:
+            httpGet:
+              path: {{$v.health.liveness}}
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 30
+          {{ end -}}
+          {{- if $v.health.readiness }}
+          readinessProbe:
+            httpGet:
+              path: {{$v.health.readiness}}
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 30
+          {{ end }}
+          startupProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 30
       volumes:
         - name: torrents
           nfs:

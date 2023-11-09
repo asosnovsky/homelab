@@ -74,7 +74,7 @@ services:
     port: 3000
     group: "Core"
   # vh services
-  {{- range $k, $v := .Values.videohosting.linuxserverServices }}
+  {{- range $k, $v := .Values.videohosting.services }}
   - prefix: "{{ $k }}.vh"
     service: "{{ $k }}"
     namespace: "apps-videohosting"

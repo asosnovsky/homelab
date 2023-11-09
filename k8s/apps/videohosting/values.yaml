@@ -8,8 +8,27 @@ global:
 plex:
   repo: "plexinc/pms-docker"
   tag: "latest"
+  resources: 
+    limits:
+      cpu: 8
+      memory: "10Gi"
+    requests:
+      cpu: 4
+      memory: "4Gi"
 
-linuxserverServices:
+database:
+  repo: postgres
+  tag: 16.0-alpine
+  pgdata: /var/lib/postgresql/data
+  resources: 
+    limits:
+      cpu: 500m
+      memory: "800Mi"
+    requests:
+      cpu: 250m
+      memory: "256Mi"
+
+services:
   sonarr:
     repo: lscr.io/linuxserver/sonarr
     tag: "latest"
@@ -25,6 +44,9 @@ linuxserverServices:
         storage: 10Gi
       limits:
         storage: 100Gi
+    health:
+      readiness: "/ping"
+      liveness: "/ping"
     ports:
       tcp:
         web: 8989
@@ -38,6 +60,9 @@ linuxserverServices:
       requests:
         cpu: 250m
         memory: "500M"
+    health:
+      readiness: "/ping"
+      liveness: "/ping"
     configVolumesResources:
       requests:
         storage: 10Gi
@@ -58,6 +83,9 @@ linuxserverServices:
       requests:
         cpu: 250m
         memory: "500M"
+    health:
+      readiness: "/health"
+      liveness: "/health"
     configVolumesResources:
       requests:
         storage: 10Gi
@@ -82,6 +110,7 @@ linuxserverServices:
       requests:
         cpu: 800m
         memory: "4Gi"
+    health: {}
     configVolumesResources:
       requests:
         storage: 10Gi
