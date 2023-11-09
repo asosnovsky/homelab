@@ -91,7 +91,7 @@ spec:
           {{ range $portName, $portValue := $v.ports.tcp }}
             - containerPort: {{ $portValue }}
               protocol: TCP
-              name: "TCP-{{ $portName }}"
+              name: "tcp-{{ $portName }}"
           {{ end }}
           {{- if $v.ports.udp -}}
           {{ range $portName, $portValue := $v.ports.udp }}
@@ -108,7 +108,7 @@ spec:
           livenessProbe:
             httpGet:
               path: {{$v.health.liveness}}
-              port: TCP-web
+              port: tcp-web
               scheme: HTTP
             initialDelaySeconds: 10
             failureThreshold: 10
@@ -118,7 +118,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{$v.health.readiness}}
-              port: TCP-web
+              port: tcp-web
               scheme: HTTP
             initialDelaySeconds: 10
             failureThreshold: 10
@@ -126,7 +126,7 @@ spec:
           {{ end }}
           startupProbe:
             tcpSocket:
-              port: TCP-web
+              port: tcp-web
             initialDelaySeconds: 10
             failureThreshold: 10
             timeoutSeconds: 30
