@@ -91,13 +91,11 @@ spec:
           {{ range $portName, $portValue := $v.ports.tcp }}
             - containerPort: {{ $portValue }}
               protocol: TCP
-              name: TCP-{{$portName}}
           {{ end }}
           {{- if $v.ports.udp -}}
           {{ range $portName, $portValue := $v.ports.udp }}
             - containerPort: {{ $portValue }}
               protocol: UDP
-              name: UDP-{{$portName}}
           {{ end }}
           {{ end }}
           volumeMounts:
