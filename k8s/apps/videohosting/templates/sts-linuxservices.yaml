@@ -107,7 +107,7 @@ spec:
           livenessProbe:
             httpGet:
               path: {{$v.health.liveness}}
-              port: http
+              port: web
               scheme: HTTP
             initialDelaySeconds: 10
             failureThreshold: 10
@@ -117,7 +117,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{$v.health.readiness}}
-              port: http
+              port: web
               scheme: HTTP
             initialDelaySeconds: 10
             failureThreshold: 10
@@ -125,7 +125,7 @@ spec:
           {{ end }}
           startupProbe:
             tcpSocket:
-              port: http
+              port: web
             initialDelaySeconds: 10
             failureThreshold: 10
             timeoutSeconds: 30
