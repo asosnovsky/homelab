@@ -92,9 +92,7 @@ resource "postgresql_database" "db" {
 }
 
 resource "postgresql_database" "db_users" {
-  for_each = {
-        for ud in local.users_db : "${ud.user}.${ud.db}" => u
-  }
+  for_each = { for ud in local.users_db: "${ud.db}.${ud.user}" => ud }
   name     = each.value.db
   owner    = postgresql_role.u[each.value.user].id
 }
