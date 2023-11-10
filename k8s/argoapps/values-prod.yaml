@@ -23,3 +23,12 @@ secrets:
     secrets:
       cloudflare:
         name: "cloudflare-apitoken"
+
+infrastructureCharts:
+  amd-gpu:
+    repoURL: "https://kubernetes-sigs.github.io/node-feature-discovery/charts"
+    targetRevision: "0.10.0"
+    values: |-
+      namespace: chart-amd-gpu
+      labeller:
+        enabled: true
