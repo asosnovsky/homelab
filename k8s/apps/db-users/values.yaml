@@ -3,5 +3,14 @@ userGeneration:
   users:
     - nextcloud
     - authentik
+    - radarr
+    - sonarr
+  users_dbs:
+    radarr: [radarr-main, radarr-log]
+    sonarr: [sonarr-main, sonarr-log]
 
 postgresSecret: ""
+
+terraform:
+  cyrilgdnPostgresql:
+    tag: 1.18.0

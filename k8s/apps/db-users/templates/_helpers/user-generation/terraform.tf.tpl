@@ -5,11 +5,15 @@ variable "db_password" {}
 variable "db_users" {
     type = list(string)
 }
+variable "db_users_dbs" {
+  type = map(list(string))
+  default = {}
+}
 terraform {
   required_providers {
     postgresql = {
       source  = "cyrilgdn/postgresql"
-      version = "1.18.0"
+      version = "{{.Values.terraform.cyrilgdnPostgresql.tag}}"
     }
   }
 }
@@ -46,6 +50,11 @@ locals {
     for u, pwd in random_password.pg_users_pswd :
     var.db_users[u] => pwd.result
   }
+  users_db = flatten([
+    for user, dbs in var.db_users_dbs:
+      for db in dbs:
+        {"db": db, "user": user}
+  ])
 }
 
 resource "kubernetes_secret" "pg_users" {
@@ -77,6 +86,12 @@ resource "postgresql_database" "db" {
   for_each = local.users
   name     = each.key
   owner    = postgresql_role.u[each.key].id
+}
+
+resource "postgresql_database" "db_users" {
+  for_each = local.users_db
+  name     = each.value.db
+  owner    = postgresql_role.u[each.value.user].id
 }
 
 
