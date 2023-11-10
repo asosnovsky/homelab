@@ -51,9 +51,11 @@ locals {
     var.db_users[u] => pwd.result
   }
   users_db = flatten([
-    for user, dbs in var.db_users_dbs:
-      for db in dbs:
+    for user, dbs in var.db_users_dbs: [
+      for db in dbs: [
         {"db": db, "user": user}
+      ]
+    ]
   ])
 }
 
