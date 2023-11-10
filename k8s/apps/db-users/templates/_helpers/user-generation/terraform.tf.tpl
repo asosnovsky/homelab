@@ -50,11 +50,12 @@ locals {
     for u, pwd in random_password.pg_users_pswd :
     var.db_users[u] => pwd.result
   }
-  users_db = toset(flatten([
+  users_db = distinct(flatten([
     for user, dbs in var.db_users_dbs: [
-      for db in dbs: [
-        {"db": db, "user": user}
-      ]
+      for db in dbs: {
+        db = db
+        user = user
+      }
     ]
   ]))
 }
