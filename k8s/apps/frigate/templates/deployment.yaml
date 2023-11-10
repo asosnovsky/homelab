@@ -36,6 +36,9 @@ spec:
             hostPath:
               path: {{ .Values.coral.hostPath }}
         {{- end }}
+        -   name: dshm
+            emptyDir:
+              medium: Memory
       containers:
         -   name: frigate
             imagePullPolicy: "Always"
@@ -92,6 +95,8 @@ spec:
               -   mountPath: {{ .Values.coral.hostPath }}
                   name: coral-dev
         {{- end }}
+              -   mountPath: /dev/shm
+                  name: dshm
 ---
 apiVersion: apps/v1
 kind: Deployment
