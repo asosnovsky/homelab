@@ -18,13 +18,13 @@ kind: ExternalSecret
 metadata:
   name: "{{$k}}-config"
 spec:
-  refreshInterval: 1h
+  refreshInterval: 1d
   secretStoreRef:
     kind: ClusterSecretStore
     name: chart-database
   target:
     name: "{{$k}}-config"
-    creationPolicy: Owned
+    creationPolicy: Owner
     template:
       engineVersion: v2
       data:
@@ -145,6 +145,15 @@ spec:
               mountPath: /config
             - name: torrents
               mountPath: /torrents
+            - name: configxml
+              mountPath: /configxml
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - cp /configxml/config.xml /config/config.xml
           livenessProbe:
             httpGet:
               path: "/ping"
@@ -168,6 +177,9 @@ spec:
             failureThreshold: 10
             timeoutSeconds: 30
       volumes:
+        - name: configxml
+          secret:
+            secretName: "{{$k}}-config"
         - name: torrents
           nfs:
             server: "{{ $.Values.global.nfs.server }}"
