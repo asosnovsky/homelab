@@ -1,0 +1,176 @@
+{{ range $k, $v := .Values.arrs }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{$k}}-envs
+data:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: {{ $.Values.global.timezone }}
+{{- range $envName, $envValue := ($v.envVars | default (dict )) }}
+  {{ $envName }}: "{{$envValue}}"
+{{ end }}
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: "{{$k}}-config"
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: chart-database
+  target:
+    name: "{{$k}}-config"
+    creationPolicy: Owned
+    template:
+      engineVersion: v2
+      data:
+        config.xml: |-
+        <Config>
+          <LogLevel>info</LogLevel>
+          <EnableSsl>False</EnableSsl>
+          <Port>80</Port>
+          <SslPort>443</SslPort>
+          <UrlBase></UrlBase>
+          <BindAddress>*</BindAddress>
+          <ApiKey>258c8ca51bc54161889705caaf32a824</ApiKey>
+          <AuthenticationMethod>None</AuthenticationMethod>
+          <UpdateMechanism>Docker</UpdateMechanism>
+          <LaunchBrowser>False</LaunchBrowser>
+          <Branch>main</Branch>
+          <SslCertHash></SslCertHash>
+          <InstanceName>Sosnovsky {{$k}}</InstanceName>
+          <SyslogPort>{{ `{{.port}}` }}</SyslogPort>
+          <PostgresUser>{{ `{{.username}}` }}</PostgresUser>
+          <PostgresPassword>{{ `{{.password}}` }}</PostgresPassword>
+          <PostgresPort>5432</PostgresPort>
+          <PostgresHost>{{ `{{.host}}` }}</PostgresHost>
+          <PostgresMainDb>{{$k}}</PostgresMainDb>
+          <PostgresLogDb>{{$k}}-log</PostgresLogDb>
+        </Config>
+  data:
+    - remoteRef:
+        key: password.pg.{{$k}}
+        property: username
+      secretKey: username
+    - remoteRef:
+        key: password.pg.{{$k}}
+        property: password
+      secretKey: password
+    - remoteRef:
+        key: password.pg.{{$k}}
+        property: port
+      secretKey: port
+    - remoteRef:
+        key: password.pg.{{$k}}
+        property: host
+      secretKey: host
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ $k }}
+spec:
+  selector:
+    app: {{ $k }}
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      name: "http"
+    - port: 443
+      targetPort: 443
+      name: "https"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+    name: {{$k}}
+spec:
+  selector:
+    matchLabels:
+      app: {{$k}}
+  replicas: 1
+  revisionHistoryLimit: 2
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        finalizers:
+          - kubernetes.io/pvc-protection
+        name: config
+      spec:
+        storageClassName: {{ $.Values.global.nfs.storageClass }}
+        accessModes:
+          - ReadWriteOnce
+        resources: 
+          {{- $v.configVolumesResources | toYaml | nindent 10 }}
+  template:
+    metadata:
+      labels:
+        app: {{$k}}
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: homelab/capacity
+                  operator: In
+                  values:
+                    - med
+                    - low
+      containers:
+        - name: {{$k}}
+          image: "{{ $v.repo }}:{{ $v.tag }}"
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef: 
+                name: {{$k}}-envs
+          resources: 
+            {{- $v.podResources | toYaml | nindent 12 }}
+          ports:
+            - containerPort: 80
+              name: "http"
+            - containerPort: 443
+              name: "https"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: torrents
+              mountPath: /torrents
+          livenessProbe:
+            httpGet:
+              path: "/ping"
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 30
+            failureThreshold: 10
+            timeoutSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: "/ping"
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 30
+            failureThreshold: 10
+            timeoutSeconds: 30
+          startupProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 30
+            failureThreshold: 10
+            timeoutSeconds: 30
+      volumes:
+        - name: torrents
+          nfs:
+            server: "{{ $.Values.global.nfs.server }}"
+            path: "{{ $.Values.global.nfs.additionalShares.torrents  }}"
+            readOnly: false
+{{ end }}

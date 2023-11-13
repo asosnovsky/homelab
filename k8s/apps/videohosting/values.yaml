@@ -28,7 +28,7 @@ database:
       cpu: 250m
       memory: "256Mi"
 
-services:
+arrs:
   sonarr:
     repo: lscr.io/linuxserver/sonarr
     tag: "latest"
@@ -44,12 +44,7 @@ services:
         storage: 10Gi
       limits:
         storage: 100Gi
-    health:
-      readiness: "/ping"
-      liveness: "/ping"
-    ports:
-      tcp:
-        web: 8989
+    
   radarr:
     repo: lscr.io/linuxserver/radarr
     tag: "latest"
@@ -60,17 +55,13 @@ services:
       requests:
         cpu: 250m
         memory: "500M"
-    health:
-      readiness: "/ping"
-      liveness: "/ping"
     configVolumesResources:
       requests:
         storage: 10Gi
       limits:
         storage: 100Gi
-    ports:
-      tcp:
-        web: 7878
+
+services:
   jackett:
     repo: lscr.io/linuxserver/jackett
     tag: "latest"
