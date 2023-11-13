@@ -27,14 +27,6 @@ global:
 
 videohosting:
   services:
-    sonarr:
-      ports:
-        tcp:
-          web: 8989
-    radarr:
-      ports:
-        tcp:
-          web: 7878
     jackett:
       ports:
         tcp:
