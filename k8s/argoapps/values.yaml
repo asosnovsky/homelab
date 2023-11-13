@@ -91,7 +91,7 @@ infrastructureCharts:
       installCRDs: true
   external-secrets:
     repoURL: "https://charts.external-secrets.io"
-    targetRevision: "0.7.2"
+    targetRevision: "0.9.9"
     values: |-
       installCRDs: true
   nfs-generic-storageclass:
