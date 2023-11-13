@@ -18,7 +18,7 @@ kind: ExternalSecret
 metadata:
   name: "{{$k}}-config"
 spec:
-  refreshInterval: 1d
+  refreshInterval: 24h
   secretStoreRef:
     kind: ClusterSecretStore
     name: chart-database
