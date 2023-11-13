@@ -79,10 +79,10 @@ resource "kubernetes_secret" "pg_users" {
     password = each.value
     host = var.db_host
     port = var.db_port
-    additional_dbs = [
+    additional_dbs = jsonencode({
       for dbName in try(var.db_users_dbs[each.key], []):
-        "${each.key}-${dbName}"
-    ]
+        dbName => "${each.key}-${dbName}"
+    })
   }
 
   type = "Opaque"
