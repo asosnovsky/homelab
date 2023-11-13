@@ -6,8 +6,8 @@ userGeneration:
     - radarr
     - sonarr
   users_dbs:
-    radarr: [radarr-main, radarr-log]
-    sonarr: [sonarr-main, sonarr-log]
+    radarr: [log]
+    sonarr: [log]
 
 postgresSecret: ""
 

@@ -5,6 +5,10 @@ variable "db_password" {}
 variable "db_users" {
     type = list(string)
 }
+variable "db_port" {
+  type = number
+  default = 5432
+}
 variable "db_users_dbs" {
   type = map(list(string))
   default = {}
@@ -29,7 +33,7 @@ terraform {
 
 provider "postgresql" {
   host            = var.db_host
-  port            = 5432
+  port            = var.db_port
   username        = var.db_username
   password        = var.db_password
   connect_timeout = 15
@@ -73,6 +77,12 @@ resource "kubernetes_secret" "pg_users" {
   data = {
     username = each.key
     password = each.value
+    host = var.db_host
+    port = var.db_port
+    additional_dbs = [
+      for dbName in try(var.db_users_dbs[each.key], []):
+        "${each.key}-${dbName}"
+    ]
   }
 
   type = "Opaque"
@@ -93,7 +103,7 @@ resource "postgresql_database" "db" {
 
 resource "postgresql_database" "db_users" {
   for_each = { for ud in local.users_db: "${ud.db}.${ud.user}" => ud }
-  name     = each.value.db
+  name     = "${ud.user}-${ud.db}"
   owner    = postgresql_role.u[each.value.user].id
 }
 
