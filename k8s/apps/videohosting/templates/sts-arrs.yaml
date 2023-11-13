@@ -29,28 +29,28 @@ spec:
       engineVersion: v2
       data:
         config.xml: |-
-        <Config>
-          <LogLevel>info</LogLevel>
-          <EnableSsl>False</EnableSsl>
-          <Port>80</Port>
-          <SslPort>443</SslPort>
-          <UrlBase></UrlBase>
-          <BindAddress>*</BindAddress>
-          <ApiKey>258c8ca51bc54161889705caaf32a824</ApiKey>
-          <AuthenticationMethod>None</AuthenticationMethod>
-          <UpdateMechanism>Docker</UpdateMechanism>
-          <LaunchBrowser>False</LaunchBrowser>
-          <Branch>main</Branch>
-          <SslCertHash></SslCertHash>
-          <InstanceName>Sosnovsky {{$k}}</InstanceName>
-          <SyslogPort>{{ `{{.port}}` }}</SyslogPort>
-          <PostgresUser>{{ `{{.username}}` }}</PostgresUser>
-          <PostgresPassword>{{ `{{.password}}` }}</PostgresPassword>
-          <PostgresPort>5432</PostgresPort>
-          <PostgresHost>{{ `{{.host}}` }}</PostgresHost>
-          <PostgresMainDb>{{$k}}</PostgresMainDb>
-          <PostgresLogDb>{{$k}}-log</PostgresLogDb>
-        </Config>
+          <Config>
+            <LogLevel>info</LogLevel>
+            <EnableSsl>False</EnableSsl>
+            <Port>80</Port>
+            <SslPort>443</SslPort>
+            <UrlBase></UrlBase>
+            <BindAddress>*</BindAddress>
+            <ApiKey>258c8ca51bc54161889705caaf32a824</ApiKey>
+            <AuthenticationMethod>None</AuthenticationMethod>
+            <UpdateMechanism>Docker</UpdateMechanism>
+            <LaunchBrowser>False</LaunchBrowser>
+            <Branch>main</Branch>
+            <SslCertHash></SslCertHash>
+            <InstanceName>Sosnovsky {{$k}}</InstanceName>
+            <SyslogPort>{{ `{{.port}}` }}</SyslogPort>
+            <PostgresUser>{{ `{{.username}}` }}</PostgresUser>
+            <PostgresPassword>{{ `{{.password}}` }}</PostgresPassword>
+            <PostgresPort>5432</PostgresPort>
+            <PostgresHost>{{ `{{.host}}` }}</PostgresHost>
+            <PostgresMainDb>{{$k}}</PostgresMainDb>
+            <PostgresLogDb>{{$k}}-log</PostgresLogDb>
+          </Config>
   data:
     - remoteRef:
         key: password.pg.{{$k}}
