@@ -16,22 +16,13 @@ plex:
       cpu: 4
       memory: "4Gi"
 
-database:
-  repo: postgres
-  tag: 16.0-alpine
-  pgdata: /var/lib/postgresql/data
-  resources: 
-    limits:
-      cpu: 500m
-      memory: "256Mi"
-    requests:
-      cpu: 250m
-      memory: "256Mi"
-
 arrs:
   sonarr:
     repo: lscr.io/linuxserver/sonarr
     tag: "latest"
+    migrateDbFromSqllite: 
+      enabled: false
+      claimName: changeme
     podResources:
       limits:
         cpu: 2
@@ -48,6 +39,9 @@ arrs:
   radarr:
     repo: lscr.io/linuxserver/radarr
     tag: "latest"
+    migrateDbFromSqllite: 
+      enabled: false
+      claimName: changeme
     podResources:
       limits:
         cpu: 2
