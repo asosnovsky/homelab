@@ -9,6 +9,8 @@ metadata:
     checksum/main-tf: "{{ include "pg-users.terraform" . | sha256sum }}"
     checksum/users-tfvars: "{{ (print "db_users = " ( .Values.userGeneration.users | toJson  )) | sha256sum }}"
     checksum/users_dbs-tfvars: "{{ (print "db_users_dbs = " ( .Values.userGeneration.users_dbs | toJson  )) | sha256sum }}"
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded
 spec:
   template:
     metadata:
