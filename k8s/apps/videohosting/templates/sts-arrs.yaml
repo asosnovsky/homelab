@@ -211,6 +211,8 @@ metadata:
   name: "migrate-{{$k}}"
 spec:
   template:
+    metadata:
+      name: "migrate-{{$k}}"
     spec:
       restartPolicy: Never
       volumes:
@@ -224,8 +226,10 @@ spec:
         - name: migration
           image: "ghcr.io/roxedus/pgloader"
           command:
-            - sh 
-            - /configxml/migration-sqllite-to-pg.sh
+            # - sh 
+            # - /configxml/migration-sqllite-to-pg.sh
+            - sleep
+            - infinity
           volumeMounts:
             - mountPath: /app
               name: tffiles
