@@ -38,7 +38,7 @@ spec:
             <SslPort>443</SslPort>
             <UrlBase></UrlBase>
             <BindAddress>*</BindAddress>
-            <ApiKey>{{ `{{.password}}` }}</ApiKey>
+            <ApiKey>{{ `{{.password}}` }}{{ `{{.password}}` }}</ApiKey>
             <AuthenticationMethod>External</AuthenticationMethod>
             <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
             <UpdateMechanism>Docker</UpdateMechanism>
@@ -215,12 +215,10 @@ spec:
         - name: migration
           image: "ghcr.io/roxedus/pgloader"
           command:
-            - sleep
-            - infinity
-            # - --with "quote identifiers" 
-            # - --with "data only"
-            # - /data/{{$k}}.db 
-            # - "${CONNECTION_STRING}"
+            - --with "quote identifiers" 
+            - --with "data only"
+            - /data/{{$k}}.db 
+            - $CONNECTION_STRING
           volumeMounts:
             - mountPath: /app
               name: tffiles
