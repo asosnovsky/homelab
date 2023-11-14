@@ -71,6 +71,7 @@ spec:
         key: password.pg.{{$k}}
         property: host
       secretKey: host
+
 ---
 kind: Service
 apiVersion: v1
@@ -97,11 +98,13 @@ spec:
   selector:
     matchLabels:
       app: {{$k}}
+
   {{ if $v.migrateDbFromSqllite.enabled }}
   replicas: 1
-  {{else}}
+  {{ else }}
   replicas: 0
-  {{end}}
+  {{ end }}
+
   revisionHistoryLimit: 2
   updateStrategy:
     rollingUpdate:
@@ -200,10 +203,14 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: "migrate-{{$k}}"
-  namespace: "{{ .Release.Namespace }}"
 spec:
   template:
     spec:
+      restartPolicy: Never
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: "{{ $v.migrateDbFromSqllite.claimName }}"
       containers:
         - name: migration
           image: "ghcr.io/roxedus/pgloader"
@@ -224,10 +231,5 @@ spec:
           volumeMounts:
             - mountPath: "/data"
               name: data
-        volumes:
-          - name: data
-            persistentVolumeClaim:
-              claimName: "{{ $v.migrateDbFromSqllite.claimName }}"
-      restartPolicy: Never
 {{ end }}
 {{ end }}
