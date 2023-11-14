@@ -7,7 +7,7 @@ global:
       familyvideos: "changeme"
 plex:
   repo: "plexinc/pms-docker"
-  tag: "latest"
+  tag: "1.32.7"
   resources: 
     limits:
       cpu: 8
