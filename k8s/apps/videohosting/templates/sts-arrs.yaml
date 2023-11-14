@@ -160,7 +160,7 @@ spec:
             - name: configxml
               mountPath: /configxml
           lifecycle:
-            postStart:
+            preStart:
               exec:
                 command:
                   - /bin/sh
