@@ -189,6 +189,7 @@ spec:
             server: "{{ $.Values.global.nfs.server }}"
             path: "{{ $.Values.global.nfs.additionalShares.torrents  }}"
             readOnly: false
+
 {{ if $v.migrateDbFromSqllite.enabled }}
 ---
 apiVersion: batch/v1
@@ -227,5 +228,5 @@ spec:
             persistentVolumeClaim:
               claimName: "{{ $v.migrateDbFromSqllite.claimName }}"
       restartPolicy: Never
-  backoffLimit: 2
+{{ end }}
 {{ end }}
