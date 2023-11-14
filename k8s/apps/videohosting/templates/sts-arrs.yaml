@@ -100,9 +100,9 @@ spec:
       app: {{$k}}
 
   {{ if $v.migrateDbFromSqllite.enabled }}
-  replicas: 1
-  {{ else }}
   replicas: 0
+  {{ else }}
+  replicas: 1
   {{ end }}
 
   revisionHistoryLimit: 2
