@@ -37,6 +37,8 @@ arrs:
         storage: 100Gi
     extraConfigXml: |-
       <InstanceName>Sosnovsky Sonarr</InstanceName>
+      <AuthenticationMethod>External</AuthenticationMethod>
+      <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
     
   radarr:
     repo: lscr.io/linuxserver/radarr
