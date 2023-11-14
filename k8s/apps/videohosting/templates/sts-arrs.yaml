@@ -217,8 +217,10 @@ spec:
           image: "ghcr.io/roxedus/pgloader"
           command:
             - pgloader
-            - --with "quote identifiers" 
-            - --with "data only"
+            - --with 
+            - "quote identifiers" 
+            - --with 
+            - "data only"
             - /data/{{$k}}.db 
             - $CONNECTION_STRING
           volumeMounts:
