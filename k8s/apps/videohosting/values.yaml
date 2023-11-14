@@ -19,7 +19,7 @@ plex:
 arrs:
   sonarr:
     repo: lscr.io/linuxserver/sonarr
-    tag: "latest"
+    tag: "4.0.0-develop"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-sonarr-0
@@ -64,7 +64,7 @@ arrs:
 services:
   jackett:
     repo: lscr.io/linuxserver/jackett
-    tag: "4.0.0-develop"
+    tag: "latest"
     envVars:
       AUTO_UPDATE: "true"
     podResources:
