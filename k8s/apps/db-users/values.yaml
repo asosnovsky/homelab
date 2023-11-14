@@ -5,9 +5,11 @@ userGeneration:
     - authentik
     - radarr
     - sonarr
+    - prowlarr
   users_dbs:
     radarr: [log]
     sonarr: [log]
+    prowlarr: [log]
 
 postgresSecret: ""
 

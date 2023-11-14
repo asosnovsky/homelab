@@ -23,7 +23,7 @@ arrs:
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-sonarr-0
-    usePostgres: false
+    usePostgres: true
     podResources:
       limits:
         cpu: 2
@@ -62,6 +62,30 @@ arrs:
         storage: 100Gi
     extraConfigXml: |-
       <InstanceName>Sosnovsky Radarr</InstanceName>
+      <AuthenticationMethod>External</AuthenticationMethod>
+      <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
+      
+  prowlarr:
+    repo: lscr.io/linuxserver/prowlarr
+    tag: "1.9.4"
+    migrateDbFromSqllite: 
+      enabled: false
+      claimName: config-prowlarr-0
+    usePostgres: true
+    podResources:
+      limits:
+        cpu: 2
+        memory: "8Gi"
+      requests:
+        cpu: 50m
+        memory: "250M"
+    configVolumesResources:
+      requests:
+        storage: 1Gi
+      limits:
+        storage: 10Gi
+    extraConfigXml: |-
+      <InstanceName>Sosnovsky Prowlarr</InstanceName>
       <AuthenticationMethod>External</AuthenticationMethod>
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
 
