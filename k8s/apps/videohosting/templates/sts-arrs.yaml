@@ -229,12 +229,6 @@ spec:
           volumeMounts:
             - mountPath: /app
               name: tffiles
-          env:
-            - name: CONNECTION_STRING
-              valueFrom:
-                secretKeyRef:
-                  name:  "{{$k}}-config"
-                  key: "CONNECTION_STRING"
           volumeMounts:
             - mountPath: "/data"
               name: data

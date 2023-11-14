@@ -21,7 +21,7 @@ arrs:
     repo: lscr.io/linuxserver/sonarr
     tag: "4.0.0-develop"
     migrateDbFromSqllite: 
-      enabled: false
+      enabled: true
       claimName: config-sonarr-0
     podResources:
       limits:
