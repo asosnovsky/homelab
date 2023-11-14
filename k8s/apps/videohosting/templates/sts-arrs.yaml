@@ -28,8 +28,13 @@ spec:
     template:
       engineVersion: v2
       data:
-        CONNECTION_STRING: |-
-          {{ `postgresql://{{.username}}:{{.password}}@{{.host}}:{{.port}}/` }}{{$k}}
+  {{ if $v.migrateDbFromSqllite.enabled }}
+        migration-sqllite-to-pg.sh:
+            pgloader \
+              --with "quote identifiers" \
+              --with "data only" \
+              /data/{{$k}}.db {{ `postgresql://{{.username}}:{{.password}}@{{.host}}:{{.port}}/` }}{{$k}}
+  {{ end }}
         config.xml: |-
           <Config>
             <LogLevel>info</LogLevel>
@@ -212,17 +217,15 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: "{{ $v.migrateDbFromSqllite.claimName }}"
+        - name: configxml
+          secret:
+            secretName: "{{$k}}-config"
       containers:
         - name: migration
           image: "ghcr.io/roxedus/pgloader"
           command:
-            - pgloader
-            - --with 
-            - "quote identifiers" 
-            - --with 
-            - "data only"
-            - /data/{{$k}}.db 
-            - $CONNECTION_STRING
+            - sh 
+            - /configxml/migration-sqllite-to-pg.sh
           volumeMounts:
             - mountPath: /app
               name: tffiles
@@ -235,5 +238,7 @@ spec:
           volumeMounts:
             - mountPath: "/data"
               name: data
+            - name: configxml
+              mountPath: /configxml
 {{ end }}
 {{ end }}
