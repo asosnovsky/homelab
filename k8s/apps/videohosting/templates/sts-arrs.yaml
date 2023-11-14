@@ -33,7 +33,7 @@ spec:
             pgloader \
               --with "quote identifiers" \
               --with "data only" \
-              /data/{{$k}}.db {{ `postgresql://{{.username}}:{{.password}}@{{.host}}:{{.port}}/` }}{{$k}}
+              /data/{{$k}}.db '{{ `postgresql://{{.username}}:{{.password}}@{{.host}}:{{.port}}/` }}{{$k}}'
   {{ end }}
         config.xml: |-
           <Config>
