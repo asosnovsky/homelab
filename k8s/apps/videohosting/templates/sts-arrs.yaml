@@ -97,7 +97,11 @@ spec:
   selector:
     matchLabels:
       app: {{$k}}
+  {{ if $v.migrateDbFromSqllite.enabled }}
   replicas: 1
+  {{else}}
+  replicas: 0
+  {{end}}
   revisionHistoryLimit: 2
   updateStrategy:
     rollingUpdate:
@@ -197,9 +201,6 @@ kind: Job
 metadata:
   name: "migrate-{{$k}}"
   namespace: "{{ .Release.Namespace }}"
-  annotations:
-    helm.sh/hook: pre-install
-    helm.sh/hook-delete-policy: hook-succeeded
 spec:
   template:
     spec:

@@ -22,7 +22,7 @@ arrs:
     tag: "latest"
     migrateDbFromSqllite: 
       enabled: false
-      claimName: changeme
+      claimName: config-sonarr-0
     podResources:
       limits:
         cpu: 2
@@ -41,7 +41,7 @@ arrs:
     tag: "latest"
     migrateDbFromSqllite: 
       enabled: false
-      claimName: changeme
+      claimName: config-radarr-0
     podResources:
       limits:
         cpu: 2
