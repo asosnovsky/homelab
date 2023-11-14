@@ -45,7 +45,7 @@ spec:
             <SslPort>443</SslPort>
             <UrlBase></UrlBase>
             <BindAddress>*</BindAddress>
-            <ApiKey>{{ `{{.password}}` }}{{ `{{.password}}` }}</ApiKey>
+            <ApiKey>{{ `{{.password | b32enc}}` }}{{ `{{.password | b32enc}}` }}</ApiKey>
             <UpdateMechanism>Docker</UpdateMechanism>
             <LaunchBrowser>False</LaunchBrowser>
             <Branch>main</Branch>
