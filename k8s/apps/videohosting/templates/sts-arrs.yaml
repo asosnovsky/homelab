@@ -125,6 +125,8 @@ spec:
       labels:
         app: {{$k}}
     spec:
+      annotations:
+        "checksum/extraConfigXml": "{{ $v.extraConfigXml | sha256sum }}"
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
