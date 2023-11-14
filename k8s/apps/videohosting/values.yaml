@@ -35,6 +35,8 @@ arrs:
         storage: 10Gi
       limits:
         storage: 100Gi
+    extraConfigXml: |-
+      <InstanceName>Sosnovsky Sonarr</InstanceName>
     
   radarr:
     repo: lscr.io/linuxserver/radarr
@@ -54,6 +56,10 @@ arrs:
         storage: 10Gi
       limits:
         storage: 100Gi
+    extraConfigXml: |-
+      <InstanceName>Sosnovsky Radarr</InstanceName>
+      <AuthenticationMethod>External</AuthenticationMethod>
+      <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
 
 services:
   jackett:

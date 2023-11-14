@@ -39,13 +39,10 @@ spec:
             <UrlBase></UrlBase>
             <BindAddress>*</BindAddress>
             <ApiKey>{{ `{{.password}}` }}{{ `{{.password}}` }}</ApiKey>
-            <AuthenticationMethod>External</AuthenticationMethod>
-            <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
             <UpdateMechanism>Docker</UpdateMechanism>
             <LaunchBrowser>False</LaunchBrowser>
             <Branch>main</Branch>
             <SslCertHash></SslCertHash>
-            <InstanceName>Sosnovsky {{$k}}</InstanceName>
             <SyslogPort>{{ `{{.port}}` }}</SyslogPort>
             <PostgresUser>{{ `{{.username}}` }}</PostgresUser>
             <PostgresPassword>{{ `{{.password}}` }}</PostgresPassword>
@@ -53,6 +50,8 @@ spec:
             <PostgresHost>{{ `{{.host}}` }}</PostgresHost>
             <PostgresMainDb>{{$k}}</PostgresMainDb>
             <PostgresLogDb>{{$k}}-log</PostgresLogDb>
+
+            {{- $v.extraConfigXml | nindent 12 }}
           </Config>
   data:
     - remoteRef:
