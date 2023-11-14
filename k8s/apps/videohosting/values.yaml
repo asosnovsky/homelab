@@ -23,6 +23,7 @@ arrs:
     migrateDbFromSqllite: 
       enabled: true
       claimName: config-sonarr-0
+    usePostgres: false
     podResources:
       limits:
         cpu: 2
@@ -46,6 +47,7 @@ arrs:
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-radarr-0
+    usePostgres: true
     podResources:
       limits:
         cpu: 2

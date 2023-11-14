@@ -51,12 +51,14 @@ spec:
             <Branch>main</Branch>
             <SslCertHash></SslCertHash>
             <SyslogPort>{{ `{{.port}}` }}</SyslogPort>
+            {{ if $v.usePostgres }}
             <PostgresUser>{{ `{{.username}}` }}</PostgresUser>
             <PostgresPassword>{{ `{{.password}}` }}</PostgresPassword>
             <PostgresPort>5432</PostgresPort>
             <PostgresHost>{{ `{{.host}}` }}</PostgresHost>
             <PostgresMainDb>{{$k}}</PostgresMainDb>
             <PostgresLogDb>{{$k}}-log</PostgresLogDb>
+            {{ end }}
 
             {{- $v.extraConfigXml | nindent 12 }}
           </Config>
