@@ -29,11 +29,13 @@ spec:
       engineVersion: v2
       data:
   {{ if $v.migrateDbFromSqllite.enabled }}
-        migration-sqllite-to-pg.sh:
+        migration-sqllite-to-pg.sh: |-
             pgloader \
               --with "quote identifiers" \
               --with "data only" \
-              /data/{{$k}}.db '{{ `postgresql://{{.username}}:{{.password}}@{{.host}}:{{.port}}/` }}{{$k}}'
+              --with "prefetch rows = 100" --with "batch size = 1MB" \
+              /data/{{$k}}.db \
+              '{{ `postgresql://{{.username}}:{{.password}}@{{.host}}:{{.port}}/` }}{{$k}}'
   {{ end }}
         config.xml: |-
           <Config>
@@ -215,6 +217,7 @@ spec:
       name: "migrate-{{$k}}"
     spec:
       restartPolicy: Never
+      backoffLimit: 1
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -226,10 +229,8 @@ spec:
         - name: migration
           image: "ghcr.io/roxedus/pgloader"
           command:
-            # - sh 
-            # - /configxml/migration-sqllite-to-pg.sh
-            - sleep
-            - infinity
+            - sh 
+            - /configxml/migration-sqllite-to-pg.sh
           volumeMounts:
             - mountPath: /app
               name: tffiles
