@@ -215,10 +215,12 @@ spec:
         - name: migration
           image: "ghcr.io/roxedus/pgloader"
           command:
-            - --with "quote identifiers" 
-            - --with "data only"
-            - /data/{{$k}}.db 
-            - "${CONNECTION_STRING}"
+            - sleep
+            - infinity
+            # - --with "quote identifiers" 
+            # - --with "data only"
+            # - /data/{{$k}}.db 
+            # - "${CONNECTION_STRING}"
           volumeMounts:
             - mountPath: /app
               name: tffiles
