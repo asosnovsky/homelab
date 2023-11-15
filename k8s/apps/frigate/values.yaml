@@ -8,7 +8,7 @@ images:
         repo: "alexxit/go2rtc"
         tag: "latest"
     scrypted:
-        repo: "koush/scrypted"
+        repo: "ghcr.io/koush/scrypted"
         tag: "latest"
 
 
