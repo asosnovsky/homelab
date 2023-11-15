@@ -7,6 +7,10 @@ images:
     go2rtc:
         repo: "alexxit/go2rtc"
         tag: "latest"
+    scrypted:
+        repo: "koush/scrypted"
+        tag: "latest"
+
 
 persistence:
     media_path:

@@ -24,3 +24,21 @@ spec:
       targetPort: 1984
       name: http
       protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: scrypted-lb
+spec:
+  selector:
+    homelab/app: scrypted
+  type: LoadBalancer
+  ports:
+    -   port: 554
+        targetPort: 554
+        name: rtsp-tcp
+        protocol: TCP
+    -   port: 554
+        targetPort: 554
+        name: rtsp-udp
+        protocol: UDP
