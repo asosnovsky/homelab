@@ -9,7 +9,7 @@ images:
         tag: "latest"
     scrypted:
         repo: "ghcr.io/koush/scrypted"
-        tag: "latest"
+        tag: "v0.57.0"
 
 
 persistence:
