@@ -1,0 +1,117 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "scrypted"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      homelab/app: scrypted
+  template:
+    metadata:
+      labels:
+        homelab/app: scrypted
+    spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: 
+        {{- .Values.nodeSelector | toYaml | nindent 8}}
+      {{- end }}
+      volumes:
+        {{- if .Values.persistence.media_path.enabled }}
+        -   name: media-path
+            persistentVolumeClaim:
+              claimName: {{ .Values.persistence.media_path.claimName }}
+        {{- end }}
+        {{- if .Values.persistence.conf_path.enabled }}
+        -   name: conf-path
+            persistentVolumeClaim:
+              claimName: {{ .Values.persistence.conf_path.claimName }}
+        {{- end }}
+        {{- if .Values.coral.enabledForScrypted }}
+        -   name: coral-dev
+            hostPath:
+              path: {{ .Values.coral.hostPath }}
+        {{- end }}
+        -   name: dshm
+            emptyDir:
+              medium: Memory
+      containers:
+        -   name: scrypted
+            imagePullPolicy: "Always"
+            securityContext:
+              privileged: true
+            image: "{{ .Values.images.scrypted.repo }}:{{ .Values.images.scrypted.tag | default .Chart.AppVersion }}"
+            resources: 
+              {{- .Values.resources.scrypted | toYaml | nindent 14}}
+            livenessProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              initialDelaySeconds: 10
+              failureThreshold: 10
+              timeoutSeconds: 30
+            readinessProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              initialDelaySeconds: 10
+              failureThreshold: 10
+              timeoutSeconds: 30
+            startupProbe:
+              httpGet:
+                path: /
+                port: http
+                scheme: HTTP
+              failureThreshold: 60
+              periodSeconds: 15
+            ports:
+              -   containerPort: 80
+                  name: http
+              -   containerPort: 443
+                  name: https
+              -   containerPort: 8080
+                  name: debug
+              -   containerPort: 554
+                  name: rtsp-tcp
+                  protocol: TCP
+              -   containerPort: 554
+                  name: rtsp-udp
+                  protocol: UDP
+            env:
+              -   name: SCRYPTED_NVR_VOLUME
+                  value: /nvr
+              -   name: SCRYPTED_INSTALL_PATH
+                  value: /server/home
+              -   name: SCRYPTED_PLUGIN_VOLUME
+                  value: /server/plugins
+              -   name: SCRYPTED_DISABLE_AUTHENTICATION
+                  value: 'true'
+              -   name: SCRYPTED_INSECURE_PORT
+                  value: '80'
+              -   name: SCRYPTED_SECURE_PORT
+                  value: '443'
+              -   name: SCRYPTED_DEBUG_PORT
+                  value: '8080'
+            volumeMounts:
+        {{- if .Values.persistence.media_path.enabled }}
+              -   name: media-path
+                  mountPath: /nvr
+                  subPath: scrypted
+        {{ end }}
+        {{- if .Values.persistence.conf_path.enabled }}
+              -   name: conf-path
+                  mountPath: /server
+                  subPath: scrypted
+        {{ end }}
+        {{- if .Values.coral.enabledForScrypted }}
+              -   mountPath: {{ .Values.coral.hostPath }}
+                  name: coral-dev
+        {{- end }}
+              -   mountPath: /dev/shm
+                  name: dshm
