@@ -98,6 +98,8 @@ spec:
                   value: '443'
               -   name: SCRYPTED_DEBUG_PORT
                   value: '8080'
+              -   name: SCRYPTED_DOCKER_AVAHI
+                  value: 'true'
             volumeMounts:
         {{- if .Values.persistence.media_path.enabled }}
               -   name: media-path
