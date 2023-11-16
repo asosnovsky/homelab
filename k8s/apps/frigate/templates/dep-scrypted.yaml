@@ -86,10 +86,6 @@ spec:
             env:
               -   name: SCRYPTED_NVR_VOLUME
                   value: /nvr
-              -   name: SCRYPTED_INSTALL_PATH
-                  value: /server/home
-              -   name: SCRYPTED_PLUGIN_VOLUME
-                  value: /server/plugins
               -   name: SCRYPTED_DISABLE_AUTHENTICATION
                   value: 'true'
               -   name: SCRYPTED_INSECURE_PORT
@@ -108,7 +104,7 @@ spec:
         {{ end }}
         {{- if .Values.persistence.conf_path.enabled }}
               -   name: conf-path
-                  mountPath: /server
+                  mountPath: /server/volume
                   subPath: scrypted
         {{ end }}
         {{- if .Values.coral.enabledForScrypted }}
