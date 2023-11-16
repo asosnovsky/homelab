@@ -45,4 +45,4 @@ resources:
 scrypted:
     homekit:
         startPort: 4000
-        endPort: 4900
+        endPort: 4010
