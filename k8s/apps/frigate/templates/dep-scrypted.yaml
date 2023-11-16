@@ -85,6 +85,12 @@ spec:
                   protocol: UDP
               -   containerPort: 47524
                   name: homekit
+            {{ with .Values.scrypted.homekit }}
+              {{ range $i := (untilStep (int .startPort) (int .endPort) 1) }}
+              -   containerPort: "{{$i}}"
+                  name: homekit-{{$i}}
+              {{ end }}
+            {{ end }}
             env:
               -   name: SCRYPTED_NVR_VOLUME
                   value: /nvr

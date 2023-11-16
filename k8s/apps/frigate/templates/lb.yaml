@@ -42,7 +42,10 @@ spec:
         targetPort: 554
         name: rtsp-udp
         protocol: UDP
-    -   port: 47524
-        targetPort: 47524
-        name: homekit
-        
+{{ with .Values.scrypted.homekit }}
+  {{ range $i := (untilStep (int .startPort) (int .endPort) 1) }}
+    -   port: "{{$i}}"
+        targetPort: "{{$i}}"
+        name: homekit-{{$i}}
+  {{ end }}
+{{ end }}
