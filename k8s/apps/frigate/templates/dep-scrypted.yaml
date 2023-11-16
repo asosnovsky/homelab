@@ -87,7 +87,7 @@ spec:
                   name: homekit
             {{ with .Values.scrypted.homekit }}
               {{ range $i := (untilStep (int .startPort) (int .endPort) 1) }}
-              -   containerPort: "{{$i}}"
+              -   containerPort: {{$i}}
                   name: homekit-{{$i}}
               {{ end }}
             {{ end }}

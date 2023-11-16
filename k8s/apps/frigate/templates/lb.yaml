@@ -44,8 +44,8 @@ spec:
         protocol: UDP
 {{ with .Values.scrypted.homekit }}
   {{ range $i := (untilStep (int .startPort) (int .endPort) 1) }}
-    -   port: "{{$i}}"
-        targetPort: "{{$i}}"
+    -   port: {{$i}}
+        targetPort: {{$i}}
         name: homekit-{{$i}}
   {{ end }}
 {{ end }}
