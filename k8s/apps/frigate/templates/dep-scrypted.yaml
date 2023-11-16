@@ -83,6 +83,8 @@ spec:
               -   containerPort: 554
                   name: rtsp-udp
                   protocol: UDP
+              -   containerPort: 47524
+                  name: homekit
             env:
               -   name: SCRYPTED_NVR_VOLUME
                   value: /nvr

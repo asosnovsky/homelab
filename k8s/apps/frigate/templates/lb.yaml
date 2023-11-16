@@ -42,3 +42,7 @@ spec:
         targetPort: 554
         name: rtsp-udp
         protocol: UDP
+    -   port: 47524
+        targetPort: 47524
+        name: homekit
+        
