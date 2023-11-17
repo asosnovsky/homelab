@@ -49,7 +49,10 @@ apps:
         persistence:
           geodata-cache:
             storageClass: {{ .Values.glonal.nfs.storageClass }}
-
+      machine-learning:
+        persistence:
+          cache:
+            storageClass: {{ .Values.glonal.nfs.storageClass }}
   videohosting:
     values: |-
       {{ .Values.videohosting | toYaml }}
