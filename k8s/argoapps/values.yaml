@@ -44,15 +44,15 @@ apps:
     values: |-
       typesense:
         persistence:
-          storageClass: {{ .Values.glonal.nfs.storageClass }}
+          storageClass: {{ .Values.global.nfs.storageClass }}
       microservices:
         persistence:
           geodata-cache:
-            storageClass: {{ .Values.glonal.nfs.storageClass }}
+            storageClass: {{ .Values.global.nfs.storageClass }}
       machine-learning:
         persistence:
           cache:
-            storageClass: {{ .Values.glonal.nfs.storageClass }}
+            storageClass: {{ .Values.global.nfs.storageClass }}
   videohosting:
     values: |-
       {{ .Values.videohosting | toYaml }}
