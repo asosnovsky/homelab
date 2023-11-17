@@ -40,6 +40,9 @@ videohosting:
           6881: 6881
 
 apps:
+  photos:
+    values: ""
+    
   videohosting:
     values: |-
       {{ .Values.videohosting | toYaml }}
