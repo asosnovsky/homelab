@@ -47,14 +47,13 @@ redis:
     enabled: false
 
 typesense:
-  enabled: false
+  enabled: true
   env:
     TYPESENSE_DATA_DIR: /tsdata
     TYPESENSE_API_KEY: typesense
   persistence:
     tsdata:
-      # Enabling typesense persistence is recommended to avoid slow reindexing
-      enabled: false
+      enabled: true
       accessMode: ReadWriteOnce
       size: 1Gi
       # storageClass: storage-class
@@ -79,8 +78,6 @@ microservices:
     geodata-cache:
       enabled: true
       size: 1Gi
-      # Optional: Set this to pvc to avoid downloading the geodata every start.
-      type: emptyDir
       accessMode: ReadWriteMany
       # storageClass: your-class
   image:
@@ -98,8 +95,6 @@ machine-learning:
     cache:
       enabled: true
       size: 10Gi
-      # Optional: Set this to pvc to avoid downloading the ML models every start.
-      type: emptyDir
       accessMode: ReadWriteMany
       # storageClass: your-class
 
@@ -125,11 +120,3 @@ proxy:
   ingress:
     main:
       enabled: false
-      annotations:
-        # proxy-body-size is set to 0 to remove the body limit on file uploads
-        nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      hosts:
-        - host: immich.local
-          paths:
-            - path: "/"
-      tls: []

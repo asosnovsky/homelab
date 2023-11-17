@@ -41,8 +41,15 @@ videohosting:
 
 apps:
   photos:
-    values: ""
-    
+    values: |-
+      typesense:
+        persistence:
+          storageClass: {{ .Values.glonal.nfs.storageClass }}
+      microservices:
+        persistence:
+          geodata-cache:
+            storageClass: {{ .Values.glonal.nfs.storageClass }}
+
   videohosting:
     values: |-
       {{ .Values.videohosting | toYaml }}
