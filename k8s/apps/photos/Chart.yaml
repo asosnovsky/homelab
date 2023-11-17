@@ -1,0 +1,14 @@
+apiVersion: v2
+name: photos
+description: An apps service for homelab
+type: application
+version: 0.1.0
+appVersion: "edge"
+dependencies: 
+  - name: common
+    repository: https://bjw-s.github.io/helm-charts
+    version: 1.4.0
+  - name: redis
+    condition: redis.enabled
+    repository: https://charts.bitnami.com/bitnami
+    version: 17.11.6
