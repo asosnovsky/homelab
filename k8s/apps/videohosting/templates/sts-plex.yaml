@@ -108,7 +108,6 @@ spec:
                 - key: homelab/capacity
                   operator: In
                   values:
-                    - med
                     - high
       containers:
         - name: plex
