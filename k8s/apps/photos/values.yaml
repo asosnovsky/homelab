@@ -7,8 +7,15 @@ global:
 immich:
   shared:
     version: v1.88.2
+    importMountPath: /media/import
+    importMountSubPath: "Pictures"
+    importPVC:
+      nfs:
+        path: changeme
+        server: changeme
+
+    libraryMounSubPath: "Pictures/Immich"
     libraryMountPath: /usr/src/app/upload
-    libraryMounSubtPath: "Pictures"
     libraryPVC:
       nfs:
         path: changeme

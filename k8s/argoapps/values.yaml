@@ -44,8 +44,11 @@ apps:
     values: |-
       immich:
         shared:
-          libraryMounSubtPath: "{{ .Values.global.nfs.additionalShares.familyphotosSubPath }}"
           libraryPVC:
+            nfs:
+              path: {{ .Values.global.nfs.additionalShares.familyphotos }}
+              server: {{ .Values.global.nfs.server }}
+          importPVC:
             nfs:
               path: {{ .Values.global.nfs.additionalShares.familyphotos }}
               server: {{ .Values.global.nfs.server }}
