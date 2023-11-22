@@ -6,15 +6,30 @@ deployment=${2:-dev}
 app=$(basename $full_path)
 location=$(dirname $full_path)
 tmp_path=".tmp/$location/$deployment-$app.yaml"
+chart_checksum_path=".tmp/.checksums/$location/$deployment-$app.chart.yaml.checksum"
 
 echo "Running for $app:$deployment"
 
 mkdir -p $(dirname $tmp_path)
 
-echo "  > updating dependencies..."
+previous_checksum=""
+if [ -f "$chart_checksum_path" ]; then
+    previous_checksum=$(cat $chart_checksum_path)
+else
+    mkdir -p $(dirname $chart_checksum_path)
+fi
 pushd $full_path &> /dev/null
-helm dependency update 
+chart_checksum=$(sha256sum Chart.yaml | cut -d ' ' -f 1)
+echo "  > Current Chart.yaml checksum: $chart_checksum"
+echo "  > Previous Chart.yaml checksum: $previous_checksum"
+if [ "$chart_checksum" == "$previous_checksum" ]; then
+    echo "  > skipping helm update!"
+else
+    echo "  > updating dependencies..."
+    helm dependency update 
+fi
 popd &> /dev/null
+echo $chart_checksum > $chart_checksum_path
 
 if [ -f "$tmp_path" ]; then
     echo "  > found existing file"

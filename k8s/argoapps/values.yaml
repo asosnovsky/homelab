@@ -42,17 +42,12 @@ videohosting:
 apps:
   photos:
     values: |-
-      typesense:
-        persistence:
-          storageClass: {{ .Values.global.nfs.storageClass }}
-      microservices:
-        persistence:
-          geodata-cache:
-            storageClass: {{ .Values.global.nfs.storageClass }}
-      machine-learning:
-        persistence:
-          cache:
-            storageClass: {{ .Values.global.nfs.storageClass }}
+      immich:
+        shared:
+          mediaPVC:
+            nfs:
+              path: {{ .Values.global.nfs.additionalShares.familyphotos }}
+              server: {{ .Values.global.nfs.server }}
   videohosting:
     values: |-
       {{ .Values.videohosting | toYaml }}

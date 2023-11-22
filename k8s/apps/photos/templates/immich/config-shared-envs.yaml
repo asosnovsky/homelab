@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: immich-shared-envs
+data:
+    # general
+    TZ: {{ $.Values.global.timezone }}
+    LOG_LEVEL: log
+    PUBLIC_LOGIN_PAGE_MESSAGE: Sosnovsky
+    IMMICH_MEDIA_LOCATION: /shared/media/
+    # ports
+    PORT: "{{ $.Values.immich.apps.web.port }}"
+    SERVER_PORT: "{{ $.Values.immich.apps.server.port }}"
+    MICROSERVICES_PORT: "{{ $.Values.immich.apps.microservices.port }}"
+    MACHINE_LEARNING_PORT: "{{ $.Values.immich.apps.machineLearning.port }}"
+    MACHINE_LEARNING_HOST: immich-ml.{{ $.Release.Namespace }}.svc.cluster.local
+    IMMICH_MACHINE_LEARNING_URL: "http://immich-ml.{{ $.Release.Namespace }}.svc.cluster.local:{{ $.Values.immich.apps.machineLearning.port }}"
+    IMMICH_SERVER_URL: "http://immich-server.{{ $.Release.Namespace }}.svc.cluster.local:{{ $.Values.immich.apps.server.port }}"
+    IMMICH_WEB_URL: "http://immich-web.{{ $.Release.Namespace }}.svc.cluster.local:{{ $.Values.immich.apps.web.port }}"
+    # db & redis
+    REDIS_HOSTNAME: "immich-redis.{{ $.Release.Namespace }}.svc.cluster.local"
+    # typesense
+    TYPESENSE_ENABLED: "true"
+    TYPESENSE_HOST: "immich-typesense.{{ $.Release.Namespace }}.svc.cluster.local"
+    TYPESENSE_PORT: "{{ $.Values.immich.apps.typesense.port }}"

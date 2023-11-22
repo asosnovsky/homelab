@@ -1,0 +1,103 @@
+{{ define "homelab.immich.deployment" }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: immich-{{ .name }}
+spec:
+    type: ClusterIP
+    ports:
+        -   port: {{ .port }}
+            targetPort: http
+            protocol: TCP
+            name: http
+    selector:
+        homelab/name: immich
+        app.kubernetes.io/name: {{ .name }}
+        app.kubernetes.io/instance: photos
+
+{{- range $key, $val := .persistence }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-{{ .name }}-{{ $key }}
+spec:
+  storageClassName: {{ $.global.nfs.storageClass }}
+  accessModes: 
+    {{- $val.accessModes | toYaml | nindent 4 }}
+  resources:
+    {{- $val.resources | toYaml | nindent 4 }}
+{{ end -}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: immich-{{ .name }}
+spec:
+    revisionHistoryLimit: 2
+    replicas: "{{ .replicas }}"
+    updateStrategy:
+        rollingUpdate:
+            partition: "25%"
+            type: RollingUpdate
+    strategy:
+        type: Recreate
+    selector:
+        matchLabels:
+            homelab/name: immich
+            app.kubernetes.io/name: {{ .name }}
+            app.kubernetes.io/instance: photos
+    template:
+        metadata:
+            labels:
+                homelab/name: immich
+                app.kubernetes.io/name: {{ .name }}
+                app.kubernetes.io/instance: photos
+        spec:
+            containers:
+                -   name: {{ .name }}
+                    image: "{{.image}}:{{ .version }}"
+                    imagePullPolicy: IfNotPresent
+                    envFrom:
+                        -   configMapRef: 
+                                name: immich-shared-envs
+                        -   secretRef: 
+                                name: immich-shared-envs
+                    {{ if .env }}
+                    env:
+                        {{ .env | toYaml | nindent 24 }}
+                    {{ end }}
+                    ports:
+                        -   name: http
+                            containerPort: "{{ .port }}"
+                            protocol: TCP
+                    volumeMounts:
+                        -   name: library
+                            mountPath: "{{ .libraryMountPath }}"
+{{- range $key, $val := .persistence }}
+                        -   name: {{ $key }}
+                            mountPath: {{ $val.mountPath }}
+{{ end }}
+                    {{ if .livenessProbe }}
+                    livenessProbe:
+                        {{ .livenessProbe | toYaml | nindent 24 }}
+                    {{ end }}
+                    {{ if .readinessProbe }}
+                    readinessProbe:
+                        {{ .readinessProbe | toYaml | nindent 24 }}
+                    {{ end }}
+                    {{ if .startupProbe }}
+                    startupProbe:
+                        {{ .startupProbe | toYaml | nindent 24 }}
+                    {{ end }}
+            volumes:
+                -   name: library
+                    {{- .libraryPVC | toYaml | nindent 20 }}
+{{- range $key, $val := .persistence }}
+                -   name: {{ $key }}
+                    persistentVolumeClaim:
+                        claimName: immich-{{ .name }}-{{ $key }}
+{{ end }}
+
+{{ end }}

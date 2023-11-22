@@ -6,6 +6,7 @@ userGeneration:
     - radarr
     - sonarr
     - prowlarr
+    - immich
   users_dbs:
     radarr: [log]
     sonarr: [log]
