@@ -103,6 +103,7 @@ immich:
           periodSeconds: 10
           timeoutSeconds: 1
     typesense:
+      replicas: 1
       port: 8108
       image: docker.io/typesense/typesense
       version: 0.24.0
