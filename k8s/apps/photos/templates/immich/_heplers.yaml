@@ -16,7 +16,7 @@ spec:
         app.kubernetes.io/name: {{ .name }}
         app.kubernetes.io/instance: photos
 
-{{- range $key, $val := .persistence }}
+{{ range $key, $val := .persistence }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -28,7 +28,8 @@ spec:
     {{- $val.accessModes | toYaml | nindent 4 }}
   resources:
     {{- $val.resources | toYaml | nindent 4 }}
-{{ end -}}
+{{ end }}
+
 ---
 apiVersion: apps/v1
 kind: Deployment
