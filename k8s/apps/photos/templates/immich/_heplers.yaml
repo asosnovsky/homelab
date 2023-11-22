@@ -72,7 +72,7 @@ spec:
                     {{ end }}
                     ports:
                         -   name: http
-                            containerPort: "{{ .port }}"
+                            containerPort: {{ .port }}
                             protocol: TCP
                     volumeMounts:
                         -   name: library
