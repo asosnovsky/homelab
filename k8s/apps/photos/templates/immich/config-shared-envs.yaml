@@ -14,8 +14,8 @@ data:
     SERVER_PORT: "{{ $.Values.immich.apps.server.port }}"
     MICROSERVICES_PORT: "{{ $.Values.immich.apps.microservices.port }}"
     MACHINE_LEARNING_PORT: "{{ $.Values.immich.apps.machineLearning.port }}"
-    MACHINE_LEARNING_HOST: immich-ml.{{ $.Release.Namespace }}.svc.cluster.local
-    IMMICH_MACHINE_LEARNING_URL: "http://immich-ml.{{ $.Release.Namespace }}.svc.cluster.local:{{ $.Values.immich.apps.machineLearning.port }}"
+    MACHINE_LEARNING_HOST: immich-machinelearning.{{ $.Release.Namespace }}.svc.cluster.local
+    IMMICH_MACHINE_LEARNING_URL: "http://immich-machinelearning.{{ $.Release.Namespace }}.svc.cluster.local:{{ $.Values.immich.apps.machineLearning.port }}"
     IMMICH_SERVER_URL: "http://immich-server.{{ $.Release.Namespace }}.svc.cluster.local:{{ $.Values.immich.apps.server.port }}"
     IMMICH_WEB_URL: "http://immich-web.{{ $.Release.Namespace }}.svc.cluster.local:{{ $.Values.immich.apps.web.port }}"
     # db & redis
