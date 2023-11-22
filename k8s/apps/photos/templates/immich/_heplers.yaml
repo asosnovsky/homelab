@@ -107,7 +107,7 @@ spec:
 {{- range $key, $val := .persistence }}
                 -   name: {{ $key }}
                     persistentVolumeClaim:
-                        claimName: immich-{{ .name }}-{{ $key }}
+                        claimName: immich-{{ $.name }}-{{ $key }}
 {{ end }}
 
 {{ end }}
