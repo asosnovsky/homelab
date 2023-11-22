@@ -38,11 +38,16 @@ metadata:
 spec:
     revisionHistoryLimit: 2
     replicas: {{ .replicas | int }}
+{{ if .strategy }}
+    strategy: 
+        {{ .strategy | toYaml | nindent 8 }}
+{{ else }}
     strategy:
         type: RollingUpdate
         rollingUpdate:
             maxSurge: 2
             maxUnavailable: 0
+{{ end }}
     selector:
         matchLabels:
             homelab/name: immich

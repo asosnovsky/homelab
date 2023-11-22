@@ -97,6 +97,8 @@ immich:
           timeoutSeconds: 1
     typesense:
       replicas: 1
+      strategy:
+        type: Recreate
       port: 8108
       image: docker.io/typesense/typesense
       version: 0.24.0
