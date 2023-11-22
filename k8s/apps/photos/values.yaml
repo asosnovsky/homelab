@@ -23,7 +23,7 @@ immich:
         httpGet:
             path: /server-info/ping
             port: http
-        initialDelaySeconds: 0
+        initialDelaySeconds: 5
         periodSeconds: 10
         timeoutSeconds: 1
       readinessProbe:
@@ -31,7 +31,7 @@ immich:
           httpGet:
               path: /server-info/ping
               port: http
-          initialDelaySeconds: 0
+          initialDelaySeconds: 5
           periodSeconds: 10
           timeoutSeconds: 1
     microservices:
@@ -58,7 +58,7 @@ immich:
         httpGet:
             path: /server-info/ping
             port: http
-        initialDelaySeconds: 0
+        initialDelaySeconds: 5
         periodSeconds: 10
         timeoutSeconds: 1
       readinessProbe:
@@ -66,7 +66,7 @@ immich:
           httpGet:
               path: /server-info/ping
               port: http
-          initialDelaySeconds: 0
+          initialDelaySeconds: 5
           periodSeconds: 10
           timeoutSeconds: 1
     machineLearning:
@@ -91,7 +91,7 @@ immich:
           httpGet:
               path: /ping
               port: http
-          initialDelaySeconds: 0
+          initialDelaySeconds: 5
           periodSeconds: 10
           timeoutSeconds: 1
       readinessProbe:
@@ -99,7 +99,7 @@ immich:
           httpGet:
               path: /ping
               port: http
-          initialDelaySeconds: 0
+          initialDelaySeconds: 5
           periodSeconds: 10
           timeoutSeconds: 1
     typesense:
@@ -124,7 +124,7 @@ immich:
           httpGet:
               path: /health
               port: http
-          initialDelaySeconds: 0
+          initialDelaySeconds: 5
           periodSeconds: 10
           timeoutSeconds: 1
       readinessProbe:
@@ -132,7 +132,7 @@ immich:
           httpGet:
               path: /health
               port: http
-          initialDelaySeconds: 0
+          initialDelaySeconds: 5
           periodSeconds: 10
           timeoutSeconds: 1
 
