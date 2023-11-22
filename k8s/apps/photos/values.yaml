@@ -43,8 +43,6 @@ immich:
       replicas: 1
       port: 80
       image: ghcr.io/immich-app/immich-server
-      livenessProbePath: "/server-info/ping"
-      readinessProbePath: "/server-info/ping"
       livenessProbe:
         failureThreshold: 3
         httpGet:
@@ -53,7 +51,7 @@ immich:
         initialDelaySeconds: 0
         periodSeconds: 10
         timeoutSeconds: 1
-        readinessProbe:
+      readinessProbe:
           failureThreshold: 3
           httpGet:
               path: /server-info/ping
@@ -64,8 +62,63 @@ immich:
     microservices:
       replicas: 1
       port: 80
-      livenessProbePath: ""
-      readinessProbePath: ""
+      image: ghcr.io/immich-app/immich-server
+      args:
+        - ./start-microservices.sh
+      env:
+        - name: REVERSE_GEOCODING_DUMP_DIRECTORY
+          value: /geodata-cache
+      persistence:
+        geodata-cache:
+          mountPath: /geodata-cache
+          accessModes:
+              - ReadWriteMany
+          resources:
+            limits:
+              storage: 5Gi
+            requests:
+              storage: 5Gi
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+            path: /server-info/ping
+            port: http
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+      readinessProbe:
+          failureThreshold: 3
+          httpGet:
+              path: /server-info/ping
+              port: http
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+    proxy:
+      replicas: 1
+      port: 8080
+      image: ghcr.io/immich-app/immich-proxy
+      livenessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        tcpSocket:
+          port: 8080
+        timeoutSeconds: 1
+      readinessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        tcpSocket:
+          port: 8080
+        timeoutSeconds: 1
+      startupProbe:
+        failureThreshold: 30
+        initialDelaySeconds: 0
+        periodSeconds: 5
+        tcpSocket:
+          port: 8080
+        timeoutSeconds: 1
     machineLearning:
       replicas: 1
       port: 80
