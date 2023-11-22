@@ -136,8 +136,9 @@ immich:
           periodSeconds: 10
           timeoutSeconds: 1
 
-redis:
-  enabled: false
+immich-redis:
+  enabled: true
+  fullnameOverride: immich-redis
   architecture: standalone
   auth:
     enabled: false

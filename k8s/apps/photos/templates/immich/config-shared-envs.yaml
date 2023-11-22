@@ -17,7 +17,7 @@ data:
     IMMICH_MACHINE_LEARNING_URL: "http://immich-machinelearning.{{ $.Release.Namespace }}.svc.cluster.local:{{ $.Values.immich.apps.machineLearning.port }}"
     IMMICH_SERVER_URL: "http://immich-server.{{ $.Release.Namespace }}.svc.cluster.local:{{ $.Values.immich.apps.server.port }}"
     # db & redis
-    REDIS_HOSTNAME: "immich-redis.{{ $.Release.Namespace }}.svc.cluster.local"
+    REDIS_HOSTNAME: "immich-redis-headless.{{ $.Release.Namespace }}.svc.cluster.local"
     # typesense
     TYPESENSE_ENABLED: "true"
     TYPESENSE_HOST: "immich-typesense.{{ $.Release.Namespace }}.svc.cluster.local"
