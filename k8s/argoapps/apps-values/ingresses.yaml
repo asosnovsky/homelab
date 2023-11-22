@@ -94,7 +94,7 @@ services:
     middleware: "apps-ingresses-chain-authentik"
     group: "Video Hosting"
   - prefix: "immich"
-    service: "photos-proxy"
+    service: "immich-proxy"
     namespace: "apps-photos"
     middleware: "apps-ingresses-chain-authentik"
     group: "Apps"

@@ -44,7 +44,7 @@ apps:
     values: |-
       immich:
         shared:
-          mediaPVC:
+          libraryPVC:
             nfs:
               path: {{ .Values.global.nfs.additionalShares.familyphotos }}
               server: {{ .Values.global.nfs.server }}
