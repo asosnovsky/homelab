@@ -36,7 +36,7 @@ metadata:
     name: immich-{{ .name }}
 spec:
     revisionHistoryLimit: 2
-    replicas: "{{ .replicas }}"
+    replicas: {{ .replicas | int }}
     updateStrategy:
         rollingUpdate:
             partition: "25%"
