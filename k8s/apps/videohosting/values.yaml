@@ -18,6 +18,30 @@ plex:
 
 arrs:
   sonarr:
+    repo: lscr.io/linuxserver/bazarr
+    tag: "latest"
+    migrateDbFromSqllite: 
+      enabled: false
+      claimName: config-sonarr-0
+    usePostgres: true
+    podResources:
+      limits:
+        cpu: 2
+        memory: "8Gi"
+      requests:
+        cpu: 250m
+        memory: "500M"
+    configVolumesResources:
+      requests:
+        storage: 10Gi
+      limits:
+        storage: 100Gi
+    extraConfigXml: |-
+      <InstanceName>Sosnovsky Sonarr</InstanceName>
+      <AuthenticationMethod>External</AuthenticationMethod>
+      <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
+
+  sonarr:
     repo: lscr.io/linuxserver/sonarr
     tag: "4.0.0-develop"
     migrateDbFromSqllite: 
@@ -125,7 +149,7 @@ services:
     podResources:
       limits:
         cpu: 2
-        memory: "8Gi"
+        memory: "6Gi"
       requests:
         cpu: 800m
         memory: "4Gi"

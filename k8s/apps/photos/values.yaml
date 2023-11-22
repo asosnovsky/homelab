@@ -8,6 +8,7 @@ immich:
   shared:
     version: v1.79.1
     libraryMountPath: /usr/src/app/upload
+    libraryMounSubtPath: "Pictures"
     libraryPVC:
       nfs:
         path: changeme

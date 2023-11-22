@@ -77,6 +77,7 @@ spec:
                     volumeMounts:
                         -   name: library
                             mountPath: "{{ .libraryMountPath }}"
+                            subPath: "{{ .libraryMounSubtPath }}"
 {{- range $key, $val := .persistence }}
                         -   name: {{ $key }}
                             mountPath: {{ $val.mountPath }}
