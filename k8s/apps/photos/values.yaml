@@ -55,28 +55,6 @@ immich:
               storage: 5Gi
             requests:
               storage: 5Gi
-      startupProbe:
-        failureThreshold: 30
-        initialDelaySeconds: 0
-        periodSeconds: 5
-        tcpSocket:
-          port: 80
-        timeoutSeconds: 1
-      livenessProbe:
-        tcpSocket:
-          port: 80
-        failureThreshold: 3
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 1
-      readinessProbe:
-          failureThreshold: 3
-          httpGet:
-              path: /server-info/ping
-              port: http
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 1
     machineLearning:
       replicas: 1
       port: 80
