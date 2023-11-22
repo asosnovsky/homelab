@@ -18,11 +18,12 @@ immich:
       replicas: 1
       port: 80
       image: ghcr.io/immich-app/immich-server
-      command: [ "start.sh", "immich" ]
+      command: [ "/bin/sh" ]
+      args: [./start-server.sh]
       livenessProbe:
         failureThreshold: 3
         httpGet:
-            path: /server-info/ping
+            path: /api/server-info/ping
             port: http
         initialDelaySeconds: 5
         periodSeconds: 10
@@ -30,7 +31,7 @@ immich:
       readinessProbe:
           failureThreshold: 3
           httpGet:
-              path: /server-info/ping
+              path: /api/server-info/ping
               port: http
           initialDelaySeconds: 5
           periodSeconds: 10
