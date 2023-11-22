@@ -78,6 +78,9 @@ spec:
                         -   name: library
                             mountPath: "{{ .libraryMountPath }}"
                             subPath: "{{ .libraryMounSubPath }}"
+                        -   name: import
+                            mountPath: "{{ .importMountPath }}"
+                            subPath: "{{ .importMounSubPath }}"
 {{- range $key, $val := .persistence }}
                         -   name: {{ $key }}
                             mountPath: {{ $val.mountPath }}
@@ -105,6 +108,8 @@ spec:
             volumes:
                 -   name: library
                     {{- .libraryPVC | toYaml | nindent 20 }}
+                -   name: import
+                    {{- .importPVC | toYaml | nindent 20 }}
 {{- range $key, $val := .persistence }}
                 -   name: {{ $key }}
                     persistentVolumeClaim:
