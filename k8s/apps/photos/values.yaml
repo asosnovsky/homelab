@@ -6,7 +6,7 @@ global:
 
 immich:
   shared:
-    version: v1.79.1
+    version: v1.88.2
     libraryMountPath: /usr/src/app/upload
     libraryMounSubtPath: "Pictures"
     libraryPVC:
@@ -14,33 +14,6 @@ immich:
         path: changeme
         server: changeme
   apps:
-    web:
-      replicas: 1
-      port: 80
-      image: ghcr.io/immich-app/immich-web
-      livenessProbePath: "/web-info/ping"
-      readinessProbePath: "/web-info/ping"
-      livenessProbe:
-        failureThreshold: 3
-        initialDelaySeconds: 0
-        periodSeconds: 10
-        tcpSocket:
-          port: 3000
-        timeoutSeconds: 1
-      readinessProbe:
-        failureThreshold: 3
-        initialDelaySeconds: 0
-        periodSeconds: 10
-        tcpSocket:
-          port: 3000
-        timeoutSeconds: 1
-      startupProbe:
-        failureThreshold: 30
-        initialDelaySeconds: 0
-        periodSeconds: 5
-        tcpSocket:
-          port: 3000
-        timeoutSeconds: 1
     server:
       replicas: 1
       port: 80
@@ -96,31 +69,6 @@ immich:
           initialDelaySeconds: 0
           periodSeconds: 10
           timeoutSeconds: 1
-    proxy:
-      replicas: 1
-      port: 8080
-      image: ghcr.io/immich-app/immich-proxy
-      livenessProbe:
-        failureThreshold: 3
-        initialDelaySeconds: 0
-        periodSeconds: 10
-        tcpSocket:
-          port: 8080
-        timeoutSeconds: 1
-      readinessProbe:
-        failureThreshold: 3
-        initialDelaySeconds: 0
-        periodSeconds: 10
-        tcpSocket:
-          port: 8080
-        timeoutSeconds: 1
-      startupProbe:
-        failureThreshold: 30
-        initialDelaySeconds: 0
-        periodSeconds: 5
-        tcpSocket:
-          port: 8080
-        timeoutSeconds: 1
     machineLearning:
       replicas: 1
       port: 80
