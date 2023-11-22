@@ -21,7 +21,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: immich-{{ .name }}-{{ $key }}
+  name: immich-{{ $.name }}-{{ $key }}
 spec:
   storageClassName: {{ $.global.nfs.storageClass }}
   accessModes: 
