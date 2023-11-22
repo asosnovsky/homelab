@@ -64,6 +64,8 @@ spec:
                                 name: immich-shared-envs
                         -   secretRef: 
                                 name: immich-shared-envs
+                        -   secretRef:
+                                name: immich-db
                     {{ if .env }}
                     env:
                         {{ .env | toYaml | nindent 24 }}
