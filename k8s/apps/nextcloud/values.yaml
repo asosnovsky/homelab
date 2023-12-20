@@ -74,8 +74,8 @@ nextcloud:
       memory: "1Gi"
       ephemeral-storage: "20Mi"
     limits:
-      cpu: "3"
-      memory: 5Gi
+      cpu: "8"
+      memory: 10Gi
       ephemeral-storage: "200Mi"
 
   hpa:
