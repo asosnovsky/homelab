@@ -10,10 +10,10 @@ plex:
   tag: "1.32.7.7621-871adbd44"
   resources: 
     limits:
-      cpu: 4
+      cpu: 8
       memory: "14Gi"
     requests:
-      cpu: 100m
+      cpu: 750m
       memory: "4Gi"
 
 arrs:
