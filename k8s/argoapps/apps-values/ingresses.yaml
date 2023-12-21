@@ -111,7 +111,7 @@ services:
   {{- $webapps := .Files.Get (printf "apps-values/%s" .Values.apps.webapps.valuesFile) }}
   {{- $webapps := tpl $webapps . | fromYaml }}
   {{- range $k, $v := $webapps.apps }}
-  - prefix: "{{ $k }}.wa"
+  - prefix: "{{ $k }}-app"
     service: "{{ $k }}"
     namespace: "apps-webapps"
     port: {{ $v.ports.tcp.web }}
