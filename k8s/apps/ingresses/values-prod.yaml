@@ -1,3 +1,6 @@
+global:
+  tls:
+    enabled: true
 reverseProxy:
   castle:
     ip: "192.168.0.23"
@@ -17,4 +20,5 @@ reverseProxy:
     overrides:
       icon: https://basement.home.sosnovsky.ca/static/icons/favicon.ico
 
-  
+cloudflare:
+  enabled: true

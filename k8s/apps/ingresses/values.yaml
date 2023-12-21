@@ -18,3 +18,8 @@ cloudflare:
   enabled: false
   tokenSecretName: ~
   tokenSecretKey: ~
+  certificateRootDomains:
+    - ""
+    - ".core"
+    - ".vh"
+    - ".wa"
