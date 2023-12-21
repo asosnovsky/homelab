@@ -40,6 +40,14 @@ videohosting:
           6881: 6881
 
 apps:
+  basic-webapps:
+    valuesFile: basic-webapp.yaml
+    syncPolicy:
+      automated:
+        selfHeal: true
+      syncOptions:
+        - ServerSideApply=true
+
   photos:
     values: |-
       immich:
@@ -52,6 +60,7 @@ apps:
             nfs:
               path: {{ .Values.global.nfs.additionalShares.familyphotos }}
               server: {{ .Values.global.nfs.server }}
+  
   videohosting:
     values: |-
       {{ .Values.videohosting | toYaml }}

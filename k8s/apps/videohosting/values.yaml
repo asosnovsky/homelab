@@ -10,10 +10,9 @@ plex:
   tag: "1.32.7.7621-871adbd44"
   resources: 
     limits:
-      cpu: 8
       memory: "14Gi"
     requests:
-      cpu: 750m
+      cpu: 1
       memory: "4Gi"
 
 arrs:
@@ -26,7 +25,6 @@ arrs:
     usePostgres: true
     podResources:
       limits:
-        cpu: 2
         memory: "8Gi"
       requests:
         cpu: 250m
@@ -50,7 +48,6 @@ arrs:
     usePostgres: true
     podResources:
       limits:
-        cpu: 2
         memory: "8Gi"
       requests:
         cpu: 250m
@@ -74,7 +71,6 @@ arrs:
     usePostgres: true
     podResources:
       limits:
-        cpu: 2
         memory: "8Gi"
       requests:
         cpu: 250m
@@ -98,7 +94,6 @@ arrs:
     usePostgres: true
     podResources:
       limits:
-        cpu: 2
         memory: "8Gi"
       requests:
         cpu: 50m
@@ -121,7 +116,6 @@ services:
       AUTO_UPDATE: "true"
     podResources:
       limits:
-        cpu: 500m
         memory: "1Gi"
       requests:
         cpu: 250m
@@ -148,7 +142,6 @@ services:
         6881: 6881
     podResources:
       limits:
-        cpu: 2
         memory: "6Gi"
       requests:
         cpu: 800m

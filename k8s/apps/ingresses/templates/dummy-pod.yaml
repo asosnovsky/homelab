@@ -21,7 +21,6 @@ spec:
           image: nginxdemos/hello
           resources:
             limits:
-              cpu: 1
               memory: 1Gi
           ports:
             - containerPort: 80

@@ -33,14 +33,12 @@ resources:
             cpu: "2"
         limits:
             memory: "4Gi"
-            cpu: "3"
     go2rtc:
         requests:
             memory: "100Mi"
             cpu: "500m"
         limits:
             memory: "500Mi"
-            cpu: "1"
 
 scrypted:
     homekit:
