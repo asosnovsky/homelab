@@ -115,8 +115,8 @@ services:
     service: "{{ $k }}"
     namespace: "apps-webapps"
     port: {{ $v.ports.tcp.web }}
-    {{- if $.ingress }}
-    middleware: {{ $.ingress.middleware | default "apps-ingresses-chain-authentik" }}
+    {{- if $v.ingress }}
+    middleware: {{ $v.ingress.middleware | default "apps-ingresses-chain-authentik" }}
     {{ else }}
     middleware: "apps-ingresses-chain-authentik"
     {{ end -}}
