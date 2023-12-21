@@ -1,4 +1,4 @@
-app:
+apps:
   quirky:
     ingress:
         middleware: apps-ingresses-https-redirect

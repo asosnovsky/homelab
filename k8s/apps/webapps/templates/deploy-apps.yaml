@@ -1,4 +1,4 @@
-{{ range $k, $v := .Values.services }}
+{{ range $k, $v := .Values.apps }}
 ---
 kind: Service
 apiVersion: v1
