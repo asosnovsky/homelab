@@ -75,7 +75,7 @@ spec:
           - kubernetes.io/pvc-protection
         name: config
       spec:
-        storageClassName: {{ $.Values.global.nfs.storageClass }}
+        storageClassName: local-path
         accessModes:
           - ReadWriteOnce
         resources: 
@@ -88,6 +88,7 @@ spec:
           - kubernetes.io/pvc-protection
         name: transcode
       spec:
+        storageClassName: local-path
         accessModes:
           - ReadWriteOnce
         resources: 
