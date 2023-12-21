@@ -40,8 +40,8 @@ videohosting:
           6881: 6881
 
 apps:
-  basic-webapps:
-    valuesFile: basic-webapp.yaml
+  webapps:
+    valuesFile: webapps.yaml
     syncPolicy:
       automated:
         selfHeal: true

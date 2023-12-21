@@ -107,11 +107,13 @@ services:
     middleware: "apps-ingresses-chain-authentik"
     group: "Video Hosting"
   {{- end }}
-  # basic-webapp services
-  {{- range $k, $v := .Values.basic-webapps.apps }}
+  # webapp services
+  {{ $webapps := .Files.Get .Values.apps.webapps.valuesFile }}
+  {{ $webapps := tpl $webapps . | fromYaml }}
+  {{- range $k, $v := $webapps.apps }}
   - prefix: "{{ $k }}.wa"
     service: "{{ $k }}"
-    namespace: "apps-basic-webapps"
+    namespace: "apps-webapps"
     port: {{ $v.ports.tcp.web }}
     {{ if $.ingress }}
     middleware: {{ $.ingress.middleware | default "apps-ingresses-chain-authentik" }}
@@ -120,3 +122,4 @@ services:
     {{ end }}
     group: "Basic Webapps"
   {{- end }}
+  
