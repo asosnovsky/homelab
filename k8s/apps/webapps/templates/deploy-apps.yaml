@@ -34,10 +34,6 @@ spec:
       app: {{$k}}
   replicas: 1
   revisionHistoryLimit: 2
-  updateStrategy:
-    rollingUpdate:
-      partition: 1
-    type: RollingUpdate
   template:
     metadata:
       labels:
