@@ -55,6 +55,11 @@ services:
     port: 32400
     group: "Apps"
     icon: "https://plex.home.sosnovsky.ca/web/favicon.ico"
+  - prefix: "jellyfin"
+    service: "jellyfin"
+    namespace: "apps-videohosting"
+    port: 8096
+    group: "Apps"
   - prefix: "frigate"
     service: "frigate"
     namespace: "apps-frigate"
