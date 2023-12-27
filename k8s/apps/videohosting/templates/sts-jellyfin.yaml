@@ -113,9 +113,9 @@ spec:
             - name: cache
               mountPath: /cache
             - name: torrents
-              mountPath: /data
+              mountPath: /torrents
             - name: family-videos
-              mountPath: /data/family-videos
+              mountPath: /family-videos
           startupProbe:
             tcpSocket:
               port: jellyfin
