@@ -113,11 +113,7 @@ spec:
             - name: cache
               mountPath: /cache
             - name: torrents
-              mountPath: /data/tv
-              subPath: tv
-            - name: torrents
-              mountPath: /data/movies
-              subPath: movies
+              mountPath: /data
             - name: family-videos
               mountPath: /data/family-videos
           startupProbe:
