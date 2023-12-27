@@ -96,10 +96,9 @@ arrs:
     
   readarr:
     repo: lscr.io/linuxserver/readarr
-    tag: "latest"
+    tag: "nightly"
     migrateDbFromSqllite: 
       enabled: false
-      claimName: config-readarr-0
     usePostgres: true
     podResources:
       limits:
