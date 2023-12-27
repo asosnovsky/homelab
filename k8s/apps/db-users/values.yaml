@@ -7,10 +7,12 @@ userGeneration:
     - sonarr
     - prowlarr
     - immich
+    - readarr
   users_dbs:
-    radarr: [log]
-    sonarr: [log]
-    prowlarr: [log]
+    radarr: [log, cache]
+    sonarr: [log, cache]
+    prowlarr: [log, cache]
+    readarr: [log, cache]
 
 postgresSecret: ""
 

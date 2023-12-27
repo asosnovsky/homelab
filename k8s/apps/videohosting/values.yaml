@@ -14,6 +14,15 @@ plex:
     requests:
       cpu: 3.5
       memory: "4Gi"
+jellyfin:
+  repo: "lscr.io/linuxserver/jellyfin"
+  tag: latest
+  resources: 
+    limits:
+      memory: "14Gi"
+    requests:
+      cpu: 1
+      memory: "4Gi"
 
 arrs:
   sonarr:
@@ -82,6 +91,29 @@ arrs:
         storage: 100Gi
     extraConfigXml: |-
       <InstanceName>Sosnovsky Radarr</InstanceName>
+      <AuthenticationMethod>External</AuthenticationMethod>
+      <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
+    
+  readarr:
+    repo: lscr.io/linuxserver/readarr
+    tag: "latest"
+    migrateDbFromSqllite: 
+      enabled: false
+      claimName: config-readarr-0
+    usePostgres: true
+    podResources:
+      limits:
+        memory: "8Gi"
+      requests:
+        cpu: 250m
+        memory: "500M"
+    configVolumesResources:
+      requests:
+        storage: 10Gi
+      limits:
+        storage: 100Gi
+    extraConfigXml: |-
+      <InstanceName>Sosnovsky Readarr</InstanceName>
       <AuthenticationMethod>External</AuthenticationMethod>
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
       

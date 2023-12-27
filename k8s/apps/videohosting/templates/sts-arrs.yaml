@@ -58,6 +58,7 @@ spec:
             <PostgresHost>{{ `{{.host}}` }}</PostgresHost>
             <PostgresMainDb>{{$k}}</PostgresMainDb>
             <PostgresLogDb>{{$k}}-log</PostgresLogDb>
+            <PostgresCacheDb>{{$k}}-cache</PostgresCacheDb>
             {{ end }}
 
             {{- $v.extraConfigXml | nindent 12 }}
