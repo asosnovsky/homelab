@@ -113,7 +113,6 @@ arrs:
         storage: 100Gi
     extraConfigXml: |-
       <InstanceName>Sosnovsky Readarr</InstanceName>
-      <AuthenticationMethod>External</AuthenticationMethod>
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
       
   prowlarr:
