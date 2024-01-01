@@ -49,6 +49,7 @@ apps:
         - ServerSideApply=true
 
   photos:
+    disabled: true
     values: |-
       immich:
         shared:
@@ -60,7 +61,7 @@ apps:
             nfs:
               path: {{ .Values.global.nfs.additionalShares.familyphotos }}
               server: {{ .Values.global.nfs.server }}
-  
+
   videohosting:
     values: |-
       {{ .Values.videohosting | toYaml }}
