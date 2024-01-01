@@ -4,6 +4,8 @@
 
 {{ range $appName, $appProps := .Values.apps }}
 
+{{ if (not $appProps.disabled) }}
+
 {{- $genNamespace := (printf "apps-%s" $appName) -}}
 
 {{ if (not $appProps.namespace) }}
@@ -48,4 +50,5 @@ spec:
   syncPolicy:
     {{$appProps.syncPolicy | toYaml | nindent 4 }}
   {{ end }}
+{{ end }}
 {{ end }}
