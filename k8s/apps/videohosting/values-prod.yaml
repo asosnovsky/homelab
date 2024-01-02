@@ -4,3 +4,5 @@ services:
         envVars:
           USER_MAPPING: >-
             { \"ari\": \"arielso6\", \"vita\": \"vitakoren\" }
+        LIBRARY_MAPPING: >- 
+            { \"Shows\": \"TV Shows\" }
