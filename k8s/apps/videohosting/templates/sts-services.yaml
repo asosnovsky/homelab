@@ -1,4 +1,5 @@
 {{ range $k, $v := .Values.services }}
+{{ if (not $v.disabled)}}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -136,4 +137,5 @@ spec:
             server: "{{ $.Values.global.nfs.server }}"
             path: "{{ $.Values.global.nfs.additionalShares.torrents  }}"
             readOnly: false
+{{ end }}
 {{ end }}

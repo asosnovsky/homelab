@@ -140,6 +140,7 @@ arrs:
 
 services:
   jackett:
+    disabled: true
     repo: lscr.io/linuxserver/jackett
     tag: "latest"
     envVars:
