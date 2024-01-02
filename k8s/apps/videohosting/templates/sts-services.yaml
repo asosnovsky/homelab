@@ -13,7 +13,7 @@ data:
   {{ $envName }}: "{{tpl $envValue $}}"
 {{ end }}
 
-{{ if $v.disableSVC }}
+{{ if (not $v.disableSVC) }}
 ---
 kind: Service
 apiVersion: v1
