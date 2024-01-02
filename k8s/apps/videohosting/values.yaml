@@ -139,6 +139,19 @@ arrs:
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
 
 services:
+  jellyplex:
+    repo: "luigi311/jellyplex-watched"
+    tag: "latest"
+    envVars:
+      PLEX_BASEURL: "plex.{{.Release.Namespace}}.svc.cluster.local:32400"
+      JELLYFIN_BASEURL: "jellyfin.{{.Release.Namespace}}.svc.cluster.local:8096"
+      SSL_BYPASS: "True"
+    podResources:
+      limits:
+        memory: "500M"
+      requests:
+        cpu: 50m
+        memory: "500M"
   jackett:
     disabled: true
     repo: lscr.io/linuxserver/jackett

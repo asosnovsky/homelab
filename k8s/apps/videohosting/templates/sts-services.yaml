@@ -10,9 +10,10 @@ data:
   PGID: "1000"
   TZ: {{ $.Values.global.timezone }}
 {{- range $envName, $envValue := ($v.envVars | default (dict )) }}
-  {{ $envName }}: "{{$envValue}}"
+  {{ $envName }}: "{{tpl $envValue $}}"
 {{ end }}
 
+{{ if $v.disableSVC }}
 ---
 kind: Service
 apiVersion: v1
@@ -37,6 +38,7 @@ spec:
       protocol: UDP
     {{ end }}
     {{- end }}
+{{ end }}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -88,6 +90,7 @@ spec:
                 name: {{$k}}-envs
           resources: 
             {{- $v.podResources | toYaml | nindent 12 }}
+          {{ if $v.ports}}
           ports:
           {{ range $portName, $portValue := $v.ports.tcp }}
             - containerPort: {{ $portValue }}
@@ -100,11 +103,13 @@ spec:
               protocol: UDP
           {{ end }}
           {{ end }}
+          {{ end }}
           volumeMounts:
             - name: config
               mountPath: /config
             - name: torrents
               mountPath: /torrents
+          {{- if $v.health }}
           {{- if $v.health.liveness }}
           livenessProbe:
             httpGet:
@@ -131,6 +136,7 @@ spec:
             initialDelaySeconds: 10
             failureThreshold: 10
             timeoutSeconds: 30
+          {{ end }}
       volumes:
         - name: torrents
           nfs:
