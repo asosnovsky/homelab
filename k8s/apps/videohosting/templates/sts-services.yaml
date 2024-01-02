@@ -51,11 +51,11 @@ spec:
       app: {{$k}}
   replicas: 1
   revisionHistoryLimit: 2
+  {{ if (eq $kind "StatefulSet")}}
   updateStrategy:
     rollingUpdate:
       partition: 0
     type: RollingUpdate
-  {{ if (eq $kind "StatefulSet")}}
   volumeClaimTemplates:
     - metadata:
         finalizers:
