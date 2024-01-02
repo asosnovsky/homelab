@@ -1,6 +1,7 @@
 global:
   timezone: changeme
   nfs:
+    storageClass: changeme
     server: changeme
     additionalShares:
       torrents: "changeme"
