@@ -3,4 +3,4 @@ services:
     jellyplex:
         envVars:
           USER_MAPPING: >-
-            { \"ari\": \"ariso6\" }
+            { \"ari\": \"arielso6\", \"vita\": \"vitakoren\" }
