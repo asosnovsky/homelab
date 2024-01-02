@@ -102,11 +102,11 @@ services:
     namespace: "apps-videohosting"
     middleware: "apps-ingresses-chain-authentik"
     group: "Video Hosting"
-  - prefix: "immich"
-    service: "immich-server"
-    namespace: "apps-photos"
-    middleware: "apps-ingresses-chain-authentik"
-    group: "Apps"
+  # - prefix: "immich"
+  #   service: "immich-server"
+  #   namespace: "apps-photos"
+  #   middleware: "apps-ingresses-chain-authentik"
+  #   group: "Apps"
   # vh services
   {{- range $k, $v := .Values.videohosting.services }}
   - prefix: "{{ $k }}.vh"
