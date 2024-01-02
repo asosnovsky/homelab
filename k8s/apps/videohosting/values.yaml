@@ -191,7 +191,8 @@ services:
       requests:
         cpu: 800m
         memory: "4Gi"
-    health: {}
+    health: 
+      enabled: true
     configVolumesResources:
       requests:
         storage: 10Gi
