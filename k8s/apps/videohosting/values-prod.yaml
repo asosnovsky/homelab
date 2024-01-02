@@ -1,0 +1,5 @@
+
+services:
+    jellyplex:
+        envVars:
+          USER_MAPPING: "{ \"ari\": \"ariso6\" }"  
