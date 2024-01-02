@@ -145,8 +145,8 @@ services:
     repo: "luigi311/jellyplex-watched"
     tag: "latest"
     envVars:
-      PLEX_BASEURL: "plex.{{.Release.Namespace}}.svc.cluster.local:32400"
-      JELLYFIN_BASEURL: "jellyfin.{{.Release.Namespace}}.svc.cluster.local:8096"
+      PLEX_BASEURL: "http://plex.{{.Release.Namespace}}.svc.cluster.local:32400"
+      JELLYFIN_BASEURL: "http://jellyfin.{{.Release.Namespace}}.svc.cluster.local:8096"
       SSL_BYPASS: "True"
     podResources:
       limits:
