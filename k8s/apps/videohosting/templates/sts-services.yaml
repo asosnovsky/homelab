@@ -39,9 +39,10 @@ spec:
     {{ end }}
     {{- end }}
 {{ end }}
+{{- $kind := $v.kind | default "StatefulSet" -}}
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: {{ $kind }}
 metadata:
     name: {{$k}}
 spec:
@@ -54,6 +55,7 @@ spec:
     rollingUpdate:
       partition: 0
     type: RollingUpdate
+  {{ if (eq $kind "StatefulSet")}}
   volumeClaimTemplates:
     - metadata:
         finalizers:
@@ -65,6 +67,7 @@ spec:
           - ReadWriteOnce
         resources: 
           {{- $v.configVolumesResources | toYaml | nindent 10 }}
+  {{ end }}
   template:
     metadata:
       labels:
@@ -105,8 +108,10 @@ spec:
           {{ end }}
           {{ end }}
           volumeMounts:
+  {{ if (eq $kind "StatefulSet")}}
             - name: config
               mountPath: /config
+  {{ end }}
             - name: torrents
               mountPath: /torrents
           {{- if $v.health }}

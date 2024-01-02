@@ -140,6 +140,7 @@ arrs:
 
 services:
   jellyplex:
+    kind: Deployment
     disableSVC: true
     repo: "luigi311/jellyplex-watched"
     tag: "latest"
