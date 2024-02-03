@@ -21,7 +21,13 @@ reverseProxy:
       icon: https://basement.home.sosnovsky.ca/static/icons/favicon.ico
 
   scrypted:
+    disableIngress: true
     ip: "192.168.0.200"
+    port: "11080"
+
+  glroutermetrics:
+    disableIngress: true
+    ip: "192.168.8.1"
     port: "11080"
 
 cloudflare:
