@@ -1,3 +1,13 @@
 .tmp
 **/charts/*.tgz
 Chart.lock
+# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
+
