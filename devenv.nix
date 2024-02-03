@@ -9,5 +9,5 @@
   ];
 
   languages.nix.enable = true;
-  # pre-commit.hooks.shellcheck.enable = true;
+  pre-commit.hooks.shellcheck.enable = true;
 }
