@@ -63,8 +63,6 @@ spec:
           limits:
             storage: 100Gi
     - metadata:
-        finalizers:
-          - kubernetes.io/pvc-protection
         name: cache
       spec:
         storageClassName: local-path
