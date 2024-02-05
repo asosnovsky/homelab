@@ -1,0 +1,105 @@
+config dnsmasq
+	option domainneeded '1'
+	option filterwin2k '0'
+	option localise_queries '1'
+	option rebind_localhost '1'
+	option local '/lan/'
+	option domain 'lan'
+	option expandhosts '1'
+	option nonegcache '0'
+	option authoritative '1'
+	option readethers '1'
+	option leasefile '/tmp/dhcp.leases'
+	option resolvfile '/tmp/resolv.conf.d/resolv.conf.auto'
+	option nonwildcard '1'
+	option localservice '1'
+	option ednspacket_max '1232'
+	option rebind_protection '0'
+
+config dhcp 'lan'
+	option interface 'lan'
+	option start '100'
+	option limit '150'
+	option dhcpv4 'server'
+	option ra_slaac '1'
+	option force '1'
+	option dhcpv6 'disabled'
+	option ra 'disabled'
+	option leasetime '720m'
+	option ignore '0'
+
+config dhcp 'wan'
+	option interface 'wan'
+	option ignore '1'
+
+config odhcpd 'odhcpd'
+	option maindhcp '0'
+	option leasefile '/tmp/hosts/odhcpd'
+	option leasetrigger '/usr/sbin/odhcpd-update'
+	option loglevel '4'
+
+config domain
+	option name 'console.gl-inet.com'
+	option ip '10.0.0.2'
+
+config domain
+	option name 'console.gl-inet.com'
+	option ip '::ffff:10.0.0.2'
+
+config dhcp 'guest'
+	option interface 'guest'
+	option start '100'
+	option limit '150'
+	option leasetime '12h'
+	option dhcpv6 'disabled'
+	option ra 'disabled'
+
+config host
+	option mac '3C:7C:3F:1E:B7:A0'
+	option ip '10.0.10.1'
+	option tag 'LabTrueNas1'
+
+config host
+	option mac '7C:83:34:B8:7B:43'
+	option ip '10.0.10.2'
+	option tag 'LabK3sbee1'
+
+config host
+	option mac '00:A0:98:3D:7C:C8'
+	option ip '10.0.10.3'
+	option tag 'LabKubedb'
+
+config host
+	option mac 'B8:27:EB:F7:44:4E'
+	option ip '10.0.10.4'
+	option tag 'LabPi1'
+
+config host
+	option mac 'E4:5F:01:A2:8D:BC'
+	option ip '10.0.11.1'
+	option tag 'HubCastle'
+
+config host
+	option mac 'DC:A6:32:92:B2:79'
+	option ip '10.0.11.2'
+	option tag 'HubBasement'
+
+config host
+	option mac '68:1D:EF:26:B7:6C'
+	option ip '10.0.10.5'
+	option tag 'LabTerry1'
+
+config host
+	option mac '58:47:CA:71:D8:E6'
+	option ip '10.0.10.6'
+	option tag 'LabMinisf1'
+
+config host
+	option mac '00:A0:98:17:B2:64'
+	option ip '10.0.10.7'
+	option tag 'LabTruenas2'
+
+config host
+	option mac '4E:F6:9C:7C:56:33'
+	option ip '10.0.11.3'
+	option tag 'HubFlic'
