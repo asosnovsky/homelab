@@ -1,6 +1,6 @@
 lab:
     -   mac: '3C:7C:3F:1E:B7:A0'
-        name: 'tnascore1'
+        name: 'tnas1'
     -   mac: '00:A0:98:3D:7C:C8'
         name: 'kubedb'
     -   mac: 'B8:27:EB:F7:44:4E'

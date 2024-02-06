@@ -1,0 +1,55 @@
+
+Lab:
+   Tnas1:
+       ip: "10.0.10.1"
+       host: "tnas1.lab.internal"
+   Kubedb:
+       ip: "10.0.10.2"
+       host: "kubedb.lab.internal"
+   Pi1:
+       ip: "10.0.10.3"
+       host: "pi1.lab.internal"
+   Fws1:
+       ip: "10.0.10.4"
+       host: "fws1.lab.internal"
+K3s:
+   Bee1:
+       ip: "10.0.11.1"
+       host: "bee1.k3s.internal"
+       domain: "home.sosnovsky.ca"
+   Terry1:
+       ip: "10.0.11.2"
+       host: "terry1.k3s.internal"
+       domain: "home.sosnovsky.ca"
+   Minisf1:
+       ip: "10.0.11.3"
+       host: "minisf1.k3s.internal"
+       domain: "home.sosnovsky.ca"
+   Tnas1:
+       ip: "10.0.11.4"
+       host: "tnas1.k3s.internal"
+Hub:
+   Castle:
+       ip: "10.0.12.1"
+       host: "castle.hub.internal"
+       domain: "castle.home.sosnovsky.ca"
+   Basement:
+       ip: "10.0.12.2"
+       host: "basement.hub.internal"
+       domain: "basement.home.sosnovsky.ca"
+   Flic:
+       ip: "10.0.12.3"
+       host: "flic.hub.internal"
+Cam:
+   Korie:
+       ip: "10.0.13.1"
+       host: "korie.cam.internal"
+   Eddie:
+       ip: "10.0.13.2"
+       host: "eddie.cam.internal"
+   Doorbell:
+       ip: "10.0.13.3"
+       host: "doorbell.cam.internal"
+   Livingroom:
+       ip: "10.0.13.4"
+       host: "livingroom.cam.internal"
