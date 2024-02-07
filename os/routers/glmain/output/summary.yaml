@@ -3,6 +3,7 @@ Lab:
    Tnas1:
        ip: "10.0.10.1"
        host: "tnas1.lab.internal"
+       domain: "tnas1.lab.local"
    Kubedb:
        ip: "10.0.10.2"
        host: "kubedb.lab.internal"
