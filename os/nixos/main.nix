@@ -1,6 +1,6 @@
 { 
   hostName, 
-  stateVersion = "23.05", 
+  stateVersion, 
   dbConnectionStr,
   K3SToken
 }:
