@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import shutil
 from pathlib import Path
 
 import yaml
@@ -6,8 +7,10 @@ import yaml
 BASE_PATH = Path(__file__).parent
 CONFIG_FILE = BASE_PATH / "config.yaml"
 OUTPUT_FOLDER = BASE_PATH / "output"
-DNSMASQ_CONF = OUTPUT_FOLDER / "var" / "dnsmasq.conf"
+DNSMASQ_CONF = OUTPUT_FOLDER / "etc/dnsmasq.conf"
 SUMMARY = OUTPUT_FOLDER / "summary.yaml"
+
+shutil.rmtree(OUTPUT_FOLDER)
 DNSMASQ_CONF.parent.mkdir(exist_ok=True, parents=True)
 
 root_domain = "internal"
@@ -16,6 +19,7 @@ ip_prefix_map = {
     "k3s": "10.0.11.",
     "hub": "10.0.12.",
     "cam": "10.0.13.",
+    "iot": "10.0.14.",
 }
 
 def cap1_and_join(*args: str) -> str:

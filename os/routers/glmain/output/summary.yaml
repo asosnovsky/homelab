@@ -53,3 +53,13 @@ Cam:
    Livingroom:
        ip: "10.0.13.4"
        host: "livingroom.cam.internal"
+Iot:
+   Korielamp:
+       ip: "10.0.14.1"
+       host: "korieLamp.iot.internal"
+   Officestrip:
+       ip: "10.0.14.2"
+       host: "officestrip.iot.internal"
+   Ecobee:
+       ip: "10.0.14.3"
+       host: "ecobee.iot.internal"
