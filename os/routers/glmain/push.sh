@@ -21,9 +21,10 @@ function ask {
 
 
 server=$USER@$ROUTER
-echo "using 🤖 $server"
-
 pushd "$BASE_PATH" || exit 1
+echo "using 🤖 $server"
+ask "continue update"
+
 echo "Updating conf..."
 ./gen-mappings.py
 cat output/summary.yaml
