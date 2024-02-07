@@ -48,5 +48,5 @@ fi
 EOF
 
 git add .
-git commit -m "Updated Router Config at $(date)"
+git commit -m "🤖 Updated Router Config at $(date)"
 git push
