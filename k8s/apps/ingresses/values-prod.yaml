@@ -3,19 +3,19 @@ global:
     enabled: true
 reverseProxy:
   castle:
-    ip: "castle.hub.internal"
+    ip: "10.0.12.1"
     port: "80"
     overrides:
       icon: https://castle.home.sosnovsky.ca/static/icons/favicon.ico
 
   kuma:
-    ip: "castle.hub.internal"
+    ip: "10.0.12.1"
     port: "3001"
     overrides:
       icon: "https://kuma.home.sosnovsky.ca/apple-touch-icon.png"
 
   basement:
-    ip: "basement.hub.internal"
+    ip: "10.0.12.2"
     port: "8123"
     overrides:
       icon: https://basement.home.sosnovsky.ca/static/icons/favicon.ico
