@@ -8,7 +8,6 @@
 {
   imports =
     [ 
-      ./hardware-configuration.nix
       (import "./k3s.nix" {
         hostName = hostName;
         dbConnectionStr = dbConnectionStr;
