@@ -8,13 +8,13 @@
 {
   imports =
     [ 
-      (import "./k3s.nix" {
+      (import ./k3s.nix {
         hostName = hostName;
         dbConnectionStr = dbConnectionStr;
         K3SToken = K3SToken;
       })
-      "./users.nix"
-      "./settings.nix"
+      ./users.nix
+      ./settings.nix
     ];
 
   # Bootloader.
