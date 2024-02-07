@@ -10,10 +10,6 @@ subsets:
   ports:
   - port: {{ $data.port | default 80 }}
     protocol: TCP
-  {{ range $p := ($data.additionalPorts | default [] )}}
-  - port: "{{ $p.port }}"
-    protocol: "{{ $p.protocol | default 'TCP' }}"
-  {{ end }}`
 ---
 apiVersion: v1
 kind: Service
@@ -25,12 +21,6 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: {{ $data.port | default 80 }}
-  {{ range $p := ($data.additionalPorts | default [])}}
-  - port: "{{ $p.port }}"
-    protocol: "{{ $p.protocol | default 'TCP' }}"
-    targetPort: "{{ $p.port }}"
-    name: "{{ $p.name | default $p.port }}"
-  {{ end }}`
 {{ if (not $data.disableIngress) }}
 {{- $ingressDef := (dict "service" (printf "reverse-proxy-%s" $prefix) "prefix" $prefix "global" $.Values.global "namespace" $.Release.Namespace "group" "reverse-proxies" ) -}}
 {{- $ingressDef := (merge ($data.overrides | default (dict)) $ingressDef) -}}
