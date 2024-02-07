@@ -20,6 +20,7 @@
   environment.systemPackages = with pkgs; [
      pkgs.k3s
      nfs-utils
+     git
   ];
   services.k3s.enable = true;
   services.k3s.role = "server";
