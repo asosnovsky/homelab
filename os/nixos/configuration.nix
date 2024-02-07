@@ -1,14 +1,19 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
+{ 
+  hostName, 
+  stateVersion = "23.05", 
+  dbConnectionStr,
+  K3SToken
+}:
 { config, pkgs, ... }:
-
 {
   imports =
     [ 
       ./hardware-configuration.nix
-      "./k3s.nix"
+      (import "./k3s.nix" {
+        hostName = hostName;
+        dbConnectionStr = dbConnectionStr;
+        K3SToken = K3SToken;
+      })
       "./users.nix"
       "./settings.nix"
     ];
@@ -16,6 +21,6 @@
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
-  networking.hostName = "changeme"; # Define your hostname.
-  system.stateVersion = "23.05";
+  networking.hostName = hostName;
+  system.stateVersion = stateVersion;
 }

@@ -1,7 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
+{
+  hostName,
+  dbConnectionStr,
+  K3SToken
+}:
 { config, pkgs, ... }:
 
 {
@@ -21,9 +25,9 @@
   services.k3s.role = "server";
   services.k3s.extraFlags = toString [
     "--tls-san"
-    "192.168.0.26"
-    "--datastore-endpoint" "postgres://postgres:3wtvrd5KdQYUXE@192.168.0.28:5432/k3sdb?sslmode=disable"
-    "--token" "Upi+DZa++9DiAc1po4LkPKPx6Ed1IRrg1VRsglGjp2ERhOssDXaKCWLY8Enk3GIOGyWHHlHKz1dIofXpgkRV2w=="
+    hostName
+    "--datastore-endpoint" dbConnectionStr
+    "--token" K3SToken
   ];
   networking.firewall.allowedTCPPorts = [ 22 80 443 ];
   networking.firewall.allowedUDPPorts = [ 80 443 ];
