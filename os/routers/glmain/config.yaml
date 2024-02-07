@@ -48,3 +48,6 @@ iot:
         mac: '30:30:F9:DC:A8:18'
     -   name: 'apollo-office'
         mac: '30:30:F9:DA:C7:A4'
+apl:
+    -   name: 'hp-print'
+        mac: '48:9E:BD:CB:07:E3'

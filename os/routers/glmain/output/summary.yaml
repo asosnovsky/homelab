@@ -69,3 +69,7 @@ Iot:
    Apollo-office:
        ip: "10.0.14.5"
        host: "apollo-office.iot.internal"
+Apl:
+   Hp-print:
+       ip: "10.0.15.1"
+       host: "hp-print.apl.internal"

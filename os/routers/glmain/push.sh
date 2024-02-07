@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BASE_PATH=$(realpath $BASH_SOURCE | xargs dirname)
+BASE_PATH=$(realpath "${BASH_SOURCE[0]}" | xargs dirname)
 
 ROUTER=${1:-10.0.0.1}
 USER=${2:-root}
@@ -23,17 +23,17 @@ function ask {
 server=$USER@$ROUTER
 echo "using 🤖 $server"
 
-pushd $BASE_PATH
+pushd "$BASE_PATH" || exit 1
 echo "Updating conf..."
 ./gen-mappings.py
 cat output/summary.yaml
-ask
+ask "continue update"
 
-scp -O output/etc/dnsmasq.conf  $USER@$ROUTER:/tmp/dnsmasq.new.conf
-ssh $USER@$ROUTER << EOF
-echo "Backing up dnsmasq.conf file to /tmp/dnsmasq.old.conf"
+scp -O output/etc/dnsmasq.conf  "$server:/tmp/dnsmasq.new.conf"
+ssh "$server" << EOF
+echo 'Backing up dnsmasq.conf file to /tmp/dnsmasq.old.conf'
 cp /etc/dnsmasq.conf /tmp/dnsmasq.old.conf
-echo "Updating dnsmasq.conf 🙇🏼"
+echo 'Updating dnsmasq.conf 🙇🏼'
 cp /tmp/dnsmasq.new.conf /etc/dnsmasq.conf 
 if dnsmasq --test ; then 
     /etc/init.d/dnsmasq restart
@@ -45,3 +45,7 @@ else
     echo "Revert successful! 👍"
 fi
 EOF
+
+git add .
+git commit -m "Updated Router Config at $(date)"
+git push
