@@ -54,23 +54,3 @@ Cam:
    Livingroom:
        ip: "10.0.13.4"
        host: "livingroom.cam.internal"
-Iot:
-   Korie-lamp:
-       ip: "10.0.14.1"
-       host: "korie-lamp.iot.internal"
-   Office-strip:
-       ip: "10.0.14.2"
-       host: "office-strip.iot.internal"
-   Ecobee:
-       ip: "10.0.14.3"
-       host: "ecobee.iot.internal"
-   Apollo-eddie:
-       ip: "10.0.14.4"
-       host: "apollo-eddie.iot.internal"
-   Apollo-office:
-       ip: "10.0.14.5"
-       host: "apollo-office.iot.internal"
-Apl:
-   Hp-print:
-       ip: "10.0.15.1"
-       host: "hp-print.apl.internal"
