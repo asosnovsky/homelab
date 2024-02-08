@@ -7,9 +7,9 @@ Type=oneshot
 Restart=on-failure
 WorkingDirectory=/etc/openvpn
 EnvironmentFile=/etc/openvpn/openvpn.service.env
-ExecStart=/usr/sbin/openvpn --config \
-    /etc/openvpn/nordvpn/${CONFIG_FILE} \
-    --auth-user-pass ${AUTH_FILE}
+ExecStart=/usr/sbin/openvpn \
+    --config "${CONFIG_FILE}" \
+    --auth-user-pass "${AUTH_FILE}"
 
 
 [Install]
