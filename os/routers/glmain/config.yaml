@@ -14,19 +14,19 @@ k3s:
         domain: home.sosnovsky.ca
     -   mac: '68:1D:EF:26:B7:6C'
         name: 'terry1'
-        domain: home.sosnovsky.ca
+        # domain: home.sosnovsky.ca
     -   mac: '58:47:CA:71:D8:E6'
         name: 'minisf1'
-        domain: home.sosnovsky.ca
+        # domain: home.sosnovsky.ca
     -   mac: '00:A0:98:17:B2:64'
         name: 'tnas1'
 hub:
     -   mac: 'E4:5F:01:A2:8D:BC'
         name: 'castle'
-        domain: castle.home.sosnovsky.ca
+        # domain: castle.home.sosnovsky.ca
     -   mac: 'DC:A6:32:92:B2:79'
         name: 'basement'
-        domain: basement.home.sosnovsky.ca
+        # domain: basement.home.sosnovsky.ca
     -   mac: '4E:F6:9C:7C:56:33'
         name: 'flic'
 cam:
@@ -38,17 +38,17 @@ cam:
         mac: '48:9E:9D:4A:32:80'
     -   name: 'livingroom'
         mac: '34:60:F9:D7:51:3F'
-# iot:
-#     -   name: 'korie-lamp'
-#         mac: '60:74:F4:4D:B8:C5'
-#     -   name: 'office-strip'
-#         mac: 'DC:4F:22:24:0C:E4'
-#     -   name: 'ecobee'
-#         mac: '44:61:32:FC:10:EC'
-#     -   name: 'apollo-eddie'
-#         mac: '30:30:F9:DC:A8:18'
-#     -   name: 'apollo-office'
-#         mac: '30:30:F9:DA:C7:A4'
-# apl:
-#     -   name: 'hp-print'
-#         mac: '48:9E:BD:CB:07:E3'
+iot:
+    -   name: 'korie-lamp'
+        mac: '60:74:F4:4D:B8:C5'
+    -   name: 'office-strip'
+        mac: 'DC:4F:22:24:0C:E4'
+    -   name: 'ecobee'
+        mac: '44:61:32:FC:10:EC'
+    -   name: 'apollo-eddie'
+        mac: '30:30:F9:DC:A8:18'
+    -   name: 'apollo-office'
+        mac: '30:30:F9:DA:C7:A4'
+apl:
+    -   name: 'hp-print'
+        mac: '48:9E:BD:CB:07:E3'
