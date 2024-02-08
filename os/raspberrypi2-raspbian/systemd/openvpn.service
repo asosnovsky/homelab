@@ -1,0 +1,16 @@
+[Unit]
+Description=OpenVPN Client
+After=network.target
+
+[Service]
+Type=oneshot
+Restart=on-failure
+WorkingDirectory=/etc/openvpn
+EnvironmentFile=/etc/openvpn/openvpn.service.env
+ExecStart=/usr/sbin/openvpn --config \
+    /etc/openvpn/nordvpn/${CONFIG_FILE} \
+    --auth-user-pass ${AUTH_FILE}
+
+
+[Install]
+WantedBy=multi-user.target
