@@ -25,6 +25,7 @@ reverseProxy:
     port: "8080"
     overrides:
       middleware: "apps-ingresses-chain-authentik"
+      group: "Video Hosting"
 
   # scrypted:
   #   disableIngress: true
