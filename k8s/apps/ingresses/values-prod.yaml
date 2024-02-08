@@ -20,6 +20,12 @@ reverseProxy:
     overrides:
       icon: https://basement.home.sosnovsky.ca/static/icons/favicon.ico
 
+  pitorrent:
+    ip: "10.0.10.3"
+    port: "8080"
+    overrides:
+      middleware: "apps-ingresses-chain-authentik"
+
   # scrypted:
   #   disableIngress: true
   #   ip: "192.168.0.200"
