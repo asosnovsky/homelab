@@ -26,11 +26,12 @@ echo "using 🤖 $server"
 ask "continue update"
 
 echo "Updating conf..."
-./gen-mappings.py
+# ./gen-mappings.py
 cat output/summary.yaml
 ask "continue update"
 
 scp -O output/etc/dnsmasq.conf  "$server:/tmp/dnsmasq.new.conf"
+scp -O output/etc/ethers  "$server:/etc/ethers"
 ssh "$server" << EOF
 echo 'Backing up dnsmasq.conf file to /tmp/dnsmasq.old.conf'
 cp /etc/dnsmasq.conf /tmp/dnsmasq.old.conf
