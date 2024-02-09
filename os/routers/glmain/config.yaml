@@ -74,8 +74,7 @@ apl:
         mac: '04:99:B9:86:2D:AE'
     -   name: 'pod-livingroom'
         mac: '04:99:B9:88:ED:3B'
-router:
-    -   name: 'velica-office'
-        mac: '94:83:C4:41:77:BA'
-    -   name: 'gl-basement'
-        mac: '94:83:C4:31:D5:CE'
+    -   name: 'appletv-livingroom'
+        mac: '48:E1:5C:5B:CB:A3'
+    -   name: 'samsuntv-livingroom'
+        mac: 'F0:70:4F:54:F3:F0'

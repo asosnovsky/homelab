@@ -105,10 +105,9 @@ Apl:
    Pod-livingroom:
        ip: "10.0.15.5"
        host: "pod-livingroom.apl.internal"
-Router:
-   Velica-office:
-       ip: "10.0.16.1"
-       host: "velica-office.router.internal"
-   Gl-basement:
-       ip: "10.0.16.2"
-       host: "gl-basement.router.internal"
+   Appletv-livingroom:
+       ip: "10.0.15.6"
+       host: "appletv-livingroom.apl.internal"
+   Samsuntv-livingroom:
+       ip: "10.0.15.7"
+       host: "samsuntv-livingroom.apl.internal"

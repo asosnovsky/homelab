@@ -68,8 +68,7 @@ CC:6A:10:8B:7D:D3 myq-garage.apl.internal
 04:99:B9:86:2D:AE pod-korie.apl.internal
 04:99:B9:88:ED:3B 10.0.15.5
 04:99:B9:88:ED:3B pod-livingroom.apl.internal
-#Router
-94:83:C4:41:77:BA 10.0.16.1
-94:83:C4:41:77:BA velica-office.router.internal
-94:83:C4:31:D5:CE 10.0.16.2
-94:83:C4:31:D5:CE gl-basement.router.internal
+48:E1:5C:5B:CB:A3 10.0.15.6
+48:E1:5C:5B:CB:A3 appletv-livingroom.apl.internal
+F0:70:4F:54:F3:F0 10.0.15.7
+F0:70:4F:54:F3:F0 samsuntv-livingroom.apl.internal
