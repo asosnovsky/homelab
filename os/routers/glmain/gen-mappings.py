@@ -48,12 +48,12 @@ with DNSMASQ_CONF.open('w') as dfp, SUMMARY.open('w') as sfp, ETHERS.open('w') a
             host = f"{name}.{sub_domain}.{root_domain}"
             sfp.write(f'\n       ip: "{ip}"')
             sfp.write(f'\n       host: "{host}"')
-            dfp.write(f"dhcp-host={mac},{cap1_and_join(sub_domain, name)},{ip},infinite\n")
-            dfp.write(f"address=/{host}/{ip}\n")
+            # dfp.write(f"dhcp-host={mac},{cap1_and_join(sub_domain, name)},{ip},infinite\n")
+            # dfp.write(f"address=/{host}/{ip}\n")
             efp.write(f'{mac} {ip}\n')
             efp.write(f'{mac} {host}\n')
             if domain := dvc.get('domain'):
                 dfp.write(f"address=/{domain}/{ip}\n")
                 dfp.write(f"address=/.{domain}/{ip}\n")
                 sfp.write(f'\n       domain: "{domain}"')
-                efp.write(f'{mac} {domain}\n')
+                # efp.write(f'{mac} {domain}\n')
