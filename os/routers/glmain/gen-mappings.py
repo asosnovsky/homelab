@@ -22,7 +22,8 @@ ip_prefix_map = {
     "hub": "10.0.12.",
     "cam": "10.0.13.",
     "iot": "10.0.14.",
-    "apl": "10.0.15."
+    "apl": "10.0.15.",
+    "router": "10.0.16.",
 }
 
 def cap1_and_join(*args: str) -> str:
