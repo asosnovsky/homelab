@@ -38,6 +38,8 @@ cam:
         mac: '48:9E:9D:4A:32:80'
     -   name: 'livingroom'
         mac: '34:60:F9:D7:51:3F'
+    -   name: 'garage'
+        mac: ''
 iot:
     -   name: 'korie-lamp'
         mac: '60:74:F4:4D:B8:C5'
@@ -72,3 +74,6 @@ apl:
         mac: '04:99:B9:86:2D:AE'
     -   name: 'pod-livingroom'
         mac: '04:99:B9:88:ED:3B'
+routers:
+    -   name: 'velica1-office'
+        mac: '94:83:C4:41:77:BA'

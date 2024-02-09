@@ -32,6 +32,8 @@ A0:60:32:03:86:8A eddie.cam.internal
 48:9E:9D:4A:32:80 doorbell.cam.internal
 34:60:F9:D7:51:3F 10.0.13.4
 34:60:F9:D7:51:3F livingroom.cam.internal
+ 10.0.13.5
+ garage.cam.internal
 #Iot
 60:74:F4:4D:B8:C5 10.0.14.1
 60:74:F4:4D:B8:C5 korie-lamp.iot.internal
