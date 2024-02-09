@@ -77,7 +77,28 @@ Iot:
    Epl-livingroom:
        ip: "10.0.14.8"
        host: "epl-livingroom.iot.internal"
+   Shelly-basement-living:
+       ip: "10.0.14.9"
+       host: "shelly-basement-living.iot.internal"
+   Shelly-basement-shared:
+       ip: "10.0.14.10"
+       host: "shelly-basement-shared.iot.internal"
+   Shelly-laundry-light:
+       ip: "10.0.14.11"
+       host: "shelly-laundry-light.iot.internal"
 Apl:
    Hp-print:
        ip: "10.0.15.1"
        host: "hp-print.apl.internal"
+   Gm-eddie:
+       ip: "10.0.15.2"
+       host: "gm-eddie.apl.internal"
+   Myq-garage:
+       ip: "10.0.15.3"
+       host: "myq-garage.apl.internal"
+   Pod-korie:
+       ip: "10.0.15.4"
+       host: "pod-korie.apl.internal"
+   Pod-livingroom:
+       ip: "10.0.15.5"
+       host: "pod-livingroom.apl.internal"

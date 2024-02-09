@@ -26,27 +26,27 @@ echo "using 🤖 $server"
 ask "continue update"
 
 echo "Updating conf..."
-# ./gen-mappings.py
+./gen-mappings.py
 cat output/summary.yaml
 ask "continue update"
 
-scp -O output/etc/dnsmasq.conf  "$server:/tmp/dnsmasq.new.conf"
+# scp -O output/etc/dnsmasq.conf  "$server:/tmp/dnsmasq.new.conf"
 scp -O output/etc/ethers  "$server:/etc/ethers"
-ssh "$server" << EOF
-echo 'Backing up dnsmasq.conf file to /tmp/dnsmasq.old.conf'
-cp /etc/dnsmasq.conf /tmp/dnsmasq.old.conf
-echo 'Updating dnsmasq.conf 🙇🏼'
-cp /tmp/dnsmasq.new.conf /etc/dnsmasq.conf 
-if dnsmasq --test ; then 
-    /etc/init.d/dnsmasq restart
-else
-    echo "Updated Failed! 🚨"
-    echo "Attempting to revert back..."
-    cp /tmp/dnsmasq.old.conf /etc/dnsmasq.conf 
-    dnsmasq --test
-    echo "Revert successful! 👍"
-fi
-EOF
+# ssh "$server" << EOF
+# echo 'Backing up dnsmasq.conf file to /tmp/dnsmasq.old.conf'
+# cp /etc/dnsmasq.conf /tmp/dnsmasq.old.conf
+# echo 'Updating dnsmasq.conf 🙇🏼'
+# cp /tmp/dnsmasq.new.conf /etc/dnsmasq.conf 
+# if dnsmasq --test ; then 
+#     /etc/init.d/dnsmasq restart
+# else
+#     echo "Updated Failed! 🚨"
+#     echo "Attempting to revert back..."
+#     # cp /tmp/dnsmasq.old.conf /etc/dnsmasq.conf 
+#     dnsmasq --test
+#     echo "Revert successful! 👍"
+# fi
+# EOF
 
 git add .
 git commit -m "🤖 Updated Router Config at $(date)"
