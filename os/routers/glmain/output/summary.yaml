@@ -31,9 +31,11 @@ Hub:
    Castle:
        ip: "10.0.12.1"
        host: "castle.hub.internal"
+       domain: "castle.home.sosnovsky.ca"
    Basement:
        ip: "10.0.12.2"
        host: "basement.hub.internal"
+       domain: "basement.home.sosnovsky.ca"
    Flic:
        ip: "10.0.12.3"
        host: "flic.hub.internal"
@@ -66,6 +68,15 @@ Iot:
    Apollo-office:
        ip: "10.0.14.5"
        host: "apollo-office.iot.internal"
+   Apollo-laundry:
+       ip: "10.0.14.6"
+       host: "apollo-laundry.iot.internal"
+   Epl-kitchen:
+       ip: "10.0.14.7"
+       host: "epl-kitchen.iot.internal"
+   Epl-livingroom:
+       ip: "10.0.14.8"
+       host: "epl-livingroom.iot.internal"
 Apl:
    Hp-print:
        ip: "10.0.15.1"
