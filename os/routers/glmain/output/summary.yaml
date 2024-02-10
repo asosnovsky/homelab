@@ -111,6 +111,15 @@ Apl:
    Samsuntv-livingroom:
        ip: "10.0.15.7"
        host: "samsuntv-livingroom.apl.internal"
+   Leviot-humid1:
+       ip: "10.0.15.8"
+       host: "leviot-humid1.apl.internal"
+   Leviot-humid2:
+       ip: "10.0.15.9"
+       host: "leviot-humid2.apl.internal"
+   Amzn-bedroom:
+       ip: "10.0.15.10"
+       host: "amzn-bedroom.apl.internal"
 Router:
    Gl-basement:
        ip: "10.0.16.1"

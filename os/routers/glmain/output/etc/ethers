@@ -72,6 +72,12 @@ CC:6A:10:8B:7D:D3 myq-garage.apl.internal
 48:E1:5C:5B:CB:A3 appletv-livingroom.apl.internal
 F0:70:4F:54:F3:F0 10.0.15.7
 F0:70:4F:54:F3:F0 samsuntv-livingroom.apl.internal
+3C:E9:0E:62:14:D8 10.0.15.8
+3C:E9:0E:62:14:D8 leviot-humid1.apl.internal
+1C:9D:C2:39:61:F8 10.0.15.9
+1C:9D:C2:39:61:F8 leviot-humid2.apl.internal
+D8:BE:65:F2:ED:18 10.0.15.10
+D8:BE:65:F2:ED:18 amzn-bedroom.apl.internal
 #Router
 94:83:C4:31:D5:CE 10.0.16.1
 94:83:C4:31:D5:CE gl-basement.router.internal
