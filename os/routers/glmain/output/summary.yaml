@@ -112,9 +112,12 @@ Apl:
        ip: "10.0.15.7"
        host: "samsuntv-livingroom.apl.internal"
 Router:
-   Velica-office:
-       ip: "10.0.16.1"
-       host: "velica-office.router.internal"
    Gl-basement:
-       ip: "10.0.16.2"
+       ip: "10.0.16.1"
        host: "gl-basement.router.internal"
+   Orbi-office:
+       ip: "10.0.16.2"
+       host: "orbi-office.router.internal"
+   Velica-office:
+       ip: "10.0.16.3"
+       host: "velica-office.router.internal"
