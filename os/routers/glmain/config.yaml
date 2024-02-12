@@ -66,16 +66,30 @@ iot:
 apl:
     -   name: 'hp-print'
         mac: '48:9E:BD:CB:07:E3'
+    -   name: 'gm-eddie'
+        mac: '20:DF:B9:71:55:9C'
+        justMac: true
     -   name: 'myq-garage'
         mac: 'CC:6A:10:8B:7D:D3'
+    -   name: 'pod-korie'
+        mac: '04:99:B9:86:2D:AE'
+        justMac: true
+    -   name: 'pod-livingroom'
+        mac: '04:99:B9:88:ED:3B'
+        justMac: true
     -   name: 'appletv-livingroom'
         mac: '48:E1:5C:5B:CB:A3'
     -   name: 'samsuntv-livingroom'
         mac: 'F0:70:4F:54:F3:F0'
     -   name: 'leviot-humid1'
         mac: '3C:E9:0E:62:14:D8'
+        justMac: true
     -   name: 'leviot-humid2'
         mac: '1C:9D:C2:39:61:F8'
+        justMac: true
+    -   name: 'amzn-bedroom'
+        mac: 'D8:BE:65:F2:ED:18'
+        justMac: true
 router:
     -   name: 'gl-basement'
         mac: '94:83:C4:31:D5:CE'

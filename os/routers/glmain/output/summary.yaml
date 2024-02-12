@@ -93,21 +93,27 @@ Apl:
    Hp-print:
        ip: "10.0.15.1"
        host: "hp-print.apl.internal"
+   Gm-eddie:
+       host: "gm-eddie.apl.internal"
    Myq-garage:
-       ip: "10.0.15.2"
-       host: "myq-garage.apl.internal"
-   Appletv-livingroom:
        ip: "10.0.15.3"
+       host: "myq-garage.apl.internal"
+   Pod-korie:
+       host: "pod-korie.apl.internal"
+   Pod-livingroom:
+       host: "pod-livingroom.apl.internal"
+   Appletv-livingroom:
+       ip: "10.0.15.6"
        host: "appletv-livingroom.apl.internal"
    Samsuntv-livingroom:
-       ip: "10.0.15.4"
+       ip: "10.0.15.7"
        host: "samsuntv-livingroom.apl.internal"
    Leviot-humid1:
-       ip: "10.0.15.5"
        host: "leviot-humid1.apl.internal"
    Leviot-humid2:
-       ip: "10.0.15.6"
        host: "leviot-humid2.apl.internal"
+   Amzn-bedroom:
+       host: "amzn-bedroom.apl.internal"
 Router:
    Gl-basement:
        ip: "10.0.16.1"
