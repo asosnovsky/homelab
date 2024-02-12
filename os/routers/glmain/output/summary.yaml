@@ -93,33 +93,21 @@ Apl:
    Hp-print:
        ip: "10.0.15.1"
        host: "hp-print.apl.internal"
-   Gm-eddie:
-       ip: "10.0.15.2"
-       host: "gm-eddie.apl.internal"
    Myq-garage:
-       ip: "10.0.15.3"
+       ip: "10.0.15.2"
        host: "myq-garage.apl.internal"
-   Pod-korie:
-       ip: "10.0.15.4"
-       host: "pod-korie.apl.internal"
-   Pod-livingroom:
-       ip: "10.0.15.5"
-       host: "pod-livingroom.apl.internal"
    Appletv-livingroom:
-       ip: "10.0.15.6"
+       ip: "10.0.15.3"
        host: "appletv-livingroom.apl.internal"
    Samsuntv-livingroom:
-       ip: "10.0.15.7"
+       ip: "10.0.15.4"
        host: "samsuntv-livingroom.apl.internal"
    Leviot-humid1:
-       ip: "10.0.15.8"
+       ip: "10.0.15.5"
        host: "leviot-humid1.apl.internal"
    Leviot-humid2:
-       ip: "10.0.15.9"
+       ip: "10.0.15.6"
        host: "leviot-humid2.apl.internal"
-   Amzn-bedroom:
-       ip: "10.0.15.10"
-       host: "amzn-bedroom.apl.internal"
 Router:
    Gl-basement:
        ip: "10.0.16.1"
@@ -127,6 +115,3 @@ Router:
    Orbi-office:
        ip: "10.0.16.2"
        host: "orbi-office.router.internal"
-   Velica-office:
-       ip: "10.0.16.3"
-       host: "velica-office.router.internal"
