@@ -95,3 +95,12 @@ router:
         mac: '94:83:C4:31:D5:CE'
     -   name: 'orbi-office'
         mac: '34:98:B5:AC:36:67'
+devices:
+    -   name: 'fwlaptop'
+        mac: '14:AC:60:29:85:4D'
+    -   name: 'sumomac'
+        mac: 'F8:E4:3B:36:0F:E4'
+    -   name: 'steamdeck'
+        mac: '34:6F:24:CA:70:57'
+    -   name: 'vitapc'
+        mac: 'E0:0A:F6:79:C6:E9'

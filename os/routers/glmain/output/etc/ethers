@@ -77,3 +77,8 @@ D8:BE:65:F2:ED:18 amzn-bedroom.apl.internal
 94:83:C4:31:D5:CE gl-basement.router.internal
 34:98:B5:AC:36:67 10.0.16.2
 34:98:B5:AC:36:67 orbi-office.router.internal
+#Devices
+14:AC:60:29:85:4D fwlaptop.devices.internal
+F8:E4:3B:36:0F:E4 sumomac.devices.internal
+34:6F:24:CA:70:57 steamdeck.devices.internal
+E0:0A:F6:79:C6:E9 vitapc.devices.internal

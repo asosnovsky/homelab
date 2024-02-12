@@ -121,3 +121,12 @@ Router:
    Orbi-office:
        ip: "10.0.16.2"
        host: "orbi-office.router.internal"
+Devices:
+   Fwlaptop:
+       host: "fwlaptop.devices.internal"
+   Sumomac:
+       host: "sumomac.devices.internal"
+   Steamdeck:
+       host: "steamdeck.devices.internal"
+   Vitapc:
+       host: "vitapc.devices.internal"

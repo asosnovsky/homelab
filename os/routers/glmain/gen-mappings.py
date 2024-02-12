@@ -24,6 +24,12 @@ ip_prefix_map = {
     "iot": "10.0.14.",
     "apl": "10.0.15.",
     "router": "10.0.16.",
+    "devices": "10.0.0.",
+}
+defaults = {
+    'devices': {
+        'justMac': True,
+    }
 }
 
 def cap1_and_join(*args: str) -> str:
@@ -38,12 +44,14 @@ with CONFIG_FILE.open('r') as fp:
 
 with DNSMASQ_CONF.open('w') as dfp, SUMMARY.open('w') as sfp, ETHERS.open('w') as efp:
     for sub_domain, configs in devices.items():
+        default_values = defaults.get(sub_domain, {})
         ip_prefix = ip_prefix_map[sub_domain]
         sfp.write(f'\n{cap1_and_join(sub_domain)}:')
         efp.write(f'#{cap1_and_join(sub_domain)}\n')
         ip_suffix = 0
         for dvc in configs:
             ip_suffix += 1
+            dvc = {**default_values, **dvc}
             mac = dvc['mac']
             name = dvc['name']
             sfp.write(f'\n   {cap1_and_join(name)}:')
