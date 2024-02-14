@@ -1,4 +1,4 @@
-#!/bin/ash
+#!/bin/bash
 # Turn an OpenWrt dumb access point into a Wi-fi mesh point
 
 # ######################
@@ -47,15 +47,15 @@ uci delete wireless.default_radio1
 
 # create the mesh Wifi
 uci set wireless.wifinet0=wifi-iface
-uci set wireless.wifinet0.device=$MESH_RADIO
+uci set wireless.wifinet0.device="$MESH_RADIO"
 uci set wireless.wifinet0.mode='mesh'
 uci set wireless.wifinet0.encryption='sae'
-uci set wireless.wifinet0.mesh_id=$MESH_NAME
+uci set wireless.wifinet0.mesh_id="$MESH_NAME"
 uci set wireless.wifinet0.mesh_fwding='1'
 uci set wireless.wifinet0.mesh_rssi_threshold='0'
-uci set wireless.wifinet0.key=$MESH_PWD
+uci set wireless.wifinet0.key="$MESH_PWD"
 uci set wireless.wifinet0.network='lan'
-uci set "wireless.$MESH_RADIO.channel"=$MESH_CHANNEL
+uci set "wireless.$MESH_RADIO.channel=$MESH_CHANNEL"
 uci delete "wireless.$MESH_RADIO.disabled"   
 
 # create the AP Wifi

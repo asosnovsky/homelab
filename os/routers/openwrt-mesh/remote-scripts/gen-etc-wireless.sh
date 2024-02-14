@@ -1,7 +1,7 @@
 #!/bin/sh
 
-MESH_PWD=$(echo $MESH_PWD | tr -d '"')
-WIFI_PWD=$(echo $WIFI_PWD | tr -d '"')
+MESH_PWD=$(echo "$MESH_PWD" | tr -d '"')
+WIFI_PWD=$(echo "$WIFI_PWD" | tr -d '"')
 output_file=${1:-"/etc/config/wireless"}
 
 echo "writing to $output_file"
