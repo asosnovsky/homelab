@@ -118,9 +118,12 @@ Router:
    Gl-basement:
        ip: "10.0.16.1"
        host: "gl-basement.router.internal"
-   Orbi-office:
+   Velica-main:
        ip: "10.0.16.2"
-       host: "orbi-office.router.internal"
+       host: "velica-main.router.internal"
+   Velica-node1:
+       ip: "10.0.16.3"
+       host: "velica-node1.router.internal"
 Devices:
    Fwlaptop:
        host: "fwlaptop.devices.internal"
