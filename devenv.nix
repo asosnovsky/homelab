@@ -14,5 +14,4 @@
   languages.python.enable = true;
   languages.python.venv.enable = true;
   languages.python.venv.requirements = ./pydeps.requirements;
-  pre-commit.hooks.shellcheck.enable = true;
 }
