@@ -28,7 +28,7 @@ jellyfin:
 arrs:
   bazarr:
     repo: lscr.io/linuxserver/bazarr
-    tag: "latest"
+    tag: "v1.4.1-ls238"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-sonarr-0
@@ -51,7 +51,7 @@ arrs:
 
   sonarr:
     repo: lscr.io/linuxserver/sonarr
-    tag: "latest"
+    tag: "4.0.1.929-ls225"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-sonarr-0
@@ -74,7 +74,7 @@ arrs:
     
   radarr:
     repo: lscr.io/linuxserver/radarr
-    tag: "latest"
+    tag: "5.2.6.8376-ls203"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-radarr-0
@@ -118,7 +118,7 @@ arrs:
       
   prowlarr:
     repo: lscr.io/linuxserver/prowlarr
-    tag: "latest"
+    tag: "1.13.3.4273-ls53"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-prowlarr-0
