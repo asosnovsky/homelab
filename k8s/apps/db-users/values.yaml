@@ -1,6 +1,7 @@
 userGeneration:
   tfVersion: "1.3.7"
   users:
+    - bazarr
     - nextcloud
     - authentik
     - radarr
@@ -8,7 +9,6 @@ userGeneration:
     - prowlarr
     - immich
     - readarr
-    - bazarr
   users_dbs:
     radarr: [log, cache]
     sonarr: [log, cache]
