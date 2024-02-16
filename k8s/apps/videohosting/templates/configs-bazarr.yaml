@@ -1,0 +1,39 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: "bazarr-db-creds"
+spec:
+  refreshInterval: 24h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: chart-db-creds
+  target:
+    name: "bazarr-config"
+    creationPolicy: Owner
+    template:
+      engineVersion: v2
+      data:
+        POSTGRES_ENABLED: "true" 
+        POSTGRES_HOST: "{{ `{{.host}}` }}"
+        POSTGRES_PORT: "{{ `{{.port}}` }}"
+        POSTGRES_DATABASE: "{{ `{{.username}}` }}"
+        POSTGRES_USERNAME: "{{ `{{.username}}` }}"
+        POSTGRES_PASSWORD: "{{ `{{.password}}` }}"
+  data:
+    - remoteRef:
+        key: password.pg.{{$k}}
+        property: username
+      secretKey: username
+    - remoteRef:
+        key: password.pg.{{$k}}
+        property: password
+      secretKey: password
+    - remoteRef:
+        key: password.pg.{{$k}}
+        property: port
+      secretKey: port
+    - remoteRef:
+        key: password.pg.{{$k}}
+        property: host
+      secretKey: host

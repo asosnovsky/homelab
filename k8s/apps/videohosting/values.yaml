@@ -26,30 +26,6 @@ jellyfin:
       memory: "4Gi"
 
 arrs:
-  bazarr:
-    repo: lscr.io/linuxserver/bazarr
-    tag: "v1.4.1-ls238"
-    port: 6767
-    migrateDbFromSqllite: 
-      enabled: false
-      claimName: config-sonarr-0
-    usePostgres: true
-    podResources:
-      limits:
-        memory: "8Gi"
-      requests:
-        cpu: 250m
-        memory: "500M"
-    configVolumesResources:
-      requests:
-        storage: 10Gi
-      limits:
-        storage: 100Gi
-    extraConfigXml: |-
-      <InstanceName>Sosnovsky Bazarr</InstanceName>
-      <AuthenticationMethod>External</AuthenticationMethod>
-      <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
-
   sonarr:
     repo: lscr.io/linuxserver/sonarr
     tag: "4.0.1.929-ls225"
@@ -141,6 +117,24 @@ arrs:
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
 
 services:
+  bazarr:
+    kind: StatefulSet
+    repo: lscr.io/linuxserver/bazarr
+    tag: "v1.4.1-ls238"
+    ports:
+      web:
+        http: 6767
+    health: {}
+    envFrom:
+      - secretRef:
+          name: bazarr-db-creds
+    podResources:
+      limits:
+        memory: "8Gi"
+      requests:
+        cpu: 250m
+        memory: "500M"
+    
   jellyplex:
     kind: Deployment
     disableSVC: true
