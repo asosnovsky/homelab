@@ -33,6 +33,8 @@ apps:
     health:
       readiness: "/"
       liveness: "/"
+    exposedPorts:
+      "1143": 11434
     ports:
       tcp:
         web: 11434

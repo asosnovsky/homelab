@@ -35,10 +35,10 @@ spec:
     homelab/app: scrypted
   type: LoadBalancer
   ports:
-  {{ $exPort, $inPort := range $v.exposedPorts }}
-    -   port: "{{ $exPort }}"
-        targetPort: "{{ $inPort }}"
-        protocol: TCP
+  {{ range $exPort, $inPort := $v.exposedPorts }}
+    - port: "{{ $exPort }}"
+      targetPort: "{{ $inPort }}"
+      protocol: TCP
   {{ end }}
 {{ end }}
 ---
