@@ -8,6 +8,7 @@ userGeneration:
     - prowlarr
     - immich
     - readarr
+    - bazarr
   users_dbs:
     radarr: [log, cache]
     sonarr: [log, cache]
