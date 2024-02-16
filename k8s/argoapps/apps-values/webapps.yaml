@@ -59,7 +59,7 @@ apps:
       liveness: "/"
     env:
       - name: OLLAMA_API_BASE_URL
-        value: http://ollama.apps-webapps.svc.cluster.local
+        value: "http://ollama.apps-webapps.svc.cluster.local:11434/api"
     ports:
       tcp:
         web: 8080
