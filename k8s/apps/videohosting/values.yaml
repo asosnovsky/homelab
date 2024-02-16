@@ -29,6 +29,7 @@ arrs:
   bazarr:
     repo: lscr.io/linuxserver/bazarr
     tag: "v1.4.1-ls238"
+    port: 6767
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-sonarr-0

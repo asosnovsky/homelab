@@ -158,7 +158,7 @@ spec:
           resources: 
             {{- $v.podResources | toYaml | nindent 12 }}
           ports:
-            - containerPort: 80
+            - containerPort: {{ .port | default 80 }}
               name: "http"
             - containerPort: 443
               name: "https"
