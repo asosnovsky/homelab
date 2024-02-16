@@ -36,8 +36,8 @@ spec:
   type: LoadBalancer
   ports:
   {{ range $exPort, $inPort := $v.exposedPorts }}
-    - port: "{{ $exPort }}"
-      targetPort: "{{ $inPort }}"
+    - port: {{ $exPort }}
+      targetPort: {{ $inPort }}
       protocol: TCP
   {{ end }}
 {{ end }}
