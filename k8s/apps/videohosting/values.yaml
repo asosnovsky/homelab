@@ -97,7 +97,7 @@ arrs:
     
   readarr:
     repo: lscr.io/linuxserver/readarr
-    tag: "nightly"
+    tag: "develop-0.3.18.2411-ls88"
     migrateDbFromSqllite: 
       enabled: false
     usePostgres: true
