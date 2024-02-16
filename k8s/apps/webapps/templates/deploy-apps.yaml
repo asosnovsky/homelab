@@ -9,7 +9,7 @@ spec:
     app: {{ $k }}
   type: ClusterIP
   ports:
-    {{ range $portName, $portValue := $v.ports.tcp }}
+    {{- range $portName, $portValue := $v.ports.tcp }}
     - port: {{ $portValue }}
       targetPort: {{ $portValue }}
       name: "{{ $portName }}"
@@ -32,10 +32,10 @@ metadata:
   name: {{ $k }}-exposed-ports
 spec:
   selector:
-    homelab/app: scrypted
+    app: {{ $k }}
   type: LoadBalancer
   ports:
-  {{ range $exPort, $inPort := $v.exposedPorts }}
+  {{- range $exPort, $inPort := $v.exposedPorts }}
     - port: {{ $exPort }}
       targetPort: {{ $inPort }}
       protocol: TCP
