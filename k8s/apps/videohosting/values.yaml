@@ -183,25 +183,25 @@ services:
     ports:
       tcp:
         web: 9117
-  qbittorrent:
-    repo: linuxserver/qbittorrent
-    tag: libtorrentv1
-    ports:
-      tcp:
-        web: 8080
-        6881: 6881
-      udp:
-        6881: 6881
-    podResources:
-      limits:
-        memory: "6Gi"
-      requests:
-        cpu: 800m
-        memory: "4Gi"
-    health: 
-      enabled: true
-    configVolumesResources:
-      requests:
-        storage: 10Gi
-      limits:
-        storage: 100Gi
+  # qbittorrent:
+  #   repo: linuxserver/qbittorrent
+  #   tag: libtorrentv1
+  #   ports:
+  #     tcp:
+  #       web: 8080
+  #       6881: 6881
+  #     udp:
+  #       6881: 6881
+  #   podResources:
+  #     limits:
+  #       memory: "6Gi"
+  #     requests:
+  #       cpu: 800m
+  #       memory: "4Gi"
+  #   health: 
+  #     enabled: true
+  #   configVolumesResources:
+  #     requests:
+  #       storage: 10Gi
+  #     limits:
+  #       storage: 100Gi
