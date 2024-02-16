@@ -30,6 +30,7 @@ services:
     middleware: "apps-ingresses-chain-authentik"
     group: "Core"
     icon: "https://grafana.core.home.sosnovsky.ca/public/img/fav32.png"
+    health: "healthz"
   - prefix: "authentik.core"
     service: "authentik"
     namespace: "chart-authentik"
