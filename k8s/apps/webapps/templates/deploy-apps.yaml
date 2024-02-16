@@ -94,5 +94,7 @@ spec:
             initialDelaySeconds: 10
             failureThreshold: 10
             timeoutSeconds: 30
+          envFrom: {{ ($v.envFrom | default list) | toJson }}
+          env: {{ ($v.env | default list) | toJson }}
           volumeMounts: {{ ($v.volumeMounts | default list) | toJson }}
 {{ end }}
