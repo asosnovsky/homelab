@@ -23,6 +23,24 @@ spec:
       protocol: UDP
     {{ end }}
     {{- end }}
+
+{{ if $v.exposedPorts }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ $k }}-exposed-ports
+spec:
+  selector:
+    homelab/app: scrypted
+  type: LoadBalancer
+  ports:
+  {{ $exPort, $inPort := range $v.exposedPorts }}
+    -   port: "{{ $exPort }}"
+        targetPort: "{{ $inPort }}"
+        protocol: TCP
+  {{ end }}
+{{ end }}
 ---
 apiVersion: apps/v1
 kind: Deployment
