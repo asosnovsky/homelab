@@ -123,8 +123,7 @@ services:
     tag: "v1.4.1-ls238"
     ports:
       tcp:
-        web:
-          http: 6767
+        web: 6767
     health: {}
     envFrom:
       - secretRef:
