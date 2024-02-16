@@ -117,7 +117,7 @@ spec:
   revisionHistoryLimit: 2
   updateStrategy:
     rollingUpdate:
-      partition: 0
+      partition: 1
     type: RollingUpdate
   volumeClaimTemplates:
     - metadata:
