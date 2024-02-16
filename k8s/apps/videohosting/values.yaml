@@ -26,7 +26,7 @@ jellyfin:
       memory: "4Gi"
 
 arrs:
-  sonarr:
+  bazarr:
     repo: lscr.io/linuxserver/bazarr
     tag: "latest"
     migrateDbFromSqllite: 
@@ -45,13 +45,13 @@ arrs:
       limits:
         storage: 100Gi
     extraConfigXml: |-
-      <InstanceName>Sosnovsky Sonarr</InstanceName>
+      <InstanceName>Sosnovsky Bazarr</InstanceName>
       <AuthenticationMethod>External</AuthenticationMethod>
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
 
   sonarr:
     repo: lscr.io/linuxserver/sonarr
-    tag: "4.0.0-develop"
+    tag: "latest"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-sonarr-0
@@ -118,7 +118,7 @@ arrs:
       
   prowlarr:
     repo: lscr.io/linuxserver/prowlarr
-    tag: "1.9.4"
+    tag: "latest"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-prowlarr-0
@@ -160,48 +160,3 @@ services:
       requests:
         cpu: 50m
         memory: "500M"
-  jackett:
-    disabled: true
-    repo: lscr.io/linuxserver/jackett
-    tag: "latest"
-    envVars:
-      AUTO_UPDATE: "true"
-    podResources:
-      limits:
-        memory: "1Gi"
-      requests:
-        cpu: 250m
-        memory: "500M"
-    health:
-      readiness: "/health"
-      liveness: "/health"
-    configVolumesResources:
-      requests:
-        storage: 10Gi
-      limits:
-        storage: 100Gi
-    ports:
-      tcp:
-        web: 9117
-  # qbittorrent:
-  #   repo: linuxserver/qbittorrent
-  #   tag: libtorrentv1
-  #   ports:
-  #     tcp:
-  #       web: 8080
-  #       6881: 6881
-  #     udp:
-  #       6881: 6881
-  #   podResources:
-  #     limits:
-  #       memory: "6Gi"
-  #     requests:
-  #       cpu: 800m
-  #       memory: "4Gi"
-  #   health: 
-  #     enabled: true
-  #   configVolumesResources:
-  #     requests:
-  #       storage: 10Gi
-  #     limits:
-  #       storage: 100Gi
