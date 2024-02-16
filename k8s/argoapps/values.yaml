@@ -172,6 +172,14 @@ storage:
     resources:
       requests:
         storage: 8Gi
+  ollamaWebGui:
+    name: ollama-web-gui
+    namespace: apps-webapps
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 8Gi
   nextcloudData:
     name: nextcloud-data
     namespace: apps-nextcloud
