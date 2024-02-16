@@ -107,15 +107,6 @@ services:
   #   namespace: "apps-photos"
   #   middleware: "apps-ingresses-chain-authentik"
   #   group: "Apps"
-  # vh services
-  {{- range $k, $v := .Values.videohosting.services }}
-  - prefix: "{{ $k }}.vh"
-    service: "{{ $k }}"
-    namespace: "apps-videohosting"
-    port: {{ $v.ports.tcp.web }}
-    middleware: "apps-ingresses-chain-authentik"
-    group: "Video Hosting"
-  {{- end }}
   # webapp services
   {{- $webapps := .Files.Get (printf "apps-values/%s" .Values.apps.webapps.valuesFile) }}
   {{- $webapps := tpl $webapps . | fromYaml }}
