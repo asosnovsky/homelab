@@ -26,10 +26,10 @@ apps:
     tag: "latest"
     podResources:
       limits:
-        memory: "8Gi"
+        memory: "16Gi"
       requests:
-        cpu: 250m
-        memory: "1Gi"
+        cpu: 1
+        memory: "4Gi"
     ports:
       tcp:
         web: 11434
