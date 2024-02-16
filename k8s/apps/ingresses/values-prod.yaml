@@ -16,7 +16,7 @@ reverseProxy:
 
   basement:
     ip: "10.0.12.2"
-    port: "8123"
+    port: "80"
     overrides:
       icon: https://basement.home.sosnovsky.ca/static/icons/favicon.ico
 
