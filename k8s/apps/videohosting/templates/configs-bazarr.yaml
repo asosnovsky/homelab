@@ -7,9 +7,9 @@ spec:
   refreshInterval: 24h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: chart-db-creds
+    name: chart-database
   target:
-    name: "bazarr-config"
+    name: "bazarr-db-creds"
     creationPolicy: Owner
     template:
       engineVersion: v2
