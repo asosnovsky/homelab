@@ -25,8 +25,6 @@ global:
     port: 1883
     host: 192.168.0.23
 
-videohosting: {}
-
 apps:
   webapps:
     valuesFile: webapps.yaml
@@ -51,8 +49,7 @@ apps:
               server: {{ .Values.global.nfs.server }}
 
   videohosting:
-    values: |-
-      {{ .Values.videohosting | toYaml }}
+    values: ""
 
   nextcloud:
     valuesFile: nextcloud.yaml
