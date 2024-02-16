@@ -93,8 +93,7 @@ spec:
           envFrom:
             - configMapRef: 
                 name: {{$k}}-envs
-            {{ if $v.envFrom }}
-            {{ range $envFrom := $v.envFrom }}
+            {{ range $envFrom := ($v.envFrom | default list) }}
             - {{ $envFrom | toJson }}
             {{ end }}
           resources: 

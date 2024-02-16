@@ -22,18 +22,18 @@ spec:
         POSTGRES_PASSWORD: "{{ `{{.password}}` }}"
   data:
     - remoteRef:
-        key: password.pg.{{$k}}
+        key: password.pg.bazarr
         property: username
       secretKey: username
     - remoteRef:
-        key: password.pg.{{$k}}
+        key: password.pg.bazarr
         property: password
       secretKey: password
     - remoteRef:
-        key: password.pg.{{$k}}
+        key: password.pg.bazarr
         property: port
       secretKey: port
     - remoteRef:
-        key: password.pg.{{$k}}
+        key: password.pg.bazarr
         property: host
       secretKey: host
