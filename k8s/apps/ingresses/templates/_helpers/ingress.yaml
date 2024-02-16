@@ -79,6 +79,8 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: {{ .middleware | default "apps-ingresses-https-redirect"}}@kubernetescrd
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
+    gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
+    gethomepage.dev/siteMonitor: 'http://{{.service}}.{{ .namespace }}.svc.cluster.local:{{.port | default 80}}{{ .path | default "/" }}'
     # gethomepage.dev/description: {{ .description | default "" }}
     gethomepage.dev/group: {{ .group | default "Unassigned" }}
     {{ if .icon }}
