@@ -30,6 +30,8 @@ reverseProxy:
   esphome:
     ip: "10.0.10.4"
     port: "6052"
+    overrides:
+      middleware: "apps-ingresses-chain-authentik"
 
   scrypted:
     ip: "10.0.10.4"
