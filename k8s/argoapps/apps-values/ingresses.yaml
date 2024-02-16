@@ -83,6 +83,11 @@ services:
     middleware: "apps-ingresses-chain-authentik"
     port: 3000
     group: "Core"
+  - prefix: "bazarr.vh"
+    service: "bazarr"
+    namespace: "apps-videohosting"
+    middleware: "apps-ingresses-chain-authentik"
+    group: "Video Hosting"
   - prefix: "radarr.vh"
     service: "radarr"
     namespace: "apps-videohosting"
