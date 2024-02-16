@@ -72,16 +72,6 @@ apps:
       smtp_password_secret: {{ .Values.secrets.smtp.secrets.smtp.name }}
       smtp_password_secret_key: password
 
-  # frigate:
-  #   values: |-
-  #     persistence:
-  #       media_path:
-  #           enabled: true
-  #           claimName: {{ .Values.storage.frigateMedia.name }}
-  #       conf_path:
-  #           enabled: true
-  #           claimName: {{ .Values.storage.frigateConf.name }}
-
 infrastructureCharts:
   cert-manager:
     repoURL: "https://charts.jetstack.io"
@@ -204,23 +194,3 @@ storage:
         storage: 20Gi
       requests:
         storage: 1Gi
-  frigateMedia:
-    name: frigate-media
-    namespace: apps-frigate
-    accessModes:
-      - ReadWriteMany
-    resources:
-      limits:
-        storage: 100Gi
-      requests:
-        storage: 10Gi
-  frigateConf:
-    name: frigate-conf
-    namespace: apps-frigate
-    accessModes:
-      - ReadWriteMany
-    resources:
-      limits:
-        storage: 1Gi
-      requests:
-        storage: 100Mi
