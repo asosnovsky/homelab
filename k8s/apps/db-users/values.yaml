@@ -13,6 +13,7 @@ userGeneration:
     sonarr: [log, cache]
     prowlarr: [log, cache]
     readarr: [log, cache]
+    bazarr: [log, cache]
 
 postgresSecret: ""
 
