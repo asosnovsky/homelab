@@ -19,3 +19,59 @@ apps:
     capacity:
       - med
       - low
+  ollama:
+    ingress:
+        middleware: apps-ingresses-chain-authentik
+    repo: ollama/ollama 
+    tag: "latest"
+    podResources:
+      limits:
+        memory: "16Gi"
+      requests:
+        cpu: 1
+        memory: "4Gi"
+    exposedPorts:
+      "11434": "11434"
+    ports:
+      tcp:
+        web: 11434
+    volumes:
+        -   name: config
+            persistentVolumeClaim: 
+                claimName: {{ .Values.storage.ollama.name }}
+    volumeMounts:
+        -   name: config
+            mountPath: /root/.ollama
+    capacity:
+      - med
+      - high
+  ollama-web:
+    ingress:
+        middleware: apps-ingresses-chain-authentik
+    repo: ghcr.io/ollama-webui/ollama-webui 
+    tag: "main"
+    podResources:
+      limits:
+        memory: "1Gi"
+      requests:
+        cpu: 250m
+        memory: "1Gi"
+    health:
+      readiness: "/"
+      liveness: "/"
+    env:
+      - name: OLLAMA_API_BASE_URL
+        value: "http://ollama.apps-webapps.svc.cluster.local:11434/api"
+    ports:
+      tcp:
+        web: 8080
+    volumes:
+        -   name: config
+            persistentVolumeClaim: 
+                claimName: {{ .Values.storage.ollamaWebGui.name }}
+    volumeMounts:
+        -   name: config
+            mountPath: /app/backend/data 
+    capacity:
+      - med
+      - low

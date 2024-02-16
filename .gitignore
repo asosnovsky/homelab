@@ -14,3 +14,5 @@ devenv.local.nix
 # Terraform
 *.tfvars
 .terraform
+os/routers/openwrt-mesh/.env
+.DS_Store

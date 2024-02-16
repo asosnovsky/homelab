@@ -1,0 +1,50 @@
+apps:
+  quirky:
+    ingress:
+        middleware: apps-ingresses-https-redirect
+    repo: ghcr.io/asosnovsky/quirky
+    tag: "latest"
+    podResources:
+      limits:
+        memory: "250Mi"
+      requests:
+        cpu: 250m
+        memory: "250Mi"
+    health:
+      readiness: "/"
+      liveness: "/"
+    ports:
+      tcp:
+        web: 80
+    capacity:
+      - med
+      - low
+  ollama:
+    ingress:
+        middleware: apps-ingresses-chain-authentik
+    repo: ollama/ollama 
+    tag: "latest"
+    podResources:
+      limits:
+        memory: "1Gi"
+      requests:
+        cpu: 250m
+        memory: "1Gi"
+    health:
+      readiness: "/"
+      liveness: "/"
+    exposedPorts:
+      "1143": 11434
+    ports:
+      tcp:
+        web: 11434
+    volumes:
+        -   name: config
+            persistentVolumeClaim: 
+                claimName: pv-ollama
+    volumeMounts:
+        -   name: config
+            mountPath: /root/.ollama
+    capacity:
+      - med
+      - high

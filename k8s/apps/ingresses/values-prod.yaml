@@ -3,32 +3,41 @@ global:
     enabled: true
 reverseProxy:
   castle:
-    ip: "192.168.0.23"
+    ip: "10.0.12.1"
     port: "80"
     overrides:
-      icon: https://castle.home.sosnovsky.ca/static/icons/favicon.ico
+      icon: http://10.0.12.1:80/static/icons/favicon.ico
 
   kuma:
-    ip: "192.168.0.23"
+    ip: "10.0.12.1"
     port: "3001"
     overrides:
       icon: "https://kuma.home.sosnovsky.ca/apple-touch-icon.png"
 
   basement:
-    ip: "192.168.1.10"
-    port: "8123"
+    ip: "10.0.12.2"
+    port: "80"
     overrides:
-      icon: https://basement.home.sosnovsky.ca/static/icons/favicon.ico
+      icon: http://10.0.12.2:80/static/icons/favicon.ico
+
+  pitorrent:
+    ip: "10.0.10.3"
+    port: "8080"
+    overrides:
+      middleware: "apps-ingresses-chain-authentik"
+      group: "Video Hosting"
+  
+  esphome:
+    ip: "10.0.10.4"
+    port: "6052"
+    overrides:
+      middleware: "apps-ingresses-chain-authentik"
 
   scrypted:
-    disableIngress: true
-    ip: "192.168.0.200"
+    ip: "10.0.10.4"
     port: "11080"
-
-  glroutermetrics:
-    disableIngress: true
-    ip: "192.168.8.1"
-    port: "11080"
+    overrides:
+      group: "Cameras"
 
 cloudflare:
   enabled: true

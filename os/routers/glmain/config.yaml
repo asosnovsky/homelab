@@ -1,6 +1,7 @@
 lab:
     -   mac: '3C:7C:3F:1E:B7:A0'
         name: 'tnas1'
+        domain: 'tnas1.lab.local'
     -   mac: '00:A0:98:3D:7C:C8'
         name: 'kubedb'
     -   mac: 'B8:27:EB:F7:44:4E'
@@ -13,10 +14,10 @@ k3s:
         domain: home.sosnovsky.ca
     -   mac: '68:1D:EF:26:B7:6C'
         name: 'terry1'
-        domain: home.sosnovsky.ca
+        # domain: home.sosnovsky.ca
     -   mac: '58:47:CA:71:D8:E6'
         name: 'minisf1'
-        domain: home.sosnovsky.ca
+        # domain: home.sosnovsky.ca
     -   mac: '00:A0:98:17:B2:64'
         name: 'tnas1'
 hub:
@@ -37,6 +38,8 @@ cam:
         mac: '48:9E:9D:4A:32:80'
     -   name: 'livingroom'
         mac: '34:60:F9:D7:51:3F'
+    -   name: 'garage'
+        mac: ''
 iot:
     -   name: 'korie-lamp'
         mac: '60:74:F4:4D:B8:C5'
@@ -48,3 +51,58 @@ iot:
         mac: '30:30:F9:DC:A8:18'
     -   name: 'apollo-office'
         mac: '30:30:F9:DA:C7:A4'
+    -   name: 'apollo-laundry'
+        mac: '30:30:F9:DC:BE:7C'
+    -   name: 'epl-kitchen'
+        mac: '64:B7:08:28:52:50'
+    -   name: 'epl-livingroom'
+        mac: '64:B7:08:28:56:F4'
+    -   name: 'shelly-basement-living'
+        mac: 'B8:D6:1A:8A:5F:F4'
+    -   name: 'shelly-basement-shared'
+        mac: 'B8:D6:1A:8C:4C:DC'
+    -   name: 'shelly-laundry-light'
+        mac: 'C8:2B:96:1D:DA:B4'
+apl:
+    -   name: 'hp-print'
+        mac: '48:9E:BD:CB:07:E3'
+    -   name: 'gm-eddie'
+        mac: '20:DF:B9:71:55:9C'
+        justMac: true
+    -   name: 'myq-garage'
+        mac: 'CC:6A:10:8B:7D:D3'
+    -   name: 'pod-korie'
+        mac: '04:99:B9:86:2D:AE'
+        justMac: true
+    -   name: 'pod-livingroom'
+        mac: '04:99:B9:88:ED:3B'
+        justMac: true
+    -   name: 'appletv-livingroom'
+        mac: '48:E1:5C:5B:CB:A3'
+    -   name: 'samsuntv-livingroom'
+        mac: 'F0:70:4F:54:F3:F0'
+    -   name: 'leviot-humid1'
+        mac: '3C:E9:0E:62:14:D8'
+        justMac: true
+    -   name: 'leviot-humid2'
+        mac: '1C:9D:C2:39:61:F8'
+        justMac: true
+    -   name: 'amzn-bedroom'
+        mac: 'D8:BE:65:F2:ED:18'
+        justMac: true
+router:
+    -   name: 'gl-basement'
+        mac: '94:83:C4:31:D5:CE'
+    -   name: 'velica-main'
+        mac: '94:83:C4:41:77:BA'
+    -   name: 'velica-node1'
+        mac: '94:83:C4:41:77:29'
+devices:
+    -   name: 'fwlaptop'
+        mac: '14:AC:60:29:85:4D'
+    -   name: 'sumomac'
+        mac: 'F8:E4:3B:36:0F:E4'
+    -   name: 'steamdeck'
+        mac: '34:6F:24:CA:70:57'
+    -   name: 'vitapc'
+        mac: 'E0:0A:F6:79:C6:E9'

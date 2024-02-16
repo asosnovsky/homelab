@@ -18,9 +18,10 @@
   services.nfs.server.enable = true;
   services.rpcbind.enable = true;
   environment.systemPackages = with pkgs; [
-     pkgs.k3s
+     k3s
      nfs-utils
      git
+     
   ];
   services.k3s.enable = true;
   services.k3s.role = "server";

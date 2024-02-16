@@ -27,31 +27,8 @@ jellyfin:
 
 arrs:
   sonarr:
-    repo: lscr.io/linuxserver/bazarr
-    tag: "latest"
-    migrateDbFromSqllite: 
-      enabled: false
-      claimName: config-sonarr-0
-    usePostgres: true
-    podResources:
-      limits:
-        memory: "8Gi"
-      requests:
-        cpu: 250m
-        memory: "500M"
-    configVolumesResources:
-      requests:
-        storage: 10Gi
-      limits:
-        storage: 100Gi
-    extraConfigXml: |-
-      <InstanceName>Sosnovsky Sonarr</InstanceName>
-      <AuthenticationMethod>External</AuthenticationMethod>
-      <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
-
-  sonarr:
     repo: lscr.io/linuxserver/sonarr
-    tag: "4.0.0-develop"
+    tag: "4.0.1.929-ls225"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-sonarr-0
@@ -74,7 +51,7 @@ arrs:
     
   radarr:
     repo: lscr.io/linuxserver/radarr
-    tag: "latest"
+    tag: "5.2.6.8376-ls203"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-radarr-0
@@ -97,7 +74,7 @@ arrs:
     
   readarr:
     repo: lscr.io/linuxserver/readarr
-    tag: "nightly"
+    tag: "develop-0.3.18.2411-ls88"
     migrateDbFromSqllite: 
       enabled: false
     usePostgres: true
@@ -118,7 +95,7 @@ arrs:
       
   prowlarr:
     repo: lscr.io/linuxserver/prowlarr
-    tag: "1.9.4"
+    tag: "1.13.3.4273-ls53"
     migrateDbFromSqllite: 
       enabled: false
       claimName: config-prowlarr-0
@@ -140,6 +117,24 @@ arrs:
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
 
 services:
+  bazarr:
+    kind: StatefulSet
+    repo: lscr.io/linuxserver/bazarr
+    tag: "v1.4.1-ls238"
+    ports:
+      tcp:
+        web: 6767
+    health: {}
+    envFrom:
+      - secretRef:
+          name: bazarr-db-creds
+    podResources:
+      limits:
+        memory: "8Gi"
+      requests:
+        cpu: 250m
+        memory: "500M"
+    
   jellyplex:
     kind: Deployment
     disableSVC: true
@@ -160,48 +155,3 @@ services:
       requests:
         cpu: 50m
         memory: "500M"
-  jackett:
-    disabled: true
-    repo: lscr.io/linuxserver/jackett
-    tag: "latest"
-    envVars:
-      AUTO_UPDATE: "true"
-    podResources:
-      limits:
-        memory: "1Gi"
-      requests:
-        cpu: 250m
-        memory: "500M"
-    health:
-      readiness: "/health"
-      liveness: "/health"
-    configVolumesResources:
-      requests:
-        storage: 10Gi
-      limits:
-        storage: 100Gi
-    ports:
-      tcp:
-        web: 9117
-  qbittorrent:
-    repo: linuxserver/qbittorrent
-    tag: libtorrentv1
-    ports:
-      tcp:
-        web: 8080
-        6881: 6881
-      udp:
-        6881: 6881
-    podResources:
-      limits:
-        memory: "6Gi"
-      requests:
-        cpu: 800m
-        memory: "4Gi"
-    health: 
-      enabled: true
-    configVolumesResources:
-      requests:
-        storage: 10Gi
-      limits:
-        storage: 100Gi

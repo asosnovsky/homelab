@@ -23,21 +23,7 @@ global:
     email: "ariel.sosnovsky@gmail.com"
   mqtt:
     port: 1883
-    host: 192.168.0.23
-
-videohosting:
-  services:
-    jackett:
-      ports:
-        tcp:
-          web: 9117
-    qbittorrent:
-      ports:
-        tcp:
-          web: 8080
-          6881: 6881
-        udp:
-          6881: 6881
+    host: castle.hub.internal
 
 apps:
   webapps:
@@ -63,8 +49,7 @@ apps:
               server: {{ .Values.global.nfs.server }}
 
   videohosting:
-    values: |-
-      {{ .Values.videohosting | toYaml }}
+    values: ""
 
   nextcloud:
     valuesFile: nextcloud.yaml
@@ -86,16 +71,6 @@ apps:
         SMTP_USERNAME: "{{.Values.global.smtp.email}}"
       smtp_password_secret: {{ .Values.secrets.smtp.secrets.smtp.name }}
       smtp_password_secret_key: password
-
-  frigate:
-    values: |-
-      persistence:
-        media_path:
-            enabled: true
-            claimName: {{ .Values.storage.frigateMedia.name }}
-        conf_path:
-            enabled: true
-            claimName: {{ .Values.storage.frigateConf.name }}
 
 infrastructureCharts:
   cert-manager:
@@ -189,6 +164,22 @@ storage:
     resources:
       requests:
         storage: 8Gi
+  ollama:
+    name: ollama
+    namespace: apps-webapps
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 8Gi
+  ollamaWebGui:
+    name: ollama-web-gui
+    namespace: apps-webapps
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 8Gi
   nextcloudData:
     name: nextcloud-data
     namespace: apps-nextcloud
@@ -219,23 +210,3 @@ storage:
         storage: 20Gi
       requests:
         storage: 1Gi
-  frigateMedia:
-    name: frigate-media
-    namespace: apps-frigate
-    accessModes:
-      - ReadWriteMany
-    resources:
-      limits:
-        storage: 100Gi
-      requests:
-        storage: 10Gi
-  frigateConf:
-    name: frigate-conf
-    namespace: apps-frigate
-    accessModes:
-      - ReadWriteMany
-    resources:
-      limits:
-        storage: 1Gi
-      requests:
-        storage: 100Mi

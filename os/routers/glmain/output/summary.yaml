@@ -3,6 +3,7 @@ Lab:
    Tnas1:
        ip: "10.0.10.1"
        host: "tnas1.lab.internal"
+       domain: "tnas1.lab.local"
    Kubedb:
        ip: "10.0.10.2"
        host: "kubedb.lab.internal"
@@ -20,11 +21,9 @@ K3s:
    Terry1:
        ip: "10.0.11.2"
        host: "terry1.k3s.internal"
-       domain: "home.sosnovsky.ca"
    Minisf1:
        ip: "10.0.11.3"
        host: "minisf1.k3s.internal"
-       domain: "home.sosnovsky.ca"
    Tnas1:
        ip: "10.0.11.4"
        host: "tnas1.k3s.internal"
@@ -53,6 +52,9 @@ Cam:
    Livingroom:
        ip: "10.0.13.4"
        host: "livingroom.cam.internal"
+   Garage:
+       ip: "10.0.13.5"
+       host: "garage.cam.internal"
 Iot:
    Korie-lamp:
        ip: "10.0.14.1"
@@ -69,3 +71,65 @@ Iot:
    Apollo-office:
        ip: "10.0.14.5"
        host: "apollo-office.iot.internal"
+   Apollo-laundry:
+       ip: "10.0.14.6"
+       host: "apollo-laundry.iot.internal"
+   Epl-kitchen:
+       ip: "10.0.14.7"
+       host: "epl-kitchen.iot.internal"
+   Epl-livingroom:
+       ip: "10.0.14.8"
+       host: "epl-livingroom.iot.internal"
+   Shelly-basement-living:
+       ip: "10.0.14.9"
+       host: "shelly-basement-living.iot.internal"
+   Shelly-basement-shared:
+       ip: "10.0.14.10"
+       host: "shelly-basement-shared.iot.internal"
+   Shelly-laundry-light:
+       ip: "10.0.14.11"
+       host: "shelly-laundry-light.iot.internal"
+Apl:
+   Hp-print:
+       ip: "10.0.15.1"
+       host: "hp-print.apl.internal"
+   Gm-eddie:
+       host: "gm-eddie.apl.internal"
+   Myq-garage:
+       ip: "10.0.15.3"
+       host: "myq-garage.apl.internal"
+   Pod-korie:
+       host: "pod-korie.apl.internal"
+   Pod-livingroom:
+       host: "pod-livingroom.apl.internal"
+   Appletv-livingroom:
+       ip: "10.0.15.6"
+       host: "appletv-livingroom.apl.internal"
+   Samsuntv-livingroom:
+       ip: "10.0.15.7"
+       host: "samsuntv-livingroom.apl.internal"
+   Leviot-humid1:
+       host: "leviot-humid1.apl.internal"
+   Leviot-humid2:
+       host: "leviot-humid2.apl.internal"
+   Amzn-bedroom:
+       host: "amzn-bedroom.apl.internal"
+Router:
+   Gl-basement:
+       ip: "10.0.16.1"
+       host: "gl-basement.router.internal"
+   Velica-main:
+       ip: "10.0.16.2"
+       host: "velica-main.router.internal"
+   Velica-node1:
+       ip: "10.0.16.3"
+       host: "velica-node1.router.internal"
+Devices:
+   Fwlaptop:
+       host: "fwlaptop.devices.internal"
+   Sumomac:
+       host: "sumomac.devices.internal"
+   Steamdeck:
+       host: "steamdeck.devices.internal"
+   Vitapc:
+       host: "vitapc.devices.internal"

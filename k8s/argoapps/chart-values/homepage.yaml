@@ -1,3 +1,6 @@
+image:
+  repository: ghcr.io/gethomepage/homepage
+  tag: latest
 config:
   widgets:
     - kubernetes:
@@ -15,18 +18,36 @@ config:
   services: 
     - Local Cameras:
         - Korie:
-            href: http://korie.amc.cam.local/
+            href: http://korie.cam.internal/
+            siteMonitor: http://korie.cam.internal/
         - Eddie:
-            href: http://eddie.amc.cam.local/
+            href: http://eddie.cam.internal/
+            siteMonitor: http://eddie.cam.internal/
         - Living Room:
-            href: http://lr.tapo.cam.local/
+            href: http://livingroom.cam.internal/
+            siteMonitor: http://livingroom.cam.internal/
+        - Doorbell:
+            href: 'http://doorbell.cam.internal'
+            siteMonitor: http://doorbell.cam.internal/
+        - Garage:
+            href: 'http://garage.cam.internal'
+            siteMonitor: http://garage.cam.internal/
     - Routers:
         - GL Main:
-            href: http://gl.router.local
+            href: http://gl.router.internal
+            siteMonitor: http://gl.router.internal
         - GL Basement:
-            href: http://basement.router.local
-        - TPlink Main:
-            href: http://tp.router.local
+            href: http://gl-basement.router.internal
+            siteMonitor: http://gl-basement.router.internal
+        - MainMesh:
+            href: http://velica-main.router.internal	
+            siteMonitor: http://velica-main.router.internal
+        - MeshNode1:
+            href: http://velica-node1.router.internal	
+            siteMonitor: http://velica-node1.router.internal
+        - MeshNode2:
+            href: http://velica-node2.router.internal	
+            siteMonitor: http://velica-node2.router.internal
   bookmarks: []
   kubernetes:
     mode: cluster
@@ -37,6 +58,3 @@ serviceAccount:
   name: homepage
 
 enableRbac: true
-
-image:
-  tag: v0.7.1

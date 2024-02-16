@@ -92,7 +92,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: {{ .port | default 80 }}
       name: "http"
     - port: 443
       targetPort: 443
@@ -117,7 +117,7 @@ spec:
   revisionHistoryLimit: 2
   updateStrategy:
     rollingUpdate:
-      partition: 0
+      partition: 1
     type: RollingUpdate
   volumeClaimTemplates:
     - metadata:
@@ -158,7 +158,7 @@ spec:
           resources: 
             {{- $v.podResources | toYaml | nindent 12 }}
           ports:
-            - containerPort: 80
+            - containerPort: {{ .port | default 80 }}
               name: "http"
             - containerPort: 443
               name: "https"

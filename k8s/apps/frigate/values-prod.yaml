@@ -1,5 +1,0 @@
-coral:
-    enabled: true
-
-nodeSelector: 
-   "homelab.device/coral": "usb"
