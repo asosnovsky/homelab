@@ -25,16 +25,16 @@ secrets:
       cloudflare:
         name: "cloudflare-apitoken"
 
-infrastructureCharts:
-  amd-gpu:
-    repoURL: "https://radeonopencompute.github.io/k8s-device-plugin/"
-    targetRevision: "0.10.0"
-    values: |-
-      namespace: chart-amd-gpu
-      labeller:
-        enabled: true
-  node-feature-discovery:
-    repoURL: "https://kubernetes-sigs.github.io/node-feature-discovery/charts"
-    targetRevision: "0.10.0"
-    values: |-
-      namespace: chart-node-feature-discovery
+# infrastructureCharts:
+#   amd-gpu:
+#     repoURL: "https://radeonopencompute.github.io/k8s-device-plugin/"
+#     targetRevision: "0.10.0"
+#     values: |-
+#       namespace: chart-amd-gpu
+#       labeller:
+#         enabled: true
+#   node-feature-discovery:
+#     repoURL: "https://kubernetes-sigs.github.io/node-feature-discovery/charts"
+#     targetRevision: "0.10.0"
+#     values: |-
+#       namespace: chart-node-feature-discovery

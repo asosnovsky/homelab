@@ -25,6 +25,8 @@ global:
     port: 1883
     host: 192.168.0.23
 
+videohosting: {}
+
 apps:
   webapps:
     valuesFile: webapps.yaml
@@ -73,15 +75,15 @@ apps:
       smtp_password_secret: {{ .Values.secrets.smtp.secrets.smtp.name }}
       smtp_password_secret_key: password
 
-  frigate:
-    values: |-
-      persistence:
-        media_path:
-            enabled: true
-            claimName: {{ .Values.storage.frigateMedia.name }}
-        conf_path:
-            enabled: true
-            claimName: {{ .Values.storage.frigateConf.name }}
+  # frigate:
+  #   values: |-
+  #     persistence:
+  #       media_path:
+  #           enabled: true
+  #           claimName: {{ .Values.storage.frigateMedia.name }}
+  #       conf_path:
+  #           enabled: true
+  #           claimName: {{ .Values.storage.frigateConf.name }}
 
 infrastructureCharts:
   cert-manager:
