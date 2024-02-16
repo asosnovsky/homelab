@@ -49,6 +49,7 @@ spec:
                   operator: In
                   values:
                     {{ $v.capacity | toYaml | nindent 20 }}
+      volumes: {{ ($v.volumes | default list) | toJson }}
       containers:
         - name: {{$k}}
           image: "{{ $v.repo }}:{{ $v.tag }}"
@@ -93,4 +94,5 @@ spec:
             initialDelaySeconds: 10
             failureThreshold: 10
             timeoutSeconds: 30
+          volumeMounts: {{ ($v.volumeMounts | default list) | toJson }}
 {{ end }}

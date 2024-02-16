@@ -23,7 +23,7 @@ global:
     email: "ariel.sosnovsky@gmail.com"
   mqtt:
     port: 1883
-    host: 192.168.0.23
+    host: castle.hub.internal
 
 apps:
   webapps:
@@ -159,6 +159,14 @@ storage:
   database:
     name: primary-database
     namespace: chart-database
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 8Gi
+  ollama:
+    name: ollama
+    namespace: apps-webapps
     accessModes:
       - ReadWriteMany
     resources:
