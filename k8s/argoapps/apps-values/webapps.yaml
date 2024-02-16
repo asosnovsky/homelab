@@ -26,7 +26,7 @@ apps:
     tag: "latest"
     podResources:
       limits:
-        memory: "1Gi"
+        memory: "8Gi"
       requests:
         cpu: 250m
         memory: "1Gi"
