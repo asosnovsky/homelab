@@ -25,20 +25,6 @@ global:
     port: 1883
     host: 192.168.0.23
 
-videohosting:
-  services:
-    jackett:
-      ports:
-        tcp:
-          web: 9117
-    qbittorrent:
-      ports:
-        tcp:
-          web: 8080
-          6881: 6881
-        udp:
-          6881: 6881
-
 apps:
   webapps:
     valuesFile: webapps.yaml
