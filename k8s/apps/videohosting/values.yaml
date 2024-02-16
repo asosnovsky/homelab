@@ -122,8 +122,9 @@ services:
     repo: lscr.io/linuxserver/bazarr
     tag: "v1.4.1-ls238"
     ports:
-      web:
-        http: 6767
+      tcp:
+        web:
+          http: 6767
     health: {}
     envFrom:
       - secretRef:
