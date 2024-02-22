@@ -124,6 +124,9 @@ Router:
    Velica-node1:
        ip: "10.0.16.3"
        host: "velica-node1.router.internal"
+   Velica-node2:
+       ip: "10.0.16.4"
+       host: "velica-node2.router.internal"
 Devices:
    Fwlaptop:
        host: "fwlaptop.devices.internal"

@@ -79,6 +79,8 @@ D8:BE:65:F2:ED:18 amzn-bedroom.apl.internal
 94:83:C4:41:77:BA velica-main.router.internal
 94:83:C4:41:77:29 10.0.16.3
 94:83:C4:41:77:29 velica-node1.router.internal
+94:83:C4:41:77:B1 10.0.16.4
+94:83:C4:41:77:B1 velica-node2.router.internal
 #Devices
 14:AC:60:29:85:4D fwlaptop.devices.internal
 F8:E4:3B:36:0F:E4 sumomac.devices.internal

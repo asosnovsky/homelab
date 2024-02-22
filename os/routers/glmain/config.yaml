@@ -97,6 +97,8 @@ router:
         mac: '94:83:C4:41:77:BA'
     -   name: 'velica-node1'
         mac: '94:83:C4:41:77:29'
+    -   name: 'velica-node2'
+        mac: '94:83:C4:41:77:B1'
 devices:
     -   name: 'fwlaptop'
         mac: '14:AC:60:29:85:4D'
