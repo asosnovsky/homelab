@@ -40,7 +40,7 @@ apps:
     volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: { { .Values.storage.ollama.name } }
+          claimName: {{ .Values.storage.ollama.name }}
     volumeMounts:
       - name: config
         mountPath: /root/.ollama
@@ -71,7 +71,7 @@ apps:
     volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: { { .Values.storage.ollamaWebGui.name } }
+          claimName: {{ .Values.storage.ollamaWebGui.name }}
     volumeMounts:
       - name: config
         mountPath: /app/backend/data
