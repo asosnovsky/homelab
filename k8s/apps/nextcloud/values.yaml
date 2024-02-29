@@ -15,10 +15,9 @@ nextcloud:
     resources:
       requests:
         cpu: "500m"
-        memory: "1Gi"
+        memory: "100Mi"
         ephemeral-storage: "40Ki"
       limits:
-        memory: 5Gi
         ephemeral-storage: "40Mi"
 
   nextcloud:
@@ -70,10 +69,9 @@ nextcloud:
   resources:
     requests:
       cpu: "500m"
-      memory: "5Gi"
+      memory: "2Gi"
       ephemeral-storage: "20Mi"
     limits:
-      memory: 10Gi
       ephemeral-storage: "200Mi"
 
   hpa:
@@ -90,5 +88,4 @@ nextcloud:
         memory: "256Mi"
         ephemeral-storage: "100Ki"
       limits:
-        memory: 1Gi
         ephemeral-storage: "100Mi"

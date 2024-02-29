@@ -1,4 +1,5 @@
 {{ range $k, $v := .Values.apps }}
+{{ if ($v.enabled | default true ) }}
 ---
 kind: Service
 apiVersion: v1
@@ -117,4 +118,5 @@ spec:
           envFrom: {{ ($v.envFrom | default list) | toJson }}
           env: {{ ($v.env | default list) | toJson }}
           volumeMounts: {{ ($v.volumeMounts | default list) | toJson }}
+{{ end }}
 {{ end }}
