@@ -5,7 +5,7 @@ nextcloud:
     pullPolicy: IfNotPresent
     flavor: fpm
 
-  replicaCount: 2
+  replicaCount: 1
 
   nodeSelector:
     homelab/capacity: high
@@ -70,7 +70,7 @@ nextcloud:
   resources:
     requests:
       cpu: "500m"
-      memory: "1Gi"
+      memory: "5Gi"
       ephemeral-storage: "20Mi"
     limits:
       memory: 10Gi
