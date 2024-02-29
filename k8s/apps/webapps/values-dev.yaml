@@ -1,7 +1,8 @@
 apps:
   quirky:
+    enabled: true
     ingress:
-        middleware: apps-ingresses-https-redirect
+      middleware: apps-ingresses-https-redirect
     repo: ghcr.io/asosnovsky/quirky
     tag: "latest"
     podResources:
@@ -20,9 +21,10 @@ apps:
       - med
       - low
   ollama:
+    enabled: false
     ingress:
-        middleware: apps-ingresses-chain-authentik
-    repo: ollama/ollama 
+      middleware: apps-ingresses-chain-authentik
+    repo: ollama/ollama
     tag: "latest"
     podResources:
       limits:
@@ -39,12 +41,12 @@ apps:
       tcp:
         web: 11434
     volumes:
-        -   name: config
-            persistentVolumeClaim: 
-                claimName: pv-ollama
+      - name: config
+        persistentVolumeClaim:
+          claimName: pv-ollama
     volumeMounts:
-        -   name: config
-            mountPath: /root/.ollama
+      - name: config
+        mountPath: /root/.ollama
     capacity:
       - med
       - high

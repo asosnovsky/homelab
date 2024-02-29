@@ -1,5 +1,5 @@
 {{ range $k, $v := .Values.apps }}
-{{ if ($v.enabled | default true ) }}
+{{ if $v.enabled }}
 ---
 kind: Service
 apiVersion: v1
