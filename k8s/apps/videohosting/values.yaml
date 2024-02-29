@@ -8,8 +8,8 @@ global:
       familyvideos: "changeme"
 plex:
   repo: "plexinc/pms-docker"
-  tag: "1.32.7.7621-871adbd44"
-  resources: 
+  tag: "1.40.0.7998-c29d4c0c8"
+  resources:
     limits:
       memory: "14Gi"
     requests:
@@ -18,7 +18,7 @@ plex:
 jellyfin:
   repo: "lscr.io/linuxserver/jellyfin"
   tag: latest
-  resources: 
+  resources:
     limits:
       memory: "14Gi"
     requests:
@@ -28,8 +28,8 @@ jellyfin:
 arrs:
   sonarr:
     repo: lscr.io/linuxserver/sonarr
-    tag: "4.0.1.929-ls225"
-    migrateDbFromSqllite: 
+    tag: "4.0.2.1183-ls229"
+    migrateDbFromSqllite:
       enabled: false
       claimName: config-sonarr-0
     usePostgres: true
@@ -48,11 +48,11 @@ arrs:
       <InstanceName>Sosnovsky Sonarr</InstanceName>
       <AuthenticationMethod>External</AuthenticationMethod>
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
-    
+
   radarr:
     repo: lscr.io/linuxserver/radarr
-    tag: "5.2.6.8376-ls203"
-    migrateDbFromSqllite: 
+    tag: "5.3.6.8612-ls206"
+    migrateDbFromSqllite:
       enabled: false
       claimName: config-radarr-0
     usePostgres: true
@@ -71,11 +71,11 @@ arrs:
       <InstanceName>Sosnovsky Radarr</InstanceName>
       <AuthenticationMethod>External</AuthenticationMethod>
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
-    
+
   readarr:
     repo: lscr.io/linuxserver/readarr
     tag: "develop-0.3.18.2411-ls88"
-    migrateDbFromSqllite: 
+    migrateDbFromSqllite:
       enabled: false
     usePostgres: true
     podResources:
@@ -92,11 +92,11 @@ arrs:
     extraConfigXml: |-
       <InstanceName>Sosnovsky Readarr</InstanceName>
       <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
-      
+
   prowlarr:
     repo: lscr.io/linuxserver/prowlarr
-    tag: "1.13.3.4273-ls53"
-    migrateDbFromSqllite: 
+    tag: "1.13.3.4273-ls54"
+    migrateDbFromSqllite:
       enabled: false
       claimName: config-prowlarr-0
     usePostgres: true
@@ -120,7 +120,7 @@ services:
   bazarr:
     kind: StatefulSet
     repo: lscr.io/linuxserver/bazarr
-    tag: "v1.4.1-ls238"
+    tag: "v1.4.2-ls240"
     ports:
       tcp:
         web: 6767
@@ -134,7 +134,7 @@ services:
       requests:
         cpu: 250m
         memory: "500M"
-    
+
   jellyplex:
     kind: Deployment
     disableSVC: true
