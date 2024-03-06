@@ -1,5 +1,6 @@
 cleanPrometheusOperatorObjectNames: false
 alertmanager:
+  enabled: true
   alertmanagerSpec:
     storage: 
         volumeClaimTemplate:

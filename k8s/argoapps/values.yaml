@@ -104,7 +104,7 @@ infrastructureCharts:
   prometheus:
     chart: kube-prometheus-stack
     repoURL: "https://prometheus-community.github.io/helm-charts"
-    targetRevision: "51.10.0"
+    targetRevision: "56.21.2"
     valuesFile: prometheus.yaml
     enableServerSideApply: true
   authentik:
