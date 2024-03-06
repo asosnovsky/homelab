@@ -32,7 +32,7 @@ services:
     icon: "https://grafana.core.home.sosnovsky.ca/public/img/fav32.png"
     health: "healthz"
   - prefix: "authentik.core"
-    service: "authentik"
+    service: "authentik-server"
     namespace: "chart-authentik"
     group: "Core"
     icon: "https://authentik.core.home.sosnovsky.ca/static/dist/assets/icons/icon.png"
