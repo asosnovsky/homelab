@@ -1,10 +1,10 @@
 authentik:
   cookie_domain: authentik.core.{{ .Values.global.domain }}
   email:
-    from: { { .Values.global.smtp.email } }
+    from: {{ .Values.global.smtp.email }}
     host: postfix.email.svc.cluster.local
     port: 25
-    username: { { .Values.global.smtp.email } }
+    username: {{ .Values.global.smtp.email }}
     use_ssl: false
   postgresql:
     host: postgres.chart-database.svc.cluster.local
@@ -17,4 +17,6 @@ redis:
 global:
   envFrom:
     - secretRef:
-        name: { { .Values.secrets.authentik.secrets.env.name } }
+        name: {{ .Values.secrets.authentik.secrets.env.name }}
+
+
