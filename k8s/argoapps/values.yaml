@@ -109,7 +109,7 @@ infrastructureCharts:
     enableServerSideApply: true
   authentik:
     repoURL: https://charts.goauthentik.io
-    targetRevision: "2024.4.4"
+    targetRevision: "2024.2.2"
     valuesFile: authentik.yaml
   homepage:
     repoURL: https://jameswynn.github.io/helm-charts
