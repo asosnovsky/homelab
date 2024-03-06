@@ -1,4 +1,6 @@
 argo-cd:
+  notifications:
+    argocdUrl: ""
   configs:
     cm:
       exec.enabled: true

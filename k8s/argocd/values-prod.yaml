@@ -1,0 +1,3 @@
+argo-cd:
+  notifications:
+    argocdUrl: "https://argocd.core.home.sosnovsky.ca"

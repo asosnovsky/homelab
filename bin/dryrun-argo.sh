@@ -21,6 +21,7 @@ if [ -f "$tmp_path" ]; then
         echo " -> Renaming old file to "$tmp_path".old.${num_files}"
         mv $tmp_path $tmp_path".old.${num_files}"
     else
+        rm $tmp_path".old"*
         echo " -> Renaming old file to "$tmp_path".old"
         mv $tmp_path $tmp_path".old"
     fi
@@ -29,6 +30,7 @@ helm template $app $full_path --namespace $app \
     --debug \
     --create-namespace \
     --values k8s/argocd/values.yaml \
+    --values k8s/argocd/values-${deployment}.yaml \
     --set selfapp.deployment="${deployment}" \
     --set selfapp.enabled="true" \
     --set selfapp.sshkey="$(cat ~/.ssh/id_rsa)" \
