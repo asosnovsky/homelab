@@ -101,7 +101,7 @@ services:
   {{- $webapps := tpl $webapps . | fromYaml }}
   {{- range $k, $v := $webapps.apps }}
   {{ if $v.enabled }}
-  - prefix: "{{ $k }}-app"
+  - prefix: "{{ $v.ingress.prefix | default (printf "%s-app" $k) }}"
     service: "{{ $k }}"
     namespace: "apps-webapps"
     port: {{ $v.ports.tcp.web }}
