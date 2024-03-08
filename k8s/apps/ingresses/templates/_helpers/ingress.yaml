@@ -11,6 +11,17 @@
 #   useWildCard: bool = False
 #   middleware: str = "https-redirect"
 # 
+{{ if .useSecondaryDomain }}
+{{ $domin := {{ .global.secondaryDomain }}  }}
+{{ else }}
+{{ $domin := {{ .global.domain }}  }}
+{{ end }}
+
+{{ if .useDirectPrefix }}
+{{ $domin := printf "%s.%s" .prefix $domain }}
+{{ else }}
+{{ $domin := printf "%s.%s.%s" .prefix .rootSubDomain $domain }}
+{{ end }}
 
 {{  if .global.tls.enabled  }}
 {{ if (.useWildCard | default .global.tls.useWildCard) }}
@@ -18,7 +29,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: "tls-{{.prefix}}.{{.global.domain}}"
+  name: "tls-{{ $domin }}"
   namespace: {{ .namespace }}
 spec:
   refreshInterval: 1h
@@ -26,45 +37,33 @@ spec:
     kind: ClusterSecretStore
     name: apps-ingresses
   target:
-    name: tls-{{.prefix}}.{{.global.domain}}
+    name: tls-{{ $domin }}
     creationPolicy: Owner
     deletionPolicy: Delete
   data:
     - secretKey: tls.crt
       remoteRef:
-      {{ if hasSuffix ".core" .prefix }}
-        key: cloudflare-wildcard.core.{{ .global.domain }}
-      {{ else if hasSuffix ".vh" .prefix }}
-        key: cloudflare-wildcard.vh.{{ .global.domain }}
-      {{ else }}
-        key: cloudflare-wildcard.{{ .global.domain }}
-      {{ end }}
+        key: cloudflare-wildcard.{{ $domin }}
         property: tls.crt
     - secretKey: tls.key
       remoteRef:
-      {{ if hasSuffix ".core" .prefix }}
-        key: cloudflare-wildcard.core.{{ .global.domain }}
-      {{ else if hasSuffix ".vh" .prefix }}
-        key: cloudflare-wildcard.vh.{{ .global.domain }}
-      {{ else }}
-        key: cloudflare-wildcard.{{ .global.domain }}
-      {{ end }}
+        key: cloudflare-wildcard.{{ $domin }}
         property: tls.key
 {{ else }}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "tls-{{.prefix}}.{{.global.domain}}"
+  name: "tls-{{ $domin }}"
   namespace: {{ .namespace }}
 spec:
-  secretName: "tls-{{.prefix}}.{{.global.domain}}"
+  secretName: "tls-{{ $domin }}"
   issuerRef: 
     kind: ClusterIssuer
     name: "{{ .global.tls.issuer }}"
-  commonName: "{{.prefix}}.{{.global.domain}}"
+  commonName: "{{ $domin }}"
   dnsNames:
-    - "{{.prefix}}.{{.global.domain}}"
+    - "{{ $domin }}"
 {{ end }}
 {{ end }}
 
@@ -72,7 +71,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "{{.prefix}}.{{.global.domain}}"
+  name: "{{ $domin }}"
   namespace: {{ .namespace }}
   annotations:
     homelab-ingress/managing-app-namespace: "apps-ingresses"
@@ -93,7 +92,7 @@ metadata:
   {{ end }}
 spec:
   rules:
-  - host: "{{.prefix}}.{{.global.domain}}"
+  - host: "{{ $domin }}"
     http:
       paths:
       - backend:
@@ -105,10 +104,13 @@ spec:
         pathType: Prefix
   {{ if .global.tls.enabled }}
   tls:
-    - secretName: "tls-{{.prefix}}.{{.global.domain}}"
+    - secretName: "tls-{{ $domin }}"
       hosts:
-        - "{{.prefix}}.{{.global.domain}}"
+        - "{{ $domin }}"
   {{ end }}
 
+{{ else }}
+
+{{ end }}
 
 {{- end -}}

@@ -91,11 +91,6 @@ services:
     namespace: "apps-videohosting"
     middleware: "apps-ingresses-chain-authentik"
     group: "Video Hosting"
-  # - prefix: "immich"
-  #   service: "immich-server"
-  #   namespace: "apps-photos"
-  #   middleware: "apps-ingresses-chain-authentik"
-  #   group: "Apps"
   # webapp services
   {{- $webapps := .Files.Get (printf "apps-values/%s" .Values.apps.webapps.valuesFile) }}
   {{- $webapps := tpl $webapps . | fromYaml }}
@@ -110,6 +105,6 @@ services:
     {{ else }}
     middleware: "apps-ingresses-chain-authentik"
     {{ end -}}
-    group: "Basic Webapps"
+    group: {{ .ingress.group | default "Basic Webapps" }}
   {{ end }}
   {{- end }}

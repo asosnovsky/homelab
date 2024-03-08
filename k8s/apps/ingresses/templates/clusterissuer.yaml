@@ -40,15 +40,15 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cloudflare-wildcard{{$prefix}}.{{ $.Values.global.domain }}
+  name: cloudflare-wildcard{{$prefix}}.{{ $.Values.global.rootSubDomain }}.{{ $.Values.global.domain }}
 spec:
-  secretName: cloudflare-wildcard{{$prefix}}.{{ $.Values.global.domain }}
+  secretName: cloudflare-wildcard{{$prefix}}.{{ $.Values.global.rootSubDomain }}.{{ $.Values.global.domain }}
   issuerRef:
     name: cloudflare
     kind: Issuer
-  commonName: '*{{$prefix}}.{{ $.Values.global.domain }}'
+  commonName: '*{{$prefix}}.{{ $.Values.global.rootSubDomain }}.{{ $.Values.global.domain }}'
   dnsNames:
-    -   "*{{$prefix}}.{{ $.Values.global.domain }}"
+    -   "*{{$prefix}}.{{ $.Values.global.rootSubDomain }}.{{ $.Values.global.domain }}"
 {{ end }}
 {{ end }}
 {{ end }}

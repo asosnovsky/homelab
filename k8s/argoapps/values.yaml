@@ -6,6 +6,8 @@ global:
   email: "ariel@sosnovsky.ca"
   timezone: America/Toronto
   domain: "changeme"
+  rootSubDomain: "home" 
+  secondaryDomain: "changeme"
   tls:
     enabled: false
     issuer: ""
