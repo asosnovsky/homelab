@@ -1,4 +1,7 @@
 {
-    "yaml.schemas": {},
+    "yaml.schemas": {
+        "file:///Users/asosnovsky/.vscode/extensions/docsmsft.docs-yaml-1.0.1/dist/toc.schema.json": "/toc\\.yml/i",
+        "https://json.schemastore.org/helmfile.json": "file:///Users/asosnovsky/git/personal/homelab/k8s/argoapps/apps-values/ingresses.yaml"
+    },
     "git-blame.gitWebUrl": ""
 }

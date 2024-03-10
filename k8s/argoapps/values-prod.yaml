@@ -1,6 +1,7 @@
 global:
   deployment: prod
-  domain: "home.sosnovsky.ca"
+  domain: "sosnovsky.ca"
+  secondaryDomain: "skyg.ca"
   tls:
     useWildCard: true
     enabled: true

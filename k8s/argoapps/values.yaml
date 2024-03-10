@@ -6,6 +6,8 @@ global:
   email: "ariel@sosnovsky.ca"
   timezone: America/Toronto
   domain: "changeme"
+  rootSubDomain: "home" 
+  secondaryDomain: "changeme"
   tls:
     enabled: false
     issuer: ""
@@ -104,12 +106,12 @@ infrastructureCharts:
   prometheus:
     chart: kube-prometheus-stack
     repoURL: "https://prometheus-community.github.io/helm-charts"
-    targetRevision: "51.10.0"
+    targetRevision: "56.21.2"
     valuesFile: prometheus.yaml
     enableServerSideApply: true
   authentik:
     repoURL: https://charts.goauthentik.io
-    targetRevision: "2023.10.5"
+    targetRevision: "2024.2.2"
     valuesFile: authentik.yaml
   homepage:
     repoURL: https://jameswynn.github.io/helm-charts

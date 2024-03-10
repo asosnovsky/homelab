@@ -14,8 +14,9 @@ postgresql:
   enabled: false
 redis:
   enabled: true
-envFrom:
-  - secretRef:
-      name: {{ .Values.secrets.authentik.secrets.env.name }}
+global:
+  envFrom:
+    - secretRef:
+        name: {{ .Values.secrets.authentik.secrets.env.name }}
 
 

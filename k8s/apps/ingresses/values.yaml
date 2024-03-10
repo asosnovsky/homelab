@@ -1,5 +1,7 @@
 global:
   domain: "me.local"
+  secondaryDomain: "me.internal"
+  rootSubDomain: "home"
   tls:
     enabled: false
 reverseProxy: {}
