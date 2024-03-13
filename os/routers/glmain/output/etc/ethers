@@ -72,6 +72,7 @@ F0:70:4F:54:F3:F0 samsuntv-livingroom.apl.internal
 3C:E9:0E:62:14:D8 leviot-humid1.apl.internal
 1C:9D:C2:39:61:F8 leviot-humid2.apl.internal
 D8:BE:65:F2:ED:18 amzn-bedroom.apl.internal
+94:83:C4:41:77:B0 lgtv-bedroom.apl.internal
 #Router
 94:83:C4:31:D5:CE 10.0.16.1
 94:83:C4:31:D5:CE gl-basement.router.internal
@@ -79,8 +80,8 @@ D8:BE:65:F2:ED:18 amzn-bedroom.apl.internal
 94:83:C4:41:77:BA velica-main.router.internal
 94:83:C4:41:77:29 10.0.16.3
 94:83:C4:41:77:29 velica-node1.router.internal
-94:83:C4:41:77:B1 10.0.16.4
-94:83:C4:41:77:B1 velica-node2.router.internal
+94:83:C4:41:77:B0 10.0.16.4
+94:83:C4:41:77:B0 velica-node2.router.internal
 #Devices
 14:AC:60:29:85:4D fwlaptop.devices.internal
 F8:E4:3B:36:0F:E4 sumomac.devices.internal

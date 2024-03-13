@@ -114,6 +114,8 @@ Apl:
        host: "leviot-humid2.apl.internal"
    Amzn-bedroom:
        host: "amzn-bedroom.apl.internal"
+   Lgtv-bedroom:
+       host: "lgtv-bedroom.apl.internal"
 Router:
    Gl-basement:
        ip: "10.0.16.1"

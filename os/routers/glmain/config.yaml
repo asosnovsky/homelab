@@ -90,6 +90,9 @@ apl:
     -   name: 'amzn-bedroom'
         mac: 'D8:BE:65:F2:ED:18'
         justMac: true
+    -   name: 'lgtv-bedroom'
+        mac: '94:83:C4:41:77:B0'
+        justMac: true
 router:
     -   name: 'gl-basement'
         mac: '94:83:C4:31:D5:CE'
@@ -98,7 +101,7 @@ router:
     -   name: 'velica-node1'
         mac: '94:83:C4:41:77:29'
     -   name: 'velica-node2'
-        mac: '94:83:C4:41:77:B1'
+        mac: '94:83:C4:41:77:B0'
 devices:
     -   name: 'fwlaptop'
         mac: '14:AC:60:29:85:4D'
