@@ -99,6 +99,7 @@ services:
   - prefix: "{{ $v.ingress.prefix | default (printf "%s-app" $k) }}"
     service: "{{ $k }}"
     namespace: "apps-webapps"
+    useDirectPrefix: {{ $v.ingress.useDirectPrefix | default "false" }}
     port: {{ $v.ports.tcp.web }}
     {{- if $v.ingress }}
     middleware: {{ $v.ingress.middleware | default "apps-ingresses-chain-authentik" }}
