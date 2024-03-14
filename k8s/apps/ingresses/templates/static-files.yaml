@@ -1,6 +1,7 @@
 {{ range $staticFile := .Values.staticFiles.secondaryDomain }}
 
 {{ $prefix := printf "sec-domain-%s" $staticFile.path }}
+{{ $appLabel := replace "." "-" $staticFile.path }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -15,16 +16,19 @@ apiVersion: apps/v1
 metadata:
     name: "{{$prefix}}-host"
     labels:
-        app: "{{$prefix}}-host"
+        app: "statis-files"
+        path: {{ $appLabel }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "{{$prefix}}-host"
+        app: "statis-files"
+        path: {{ $appLabel }}
   template:
     metadata:
       labels:
-        app: "{{$prefix}}-host"
+        app: "statis-files"
+        path: {{ $appLabel }}
     spec:
         volumes:
             -   name: static-files
@@ -54,10 +58,12 @@ apiVersion: v1
 metadata:
     name: "{{$prefix}}-static-files"
     labels:
-        app: "{{$prefix}}-static-files"
+        app: "statis-files"
+        path: {{ $appLabel }}
 spec:
   selector:
-    app: "{{$prefix}}-host"
+        app: "statis-files"
+        path: {{ $appLabel }}
   type: ClusterIP
   ports:
     - name: http
