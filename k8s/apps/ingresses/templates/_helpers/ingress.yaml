@@ -2,19 +2,23 @@
 
 # 
 # Input:
-#   prefix: str
-#   service: str
-#   namespace: str
-#   global: map (should be .global)
-#   port: int = 80
-#   path: str = "/"
-#   useWildCard: bool = False
-#   middleware: str = "https-redirect"
+#   prefix: str = {{ .prefix }}
+#   service: str = {{ .service }}
+#   namespace: str = {{ .namespace }}
+#   global: map (should be .global) = {{ .global | toJson }}
+#   port: int = 80 = {{ .port }}
+#   path: str = "/" = {{ .path }}
+#   useWildCard: bool = False = {{ .useWildCard }}
+#   middleware: str = "https-redirect" = {{ .middleware }}
+#   useSecondaryDomain: bool = False = {{ .useSecondaryDomain }}
+#   useDirectPrefix: bool = False = {{ .useDirectPrefix }}
 # 
 
 {{ $domain := (include "homelab.ingress.domain" .) }}
 
 {{ $_ := set . "domain" $domain }}
+
+# {{ .domain }}
 
 {{  if .global.tls.enabled  }}
 {{ include "homelab.ingress.domain.tls" . }}
@@ -30,7 +34,6 @@ metadata:
     homelab-ingress/managing-app-namespace: "apps-ingresses"
     traefik.ingress.kubernetes.io/router.middlewares: {{ .middleware | default "apps-ingresses-https-redirect"}}@kubernetescrd
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
     gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
     gethomepage.dev/siteMonitor: 'http://{{.service}}.{{ .namespace }}.svc.cluster.local:{{.port | default 80}}{{ .path | default "/" }}{{ .health | default "" }}'
     # gethomepage.dev/description: {{ .description | default "" }}
@@ -61,4 +64,5 @@ spec:
       hosts:
         - "{{ $domain }}"
   {{ end }}
+
 {{- end -}}
