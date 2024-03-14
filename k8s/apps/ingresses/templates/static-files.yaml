@@ -1,7 +1,8 @@
 {{ range $staticFile := .Values.staticFiles.secondaryDomain }}
 
-{{ $prefix := printf "sec-domain-%s" $staticFile.path }}
 {{ $appLabel := replace "." "-" $staticFile.path }}
+{{ $prefix := printf "sec-domain-%s" $appLabel }}
+
 ---
 apiVersion: v1
 kind: ConfigMap
