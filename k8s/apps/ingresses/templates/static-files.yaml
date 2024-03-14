@@ -10,35 +10,44 @@ data:
     index.html: {{ $staticFile.content }}
 
 ---
-apiVersion: v1
-kind: Pod
+kind: Deployment
+apiVersion: apps/v1
 metadata:
     name: "{{$prefix}}-host"
     labels:
         app: "{{$prefix}}-host"
 spec:
-    volumes:
-        -   name: static-files
-            configMap:
-                name: "{{$prefix}}-static-files"
-    containers:
-        -   name: api
-            image: caddy:2.7-alpine
-            command:
-                - caddy
-                - file-server
-                - --root
-                - /files
-                - --listen
-                - '0.0.0.0:80'
-            volumeMount:
-                -   mountPath: /files
-                    name: static-files
-            resources:
-                limits:
-                    memory: 1Gi
-            ports:
-                - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "{{$prefix}}-host"
+  template:
+    metadata:
+      labels:
+        app: "{{$prefix}}-host"
+    spec:
+        volumes:
+            -   name: static-files
+                configMap:
+                    name: "{{$prefix}}-static-files"
+        containers:
+            -   name: api
+                image: caddy:2.7-alpine
+                command:
+                    - caddy
+                    - file-server
+                    - --root
+                    - /files
+                    - --listen
+                    - '0.0.0.0:80'
+                volumeMount:
+                    -   mountPath: /files
+                        name: static-files
+                resources:
+                    limits:
+                        memory: 1Gi
+                ports:
+                    - containerPort: 80
 ---
 kind: Service
 apiVersion: v1
