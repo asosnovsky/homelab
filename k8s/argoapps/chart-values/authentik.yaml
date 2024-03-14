@@ -1,5 +1,5 @@
 authentik:
-  cookie_domain: authentik.core.{{ .Values.global.domain }}
+  cookie_domain: authentik.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
   email:
     from: {{ .Values.global.smtp.email }}
     host: postfix.email.svc.cluster.local

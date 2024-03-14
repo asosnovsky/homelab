@@ -14,9 +14,9 @@ alertmanager:
                         storage: 100Gi
 
 {{-  if .Values.global.tls.enabled  }}
-    externalUrl: "https://alerts.core.{{ .Values.global.domain }}"
+    externalUrl: "https://alerts.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}"
 {{- else }}
-    externalUrl: "http://alerts.core.{{ .Values.global.domain }}"
+    externalUrl: "http://alerts.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}"
 {{- end }}
     resources: 
         requests:
@@ -28,7 +28,7 @@ alertmanager:
     global:
         smtp_from: '{{.Values.global.smtp.email }}'
         smtp_smarthost: 'postfix.email.svc.cluster.local:25'
-        smtp_hello: 'alerts.core.{{ .Values.global.domain }}'
+        smtp_hello: 'alerts.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}'
     receivers:
         -   name: '{{ .Values.global.email }}'
             email_configs: 
@@ -48,16 +48,16 @@ grafana:
         server:
             domain: grafana.core.{{ .Values.global.domain }}
         server:
-           root_url: https://grafana.core.{{ .Values.global.domain }}
+           root_url: https://grafana.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
 
 prometheus:
   prometheusSpec:
     enableAdminAPI: false
 
 {{-  if .Values.global.tls.enabled  }}
-    externalUrl: "https://monitoring.core.{{ .Values.global.domain }}"
+    externalUrl: "https://monitoring.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}"
 {{- else }}
-    externalUrl: "http://monitoring.core.{{ .Values.global.domain }}"
+    externalUrl: "http://monitoring.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}"
 {{- end }}
     resources: 
         requests:

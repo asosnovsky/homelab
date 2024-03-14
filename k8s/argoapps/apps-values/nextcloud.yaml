@@ -2,7 +2,7 @@ global:
   storageClass: {{ .Values.global.nfs.storageClass }}
 nextcloud:
   nextcloud:
-    host: "nextcloud.{{ .Values.global.domain }}"
+    host: "nextcloud.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}"
   externalDatabase:
     host: postgres.chart-database.svc.cluster.local
   persistence:
@@ -17,7 +17,7 @@ nextcloud:
         $CONFIG = array (
             'allow_user_to_change_display_name' => false,
             'lost_password_link' => 'disabled',
-            'oidc_login_provider_url' => 'https://auth.core.{{ .Values.global.domain }}',
+            'oidc_login_provider_url' => 'https://auth.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}',
             'oidc_login_client_id' => 'nextcloud',
             'oidc_login_client_secret' => 'xjW7ByDrY0IpGo6XC5o6eQEUGagjkK6hULfbtADO5GV-ugHiG1ri1FRvkfL.-sacdHWyqZyO',
             'oidc_login_auto_redirect' => false,

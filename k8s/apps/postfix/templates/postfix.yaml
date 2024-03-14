@@ -6,7 +6,7 @@ metadata:
   name:  "postfix-smtp-env"
 type: Opaque
 data:
-  SERVER_HOSTNAME: "{{ .Values.global.domain | b64enc }}"
+  SERVER_HOSTNAME: "{{ (printf "%s.%s" .Values.global.rootSubDomain .Values.global.domain) | b64enc }}"
 {{ range $k, $v := .Values.smtp_configs }}
   {{ $k }}: "{{ $v | b64enc }}"
 {{ end }}
