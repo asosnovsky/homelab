@@ -40,7 +40,7 @@ spec:
                     - /files
                     - --listen
                     - '0.0.0.0:80'
-                volumeMount:
+                volumeMounts:
                     -   mountPath: /files
                         name: static-files
                 resources:
