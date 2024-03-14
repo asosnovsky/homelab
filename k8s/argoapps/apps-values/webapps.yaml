@@ -23,7 +23,8 @@ apps:
   me:
     enabled: true
     ingress:
-      prefix: aboutme
+      prefix: ari
+      useDirectPrefix: true
       middleware: apps-ingresses-https-redirect
     repo: ghcr.io/asosnovsky/aboutme
     tag: "latest"
