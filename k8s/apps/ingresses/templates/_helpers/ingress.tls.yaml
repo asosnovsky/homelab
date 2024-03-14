@@ -4,7 +4,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: "tls-{{ .domain }}"
+  name: "tls-{{.prefix}}.{{ .domain }}"
   namespace: {{ .namespace }}
 spec:
   refreshInterval: 1h
@@ -29,15 +29,15 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "tls-{{ .domain }}"
+  name: "tls-{{.prefix}}.{{ .domain }}"
   namespace: {{ .namespace }}
 spec:
-  secretName: "tls-{{ .domain }}"
+  secretName: "tls-{{.prefix}}.{{ .domain }}"
   issuerRef: 
     kind: ClusterIssuer
     name: "{{ .global.tls.issuer }}"
-  commonName: "{{ .domain }}"
+  commonName: "{{.prefix}}.{{ .domain }}"
   dnsNames:
-    - "{{ .domain }}"
+    - "{{.prefix}}.{{ .domain }}"
 {{ end }}
 {{ end }}

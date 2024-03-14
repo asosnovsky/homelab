@@ -1,11 +1,11 @@
 {{- define "homelab.ingress.domain" -}}
   {{- if .useSecondaryDomain -}}
-{{.prefix}}.{{.global.secondaryDomain}}
+{{.global.secondaryDomain}}
   {{- else -}}
     {{- if .useDirectPrefix -}}
-{{.prefix}}.{{.global.domain}}
+{{.global.domain}}
     {{- else -}}
-{{.prefix}}.{{.global.rootSubDomain}}.{{.global.domain}}
+{{.global.rootSubDomain}}.{{.global.domain}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
