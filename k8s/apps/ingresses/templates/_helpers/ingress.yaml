@@ -17,14 +17,16 @@
 
 {{ $splitPrefix := splitList "." .prefix }}
 {{ $prefix := first $splitPrefix }}
-{{ $rootPrefix := join "." (rest $splitPrefix) }}
+{{ $leadPrefix := join "." (rest $splitPrefix) }}
 
 {{ $_ := set . "prefix" $prefix }}
-{{ $_ := set . "rootPrefix" $rootPrefix }}
+{{ $_ := set . "leadPrefix" $leadPrefix }}
 
 {{ $domain := (include "homelab.ingress.domain" .) }}
 
 {{ $_ := set . "domain" $domain }}
+# .domain = {{ .domain }}
+# .prefix = {{ .prefix }}
 
 {{  if .global.tls.enabled  }}
 {{ include "homelab.ingress.domain.tls" . }}
