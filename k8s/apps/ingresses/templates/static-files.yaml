@@ -1,0 +1,83 @@
+{{ range $staticFile := .Values.staticFiles.secondaryDomain }}
+
+{{ $prefix := printf "sec-domain-%s" $staticFile.path }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{$prefix}}-static-files"
+data:
+    index.html: {{ $staticFile.content }}
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: "{{$prefix}}-host"
+    labels:
+        app: "{{$prefix}}-host"
+spec:
+    volumes:
+        -   name: static-files
+            configMap:
+                name: "{{$prefix}}-static-files"
+    containers:
+        -   name: api
+            image: caddy:2.7-alpine
+            command:
+                - caddy
+                - file-server
+                - --root
+                - /files
+                - --listen
+                - 80
+            volumeMount:
+                -   mountPath: /files
+                    name: static-files
+            resources:
+                limits:
+                    memory: 1Gi
+            ports:
+                - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+    name: "{{$prefix}}-static-files"
+    labels:
+        app: "{{$prefix}}-static-files"
+spec:
+  selector:
+    app: "{{$prefix}}-host"
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{$prefix}}-static-files-{{$staticFile.path}}"
+  annotations:
+    homelab-ingress/managing-app-namespace: "apps-ingresses"
+    traefik.ingress.kubernetes.io/router.middlewares: {{ $staticFile.middleware | default "apps-ingresses-https-redirect"}}@kubernetescrd
+spec:
+  rules:
+  - host: "{{ $.Values.global.secondaryDomain }}"
+    http:
+      paths:
+      - backend:
+          service:
+            name: "{{$prefix}}-static-files"
+            port:
+              number: 80
+        path: "/{{$staticFile.path}}"
+        pathType: Prefix
+  {{ if $.Values.global.tls.enabled }}
+  tls:
+    - secretName: "tls-{{ $.Values.global.secondaryDomain }}"
+      hosts:
+        - "{{ $.Values.global.secondaryDomain }}"
+  {{ end }}
+{{ end }}

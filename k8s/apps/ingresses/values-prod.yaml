@@ -41,3 +41,10 @@ reverseProxy:
 
 cloudflare:
   enabled: true
+
+staticFiles:
+  mainDomain: []
+  secondaryDomain: 
+    - suffix: "/ads.txt"
+      content: |
+        google.com, pub-6915532978483380, DIRECT, f08c47fec0942fa0

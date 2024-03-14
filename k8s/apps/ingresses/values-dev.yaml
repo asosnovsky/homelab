@@ -16,3 +16,9 @@ services:
     namespace: "apps-ingresses"
     middleware: "apps-ingresses-forwardauth-authentik"
     group: "Demo"
+staticFiles:
+  mainDomain: []
+  secondaryDomain: 
+    - path: "ads.txt"
+      content: |
+        google.com, pub-6915532978483380, DIRECT, f08c47fec0942fa0
