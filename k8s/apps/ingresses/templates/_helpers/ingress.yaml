@@ -15,6 +15,13 @@
 #   
 
 
+{{ $splitPrefix := splitList "." .prefix }}
+{{ $prefix := first $splitPrefix }}
+{{ $rootPrefix := join "." (rest $splitPrefix) }}
+
+{{ $_ := set . "prefix" $prefix }}
+{{ $_ := set . "rootPrefix" $rootPrefix }}
+
 {{ $domain := (include "homelab.ingress.domain" .) }}
 
 {{ $_ := set . "domain" $domain }}

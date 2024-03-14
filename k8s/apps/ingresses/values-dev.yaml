@@ -5,3 +5,14 @@ reverseProxy:
   yellow:
     port: "8123"
     ip: "192.168.0.23"
+services:
+  - prefix: "argocd.core"
+    service: "argocd-server"
+    namespace: "argocd"
+    group: "Core"
+    icon: "assets/favicon/favicon-32x32.png"
+  - prefix: "demo"
+    service: "dummy-app"
+    namespace: "apps-ingresses"
+    middleware: "apps-ingresses-forwardauth-authentik"
+    group: "Demo"
