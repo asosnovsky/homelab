@@ -12,7 +12,7 @@ spec:
     kind: ClusterSecretStore
     name: apps-ingresses
   target:
-    name: tls-{{ .domain }}
+    name: tls-{{.prefix}}.{{ .domain }}
     creationPolicy: Owner
     deletionPolicy: Delete
   data:
