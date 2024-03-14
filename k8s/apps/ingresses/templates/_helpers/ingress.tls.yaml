@@ -1,0 +1,43 @@
+{{ define "homelab.ingress.domain.tls"}}
+{{ if (.useWildCard | default .global.tls.useWildCard) }}
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: "tls-{{ .domain }}"
+  namespace: {{ .namespace }}
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: apps-ingresses
+  target:
+    name: tls-{{ .domain }}
+    creationPolicy: Owner
+    deletionPolicy: Delete
+  data:
+    - secretKey: tls.crt
+      remoteRef:
+        key: cloudflare-wildcard.{{ .domain }}
+        property: tls.crt
+    - secretKey: tls.key
+      remoteRef:
+        key: cloudflare-wildcard.{{ .domain }}
+        property: tls.key
+{{ else }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "tls-{{ .domain }}"
+  namespace: {{ .namespace }}
+spec:
+  secretName: "tls-{{ .domain }}"
+  issuerRef: 
+    kind: ClusterIssuer
+    name: "{{ .global.tls.issuer }}"
+  commonName: "{{ .domain }}"
+  dnsNames:
+    - "{{ .domain }}"
+{{ end }}
+{{ end }}

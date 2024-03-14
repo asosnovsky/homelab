@@ -11,67 +11,20 @@
 #   useWildCard: bool = False
 #   middleware: str = "https-redirect"
 # 
-{{ if .useSecondaryDomain }}
-{{ $domin := {{ .global.secondaryDomain }}  }}
-{{ else }}
-{{ $domin := {{ .global.domain }}  }}
-{{ end }}
 
-{{ if .useDirectPrefix }}
-{{ $domin := printf "%s.%s" .prefix $domain }}
-{{ else }}
-{{ $domin := printf "%s.%s.%s" .prefix .rootSubDomain $domain }}
-{{ end }}
+{{ $domain := (include "homelab.ingress.domain" .) }}
+
+{{ $_ := set . "domain" $domain }}
 
 {{  if .global.tls.enabled  }}
-{{ if (.useWildCard | default .global.tls.useWildCard) }}
----
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: "tls-{{ $domin }}"
-  namespace: {{ .namespace }}
-spec:
-  refreshInterval: 1h
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: apps-ingresses
-  target:
-    name: tls-{{ $domin }}
-    creationPolicy: Owner
-    deletionPolicy: Delete
-  data:
-    - secretKey: tls.crt
-      remoteRef:
-        key: cloudflare-wildcard.{{ $domin }}
-        property: tls.crt
-    - secretKey: tls.key
-      remoteRef:
-        key: cloudflare-wildcard.{{ $domin }}
-        property: tls.key
-{{ else }}
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: "tls-{{ $domin }}"
-  namespace: {{ .namespace }}
-spec:
-  secretName: "tls-{{ $domin }}"
-  issuerRef: 
-    kind: ClusterIssuer
-    name: "{{ .global.tls.issuer }}"
-  commonName: "{{ $domin }}"
-  dnsNames:
-    - "{{ $domin }}"
-{{ end }}
+{{ include "homelab.ingress.domain.tls" . }}
 {{ end }}
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "{{ $domin }}"
+  name: "{{ $domain }}"
   namespace: {{ .namespace }}
   annotations:
     homelab-ingress/managing-app-namespace: "apps-ingresses"
@@ -92,7 +45,7 @@ metadata:
   {{ end }}
 spec:
   rules:
-  - host: "{{ $domin }}"
+  - host: "{{ $domain }}"
     http:
       paths:
       - backend:
@@ -104,13 +57,8 @@ spec:
         pathType: Prefix
   {{ if .global.tls.enabled }}
   tls:
-    - secretName: "tls-{{ $domin }}"
+    - secretName: "tls-{{ $domain }}"
       hosts:
-        - "{{ $domin }}"
+        - "{{ $domain }}"
   {{ end }}
-
-{{ else }}
-
-{{ end }}
-
 {{- end -}}
