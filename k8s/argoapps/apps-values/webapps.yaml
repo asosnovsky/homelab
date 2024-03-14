@@ -2,6 +2,8 @@ apps:
   quirky:
     enabled: true
     ingress:
+      prefix: quirky
+      useSecondaryDomain: true
       middleware: apps-ingresses-https-redirect
     repo: ghcr.io/asosnovsky/quirky
     tag: "latest"
