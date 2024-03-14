@@ -30,7 +30,7 @@ spec:
                 - --root
                 - /files
                 - --listen
-                - 80
+                - '80'
             volumeMount:
                 -   mountPath: /files
                     name: static-files
