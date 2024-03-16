@@ -6,7 +6,8 @@
     pkgs.kubectl
     pkgs.kubernetes-helm
     pkgs.argocd
-    # pkgs.terraform
+    pkgs.yq
+    pkgs.jq
   ];
 
   languages.nix.enable = true;
