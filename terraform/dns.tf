@@ -1,26 +1,3 @@
-# data "cloudflare_zone" "main" {
-#   name = var.main_domain
-# }
-# locals {
-#   update_to_home = {
-#     "*.home" : {
-#       type = "A"
-#     }
-#     "ari" : {
-#       type = "A"
-#     }
-#   }
-# }
-# resource "cloudflare_record" "aboutme" {
-#   for_each = local.update_to_home
-#   zone_id  = data.cloudflare_zone.main.id
-#   name     = each.key
-#   value    = var.myip
-#   comment  = "Updated by Terraform at ${timestamp()}"
-#   type     = each.value.type
-#   proxied  = false
-# }
-
 data "cloudflare_zone" "this" {
   for_each = var.domain_mappings
   name     = each.key
