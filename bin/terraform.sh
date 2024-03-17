@@ -2,7 +2,7 @@
 
 NS=terraforms
 TF_VARS_SECRET=homelab-tfvars
-TFVAR_FILE_NAME=var.tfvars
+TFVAR_FILE_NAME=var.auto.tfvars.json
 LOCAL_TF_VARS=./terraform/$TFVAR_FILE_NAME
 
 save_tfvars() {
@@ -10,26 +10,26 @@ save_tfvars() {
     kubectl -n $NS create secret generic $TF_VARS_SECRET \
         --save-config \
         --dry-run=client \
-        --from-file=var.tfvars=$LOCAL_TF_VARS \
+        --from-file=var.auto.tfvars.json=$LOCAL_TF_VARS \
         -o yaml | kubectl apply -f -
 }
 
 get_tfvars() {
     echo "kubectl -n $NS get secret/$TF_VARS_SECRET ... > $LOCAL_TF_VARS"
     kubectl -n $NS get secret/$TF_VARS_SECRET \
-        -o jsonpath="{.data['var\.tfvars']}" \
+        -o jsonpath="{.data['var\.auto\.tfvars\.json']}" \
         | base64 -d > $LOCAL_TF_VARS
 }
 
 plan() {
     pushd ./terraform || exit 1
-    terraform plan -var-file=$TFVAR_FILE_NAME
+    terraform plan 
 }
 
 apply() {
     pushd ./terraform || exit 1
     save_tfvars
-    terraform apply -var-file=$TFVAR_FILE_NAME
+    terraform apply 
 }
 
 init() {
