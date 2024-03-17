@@ -12,7 +12,7 @@ devenv.local.nix
 .pre-commit-config.yaml
 
 # Terraform
-*.tfvars
+*.tfvars*
 .terraform
 .DS_Store
 .terraform.lock.hcl
