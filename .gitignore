@@ -12,7 +12,10 @@ devenv.local.nix
 .pre-commit-config.yaml
 
 # Terraform
-*.tfvars
+*.tfvars*
 .terraform
-os/routers/openwrt-mesh/.env
 .DS_Store
+.terraform.lock.hcl
+
+# router
+os/routers/openwrt-mesh/.env
