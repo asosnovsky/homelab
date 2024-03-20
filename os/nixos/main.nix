@@ -3,6 +3,7 @@
   stateVersion, 
   dbConnectionStr,
   K3SToken
+  additionalPkgs = [],
 }:
 { config, pkgs, ... }:
 {
@@ -12,6 +13,7 @@
         hostName = hostName;
         dbConnectionStr = dbConnectionStr;
         K3SToken = K3SToken;
+        additionalPkgs = additionalPkgs;
       })
       ./users.nix
       ./settings.nix

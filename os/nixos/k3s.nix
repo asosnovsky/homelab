@@ -4,7 +4,8 @@
 {
   hostName,
   dbConnectionStr,
-  K3SToken
+  K3SToken,
+  additionalPkgs = [],
 }:
 { config, pkgs, ... }:
 
@@ -17,12 +18,12 @@
   i18n.defaultLocale = "en_CA.UTF-8";
   services.nfs.server.enable = true;
   services.rpcbind.enable = true;
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; builtins.concat([
      k3s
      nfs-utils
      git
-     
-  ];
+     ollama
+  ], additionalPkgs);
   services.k3s.enable = true;
   services.k3s.role = "server";
   services.k3s.extraFlags = toString [
