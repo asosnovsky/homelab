@@ -18,10 +18,10 @@
   i18n.defaultLocale = "en_CA.UTF-8";
   services.nfs.server.enable = true;
   services.rpcbind.enable = true;
-  environment.systemPackages = with pkgs; builtins.concat([
-     k3s
-     nfs-utils
-     git
+  environment.systemPackages = builtins.concat([
+     pkgs.k3s
+     pkgs.nfs-utils
+     pkgs.git
   ], additionalPkgs);
   services.k3s.enable = true;
   services.k3s.role = "server";
