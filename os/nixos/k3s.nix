@@ -22,7 +22,6 @@
      k3s
      nfs-utils
      git
-     ollama
   ], additionalPkgs);
   services.k3s.enable = true;
   services.k3s.role = "server";
