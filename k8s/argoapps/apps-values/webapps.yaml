@@ -46,7 +46,7 @@ apps:
       - med
       - low
   ollama:
-    enabled: false
+    enabled: true
     ingress:
       middleware: apps-ingresses-chain-authentik
     repo: ollama/ollama
@@ -73,7 +73,7 @@ apps:
       - med
       - high
   ollama-web:
-    enabled: false
+    enabled: true
     ingress:
       middleware: apps-ingresses-chain-authentik
     repo: ghcr.io/ollama-webui/ollama-webui
