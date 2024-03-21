@@ -21,8 +21,6 @@
      k3s
      nfs-utils
      git
-     rocmPackages.rocm-smi
-     rocmPackages.rpp     
   ];
   services.k3s.enable = true;
   services.k3s.role = "server";
