@@ -4,7 +4,7 @@
 {
   hostName,
   dbConnectionStr,
-  K3SToken,
+  K3SToken
 }:
 { config, pkgs, ... }:
 
@@ -17,10 +17,12 @@
   i18n.defaultLocale = "en_CA.UTF-8";
   services.nfs.server.enable = true;
   services.rpcbind.enable = true;
-  environment.systemPackages = [
-     pkgs.k3s
-     pkgs.nfs-utils
-     pkgs.git
+  environment.systemPackages = with pkgs; [
+     k3s
+     nfs-utils
+     git
+     rocmPackages.rocm-smi
+     rocmPackages.rpp     
   ];
   services.k3s.enable = true;
   services.k3s.role = "server";
