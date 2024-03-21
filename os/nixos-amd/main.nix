@@ -2,8 +2,7 @@
   hostName, 
   stateVersion, 
   dbConnectionStr,
-  K3SToken,
-  additionalPkgs = [],
+  K3SToken
 }:
 { config, pkgs, ... }:
 {
