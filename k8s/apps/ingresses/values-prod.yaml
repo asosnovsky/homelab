@@ -39,6 +39,25 @@ reverseProxy:
     overrides:
       group: "Cameras"
 
+  fwscode:
+    ip: 10.0.10.4
+    port: 8443
+    overrides:
+      group: "Framework Services"
+
+  esphome:
+    ip: 10.0.10.4
+    port: 6052
+    overrides:
+      group: "Framework Services"
+
+  fwdockge:
+    ip: 10.0.10.4
+    port: 5050
+    overrides:
+      group: "Framework Services"
+
+
 cloudflare:
   enabled: true
 
