@@ -13,6 +13,8 @@ reverseProxy:
     port: "3001"
     overrides:
       icon: "https://kuma.home.sosnovsky.ca/apple-touch-icon.png"
+    overrides:
+      middleware: "apps-ingresses-chain-authentik"
 
   basement:
     ip: "10.0.12.2"
