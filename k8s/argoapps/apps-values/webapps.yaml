@@ -55,8 +55,8 @@ apps:
       limits:
         memory: "16Gi"
       requests:
-        cpu: 1
-        memory: "4Gi"
+        cpu: 3
+        memory: "10Gi"
     exposedPorts:
       "11434": "11434"
     ports:

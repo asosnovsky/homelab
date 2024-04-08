@@ -23,6 +23,8 @@ DC:A6:32:92:B2:79 10.0.12.2
 DC:A6:32:92:B2:79 basement.hub.internal
 4E:F6:9C:7C:56:33 10.0.12.3
 4E:F6:9C:7C:56:33 flic.hub.internal
+E8:6B:EA:23:F9:14 10.0.12.4
+E8:6B:EA:23:F9:14 voice-m5stack-office.hub.internal
 #Cam
 9C:8E:CD:25:83:1F 10.0.13.1
 9C:8E:CD:25:83:1F korie.cam.internal

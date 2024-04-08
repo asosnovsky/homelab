@@ -44,18 +44,24 @@ reverseProxy:
     port: 8443
     overrides:
       group: "Framework Services"
+    overrides:
+      middleware: "apps-ingresses-chain-authentik"
 
   esphome:
     ip: 10.0.10.4
     port: 6052
     overrides:
       group: "Framework Services"
+    overrides:
+      middleware: "apps-ingresses-chain-authentik"
 
   fwdockge:
     ip: 10.0.10.4
     port: 5050
     overrides:
       group: "Framework Services"
+    overrides:
+      middleware: "apps-ingresses-chain-authentik"
 
 
 cloudflare:

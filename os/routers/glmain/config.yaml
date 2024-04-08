@@ -29,6 +29,8 @@ hub:
         domain: basement.home.sosnovsky.ca
     -   mac: '4E:F6:9C:7C:56:33'
         name: 'flic'
+    -   name: 'voice-m5stack-office'
+        mac: 'E8:6B:EA:23:F9:14'
 cam:
     -   name: 'korie'
         mac: '9C:8E:CD:25:83:1F'

@@ -39,6 +39,9 @@ Hub:
    Flic:
        ip: "10.0.12.3"
        host: "flic.hub.internal"
+   Voice-m5stack-office:
+       ip: "10.0.12.4"
+       host: "voice-m5stack-office.hub.internal"
 Cam:
    Korie:
        ip: "10.0.13.1"
