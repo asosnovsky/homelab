@@ -28,7 +28,7 @@ jellyfin:
 arrs:
   sonarr:
     repo: lscr.io/linuxserver/sonarr
-    tag: "4.0.2.1183-ls229"
+    tag: "latest"
     migrateDbFromSqllite:
       enabled: false
       claimName: config-sonarr-0
