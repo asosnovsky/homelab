@@ -51,7 +51,7 @@ arrs:
 
   radarr:
     repo: lscr.io/linuxserver/radarr
-    tag: "5.3.6.8612-ls206"
+    tag: "latest"
     migrateDbFromSqllite:
       enabled: false
       claimName: config-radarr-0
