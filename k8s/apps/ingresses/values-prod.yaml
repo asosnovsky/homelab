@@ -46,7 +46,6 @@ reverseProxy:
     port: 8443
     overrides:
       group: "Framework Services"
-    overrides:
       middleware: "apps-ingresses-chain-authentik"
 
   esphome:
@@ -54,7 +53,6 @@ reverseProxy:
     port: 6052
     overrides:
       group: "Framework Services"
-    overrides:
       middleware: "apps-ingresses-chain-authentik"
 
   fwdockge:
@@ -62,7 +60,6 @@ reverseProxy:
     port: 5050
     overrides:
       group: "Framework Services"
-    overrides:
       middleware: "apps-ingresses-chain-authentik"
 
 
