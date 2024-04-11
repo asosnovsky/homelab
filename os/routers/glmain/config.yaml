@@ -11,7 +11,7 @@ lab:
 k3s:
     -   mac: '7C:83:34:B8:7B:43'
         name: 'bee1'
-        # domain: home.sosnovsky.ca
+        domain: k3sapp.internal
     -   mac: '68:1D:EF:26:B7:6C'
         name: 'terry1'
         # domain: home.sosnovsky.ca
