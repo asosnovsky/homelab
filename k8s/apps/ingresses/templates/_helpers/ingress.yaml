@@ -83,7 +83,7 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
     gethomepage.dev/siteMonitor: 'http://{{.service}}.{{ .namespace }}.svc.cluster.local:{{.port | default 80}}{{ .path | default "/" }}{{ .health | default "" }}'
-    gethomepage.dev/group: {{ .group | default "Unassigned" }}
+    gethomepage.dev/group: Local/{{ .group | default "Unassigned" }}
     {{ if .icon }}
     gethomepage.dev/icon: "{{.icon}}"
     {{ else }}
