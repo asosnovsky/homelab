@@ -23,7 +23,7 @@ spec:
     targetPort: {{ $data.port | default 80 }}
 {{ if (not $data.disableIngress) }}
 {{- $ingressDef := (dict "service" (printf "reverse-proxy-%s" $prefix) "prefix" $prefix "global" $.Values.global "namespace" $.Release.Namespace "group" "reverse-proxies" ) -}}
-{{- $ingressDef := (merge $ingressDef ($data.overrides | default (dict))) -}}
+{{- $ingressDef := (merge ($data.overrides | default (dict)) $ingressDef) -}}
 
 {{ include "homelab.ingress" $ingressDef}}
 
