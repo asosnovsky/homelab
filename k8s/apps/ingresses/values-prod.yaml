@@ -28,6 +28,9 @@ reverseProxy:
     overrides:
       middleware: "apps-ingresses-chain-authentik"
       group: "Video Hosting"
+      widget:
+        type: qbittorrent
+        url: http://10.0.10.3:8080
   
   esphome:
     ip: "10.0.10.4"

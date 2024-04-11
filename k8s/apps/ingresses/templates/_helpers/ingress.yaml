@@ -12,26 +12,26 @@
 #   middleware: str = "https-redirect" = {{ .middleware }}
 #   useSecondaryDomain: bool = False = {{ .useSecondaryDomain }}
 #   useDirectPrefix: bool = False = {{ .useDirectPrefix }}
+#   widget: bool = False = {{ .widget | toJson }}
 #   
 
 
-{{ $splitPrefix := splitList "." .prefix }}
-{{ $prefix := first $splitPrefix }}
-{{ $leadPrefix := join "." (rest $splitPrefix) }}
+{{- $splitPrefix := splitList "." .prefix -}}
+{{- $prefix := first $splitPrefix -}}
+{{- $leadPrefix := join "." (rest $splitPrefix) -}}
 
-{{ $_ := set . "prefix" $prefix }}
-{{ $_ := set . "leadPrefix" $leadPrefix }}
+{{- $_ := set . "prefix" $prefix -}}
+{{- $_ := set . "leadPrefix" $leadPrefix -}}
 
-{{ $domain := (include "homelab.ingress.domain" .) }}
+{{- $domain := (include "homelab.ingress.domain" .) -}}
 
-{{ $_ := set . "domain" $domain }}
+{{- $_ := set . "domain" $domain -}}
+
 # .domain = {{ .domain }}
 # .prefix = {{ .prefix }}
-
-{{  if .global.tls.enabled  }}
+{{ if .global.tls.enabled  }}
 {{ include "homelab.ingress.domain.tls" . }}
 {{ end }}
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -44,12 +44,19 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
     gethomepage.dev/siteMonitor: 'http://{{.service}}.{{ .namespace }}.svc.cluster.local:{{.port | default 80}}{{ .path | default "/" }}{{ .health | default "" }}'
-    # gethomepage.dev/description: {{ .description | default "" }}
+    {{ if .description}}
+    gethomepage.dev/description: "{{ .description }}"
+    {{ end }}
     gethomepage.dev/group: {{ .group | default "Unassigned" }}
     {{ if .icon }}
     gethomepage.dev/icon: "{{.icon}}"
     {{ else }}
     gethomepage.dev/icon: "homepage.png"
+    {{ end }}
+    {{ if .widget }}
+    {{ range $k, $v := .widget }}
+    gethomepage.dev/widget.{{$k}}: {{ $v | quote }}
+    {{ end }}
     {{ end }}
   {{ range $k, $v := (.annotations | default (dict )) }}
     {{ $k }}: {{ $v }}
@@ -83,11 +90,19 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
     gethomepage.dev/siteMonitor: 'http://{{.service}}.{{ .namespace }}.svc.cluster.local:{{.port | default 80}}{{ .path | default "/" }}{{ .health | default "" }}'
-    gethomepage.dev/group: Local/{{ .group | default "Unassigned" }}
+    {{ if .description}}
+    gethomepage.dev/description: "{{ .description }}"
+    {{ end }}
+    gethomepage.dev/group: Internal({{ .group | default "Unassigned" }})
     {{ if .icon }}
     gethomepage.dev/icon: "{{.icon}}"
     {{ else }}
     gethomepage.dev/icon: "homepage.png"
+    {{ end }}
+    {{ if .widget }}
+    {{- range $k, $v := .widget }}
+    gethomepage.dev/widget.{{$k}}: {{ $v | quote }}
+    {{- end }}
     {{ end }}
   {{ range $k, $v := (.annotations | default (dict )) }}
     {{ $k }}: {{ $v }}
