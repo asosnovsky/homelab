@@ -72,5 +72,37 @@ spec:
       hosts:
         - "{{.prefix}}.{{ $domain }}"
   {{ end }}
-
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{.prefix}}.internal"
+  namespace: {{ .namespace }}
+  annotations:
+    homelab-ingress/managing-app-namespace: "apps-ingresses"
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .middleware | default "apps-ingresses-https-redirect"}}@kubernetescrd
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
+    gethomepage.dev/siteMonitor: 'http://{{.service}}.{{ .namespace }}.svc.cluster.local:{{.port | default 80}}{{ .path | default "/" }}{{ .health | default "" }}'
+    gethomepage.dev/group: {{ .group | default "Unassigned" }}
+    {{ if .icon }}
+    gethomepage.dev/icon: "{{.icon}}"
+    {{ else }}
+    gethomepage.dev/icon: "homepage.png"
+    {{ end }}
+  {{ range $k, $v := (.annotations | default (dict )) }}
+    {{ $k }}: {{ $v }}
+  {{ end }}
+spec:
+  rules:
+  - host: "{{.prefix}}.internal"
+    http:
+      paths:
+      - backend:
+          service:
+            name: "{{.service}}"
+            port:
+              number: {{.port | default 80}}
+        path: {{ .path | default "/" }}
+        pathType: Prefix
 {{- end -}}
