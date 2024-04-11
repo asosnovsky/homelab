@@ -15,6 +15,10 @@ reverseProxy:
       icon: "https://kuma.home.sosnovsky.ca/apple-touch-icon.png"
     overrides:
       middleware: "apps-ingresses-chain-authentik"
+      widget:
+        type: uptimekuma
+        url: http://10.0.12.1:3001
+        slug: main
 
   basement:
     ip: "10.0.12.2"
