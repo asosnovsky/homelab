@@ -16,6 +16,15 @@ services:
     namespace: "apps-ingresses"
     middleware: "apps-ingresses-forwardauth-authentik"
     group: "Demo"
+  - prefix: "sonarr"
+    service: "sonarr"
+    namespace: "apps-sonarr"
+    group: "Video Hosting"
+    widget:
+      type: sonarr
+      fields: '["wanted", "queued"]'
+      url: http://sonarr.host.or.ip
+      key: apikeyapikeyapikeyapikeyapikey
 staticFiles:
   mainDomain: []
   secondaryDomain: 

@@ -15,6 +15,10 @@ reverseProxy:
       icon: "https://kuma.home.sosnovsky.ca/apple-touch-icon.png"
     overrides:
       middleware: "apps-ingresses-chain-authentik"
+      widget:
+        type: uptimekuma
+        url: http://10.0.12.1:3001
+        slug: main
 
   basement:
     ip: "10.0.12.2"
@@ -28,6 +32,9 @@ reverseProxy:
     overrides:
       middleware: "apps-ingresses-chain-authentik"
       group: "Video Hosting"
+      widget:
+        type: qbittorrent
+        url: http://10.0.10.3:8080
   
   esphome:
     ip: "10.0.10.4"
@@ -46,7 +53,6 @@ reverseProxy:
     port: 8443
     overrides:
       group: "Framework Services"
-    overrides:
       middleware: "apps-ingresses-chain-authentik"
 
   esphome:
@@ -54,7 +60,6 @@ reverseProxy:
     port: 6052
     overrides:
       group: "Framework Services"
-    overrides:
       middleware: "apps-ingresses-chain-authentik"
 
   fwdockge:
@@ -62,7 +67,6 @@ reverseProxy:
     port: 5050
     overrides:
       group: "Framework Services"
-    overrides:
       middleware: "apps-ingresses-chain-authentik"
 
 
