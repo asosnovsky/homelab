@@ -16,4 +16,6 @@
   nixpkgs.config.allowUnfree = true;
   services.openssh.enable = true;
   networking.firewall.enable = false;
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "01:30" ];
 }
