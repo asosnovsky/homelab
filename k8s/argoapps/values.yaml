@@ -6,7 +6,7 @@ global:
   email: "ariel@sosnovsky.ca"
   timezone: America/Toronto
   domain: "changeme"
-  rootSubDomain: "home" 
+  rootSubDomain: "home"
   secondaryDomain: "changeme"
   tls:
     enabled: false
@@ -113,6 +113,10 @@ infrastructureCharts:
     repoURL: https://charts.goauthentik.io
     targetRevision: "2024.2.2"
     valuesFile: authentik.yaml
+  authelia:
+    repoURL: https://charts.authelia.com
+    targetRevision: "0.8.58"
+    valuesFile: authelia.yaml
   homepage:
     repoURL: https://jameswynn.github.io/helm-charts
     chart: homepage

@@ -40,7 +40,7 @@ if [ -f "$tmp_path" ]; then
         echo " -> Renaming old file to "$tmp_path".old.${num_files}"
         mv $tmp_path $tmp_path".old.${num_files}"
     else
-        rm $tmp_path".old"*
+        rm -f $tmp_path".old.*"
         echo " -> Renaming old file to "$tmp_path".old"
         mv $tmp_path $tmp_path".old"
     fi
