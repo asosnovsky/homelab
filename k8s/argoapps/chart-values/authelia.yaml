@@ -1,0 +1,16 @@
+ingress:
+  enabled: true
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: "Authelia"
+  certManager: false
+  tls:
+    enabled: false
+  hostOverride:
+    - host: authelia.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
+      path: "/"
+  traefikCRD:
+    enabled: true
+    matchOverride: Host(`authelia.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}`)
+# configMap:
+#   disabled: true
