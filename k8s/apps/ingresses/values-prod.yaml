@@ -2,6 +2,13 @@ global:
   tls:
     enabled: true
 reverseProxy:
+  personal:
+    ip: 10.0.0.119
+    port: "8000"
+    overrides:
+      group: "Misc"
+
+
   castle:
     ip: "10.0.12.1"
     port: "80"
