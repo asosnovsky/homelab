@@ -71,19 +71,23 @@ spec:
     - name: http
       port: 80
       targetPort: 80
+{{ end }}
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "{{$prefix}}-static-files-{{$staticFile.path}}"
+  name: "sec-domain-static-files"
   annotations:
     homelab-ingress/managing-app-namespace: "apps-ingresses"
-    traefik.ingress.kubernetes.io/router.middlewares: {{ $staticFile.middleware | default "apps-ingresses-https-redirect"}}@kubernetescrd
 spec:
   rules:
   - host: "{{ $.Values.global.secondaryDomain }}"
     http:
       paths:
+{{ range $staticFile := .Values.staticFiles.secondaryDomain }}
+{{ $appLabel := replace "." "-" $staticFile.path }}
+{{ $prefix := printf "sec-domain-%s" $appLabel }}
       - backend:
           service:
             name: "{{$prefix}}-static-files"
@@ -91,10 +95,10 @@ spec:
               number: 80
         path: "/{{$staticFile.path}}"
         pathType: Prefix
+{{ end }}
   {{ if $.Values.global.tls.enabled }}
   tls:
     - secretName: "tls-{{ $.Values.global.secondaryDomain }}"
       hosts:
         - "{{ $.Values.global.secondaryDomain }}"
   {{ end }}
-{{ end }}
