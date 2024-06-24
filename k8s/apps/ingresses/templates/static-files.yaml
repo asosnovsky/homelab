@@ -1,41 +1,39 @@
-{{ range $staticFile := .Values.staticFiles.secondaryDomain }}
-
-{{ $appLabel := replace "." "-" $staticFile.path }}
-{{ $prefix := printf "sec-domain-%s" $appLabel }}
 
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "{{$prefix}}-static-files"
+  name: "{{.Values.staticFiles.secondaryDomain}}-static-files"
 data:
-    index.html: |
+{{ range $staticFile := .Values.staticFiles.secondaryDomain }}
+    {{$staticFile.path}}: |
       {{ $staticFile.content | nindent 6 }}
+{{ end }}
 
 ---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-    name: "{{$prefix}}-host"
+    name: "{{.Values.staticFiles.secondaryDomain}}-host"
     labels:
-        app: "statis-files"
-        path: {{ $appLabel }}
+        app: "static-files"
+        domain: "{{.Values.staticFiles.secondaryDomain}}"
 spec:
   replicas: 1
   selector:
     matchLabels:
-        app: "statis-files"
-        path: {{ $appLabel }}
+        app: "static-files"
+        domain: "{{.Values.staticFiles.secondaryDomain}}"
   template:
     metadata:
       labels:
-        app: "statis-files"
-        path: {{ $appLabel }}
+        app: "static-files"
+        domain: "{{.Values.staticFiles.secondaryDomain}}"
     spec:
         volumes:
             -   name: static-files
                 configMap:
-                    name: "{{$prefix}}-static-files"
+                    name: "{{.Values.staticFiles.secondaryDomain}}-static-files"
         containers:
             -   name: api
                 image: caddy:2.7-alpine
@@ -58,20 +56,19 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-    name: "{{$prefix}}-static-files"
+    name: "{{.Values.staticFiles.secondaryDomain}}-static-files"
     labels:
-        app: "statis-files"
-        path: {{ $appLabel }}
+        app: "static-files"
+        domain: "{{.Values.staticFiles.secondaryDomain}}"
 spec:
   selector:
-        app: "statis-files"
-        path: {{ $appLabel }}
+        app: "static-files"
+        domain: "{{.Values.staticFiles.secondaryDomain}}"
   type: ClusterIP
   ports:
     - name: http
       port: 80
       targetPort: 80
-{{ end }}
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -86,11 +83,9 @@ spec:
     http:
       paths:
 {{ range $staticFile := .Values.staticFiles.secondaryDomain }}
-{{ $appLabel := replace "." "-" $staticFile.path }}
-{{ $prefix := printf "sec-domain-%s" $appLabel }}
       - backend:
           service:
-            name: "{{$prefix}}-static-files"
+            name: "{{$.Values.staticFiles.secondaryDomain}}-static-files"
             port:
               number: 80
         path: "/{{$staticFile.path}}"
