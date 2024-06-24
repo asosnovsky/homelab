@@ -94,7 +94,7 @@ spec:
             port:
               number: 80
         path: "/{{$staticFile.path}}"
-        pathType: Excat
+        pathType: Exact
 {{ end }}
   {{ if $.Values.global.tls.enabled }}
   tls:
