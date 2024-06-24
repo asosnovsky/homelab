@@ -102,3 +102,20 @@ spec:
       hosts:
         - "{{ $.Values.global.secondaryDomain }}"
   {{ end }}
+
+
+{{ if $.Values.global.tls.enabled }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "tls-{{ $.Values.global.secondaryDomain }}"
+spec:
+  secretName: "tls-{{ $.Values.global.secondaryDomain }}"
+  issuerRef: 
+    kind: ClusterIssuer
+    name: "{{ $.Values.global.tls.issuer }}"
+  commonName: "{{ $.Values.global.secondaryDomain }}"
+  dnsNames:
+    - "{{ $.Values.global.secondaryDomain }}"
+{{ end }}
