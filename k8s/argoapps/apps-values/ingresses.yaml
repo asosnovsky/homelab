@@ -68,6 +68,7 @@ services:
     group: "Core"
   - prefix: "bazarr.vh"
     service: "bazarr"
+    port: 6767
     namespace: "apps-videohosting"
     middleware: "apps-ingresses-chain-authentik"
     group: "Video Hosting"
