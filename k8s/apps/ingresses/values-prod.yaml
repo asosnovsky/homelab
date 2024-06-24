@@ -91,11 +91,11 @@ staticFiles:
               <body>
               <h1>Privacy Policy</h1>
 
-              <b>Introduction</b>
+              <h2>Introduction</h2>
 
               SkyG is committed to protecting the privacy of our users. This privacy policy explains how we collect, use, and disclose information when you use our app to manage private events.
 
-              <b>Information We Collect</b>
+              <h2>Information We Collect</h2>
 
               When you create an account with us, we collect the following information:
 
@@ -111,7 +111,7 @@ staticFiles:
               * Your RSVPs and attendance records
               * Your communication with other users through our app's messaging feature
 
-              <b>How We Use Your Information</b>
+              <h2>How We Use Your Information</h2>
 
               We use your information to provide and improve our app, including:
 
@@ -121,7 +121,7 @@ staticFiles:
               * To analyze usage patterns and improve our app's features and functionality
               * To comply with legal and regulatory requirements
 
-              <b>Sharing Your Information</b>
+              <h2>Sharing Your Information</h2>
 
               We do not share your personal information with third parties except in the following circumstances:
 
@@ -129,11 +129,11 @@ staticFiles:
               * To provide services: We may share your information with third-party service providers who help us provide our app, such as payment processors and event venue management systems.
               * To comply with law: We may share your information with law enforcement or other government agencies if required by law or if necessary to protect our users or our app.
 
-              <b>Security Measures</b>
+              <h2>Security Measures</h2>
 
               We take the security of your information seriously. We use industry-standard encryption and secure servers to protect your data. We also implement access controls and other security measures to prevent unauthorized access to your information.
 
-              <b>Your Rights</b>
+              <h2>Your Rights</h2>
 
               You have the right to:
 
@@ -142,15 +142,15 @@ staticFiles:
               * Delete your personal information: You can request that we delete your personal information, but please note that this may affect your ability to use our app.
               * Object to processing: You can object to our processing of your personal information, but please note that this may affect your ability to use our app.
 
-              <b>Changes to This Policy</b>
+              <h2>Changes to This Policy</h2>
 
               We may update this policy from time to time. We will notify you of any changes by email or through our app. Your continued use of our app after any changes to this policy will be considered acceptance of those changes.
 
-              <b>Contact Us</b>
+              <h2>Contact Us</h2>
 
               If you have any questions or concerns about this policy, please contact us at [support email address].
 
-              <b>Effective Date</b>
+              <h2>Effective Date</h2>
 
               This policy is effective as of June-24/2024.
 
