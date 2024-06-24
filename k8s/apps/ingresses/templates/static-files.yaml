@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "{{.Values.staticFiles.secondaryDomain}}-static-files"
+  name: "{{$.Values.global.secondaryDomain}}-static-files"
 data:
 {{ range $staticFile := .Values.staticFiles.secondaryDomain }}
     {{$staticFile.path}}: |
@@ -14,26 +14,26 @@ data:
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-    name: "{{.Values.staticFiles.secondaryDomain}}-host"
+    name: "{{$.Values.global.secondaryDomain}}-host"
     labels:
         app: "static-files"
-        domain: "{{.Values.staticFiles.secondaryDomain}}"
+        domain: "{{$.Values.global.secondaryDomain}}"
 spec:
   replicas: 1
   selector:
     matchLabels:
         app: "static-files"
-        domain: "{{.Values.staticFiles.secondaryDomain}}"
+        domain: "{{$.Values.global.secondaryDomain}}"
   template:
     metadata:
       labels:
         app: "static-files"
-        domain: "{{.Values.staticFiles.secondaryDomain}}"
+        domain: "{{$.Values.global.secondaryDomain}}"
     spec:
         volumes:
             -   name: static-files
                 configMap:
-                    name: "{{.Values.staticFiles.secondaryDomain}}-static-files"
+                    name: "{{$.Values.global.secondaryDomain}}-static-files"
         containers:
             -   name: api
                 image: caddy:2.7-alpine
@@ -56,14 +56,14 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-    name: "{{.Values.staticFiles.secondaryDomain}}-static-files"
+    name: "{{$.Values.global.secondaryDomain}}-static-files"
     labels:
         app: "static-files"
-        domain: "{{.Values.staticFiles.secondaryDomain}}"
+        domain: "{{$.Values.global.secondaryDomain}}"
 spec:
   selector:
         app: "static-files"
-        domain: "{{.Values.staticFiles.secondaryDomain}}"
+        domain: "{{$.Values.global.secondaryDomain}}"
   type: ClusterIP
   ports:
     - name: http
@@ -85,7 +85,7 @@ spec:
 {{ range $staticFile := .Values.staticFiles.secondaryDomain }}
       - backend:
           service:
-            name: "{{$.Values.staticFiles.secondaryDomain}}-static-files"
+            name: "{{$.Values.global.secondaryDomain}}-static-files"
             port:
               number: 80
         path: "/{{$staticFile.path}}"
