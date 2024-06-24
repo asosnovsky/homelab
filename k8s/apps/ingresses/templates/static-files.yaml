@@ -26,6 +26,10 @@ spec:
         domain: "{{$.Values.global.secondaryDomain}}"
   template:
     metadata:
+      annotations:
+        {{ range $staticFile := .Values.staticFiles.secondaryDomain }}
+        "checksum/{{$staticFile.path}}": "{{ $staticFile.content | sha256sum }}"
+        {{ end }}
       labels:
         app: "static-files"
         domain: "{{$.Values.global.secondaryDomain}}"
