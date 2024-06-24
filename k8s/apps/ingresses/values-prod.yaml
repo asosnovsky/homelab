@@ -8,7 +8,6 @@ reverseProxy:
     overrides:
       group: "Misc"
 
-
   castle:
     ip: "10.0.12.1"
     port: "80"
@@ -86,3 +85,76 @@ staticFiles:
     - path: "ads.txt"
       content: |
         google.com, pub-6915532978483380, DIRECT, f08c47fec0942fa0
+    - path: "privacy-policy"
+      content: |
+            <html>
+              <body>
+              <h1>Privacy Policy</h1>
+
+              <b>Introduction</b>
+
+              {{.appName}} is committed to protecting the privacy of our users. This privacy policy explains how we collect, use, and disclose information when you use our app to manage private events.
+
+              <b>Information We Collect</b>
+
+              When you create an account with us, we collect the following information:
+
+              * Your name and email address
+              * Your phone number (optional)
+              * Your password (hashed for security)
+              * Your event details, including title, date, time, location, and description
+
+              We also collect information about your interactions with our app, including:
+
+              * Your login and logout times
+              * Your event creation and editing activities
+              * Your RSVPs and attendance records
+              * Your communication with other users through our app's messaging feature
+
+              <b>How We Use Your Information</b>
+
+              We use your information to provide and improve our app, including:
+
+              * To create and manage your account
+              * To send you notifications and updates about your events
+              * To provide customer support and troubleshoot issues
+              * To analyze usage patterns and improve our app's features and functionality
+              * To comply with legal and regulatory requirements
+
+              <b>Sharing Your Information</b>
+
+              We do not share your personal information with third parties except in the following circumstances:
+
+              * With your consent: We may share your information with third parties if you give us permission to do so.
+              * To provide services: We may share your information with third-party service providers who help us provide our app, such as payment processors and event venue management systems.
+              * To comply with law: We may share your information with law enforcement or other government agencies if required by law or if necessary to protect our users or our app.
+
+              <b>Security Measures</b>
+
+              We take the security of your information seriously. We use industry-standard encryption and secure servers to protect your data. We also implement access controls and other security measures to prevent unauthorized access to your information.
+
+              <b>Your Rights</b>
+
+              You have the right to:
+
+              * Access your personal information: You can request a copy of your personal information from us.
+              * Correct your personal information: You can request that we correct any inaccuracies in your personal information.
+              * Delete your personal information: You can request that we delete your personal information, but please note that this may affect your ability to use our app.
+              * Object to processing: You can object to our processing of your personal information, but please note that this may affect your ability to use our app.
+
+              <b>Changes to This Policy</b>
+
+              We may update this policy from time to time. We will notify you of any changes by email or through our app. Your continued use of our app after any changes to this policy will be considered acceptance of those changes.
+
+              <b>Contact Us</b>
+
+              If you have any questions or concerns about this policy, please contact us at [support email address].
+
+              <b>Effective Date</b>
+
+              This policy is effective as of June-24/2024.
+
+              By using our app, you acknowledge that you have read, understood, and agree to be bound by this privacy policy.
+
+              </body>
+            </html>
