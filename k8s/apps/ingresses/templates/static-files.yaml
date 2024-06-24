@@ -9,7 +9,8 @@ kind: ConfigMap
 metadata:
   name: "{{$prefix}}-static-files"
 data:
-    index.html: {{ $staticFile.content }}
+    index.html: |
+      {{ $staticFile.content | nindent 6 }}
 
 ---
 kind: Deployment
