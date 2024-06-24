@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "{{$.Values.global.secondaryDomain}}-static-files"
+  name: "sec-domain-static-files"
 data:
 {{ range $staticFile := .Values.staticFiles.secondaryDomain }}
     {{$staticFile.path}}: |
@@ -14,7 +14,7 @@ data:
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-    name: "{{$.Values.global.secondaryDomain}}-host"
+    name: "sec-domain-host"
     labels:
         app: "static-files"
         domain: "{{$.Values.global.secondaryDomain}}"
@@ -56,7 +56,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-    name: "{{$.Values.global.secondaryDomain}}-static-files"
+    name: "sec-domain-static-files"
     labels:
         app: "static-files"
         domain: "{{$.Values.global.secondaryDomain}}"
