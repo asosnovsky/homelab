@@ -86,8 +86,8 @@ spec:
   - host: "{{ $.Values.global.secondaryDomain }}"
     http:
       paths:
-        - backend:
-            service:
+      - backend:
+          service:
               name: "sec-domain-static-files"
               port:
                 number: 80
