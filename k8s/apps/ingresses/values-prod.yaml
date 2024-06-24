@@ -85,6 +85,54 @@ staticFiles:
     - path: "ads.txt"
       content: |
         google.com, pub-6915532978483380, DIRECT, f08c47fec0942fa0
+    - path: "data-deletion-policy"
+      content: | 
+          <html>
+
+            <head>
+                <title>Data Deletion Policy</title>
+            </head>
+
+            <body>
+                <h1>Data Deletion Policy</h1>
+                <p>This policy outlines the procedures for deleting data from our app, which helps host private events.</p>
+                <h2>Data Retention</h2>
+                <p>We retain data for a limited period of time, as outlined below:</p>
+                <ul>
+                    <li>Event data: We retain event data for a period of 1 year after the event has ended.</li>
+                    <li>User data: We retain user data for a period of 1 year after the user's account is deactivated.</li>
+                </ul>
+                <h2>Data Deletion Requests</h2>
+                <p>If you would like to request the deletion of your data, please email <a
+                        href="mailto:ariel@sosnovsky.ca">ariel@sosnovsky.ca</a> with the following information:</p>
+                <ul>
+                    <li>Your name</li>
+                    <li>Your email address</li>
+                    <li>A description of the data you would like to have deleted</li>
+                </ul>
+                <p>We will respond to your request within 30 days and delete the requested data within 60 days.</p>
+                <h2>Data Deletion Process</h2>
+                <p>When we receive a data deletion request, we will:</p>
+                <ol>
+                    <li>Verify the identity of the requestor</li>
+                    <li>Locate and identify the data to be deleted</li>
+                    <li>Delete the data from our systems</li>
+                    <li>Confirm the deletion to the requestor</li>
+                </ol>
+                <h2>Data Security</h2>
+                <p>We take the security of your data seriously and have implemented measures to protect it from unauthorized access,
+                    use, or disclosure. These measures include:</p>
+                <ul>
+                    <li>Data encryption</li>
+                    <li>Access controls</li>
+                    <li>Regular security audits</li>
+                </ul>
+                <h2>Contact Us</h2>
+                <p>If you have any questions or concerns about this policy, please email <a
+                        href="mailto:ariel@sosnovsky.ca">ariel@sosnovsky.ca</a>.</p>
+            </body>
+
+            </html>
     - path: "privacy-policy"
       content: |
             <html>
