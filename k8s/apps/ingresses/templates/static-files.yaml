@@ -85,7 +85,7 @@ spec:
 {{ range $staticFile := .Values.staticFiles.secondaryDomain }}
       - backend:
           service:
-            name: "{{$.Values.global.secondaryDomain}}-static-files"
+            name: "sec-domain-static-files"
             port:
               number: 80
         path: "/{{$staticFile.path}}"
