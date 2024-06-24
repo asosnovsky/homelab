@@ -85,6 +85,10 @@ staticFiles:
     - path: "ads.txt"
       content: |
         google.com, pub-6915532978483380, DIRECT, f08c47fec0942fa0
+    - path: "/"
+      content: |
+        <h1>SkyG</h1>
+        <h2>Site in Development</h2>
     - path: "data-deletion-policy"
       content: | 
           <html>
