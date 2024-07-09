@@ -75,7 +75,7 @@ spec:
             - name: config
               mountPath: /config
               subPath: config
-            - name: metadata
+            - name: config
               mountPath: /metadata
               subPath: metadata
             - name: torrents
