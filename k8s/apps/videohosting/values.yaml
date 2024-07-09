@@ -15,6 +15,7 @@ plex:
     requests:
       cpu: 3.5
       memory: "4Gi"
+
 jellyfin:
   repo: "lscr.io/linuxserver/jellyfin"
   tag: latest
@@ -24,6 +25,21 @@ jellyfin:
     requests:
       cpu: 1
       memory: "4Gi"
+
+abs:
+  repo: ghcr.io/advplyr/audiobookshelf
+  tag: latest
+  resources:
+    limits:
+      memory: "4Gi"
+    requests:
+      cpu: 1
+      memory: "4Gi"
+  configVolumesResources:
+    requests:
+      storage: 10Gi
+    limits:
+      storage: 100Gi
 
 arrs:
   sonarr:

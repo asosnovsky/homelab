@@ -1,0 +1,95 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: abs-envs
+data:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: {{ .Values.global.timezone }}
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: abs
+spec:
+  selector:
+    app: abs
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      name: "http"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+    name: abs
+spec:
+  selector:
+    matchLabels:
+      app: abs
+  replicas: 1
+  revisionHistoryLimit: 2
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: config
+        finalizers:
+          - kubernetes.io/pvc-protection
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources: 
+          {{ .Values.abs.configVolumesResources | toYaml | nindent 12 }}
+  template:
+    metadata:
+      labels:
+        app: abs
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: homelab/capacity
+                  operator: In
+                  values:
+                    - high
+      containers:
+        - name: abs
+          image: "{{ .Values.abs.repo }}:{{ .Values.abs.tag }}"
+          imagePullPolicy: "Always"
+          envFrom:
+            - configMapRef: 
+                name: abs-envs
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+          {{ .Values.abs.resources | toYaml | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              subPath: config
+            - name: metadata
+              mountPath: /metadata
+              subPath: metadata
+            - name: torrents
+              mountPath: /books
+              subPath: books
+          startupProbe:
+            tcpSocket:
+              port: abs
+            initialDelaySeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 30
+      volumes:
+        - name: torrents
+          nfs:
+            server: "{{ $.Values.global.nfs.server }}"
+            path: "{{ $.Values.global.nfs.additionalShares.torrents  }}"
+            readOnly: true
