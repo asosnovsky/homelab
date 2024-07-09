@@ -90,7 +90,7 @@ arrs:
 
   readarr:
     repo: lscr.io/linuxserver/readarr
-    tag: "develop-0.3.18.2411-ls88"
+    tag: "develop-0.3.30.2576-ls117"
     migrateDbFromSqllite:
       enabled: false
     usePostgres: true
