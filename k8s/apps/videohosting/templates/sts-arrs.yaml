@@ -28,15 +28,6 @@ spec:
     template:
       engineVersion: v2
       data:
-  {{ if $v.migrateDbFromSqllite.enabled }}
-        migration-sqllite-to-pg.sh: |-
-            pgloader \
-              --with "quote identifiers" \
-              --with "data only" \
-              --with "prefetch rows = 100" --with "batch size = 1MB" \
-              /data/{{$k}}.db \
-              '{{ `postgresql://{{.username}}:{{.password}}@{{.host}}:{{.port}}/` }}{{$k}}'
-  {{ end }}
         config.xml: |-
           <Config>
             <LogLevel>info</LogLevel>
@@ -107,13 +98,7 @@ spec:
   selector:
     matchLabels:
       app: {{$k}}
-
-  {{ if $v.migrateDbFromSqllite.enabled }}
-  replicas: 0
-  {{ else }}
   replicas: 1
-  {{ end }}
-
   revisionHistoryLimit: 2
   updateStrategy:
     rollingUpdate:
@@ -208,39 +193,4 @@ spec:
             path: "{{ $.Values.global.nfs.additionalShares.torrents  }}"
             readOnly: false
 
-{{ if $v.migrateDbFromSqllite.enabled }}
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: "migrate-{{$k}}"
-spec:
-  template:
-    metadata:
-      name: "migrate-{{$k}}"
-    spec:
-      restartPolicy: Never
-      backoffLimit: 1
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: "{{ $v.migrateDbFromSqllite.claimName }}"
-        - name: configxml
-          secret:
-            secretName: "{{$k}}-config"
-      containers:
-        - name: migration
-          image: "ghcr.io/roxedus/pgloader"
-          command:
-            - sh 
-            - /configxml/migration-sqllite-to-pg.sh
-          volumeMounts:
-            - mountPath: /app
-              name: tffiles
-          volumeMounts:
-            - mountPath: "/data"
-              name: data
-            - name: configxml
-              mountPath: /configxml
-{{ end }}
 {{ end }}

@@ -45,9 +45,6 @@ arrs:
   sonarr:
     repo: lscr.io/linuxserver/sonarr
     tag: "latest"
-    migrateDbFromSqllite:
-      enabled: false
-      claimName: config-sonarr-0
     usePostgres: true
     podResources:
       limits:
@@ -68,9 +65,6 @@ arrs:
   radarr:
     repo: lscr.io/linuxserver/radarr
     tag: "latest"
-    migrateDbFromSqllite:
-      enabled: false
-      claimName: config-radarr-0
     usePostgres: true
     podResources:
       limits:
@@ -91,8 +85,6 @@ arrs:
   readarr:
     repo: lscr.io/linuxserver/readarr
     tag: "develop-0.3.30.2576-ls117"
-    migrateDbFromSqllite:
-      enabled: false
     usePostgres: true
     podResources:
       limits:
@@ -112,9 +104,6 @@ arrs:
   prowlarr:
     repo: lscr.io/linuxserver/prowlarr
     tag: "1.13.3.4273-ls54"
-    migrateDbFromSqllite:
-      enabled: false
-      claimName: config-prowlarr-0
     usePostgres: true
     podResources:
       limits:
