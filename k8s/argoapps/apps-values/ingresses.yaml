@@ -18,12 +18,12 @@ services:
     group: "Core"
     icon: "https://monitoring.core.home.sosnovsky.ca/favicon.ico"
     port: 9090
-  - prefix: "alerts.core"
-    service: prometheus-kube-prometheus-alertmanager
-    namespace: chart-prometheus
-    middleware: "apps-ingresses-chain-authentik"
-    group: "Core"
-    port: 9093
+  # - prefix: "alerts.core"
+  #   service: prometheus-kube-prometheus-alertmanager
+  #   namespace: chart-prometheus
+  #   middleware: "apps-ingresses-chain-authentik"
+  #   group: "Core"
+  #   port: 9093
   - prefix: "grafana.core"
     service: prometheus-grafana
     namespace: chart-prometheus
