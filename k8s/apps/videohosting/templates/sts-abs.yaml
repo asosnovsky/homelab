@@ -83,7 +83,7 @@ spec:
               subPath: books
           startupProbe:
             tcpSocket:
-              port: abs
+              port: http
             initialDelaySeconds: 10
             failureThreshold: 10
             timeoutSeconds: 30
