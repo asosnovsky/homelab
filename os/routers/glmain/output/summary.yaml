@@ -13,6 +13,10 @@ Lab:
    Fws1:
        ip: "10.0.10.4"
        host: "fws1.lab.internal"
+   Bigbox1:
+       ip: "10.0.10.5"
+       host: "bigbox1.lab.internal"
+       domain: "compute.internal"
 K3s:
    Bee1:
        ip: "10.0.11.1"

@@ -27,7 +27,7 @@ ask "continue update"
 
 echo "Updating conf..."
 ./gen-mappings.py
-cat output/summary.yaml
+git diff
 ask "continue update"
 
 scp -O output/etc/dnsmasq.conf  "$server:/tmp/dnsmasq.new.conf"

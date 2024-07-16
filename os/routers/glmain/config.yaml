@@ -8,13 +8,15 @@ lab:
         name: 'pi1'
     -   mac: '9C:BF:0D:00:56:51'
         name: 'fws1'
+    -   mac: '74:56:3C:CA:E2:ED'
+        name: 'bigbox1'
+        domain: compute.internal
 k3s:
     -   mac: '7C:83:34:B8:7B:43'
         name: 'bee1'
         domain: k3sapp.internal
     -   mac: '68:1D:EF:26:B7:6C'
         name: 'terry1'
-        # domain: home.sosnovsky.ca
     -   mac: '58:47:CA:71:D8:E6'
         name: 'minisf1'
         domain: home.sosnovsky.ca

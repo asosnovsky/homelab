@@ -7,6 +7,8 @@ B8:27:EB:F7:44:4E 10.0.10.3
 B8:27:EB:F7:44:4E pi1.lab.internal
 9C:BF:0D:00:56:51 10.0.10.4
 9C:BF:0D:00:56:51 fws1.lab.internal
+74:56:3C:CA:E2:ED 10.0.10.5
+74:56:3C:CA:E2:ED bigbox1.lab.internal
 #K3s
 7C:83:34:B8:7B:43 10.0.11.1
 7C:83:34:B8:7B:43 bee1.k3s.internal
