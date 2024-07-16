@@ -60,9 +60,6 @@ Cam:
    Livingroom:
        ip: "10.0.13.4"
        host: "livingroom.cam.internal"
-   Garage:
-       ip: "10.0.13.5"
-       host: "garage.cam.internal"
 Iot:
    Korie-lamp:
        ip: "10.0.14.1"
