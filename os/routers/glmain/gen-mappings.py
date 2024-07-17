@@ -50,7 +50,10 @@ with DNSMASQ_CONF.open('w') as dfp, SUMMARY.open('w') as sfp, ETHERS.open('w') a
         efp.write(f'#{cap1_and_join(sub_domain)}\n')
         ip_suffix = 0
         for dvc in configs:
-            ip_suffix += 1
+            if dvc.get('id'):
+                ip_suffix = dvc.get('id')
+            else:
+                ip_suffix += 1
             dvc = {**default_values, **dvc}
             mac = dvc['mac']
             name = dvc['name']
@@ -62,8 +65,9 @@ with DNSMASQ_CONF.open('w') as dfp, SUMMARY.open('w') as sfp, ETHERS.open('w') a
             sfp.write(f'\n       host: "{host}"')
             if not dvc.get('justMac', False):
                 efp.write(f'{mac} {ip}\n')
-                if domain := dvc.get('domain'):
-                    dfp.write(f"address=/{domain}/{ip}\n")
-                    dfp.write(f"address=/.{domain}/{ip}\n")
-                    sfp.write(f'\n       domain: "{domain}"')
+                if domains := dvc.get('domain'):
+                    for domain in domains.split(','):
+                        dfp.write(f"address=/{domain}/{ip}\n")
+                        dfp.write(f"address=/.{domain}/{ip}\n")
+                    sfp.write(f'\n       domain: "{domains}"')
             efp.write(f'{mac} {host}\n')

@@ -17,21 +17,17 @@ Lab:
        ip: "10.0.10.5"
        host: "bigbox1.lab.internal"
        domain: "compute.internal"
+   Minipc1:
+       ip: "10.0.10.6"
+       host: "minipc1.lab.internal"
+   Minipc2:
+       ip: "10.0.10.7"
+       host: "minipc2.lab.internal"
 K3s:
-   Bee1:
-       ip: "10.0.11.1"
-       host: "bee1.k3s.internal"
-       domain: "k3sapp.internal"
-   Terry1:
-       ip: "10.0.11.2"
-       host: "terry1.k3s.internal"
    Minisf1:
        ip: "10.0.11.3"
        host: "minisf1.k3s.internal"
-       domain: "home.sosnovsky.ca"
-   Tnas1:
-       ip: "10.0.11.4"
-       host: "tnas1.k3s.internal"
+       domain: "home.sosnovsky.ca,k3sapp.internal"
 Hub:
    Castle:
        ip: "10.0.12.1"

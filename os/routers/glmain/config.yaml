@@ -11,17 +11,15 @@ lab:
     -   mac: '74:56:3C:CA:E2:ED'
         name: 'bigbox1'
         domain: compute.internal
-k3s:
-    -   mac: '7C:83:34:B8:7B:43'
-        name: 'bee1'
-        domain: k3sapp.internal
     -   mac: '68:1D:EF:26:B7:6C'
-        name: 'terry1'
+        name: 'minipc1'
+    -   mac: '7C:83:34:B8:7B:43'
+        name: 'minipc2'
+k3s:
     -   mac: '58:47:CA:71:D8:E6'
+        id: 3
         name: 'minisf1'
-        domain: home.sosnovsky.ca
-    -   mac: '00:A0:98:17:B2:64'
-        name: 'tnas1'
+        domain: home.sosnovsky.ca,k3sapp.internal
 hub:
     -   mac: 'E4:5F:01:A2:8D:BC'
         name: 'castle'

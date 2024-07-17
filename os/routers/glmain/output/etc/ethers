@@ -9,15 +9,13 @@ B8:27:EB:F7:44:4E pi1.lab.internal
 9C:BF:0D:00:56:51 fws1.lab.internal
 74:56:3C:CA:E2:ED 10.0.10.5
 74:56:3C:CA:E2:ED bigbox1.lab.internal
+68:1D:EF:26:B7:6C 10.0.10.6
+68:1D:EF:26:B7:6C minipc1.lab.internal
+7C:83:34:B8:7B:43 10.0.10.7
+7C:83:34:B8:7B:43 minipc2.lab.internal
 #K3s
-7C:83:34:B8:7B:43 10.0.11.1
-7C:83:34:B8:7B:43 bee1.k3s.internal
-68:1D:EF:26:B7:6C 10.0.11.2
-68:1D:EF:26:B7:6C terry1.k3s.internal
 58:47:CA:71:D8:E6 10.0.11.3
 58:47:CA:71:D8:E6 minisf1.k3s.internal
-00:A0:98:17:B2:64 10.0.11.4
-00:A0:98:17:B2:64 tnas1.k3s.internal
 #Hub
 E4:5F:01:A2:8D:BC 10.0.12.1
 E4:5F:01:A2:8D:BC castle.hub.internal
