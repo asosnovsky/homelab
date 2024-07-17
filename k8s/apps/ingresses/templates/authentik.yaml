@@ -25,10 +25,12 @@ spec:
                     name: authentik-server
                     namespace: chart-authentik
                     port: 80
+{{ if .Values.global.tls.enabled  }}
     tls:
         secretName: tls-authentik.core.home.{{ .Values.global.domain }}
         domains:
             - main: authentik.core.home.{{ .Values.global.domain }}
+{{ end }}
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -51,3 +53,7 @@ spec:
             - X-authentik-meta-provider
             - X-authentik-meta-app
             - X-authentik-meta-version
+---
+{{ if .Values.global.tls.enabled  }}
+{{ include "homelab.ingress.domain.tls" (dict "global" .Values.global "namespace" "chart-authentik" "prefix" "authentik.core.home" "domain" .Values.global.domain ) }}
+{{ end }}
