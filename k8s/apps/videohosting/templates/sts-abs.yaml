@@ -65,7 +65,7 @@ spec:
             - name: nfs-k3s
               mountPath: /config
               subPath: custom-app/abs/config
-            - name: config
+            - name: nfs-k3s
               mountPath: /metadata
               subPath: custom-app/abs/metadata
             - name: torrents
