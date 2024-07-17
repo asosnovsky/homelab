@@ -68,7 +68,7 @@ spec:
     kind: ClusterSecretStore
     name: apps-ingresses
   target:
-    name: tls-{{.prefix}}.{{ .Values.global.domain }}
+    name: "authentik-outpost-tls"
     creationPolicy: Owner
     deletionPolicy: Delete
   data:
