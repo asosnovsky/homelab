@@ -23,7 +23,7 @@ spec:
       name: "http"
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
     name: abs
 spec:
@@ -34,17 +34,6 @@ spec:
   revisionHistoryLimit: 2
   updateStrategy:
     type: RollingUpdate
-  volumeClaimTemplates:
-    - metadata:
-        name: config
-        finalizers:
-          - kubernetes.io/pvc-protection
-      spec:
-        storageClassName: {{ $.Values.global.nfs.storageClass }}
-        accessModes:
-          - ReadWriteOnce
-        resources: 
-          {{ .Values.abs.configVolumesResources | toYaml | nindent 12 }}
   template:
     metadata:
       labels:
@@ -73,12 +62,12 @@ spec:
           resources:
           {{ .Values.abs.resources | toYaml | nindent 12 }}
           volumeMounts:
-            - name: config
+            - name: nfs-k3s
               mountPath: /config
-              subPath: config
+              subPath: custom-app/abs/config
             - name: config
               mountPath: /metadata
-              subPath: metadata
+              subPath: custom-app/abs/metadata
             - name: torrents
               mountPath: /books
               subPath: books
@@ -94,3 +83,7 @@ spec:
             server: "{{ $.Values.global.nfs.server }}"
             path: "{{ $.Values.global.nfs.additionalShares.torrents  }}"
             readOnly: true
+        - name: nfs-k3s
+          nfs:
+            server: "{{ $.Values.global.nfs.server }}"
+            path: "{{ $.Values.global.nfs.share  }}"
