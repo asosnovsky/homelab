@@ -18,5 +18,20 @@ global:
   envFrom:
     - secretRef:
         name: {{ .Values.secrets.authentik.secrets.env.name }}
-
+  ingress:
+    enabled: true
+    annotations: 
+      gethomepage.dev/enabled: 'true'
+      gethomepage.dev/group: Core
+      gethomepage.dev/icon: 'https://authentik.core.home.{{ .Values.global.domain }}/static/dist/assets/icons/icon.png'
+      gethomepage.dev/name: authentik@chart-authentik
+      gethomepage.dev/siteMonitor: 'http://authentik-server.chart-authentik.svc.cluster.local:80/'
+    hosts: 
+      - authentik.core.home.{{ .Values.global.domain }}
+    pathType: Prefix
+    tls: 
+      - hosts:
+          - authentik.core.home.{{ .Values.global.domain }}
+        secretName: tls-authentik.core.home.{{ .Values.global.domain }}
+    https: true
 
