@@ -55,7 +55,7 @@ spec:
             - X-authentik-meta-version
 ---
 {{ if .Values.global.tls.enabled  }}
-{{ include "homelab.ingress.domain.tls" (dict "global" .Values.global "namespace" "chart-authentik" "prefix" "authentik.{{ .Values.global.rootSubDomain }}" "domain" .Values.global.domain ) }}
+{{ include "homelab.ingress.domain.tls" (dict "global" .Values.global "namespace" "chart-authentik" "prefix" "authentik.home" "domain" .Values.global.domain ) }}
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
