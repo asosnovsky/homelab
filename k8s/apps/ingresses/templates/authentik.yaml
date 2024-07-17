@@ -1,0 +1,30 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: authentik.core.home.{{ .Values.global.domain }}
+spec:
+    routes:
+        -   kind: Rule
+            match: "Host(`authentik.core.home.{{ .Values.global.domain }}`)"
+            middlewares:
+                -   name: forwardauth-authentik
+                    namespace: "{{ .Release.Namespace }}"
+            priority: 10
+            services: 
+                -   kind: Service
+                    name: authentik-server
+                    namespace: chart-authentik
+                    port: 80
+        -   kind: Rule
+            match: "Host(`authentik.core.home.{{ .Values.global.domain }}`) && PathPrefix(`/outpost.goauthentik.io/`)"
+            priority: 15
+            services:
+                -   kind: Service
+                    name: authentik-server
+                    namespace: chart-authentik
+                    port: 80
+    tls:
+        secretName: tls-authentik.core.home.{{ .Values.global.domain }}
+        domains:
+            - main: authentik.core.home.{{ .Values.global.domain }}
