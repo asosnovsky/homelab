@@ -35,7 +35,7 @@ services:
   #   service: "authentik-server"
   #   namespace: "chart-authentik"
   #   group: "Core"
-  #   icon: "https://authentik.core.home.sosnovsky.ca/static/dist/assets/icons/icon.png"
+  #   icon: "https://authentik.home.sosnovsky.ca/static/dist/assets/icons/icon.png"
   # root services
   - prefix: "demo"
     service: "dummy-app"

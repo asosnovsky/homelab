@@ -2,12 +2,12 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: authentik.core.home.{{ .Values.global.domain }}
+  name: authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
   namespace: chart-authentik
 spec:
     routes:
         -   kind: Rule
-            match: "Host(`authentik.core.home.{{ .Values.global.domain }}`)"
+            match: "Host(`authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}`)"
             middlewares:
                 -   name: forwardauth-authentik
                     namespace: chart-authentik
@@ -18,7 +18,7 @@ spec:
                     namespace: chart-authentik
                     port: 80
         -   kind: Rule
-            match: "Host(`authentik.core.home.{{ .Values.global.domain }}`) && PathPrefix(`/outpost.goauthentik.io/`)"
+            match: "Host(`authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}`) && PathPrefix(`/outpost.goauthentik.io/`)"
             priority: 15
             services:
                 -   kind: Service
@@ -27,9 +27,9 @@ spec:
                     port: 80
 {{ if .Values.global.tls.enabled  }}
     tls:
-        secretName: tls-authentik.core.home.{{ .Values.global.domain }}
+        secretName: tls-authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
         domains:
-            - main: authentik.core.home.{{ .Values.global.domain }}
+            - main: authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
 {{ end }}
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -39,7 +39,7 @@ metadata:
     namespace: chart-authentik
 spec:
     forwardAuth:
-        address: http://authentik.core.home.{{ .Values.global.domain }}/outpost.goauthentik.io/auth/traefik
+        address: http://authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}/outpost.goauthentik.io/auth/traefik
         trustForwardHeader: true
         authResponseHeaders:
             - X-authentik-username
@@ -55,7 +55,7 @@ spec:
             - X-authentik-meta-version
 ---
 {{ if .Values.global.tls.enabled  }}
-{{ include "homelab.ingress.domain.tls" (dict "global" .Values.global "namespace" "chart-authentik" "prefix" "authentik.core.home" "domain" .Values.global.domain ) }}
+{{ include "homelab.ingress.domain.tls" (dict "global" .Values.global "namespace" "chart-authentik" "prefix" "authentik.{{ .Values.global.rootSubDomain }}" "domain" .Values.global.domain ) }}
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret

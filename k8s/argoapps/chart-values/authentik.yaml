@@ -1,5 +1,5 @@
 authentik:
-  cookie_domain: authentik.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
+  cookie_domain: {{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
   email:
     from: {{ .Values.global.smtp.email }}
     host: postfix.email.svc.cluster.local
@@ -20,16 +20,16 @@ server:
     annotations: 
       gethomepage.dev/enabled: 'true'
       gethomepage.dev/group: Core
-      gethomepage.dev/icon: 'https://authentik.core.home.{{ .Values.global.domain }}/static/dist/assets/icons/icon.png'
+      gethomepage.dev/icon: 'https://authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}/static/dist/assets/icons/icon.png'
       gethomepage.dev/name: authentik@chart-authentik
       gethomepage.dev/siteMonitor: 'http://authentik-server.chart-authentik.svc.cluster.local:80/'
     hosts: 
-      - authentik.core.home.{{ .Values.global.domain }}
+      - authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
     pathType: Prefix
     tls: 
       - hosts:
-          - authentik.core.home.{{ .Values.global.domain }}
-        secretName: tls-authentik.core.home.{{ .Values.global.domain }}
+          - authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
+        secretName: tls-authentik.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
     https: false
 global:
   envFrom:
