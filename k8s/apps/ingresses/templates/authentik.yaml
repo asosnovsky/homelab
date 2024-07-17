@@ -56,4 +56,29 @@ spec:
 ---
 {{ if .Values.global.tls.enabled  }}
 {{ include "homelab.ingress.domain.tls" (dict "global" .Values.global "namespace" "chart-authentik" "prefix" "authentik.core.home" "domain" .Values.global.domain ) }}
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: "authentik-outpost-tls"
+  namespace: chart-authentik
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: apps-ingresses
+  target:
+    name: tls-{{.prefix}}.{{ .Values.global.domain }}
+    creationPolicy: Owner
+    deletionPolicy: Delete
+  data:
+    - secretKey: tls.crt
+      remoteRef:
+        key: cloudflare-wildcard.{{ .Values.global.domain }}
+        property: tls.crt
+    - secretKey: tls.key
+      remoteRef:
+        key: cloudflare-wildcard.{{ .Values.global.domain }}
+        property: tls.key
 {{ end }}
+
