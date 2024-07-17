@@ -40,6 +40,7 @@ spec:
         finalizers:
           - kubernetes.io/pvc-protection
       spec:
+        storageClassName: {{ $.Values.global.nfs.storageClass }}
         accessModes:
           - ReadWriteOnce
         resources: 
