@@ -74,7 +74,13 @@ reverseProxy:
     overrides:
       group: "Framework Services"
       middleware: "apps-ingresses-chain-authentik"
-
+  abs:
+    ip: 10.0.10.6
+    port: 8000
+    overrides:
+      prefix: "abs.vh"
+      middleware: "apps-ingresses-chain-authentik"
+      group: "Video Hosting"
 
 cloudflare:
   enabled: true
