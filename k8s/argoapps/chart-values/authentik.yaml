@@ -14,10 +14,7 @@ postgresql:
   enabled: false
 redis:
   enabled: true
-global:
-  envFrom:
-    - secretRef:
-        name: {{ .Values.secrets.authentik.secrets.env.name }}
+server:
   ingress:
     enabled: true
     annotations: 
@@ -33,5 +30,8 @@ global:
       - hosts:
           - authentik.core.home.{{ .Values.global.domain }}
         secretName: tls-authentik.core.home.{{ .Values.global.domain }}
-    https: true
-
+    https: false
+global:
+  envFrom:
+    - secretRef:
+        name: {{ .Values.secrets.authentik.secrets.env.name }}
