@@ -27,6 +27,7 @@ jellyfin:
       memory: "4Gi"
 
 abs:
+  enabled: false
   repo: ghcr.io/advplyr/audiobookshelf
   tag: latest
   resources:

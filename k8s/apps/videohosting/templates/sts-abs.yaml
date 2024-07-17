@@ -1,3 +1,4 @@
+{{ if .Values.abs.enabled }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -87,3 +88,4 @@ spec:
           nfs:
             server: "{{ $.Values.global.nfs.server }}"
             path: "{{ $.Values.global.nfs.share  }}"
+{{ end }}
