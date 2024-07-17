@@ -111,7 +111,7 @@ infrastructureCharts:
     enableServerSideApply: true
   authentik:
     repoURL: https://charts.goauthentik.io
-    targetRevision: "2024.6.0"
+    targetRevision: "2024.6.1"
     valuesFile: authentik.yaml
   authelia:
     repoURL: https://charts.authelia.com
