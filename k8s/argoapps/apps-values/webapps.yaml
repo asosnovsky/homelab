@@ -73,7 +73,7 @@ apps:
       - med
       - high
   ollama-web:
-    enabled: false
+    enabled: true
     ingress:
       middleware: apps-ingresses-chain-authentik
     repo: ghcr.io/ollama-webui/ollama-webui
@@ -89,7 +89,7 @@ apps:
       liveness: "/"
     env:
       - name: OLLAMA_API_BASE_URL
-        value: "http://ollama.apps-webapps.svc.cluster.local:11434/api"
+        value: "http://bigbox1.lab.internal:11434/api"
     ports:
       tcp:
         web: 8080
