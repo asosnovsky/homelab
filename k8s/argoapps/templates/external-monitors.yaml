@@ -5,7 +5,9 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: argoapps
     app.kubernetes.io/name: external-svc-monitor
+    release: prometheus
   name: external-svc-monitor
+  namespace: chart-prometheus
 spec:
   endpoints:
     - honorLabels: true
