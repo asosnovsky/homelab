@@ -1,0 +1,25 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: argoapps
+    app.kubernetes.io/name: external-svc-monitor
+  name: external-svc-monitor
+spec:
+  endpoints:
+    - honorLabels: true
+      path: "/metrics"
+      port: 80
+      scheme: http
+      scrapeTimeout: "30s"
+  jobLabel: external-svc-monitor
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: rp-metrics
+
+{{- range $def := .Values.externalPrometheusExporters }}
+
+{{ include "homelab.prom.svcm" $def }}
+
+{{ end -}}

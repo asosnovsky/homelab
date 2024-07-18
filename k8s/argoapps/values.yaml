@@ -216,3 +216,7 @@ storage:
         storage: 20Gi
       requests:
         storage: 1Gi
+
+externalPrometheusExporters:
+  - name: fwbook
+    ip: 10.0.0.119
