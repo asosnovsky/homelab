@@ -1,8 +1,0 @@
-{{ $shared := .Values.immich.shared }}
-{{- range $key, $val := .Values.immich.apps }}
-    {{- $settings := deepCopy $.Values.immich.shared  | merge $val -}}
-    {{ $_ := set $settings "name" ( lower $key  ) }}
-    {{ $_ := set $settings "global" $.Values.global }}
-
-    {{ include "homelab.immich.deployment" $settings }}
-{{ end -}}
