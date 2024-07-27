@@ -80,7 +80,6 @@ reverseProxy:
     ip: 10.0.10.6
     port: 9999
     overrides:
-      middleware: "apps-ingresses-chain-authentik"
       group: "Apps"
       useSecondaryDomain: true
 
