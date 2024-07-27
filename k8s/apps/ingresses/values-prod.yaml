@@ -61,19 +61,13 @@ reverseProxy:
       group: "Framework Services"
       middleware: "apps-ingresses-chain-authentik"
 
-  esphome:
-    ip: 10.0.10.4
-    port: 6052
-    overrides:
-      group: "Framework Services"
-      middleware: "apps-ingresses-chain-authentik"
-
   fwdockge:
     ip: 10.0.10.4
     port: 5050
     overrides:
       group: "Framework Services"
       middleware: "apps-ingresses-chain-authentik"
+
   abs:
     ip: 10.0.10.6
     port: 8000
@@ -81,6 +75,14 @@ reverseProxy:
       prefix: "abs.vh"
       middleware: "apps-ingresses-chain-authentik"
       group: "Video Hosting"
+
+  events:
+    ip: 10.0.10.6
+    port: 9999
+    overrides:
+      middleware: "apps-ingresses-chain-authentik"
+      group: "Apps"
+      useSecondaryDomain: true
 
 cloudflare:
   enabled: true
