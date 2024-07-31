@@ -23,6 +23,9 @@ Lab:
    Minipc2:
        ip: "10.0.10.7"
        host: "minipc2.lab.internal"
+   Terra1:
+       ip: "10.0.10.8"
+       host: "terra1.lab.internal"
 K3s:
    Minisf1:
        ip: "10.0.11.3"
