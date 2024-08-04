@@ -49,7 +49,7 @@ reverseProxy:
       middleware: "apps-ingresses-chain-authentik"
 
   scrypted:
-    ip: "10.0.10.4"
+    ip: "10.0.10.7"
     port: "11080"
     overrides:
       group: "Cameras"
