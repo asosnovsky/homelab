@@ -7,10 +7,10 @@ ingress:
   tls:
     enabled: false
   hostOverride:
-    - host: authelia.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
+    - host: authelia.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}
       path: "/"
   traefikCRD:
     enabled: true
-    matchOverride: Host(`authelia.core.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}`)
+    matchOverride: Host(`authelia.{{ .Values.global.rootSubDomain }}.{{ .Values.global.domain }}`)
 # configMap:
 #   disabled: true

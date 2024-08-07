@@ -122,8 +122,16 @@ infrastructureCharts:
     chart: homepage
     targetRevision: "1.2.3"
     valuesFile: homepage.yaml
+  tailscale:
+    repoURL: https://pkgs.tailscale.com/helmcharts
+    chart: tailscale-operator 
 
 secrets:
+  tailscale:
+    namespace: chart-tailscale
+    secrets:
+      oauth:
+        name: operator-oauth
   ingresses:
     enableClusterStore: true
     namespace: apps-ingresses
