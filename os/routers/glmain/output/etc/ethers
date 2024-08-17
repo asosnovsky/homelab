@@ -13,8 +13,10 @@ B8:27:EB:F7:44:4E pi1.lab.internal
 68:1D:EF:26:B7:6C minipc1.lab.internal
 7C:83:34:B8:7B:43 10.0.10.7
 7C:83:34:B8:7B:43 minipc2.lab.internal
-6C:BF:B5:01:E9:87 10.0.10.8
-6C:BF:B5:01:E9:87 terra1.lab.internal
+6C:BF:B5:01:E9:86 10.0.10.8
+6C:BF:B5:01:E9:86 terra1e1.lab.internal
+6C:BF:B5:01:E9:87 10.0.10.9
+6C:BF:B5:01:E9:87 terra1e2.lab.internal
 #K3s
 58:47:CA:71:D8:E6 10.0.11.3
 58:47:CA:71:D8:E6 minisf1.k3s.internal
