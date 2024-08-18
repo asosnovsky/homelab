@@ -16,9 +16,9 @@ lab:
     -   mac: '7C:83:34:B8:7B:43'
         name: 'minipc2'
     -   mac: '6C:BF:B5:01:E9:86'
-        name: terra1e1
+        name: terra1
     -   mac: '6C:BF:B5:01:E9:87'
-        name: terra1e2
+        name: terra1
 k3s:
     -   mac: '58:47:CA:71:D8:E6'
         id: 3
