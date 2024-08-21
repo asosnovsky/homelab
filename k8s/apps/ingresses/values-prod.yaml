@@ -80,7 +80,7 @@ reverseProxy:
     ip: 10.0.10.5
     port: 8096
     overrides:
-      prefix: "jellyfin.vh"
+      prefix: "jellyfin"
       middleware: "apps-ingresses-chain-authentik"
       group: "Video Hosting"
 
