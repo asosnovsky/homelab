@@ -81,7 +81,7 @@ reverseProxy:
     port: 8096
     overrides:
       prefix: "jellyfin"
-      middleware: "apps-ingresses-chain-authentik"
+      # middleware: "apps-ingresses-chain-authentik"
       group: "Video Hosting"
 
   events:
