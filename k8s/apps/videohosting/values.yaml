@@ -6,15 +6,6 @@ global:
     additionalShares:
       torrents: "changeme"
       familyvideos: "changeme"
-plex:
-  repo: "plexinc/pms-docker"
-  tag: "1.40.0.7998-c29d4c0c8"
-  resources:
-    limits:
-      memory: "14Gi"
-    requests:
-      cpu: 3.5
-      memory: "4Gi"
 
 jellyfin:
   enabled: false
@@ -26,22 +17,6 @@ jellyfin:
     requests:
       cpu: 1
       memory: "4Gi"
-
-abs:
-  enabled: false
-  repo: ghcr.io/advplyr/audiobookshelf
-  tag: latest
-  resources:
-    limits:
-      memory: "4Gi"
-    requests:
-      cpu: 1
-      memory: "4Gi"
-  configVolumesResources:
-    requests:
-      storage: 10Gi
-    limits:
-      storage: 100Gi
 
 arrs:
   sonarr:
@@ -140,26 +115,4 @@ services:
         memory: "8Gi"
       requests:
         cpu: 250m
-        memory: "500M"
-
-  jellyplex:
-    kind: Deployment
-    disableSVC: true
-    repo: "luigi311/jellyplex-watched"
-    tag: "latest"
-    envVars:
-      PLEX_BASEURL: "http://plex.{{.Release.Namespace}}.svc.cluster.local:32400"
-      JELLYFIN_BASEURL: "http://bigbox1.lab.internal:8096"
-      # JELLYFIN_BASEURL: "http://jellyfin.{{.Release.Namespace}}.svc.cluster.local:8096"
-      SSL_BYPASS: "True"
-      SYNC_FROM_PLEX_TO_JELLYFIN: "True"
-      SYNC_FROM_JELLYFIN_TO_PLEX: "False"
-      SYNC_FROM_PLEX_TO_PLEX: "False"
-      SYNC_FROM_JELLYFIN_TO_JELLYFIN: "True"
-      DRYRUN: "False"
-    podResources:
-      limits:
-        memory: "500M"
-      requests:
-        cpu: 50m
         memory: "500M"
