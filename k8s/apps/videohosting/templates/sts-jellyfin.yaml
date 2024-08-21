@@ -1,3 +1,4 @@
+{{ if .Values.jellyfin.enabled }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -131,3 +132,4 @@ spec:
             server: "{{ $.Values.global.nfs.server }}"
             path: "{{ .Values.global.nfs.additionalShares.familyvideos }}"
             readOnly: true
+{{ end }}

@@ -17,6 +17,7 @@ plex:
       memory: "4Gi"
 
 jellyfin:
+  enabled: false
   repo: "lscr.io/linuxserver/jellyfin"
   tag: latest
   resources:
