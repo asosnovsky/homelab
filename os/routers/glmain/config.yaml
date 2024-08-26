@@ -115,3 +115,8 @@ devices:
         mac: '34:6F:24:CA:70:57'
     -   name: 'vitapc'
         mac: 'E0:0A:F6:79:C6:E9'
+    -   name: 'vitaphone'
+        mac: 'E0:92:5C:20:F7:21'
+    -   name: 'levaphone'
+        mac: 'EC:28:D3:53:30:59'
+
