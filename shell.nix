@@ -11,4 +11,8 @@ pkgs.mkShell {
     python312
     python312Packages.pyyaml
   ];
+  shellHook = ''
+  	export PROMPT="🏠> $PROMPT"
+  	echo "Welcome to HomeLab!"
+  '';
 }
