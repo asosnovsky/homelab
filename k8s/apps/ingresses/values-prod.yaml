@@ -69,7 +69,7 @@ reverseProxy:
       middleware: "apps-ingresses-chain-authentik"
 
   abs:
-    ip: 10.0.10.6
+    ip: 10.0.10.7
     port: 8000
     overrides:
       prefix: "abs.vh"
