@@ -49,12 +49,12 @@ services:
     middleware: "apps-nextcloud-nextcloud"
     group: "Apps"
     icon: "https://nextcloud.home.sosnovsky.ca/core/img/favicon.ico"
-  - prefix: "plex"
-    service: "plex"
-    namespace: "apps-videohosting"
-    port: 32400
-    group: "Apps"
-    icon: "https://plex.home.sosnovsky.ca/web/favicon.ico"
+  # - prefix: "plex"
+  #   service: "plex"
+  #   namespace: "apps-videohosting"
+  #   port: 32400
+  #   group: "Apps"
+  #   icon: "https://plex.home.sosnovsky.ca/web/favicon.ico"
   # - prefix: "jellyfin"
   #   service: "jellyfin"
   #   namespace: "apps-videohosting"
