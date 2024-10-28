@@ -11,26 +11,26 @@ services:
     namespace: "argocd"
     group: "Core"
     icon: "https://argocd.core.home.sosnovsky.ca/assets/favicon/favicon-32x32.png"
-  - prefix: "monitoring.core"
-    service: prometheus-kube-prometheus-prometheus
-    namespace: chart-prometheus
-    middleware: "apps-ingresses-chain-authentik"
-    group: "Core"
-    icon: "https://monitoring.core.home.sosnovsky.ca/favicon.ico"
-    port: 9090
+  # - prefix: "monitoring.core"
+  #   service: prometheus-kube-prometheus-prometheus
+  #   namespace: chart-prometheus
+  #   middleware: "apps-ingresses-chain-authentik"
+  #   group: "Core"
+  #   icon: "https://monitoring.core.home.sosnovsky.ca/favicon.ico"
+  #   port: 9090
   # - prefix: "alerts.core"
   #   service: prometheus-kube-prometheus-alertmanager
   #   namespace: chart-prometheus
   #   middleware: "apps-ingresses-chain-authentik"
   #   group: "Core"
   #   port: 9093
-  - prefix: "grafana.core"
-    service: prometheus-grafana
-    namespace: chart-prometheus
-    middleware: "apps-ingresses-chain-authentik"
-    group: "Core"
-    icon: "https://grafana.core.home.sosnovsky.ca/public/img/fav32.png"
-    health: "healthz"
+  # - prefix: "grafana.core"
+  #   service: prometheus-grafana
+  #   namespace: chart-prometheus
+  #   middleware: "apps-ingresses-chain-authentik"
+    # group: "Core"
+    # icon: "https://grafana.core.home.sosnovsky.ca/public/img/fav32.png"
+    # health: "healthz"
   # - prefix: "authentik.core"
   #   service: "authentik-server"
   #   namespace: "chart-authentik"
