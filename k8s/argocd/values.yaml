@@ -21,5 +21,5 @@ selfapp:
   deployment: ""
   sshkey: ""
 gitops:
-  commit: "stable"
+  commit: "v2"
   repo: "asosnovsky/homelab"
