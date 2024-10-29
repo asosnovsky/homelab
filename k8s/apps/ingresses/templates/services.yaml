@@ -1,3 +1,0 @@
-{{ range $svc := .Values.services }}
-{{ include "homelab.ingress" (merge $svc (dict "global" $.Values.global)) }}
-{{ end }}
