@@ -1,3 +1,2 @@
 global:
   deployment: dev
-  domain: "me.local"

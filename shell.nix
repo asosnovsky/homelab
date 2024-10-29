@@ -12,7 +12,9 @@ pkgs.mkShell {
     python312Packages.pyyaml
   ];
   shellHook = ''
-  	export PROMPT="🏠> $PROMPT"
-  	echo "Welcome to HomeLab!"
+      echo "$(pwd)"
+      export PATH="$(pwd)/bin:$PATH"
+    	export PROMPT="🏠> $PROMPT"
+    	echo "Welcome to HomeLab!"
   '';
 }

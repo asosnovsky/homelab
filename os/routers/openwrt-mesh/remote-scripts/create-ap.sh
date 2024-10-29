@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 HOSTNAME=${1:-$HOSTNAME}
 
@@ -12,10 +12,10 @@ while [ "$n" -gt 0 ]; do
 done
 
 for i in firewall dnsmasq odhcpd; do
-  if /etc/init.d/"$i" enabled; then
-    /etc/init.d/"$i" disable
-    /etc/init.d/"$i" stop
-  fi
+    if /etc/init.d/"$i" enabled; then
+        /etc/init.d/"$i" disable
+        /etc/init.d/"$i" stop
+    fi
 done
 
 uci set network.lan.proto='dhcp'

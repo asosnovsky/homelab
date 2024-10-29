@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 full_path=${1}
@@ -28,7 +28,7 @@ if [ "$chart_checksum" == "$previous_checksum" ]; then
     echo "  > skipping helm update!"
 else
     echo "  > updating dependencies..."
-    helm dependency update 
+    helm dependency update
 fi
 popd &> /dev/null
 echo $chart_checksum > $chart_checksum_path
@@ -49,10 +49,10 @@ fi
 echo "  > running..."
 
 helm template $app $full_path --namespace $app \
-    --debug \
-    --values $full_path/values.yaml \
-    --values $full_path/values-$deployment.yaml \
-    > $tmp_path
+--debug \
+--values $full_path/values.yaml \
+--values $full_path/values-$deployment.yaml \
+> $tmp_path
 
 echo "Wrote Template! --> $tmp_path"
 echo "==============="
