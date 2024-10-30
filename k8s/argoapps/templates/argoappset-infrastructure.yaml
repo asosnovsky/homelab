@@ -18,7 +18,6 @@ metadata:
   name: "{{ $appProps.namespace }}"
     {{ end }}
 
-    {{- include "homelab.argo.applicaton" $appProps -}}
 
   {{- end -}}
 
