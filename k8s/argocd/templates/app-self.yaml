@@ -17,12 +17,32 @@ stringData:
 {{ if .Values.selfapp.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: common applications
+  orphanedResources:
+    warn: false
+  sourceRepos:
+    - "*"
+  destinations:
+    - server: "*"
+      namespace: '*'
+      name: '*'
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: "{{ .Release.Name }}"
   namespace: "{{ .Release.Namespace }}"
 spec:
-  project: default
+  project: argocd
   source:
     repoURL: "git@github.com:{{ .Values.gitops.repo }}.git"
     targetRevision: "{{ .Values.gitops.commit }}"
@@ -51,7 +71,7 @@ metadata:
   name: "argoapps"
   namespace: "{{ .Release.Namespace }}"
 spec:
-  project: default
+  project: argocd
   source:
     repoURL: "git@github.com:{{ .Values.gitops.repo }}.git"
     targetRevision: "{{ .Values.gitops.commit }}"
