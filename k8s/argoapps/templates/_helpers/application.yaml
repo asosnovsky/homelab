@@ -1,0 +1,29 @@
+{{ define "homelab.argo.applicaton" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ .name }}"
+spec:
+  project: {{ .project }}
+  source:
+    repoURL: "git@github.com:{{ .Values.gitops.repo }}.git"
+    targetRevision: "{{ .Values.gitops.commit }}"
+    path: 'k8s/apps/{{ .name }}'
+    helm:
+        valueFiles:
+            - values.yaml
+            - values-{{.Values.global.deployment}}.yaml
+        values: |-
+          global: 
+              {{- .Values.global | toYaml | nindent 12 }}
+        releaseName: {{ .name }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .namespace }}
+  {{- if .syncPolicy }}
+  syncPolicy:
+    {{- .syncPolicy | toYaml | nindent 4 }}
+  {{ end }}
+
+{{ end }}

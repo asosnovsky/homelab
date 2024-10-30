@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+set -e
+
+
+# Bootstrap
+set -e
+ROOT_FOLDER=$(realpath $0 | xargs dirname | xargs dirname)
+. $ROOT_FOLDER/bin/extra/common.sh
+# Bootstrap
+
+pushd $ROOT_FOLDER > /dev/null
+
+
+
+function run-bootstrap-argo() {
+    : Initial setup for argocd
+    :
+    deployment=${1}
+    check-deploy-name $deployment
+    echo "Installing initial Chart..."
+    helm install argocd k8s/argocd \
+    --namespace argocd \
+    --create-namespace \
+    --values k8s/argocd/values.yaml \
+    --set selfapp.deployment="${DEPLOYMENT}" \
+    --set selfapp.sshkey="$(cat ~/.ssh/github_ed)"
+    
+    while ! check-argo-alive; do
+        echo "Waiting on argo to get started"
+        kubectl -n argocd get all
+        sleep 1
+    done
+    
+    echo "Login to argo"
+    argocd login cd.argoproj.io --core
+    kubectl config set-context --current --namespace argocd
+    argocd admin initial-password
+}
+
+function run-upgrade-argo() {
+    : Manually upgrade argocd from disk
+    :
+    deployment=${1}
+    check-deploy-name $deployment
+    
+    pushd $ROOT_FOLDER/k8s/argocd
+    helm dependency update
+    popd
+    
+    helm upgrade argocd k8s/argocd \
+    --namespace argocd \
+    --create-namespace \
+    --values k8s/argocd/values.yaml \
+    --set selfapp.enabled="true" \
+    --set selfapp.deployment="${deployment}" \
+    --set selfapp.sshkey="$(cat ~/.ssh/github_ed)"
+}
+
+function run-port-forward-argo() {
+    : Port forward argocd to local
+    :
+    local_port=${1:-8080}
+    kubectl port-forward services/argocd-server $local_port:80 -n argocd
+}
+
+function run-new-chart() {
+    : Create a new helm chart
+    : dev new-chart {path-to-chart}
+    
+    full_path=${1}
+    app=$(basename $full_path)
+    location=$(dirname $full_path)
+    typeofapp=$(basename $location)
+    
+    mkdir -p $full_path/templates
+    touch $full_path/values.yaml
+    cat <<EOT >> $full_path/Chart.yaml
+apiVersion: v2
+name: $app
+description: An $typeofapp service for homelab
+type: application
+version: 0.1.0
+dependencies: []
+EOT
+}
+
+start_cli $@

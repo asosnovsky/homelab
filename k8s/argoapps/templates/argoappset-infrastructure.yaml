@@ -1,0 +1,25 @@
+{{- $argoappsetInfra := "infrastructure" -}}
+
+{{- include "homelab.argo.project" (dict "name" $argoappsetInfra "description" "Infrastructure related charts") -}}
+
+
+{{- range $appName, $appProps := .Values.infrastructure -}}
+  {{- $_ := set $appProps "Values" $.Values -}}
+  {{- $_ := set $appProps "name" (default $appProps.name (printf "infra-%s" $appName)) -}}
+  {{- $_ := set $appProps "project" (default $appProps.project $argoappsetInfra) -}}
+  {{- $_ := set $appProps "namespace" (default $appProps.namespace $appName) -}}
+
+  {{- if (not $appProps.disabled)  -}}
+    {{- if $appProps.createNamespace -}}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "{{ $appProps.namespace }}"
+    {{ end }}
+
+    {{- include "homelab.argo.applicaton" $appProps -}}
+
+  {{- end -}}
+
+{{- end -}}

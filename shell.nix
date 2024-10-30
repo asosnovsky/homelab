@@ -5,6 +5,8 @@ pkgs.mkShell {
     git
     kubectl
     kubernetes-helm
+    jsonnet
+    jsonnet-language-server
     argocd
     yq
     jq
