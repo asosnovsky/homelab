@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: "git@github.com:{{ .Values.gitops.repo }}.git"
     targetRevision: "{{ .Values.gitops.commit }}"
-    path: 'k8s/apps/{{ .name }}'
+    path: '{{ .rootFolder }}/{{ .name }}'
     helm:
         valueFiles:
             - values.yaml
