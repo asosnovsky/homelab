@@ -13,8 +13,3 @@ infrastructure:
   metallb:
     createNamespace: true
     namespace: metallb-system
-    syncPolicy:
-      automated:
-        selfHeal: true
-      syncOptions:
-        - ServerSideApply=true

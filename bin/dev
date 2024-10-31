@@ -25,11 +25,13 @@ function run-bootstrap-argo() {
     --set selfapp.deployment="${DEPLOYMENT}" \
     --set selfapp.sshkey="$(cat ~/.ssh/github_ed)"
     
+    echo "Waiting on argo to get started..."
     while ! check-argo-alive; do
-        echo "Waiting on argo to get started"
+        echo "Waiting on argo to get started..."
         kubectl -n argocd get all
         sleep 1
     done
+    sleep 5
     
     echo "Login to argo"
     argocd login cd.argoproj.io --core
