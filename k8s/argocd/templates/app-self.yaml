@@ -61,8 +61,6 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: "{{ .Release.Namespace }}"
-  syncPolicy:
-    automated: {}
 
 ---
 apiVersion: argoproj.io/v1alpha1
