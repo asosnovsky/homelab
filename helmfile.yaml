@@ -1,0 +1,45 @@
+repositories:
+    -   name: prometheus-community
+        url: https://prometheus-community.github.io/helm-charts
+    -   name: grafana
+        url: https://grafana.github.io/helm-charts
+    -   name: external-secrets
+        url: https://charts.external-secrets.io 
+    -   name: kubernetes-dashboard
+        url: https://kubernetes.github.io/dashboard/
+
+releases:
+    -   name: external-secrets
+        namespace: plugin-external-secrets
+        chart: external-secrets/external-secrets
+        version: "0.11.0"
+    -   name: kubernetes-dashboard
+        namespace: kubernetes-dashboard
+        chart: kubernetes-dashboard/kubernetes-dashboard
+    # -   name: prometheus-operator-crds
+    #     namespace: plugin-monitoring
+    #     chart: prometheus-community/prometheus-operator-crds
+    #     version: "17.0.2"
+    # -   name: loki
+    #     namespace: plugin-monitoring
+    #     chart: grafana/loki-stack
+    #     version: "2.10.2"
+    #     values:
+    #         - helmfile/values-loki-stack.yaml
+    # -   name: kube-prometheus-stack
+    #     namespace: plugin-monitoring
+    #     chart: prometheus-community/kube-prometheus-stack
+    #     version: "68.2.1"
+    #     values:
+    #         - helmfile/values-kube-prometheus-stack.yaml
+    #     needs:
+    #         - plugin-monitoring/prometheus-operator-crds
+    # -   name: infra
+    #     chart: ./charts/infra
+    #     namespace: default
+    #     values:
+    #         - charts/infra/values.yaml
+    #         - charts/infra/environments/sibli-gcp-values.yaml
+    #     needs: 
+    #         - plugin-monitoring/kube-prometheus-stack
+    #         - plugin-external-secrets/external-secrets
