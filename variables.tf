@@ -1,5 +1,9 @@
-variable "myip" {}
-variable "cloudflare_api_token" {}
+variable "cloudflare" {
+  type = object({
+    api_token  = string
+    account_id = string
+  })
+}
 variable "main_domain" {
   default = "sosnovsky.ca"
 }

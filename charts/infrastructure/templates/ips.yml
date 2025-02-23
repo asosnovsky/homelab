@@ -3,13 +3,13 @@ apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
   name: homelab-pool
-  namespace: "{{ .Release.Namespace }}"
+  namespace: "{{ .Values.ns.metallb }}"
 spec:
-  addresses:  
-    {{- .Values.homelab.addresses | toYaml | nindent 4 }}
+  addresses:
+    - 10.0.100.1-10.0.100.255
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
   name: l2ad
-  namespace: "{{ .Release.Namespace }}"
+  namespace: "{{ .Values.ns.metallb }}"

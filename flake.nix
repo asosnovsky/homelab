@@ -25,7 +25,7 @@
                   helm-diff
                 ];
               })
-              helmfile-wrapped
+              terraform
               argocd
               yq
               jq
@@ -34,6 +34,7 @@
               echo "$(pwd)"
               export PATH="$(pwd)/bin:$PATH"
               export PROMPT="🏠> $PROMPT"
+              export KUBE_CONFIG_PATH=~/.kube/config
               echo "Welcome to HomeLab!"
             '';
           };

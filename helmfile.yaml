@@ -5,21 +5,26 @@ repositories:
         url: https://grafana.github.io/helm-charts
     -   name: external-secrets
         url: https://charts.external-secrets.io 
-    -   name: kubernetes-dashboard
-        url: https://kubernetes.github.io/dashboard/
-
+    -   name: metallb
+        url: https://metallb.github.io/metallb
+# helm install metallb 
 releases:
     -   name: external-secrets
         namespace: plugin-external-secrets
         chart: external-secrets/external-secrets
         version: "0.11.0"
-    -   name: kubernetes-dashboard
-        namespace: kubernetes-dashboard
-        chart: kubernetes-dashboard/kubernetes-dashboard
-    # -   name: prometheus-operator-crds
-    #     namespace: plugin-monitoring
-    #     chart: prometheus-community/prometheus-operator-crds
-    #     version: "17.0.2"
+    # -   name: metallb
+    #     namespace: plugin-metallb
+    #     chart: metallb/metallb
+    #     version: "0.14.9"
+    # -   name: plugin-infrastructure
+    #     namespace: metallb
+    #     chart: ./k8s/infrastructure
+    #     values:
+    #         - ./k8s/infrastructure/values.yaml
+    #     needs:
+    #         - plugin-metallb/metallb
+    #         - plugin-external-secrets/external-secrets
     # -   name: loki
     #     namespace: plugin-monitoring
     #     chart: grafana/loki-stack
