@@ -62,6 +62,12 @@ Cam:
    Livingroom:
        ip: "10.0.13.4"
        host: "livingroom.cam.internal"
+   Living:
+       ip: "10.0.13.5"
+       host: "living.cam.internal"
+   Driveway:
+       ip: "10.0.13.6"
+       host: "driveway.cam.internal"
 Iot:
    Korie-lamp:
        ip: "10.0.14.1"
@@ -145,3 +151,7 @@ Devices:
        host: "steamdeck.devices.internal"
    Vitapc:
        host: "vitapc.devices.internal"
+   Vitaphone:
+       host: "vitaphone.devices.internal"
+   Levaphone:
+       host: "levaphone.devices.internal"
