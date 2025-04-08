@@ -19,11 +19,9 @@ lab:
         name: terra1
     -   mac: '6C:BF:B5:01:E9:87'
         name: terra1
-k3s:
     -   mac: '58:47:CA:71:D8:E6'
-        id: 3
-        name: 'minisf1'
-        domain: home.sosnovsky.ca,k3sapp.internal
+        name: 'minipc3'
+        domain: home.sosnovsky.ca
 hub:
     -   mac: 'E4:5F:01:A2:8D:BC'
         name: 'castle'
