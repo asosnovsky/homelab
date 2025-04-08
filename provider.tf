@@ -21,13 +21,19 @@ terraform {
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "5.1.0"
+      version = "5.2.0"
     }
   }
 }
 
-provider "helm" {}
-provider "kubernetes" {}
+provider "helm" {
+  kubernetes {
+    config_context = "homelab"
+  }
+}
+provider "kubernetes" {
+  config_context = "homelab"
+}
 provider "http" {}
 provider "cloudflare" {
   api_token = var.cloudflare.api_token
