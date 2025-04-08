@@ -26,8 +26,7 @@ locals {
       }
     ]
   ])
-  current_date   = formatdate("YYYY-MM-DD", timestamp())
-  record_comment = "Updated by Terraform at ${local.current_date}"
+  record_comment = "Updated by Terraform"
 }
 
 output "myip" {

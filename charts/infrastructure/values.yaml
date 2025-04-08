@@ -1,0 +1,7 @@
+# pihole:
+#     ip: 10.0.100.100
+#     image: pihole/pihole:latest
+
+registry:
+    ip: 10.0.100.101
+    image: registry:2

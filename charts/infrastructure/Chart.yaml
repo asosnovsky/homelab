@@ -2,4 +2,4 @@ apiVersion: v2
 name: cluster
 description: An infrastructure collection of manifests for homelab
 type: application
-version: 0.1.0
+version: 0.1.1
