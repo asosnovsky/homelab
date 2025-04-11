@@ -1,7 +1,8 @@
 terraform {
   backend "kubernetes" {
-    secret_suffix = "homelab"
-    namespace     = "default"
+    secret_suffix  = "homelab"
+    namespace      = "default"
+    config_context = "homelab"
   }
 }
 
@@ -27,7 +28,7 @@ terraform {
 }
 
 provider "helm" {
-  kubernetes {
+  kubernetes = {
     config_context = "homelab"
   }
 }

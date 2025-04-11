@@ -41,7 +41,7 @@ resource "cloudflare_dns_record" "this" {
   zone_id = each.value.zone_id
   comment = local.record_comment
   content = each.value.ip
-  name    = each.value.record
+  name    = each.key
   type    = each.value.type
   proxied = false
   ttl     = 1
