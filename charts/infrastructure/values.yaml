@@ -1,3 +1,22 @@
+global:
+    timezone: America/Toronto
+    nfs:
+        server: 10.0.10.1
+        rootPath: /mnt/EightTerra/k3s-cluster/direct-mounts
+
 registry:
     ip: 10.0.100.101
     image: registry:2
+
+ns:
+    metallb: "change-me"
+    argocd: "change-me"
+
+gitops:
+  commit: "v2"
+  repo: "asosnovsky/homelab"
+  sshkey: ""
+
+metallb:
+    addresses:
+        - 10.0.100.1-10.0.100.255

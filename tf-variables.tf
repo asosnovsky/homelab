@@ -1,4 +1,5 @@
 variable "cloudflare" {
+  sensitive = true
   type = object({
     api_token  = string
     account_id = string
@@ -15,4 +16,14 @@ variable "domain_mappings" {
     ip   = optional(string),
     type = optional(string, "A"),
   })))
+}
+variable "ssh_key" {
+  sensitive = true
+}
+variable "tailscale" {
+  type = object({
+    client_id     = string,
+    client_secret = string,
+  })
+  sensitive = true
 }

@@ -7,6 +7,7 @@ resource "helm_release" "plugins" {
   atomic           = true
   namespace        = "plugin-${each.key}"
   create_namespace = true
+  values           = each.value.values
 }
 
 resource "helm_release" "infra" {
