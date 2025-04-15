@@ -13,7 +13,7 @@ ns:
     argocd: "change-me"
 
 gitops:
-  commit: "v2"
+  revision: "v2"
   repo: "asosnovsky/homelab"
   sshkey: ""
 

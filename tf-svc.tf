@@ -4,6 +4,7 @@ resource "kubernetes_service_v1" "argocd-metallb" {
     namespace = module.k8s-helm-charts.namespaces.plugins.argo-cd
     annotations = {
       "metallb.universe.tf/loadBalancerIPs" : "10.0.100.2"
+      "metallb.io/ip-allocated-from-pool" : "homelab-pool"
     }
   }
   spec {
