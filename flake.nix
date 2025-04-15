@@ -19,6 +19,7 @@
               bat
               jq
               # k8s 
+              kubectx
               k3d
               (wrapHelm kubernetes-helm {
                 plugins = with pkgs.kubernetes-helmPlugins; [
@@ -33,7 +34,7 @@
             shellHook = ''
               echo "$(pwd)"
               export PATH="$(pwd)/bin:$PATH"
-              export PROMPT="🏠> $PROMPT"
+              export PROMPT="🏠|$(kubectx -c)/$(kubens -c)> $PROMPT"
               export KUBE_CONFIG_PATH=~/.kube/config
               echo "Welcome to HomeLab!"
             '';

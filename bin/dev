@@ -10,60 +10,9 @@ ROOT_FOLDER=$(realpath $0 | xargs dirname | xargs dirname)
 
 pushd $ROOT_FOLDER > /dev/null
 
-
-
-function run-bootstrap-argo() {
-    : Initial setup for argocd
-    :
-    deployment=${1}
-    check-deploy-name $deployment
-    echo "Installing initial Chart..."
-    helm install argocd k8s/argocd \
-    --namespace argocd \
-    --create-namespace \
-    --values k8s/argocd/values.yaml \
-    --set selfapp.deployment="${DEPLOYMENT}" \
-    --set selfapp.sshkey="$(cat ~/.ssh/github_ed)"
-    
-    echo "Waiting on argo to get started..."
-    while ! check-argo-alive; do
-        echo "Waiting on argo to get started..."
-        kubectl -n argocd get all
-        sleep 1
-    done
-    sleep 5
-    
-    echo "Login to argo"
-    argocd login cd.argoproj.io --core
-    kubectl config set-context --current --namespace argocd
-    argocd admin initial-password
-}
-
-function run-upgrade-argo() {
-    : Manually upgrade argocd from disk
-    :
-    deployment=${1}
-    check-deploy-name $deployment
-    
-    pushd $ROOT_FOLDER/k8s/argocd
-    helm dependency update
-    popd
-    
-    helm upgrade argocd k8s/argocd \
-    --namespace argocd \
-    --create-namespace \
-    --values k8s/argocd/values.yaml \
-    --set selfapp.enabled="true" \
-    --set selfapp.deployment="${deployment}" \
-    --set selfapp.sshkey="$(cat ~/.ssh/github_ed)"
-}
-
-function run-port-forward-argo() {
-    : Port forward argocd to local
-    :
-    local_port=${1:-8080}
-    kubectl port-forward services/argocd-server $local_port:80 -n argocd
-}
+tfvar_file=$ROOT_FOLDER/var.auto.tfvars
+tfvar_ns=default
+kubectl config use-context homelab
 
 function run-new-chart() {
     : Create a new helm chart
@@ -84,6 +33,23 @@ type: application
 version: 0.1.0
 dependencies: []
 EOT
+}
+
+function run-upload-tfvars() {
+    : Uploads tfvars to k8s cluster
+    : dev upload-tfvars
+    kubectl -n $tfvar_ns create secret generic tfvars \
+    --dry-run=client \
+    --save-config \
+    --from-file=tfvars=./$tfvar_file \
+    -o yaml | \
+    kubectl -n $tfvar_ns apply -f -
+}
+
+function run-download-tfvars() {
+    : Download tfvars from k8s cluster
+    : dev download-tfvars
+    kubectl -n $tfvar_ns get secrets/tfvars -o jsonpath='{.data.tfvars}' | base64 -d > $tfvar_file
 }
 
 start_cli $@
