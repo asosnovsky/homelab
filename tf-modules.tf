@@ -52,6 +52,7 @@ module "k8s-helm-charts" {
               "server.insecure" = true
               "server.basehref" = "/"
               "server.rootpath" = ""
+              "server.disable.auth" : true
             }
           }
           crds = {

@@ -24,10 +24,6 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "5.2.0"
     }
-    argocd = {
-      source  = "argoproj-labs/argocd"
-      version = "7.5.2"
-    }
   }
 }
 
@@ -42,7 +38,4 @@ provider "kubernetes" {
 provider "http" {}
 provider "cloudflare" {
   api_token = var.cloudflare.api_token
-}
-provider "argocd" {
-  core = true
 }

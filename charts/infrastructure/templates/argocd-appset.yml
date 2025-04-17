@@ -1,0 +1,31 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+  namespace: "{{ .Values.ns.argocd }}"
+spec:
+  generators:
+  - git:
+      directories:
+      - path: charts/apps/*
+      repoURL: git@github.com:{{ .Values.gitops.repo }}.git
+      revision: "{{ .Values.gitops.revision }}"
+      template:
+        metadata: {}
+        spec:
+          destination: {}
+          project: ""
+  template:
+    metadata:
+      name: "{{`apps-{{path.basename}}`}}"
+    spec:
+      destination:
+        namespace: "{{`{{path.basename}}`}}"
+        server: https://kubernetes.default.svc
+      project: default
+      revisionHistoryLimit: 10
+      source:
+        path: '{{`{{path}}`}}'
+        repoURL: git@github.com:{{ .Values.gitops.repo }}.git
+        targetRevision: "{{ .Values.gitops.revision }}"
