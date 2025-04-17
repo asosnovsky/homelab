@@ -1,2 +1,4 @@
 cloudflare:
     enabled: true
+    tokenSecretName: cloudflare
+    tokenSecretKey: token
