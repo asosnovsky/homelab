@@ -29,3 +29,10 @@ spec:
         path: '{{`{{path}}`}}'
         repoURL: git@github.com:{{ .Values.gitops.repo }}.git
         targetRevision: "{{ .Values.gitops.revision }}"
+        helm:
+            valueFiles:
+              - values.yaml
+              - values-{{$.Values.global.deployment}}.yaml
+            values: |-
+                global:
+                    {{ .Values.global | toYaml | nindent 20 }}

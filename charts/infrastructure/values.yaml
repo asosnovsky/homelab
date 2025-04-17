@@ -1,8 +1,4 @@
-global:
-    timezone: America/Toronto
-    nfs:
-        server: 10.0.10.1
-        rootPath: /mnt/EightTerra/k3s-cluster/direct-mounts
+global: {}
 
 registry:
     ip: 10.0.100.101
