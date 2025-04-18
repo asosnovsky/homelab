@@ -36,8 +36,8 @@ spec:
                         name: {{ .Values.cloudflare.tokenSecretName }}
                         key: {{ .Values.cloudflare.tokenSecretKey }}
 {{ range $prefix := .Values.cloudflare.certificateRootDomains }}       
-{{include "homelab.cert" (merge .Values.global.dns.primary (dict "prefix" $prefix))}}
-{{include "homelab.cert" (merge .Values.global.dns.secondary (dict "prefix" $prefix))}}
+{{include "homelab.cert" (merge $.Values.global.dns.primary (dict "prefix" $prefix))}}
+{{include "homelab.cert" (merge $.Values.global.dns.secondary (dict "prefix" $prefix))}}
 {{ end }}
 ---
 apiVersion: cert-manager.io/v1
