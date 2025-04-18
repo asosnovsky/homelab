@@ -35,10 +35,6 @@ spec:
                     apiTokenSecretRef:
                         name: {{ .Values.cloudflare.tokenSecretName }}
                         key: {{ .Values.cloudflare.tokenSecretKey }}
-{{ range $prefix := .Values.cloudflare.certificateRootDomains }}       
-{{include "homelab.cert" (merge $.Values.global.dns.primary (dict "prefix" $prefix))}}
-{{include "homelab.cert" (merge $.Values.global.dns.secondary (dict "prefix" $prefix))}}
-{{ end }}
 
 {{include "homelab.cert" $.Values.global.dns.primary}}
 {{include "homelab.cert" $.Values.global.dns.secondary}}
