@@ -36,6 +36,13 @@ spec:
                         name: {{ .Values.cloudflare.tokenSecretName }}
                         key: {{ .Values.cloudflare.tokenSecretKey }}
 
+{{ range $prefix := .Values.cloudflare.certificateRootDomains }}       
+# <{{$prefix}}>
+{{include "homelab.cert" (merge (dict "prefix" $prefix) $.Values.global.dns.primary)}}
+{{include "homelab.cert" (merge (dict "prefix" $prefix) $.Values.global.dns.secondary)}}
+# </{{$prefix}}>
+{{ end }}
+
 {{include "homelab.cert" $.Values.global.dns.primary}}
 {{include "homelab.cert" $.Values.global.dns.secondary}}
 ---
