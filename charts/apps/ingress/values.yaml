@@ -5,8 +5,6 @@ cloudflare:
     certificateRootDomains:
         - ""
         - ".core"
-        - ".vh"
-        - ".wa"
 
 
 global:
