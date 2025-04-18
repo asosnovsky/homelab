@@ -12,7 +12,6 @@ spec:
   commonName: '*{{.prefix}}.{{ .root }}.{{ .domain }}'
   dnsNames:
     -   "*{{.prefix}}.{{ .root }}.{{ .domain }}"
-{{ end }}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
