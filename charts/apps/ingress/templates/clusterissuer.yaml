@@ -56,14 +56,14 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cloudflare.{{ $.Values.global.secondaryDomain }}
+  name: cloudflare.{{ $.Values.global.dns.secondary.domain }}
 spec:
-  secretName: cloudflare.{{ $.Values.global.secondaryDomain }}
+  secretName: cloudflare.{{ $.Values.global.dns.secondary.domain }}
   issuerRef:
     name: cloudflare
     kind: Issuer
-  commonName: '{{ $.Values.global.secondaryDomain }}'
+  commonName: '{{ $.Values.global.dns.secondary.domain }}'
   dnsNames:
-    -   "{{ $.Values.global.secondaryDomain }}"
+    -   "{{ $.Values.global.dns.secondary.domain }}"
 {{ end }}
 {{ end }}
