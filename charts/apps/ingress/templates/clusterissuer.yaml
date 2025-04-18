@@ -1,16 +1,16 @@
-{{  if .Values.global.tls.enabled  }}
+{{  if .Values.global.dns.tls.enabled  }}
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-    name: {{ .Values.global.tls.issuer }}
+    name: {{ .Values.global.dns.tls.issuer }}
 spec:
     acme:
-        server: {{ .Values.global.tls.acmeServer }}
-        skipTLSVerify: {{ .Values.global.tls.skipTLSVerify }}
+        server: {{ .Values.global.dns.tls.acmeServer }}
+        skipTLSVerify: {{ .Values.global.dns.tls.skipTLSVerify }}
         email: {{ .Values.global.email }}
         privateKeySecretRef:
-            name: {{ .Values.global.tls.issuer }}
+            name: {{ .Values.global.dns.tls.issuer }}
         solvers:
             -   http01:
                     ingress:
@@ -24,8 +24,8 @@ metadata:
   name: cloudflare
 spec:
   acme:
-    server: {{ .Values.global.tls.acmeServer }}
-    skipTLSVerify: {{ .Values.global.tls.skipTLSVerify }}
+    server: {{ .Values.global.dns.tls.acmeServer }}
+    skipTLSVerify: {{ .Values.global.dns.tls.skipTLSVerify }}
     email: {{ .Values.global.email }}
     privateKeySecretRef:
         name: cloudflare
@@ -36,59 +36,22 @@ spec:
                         name: {{ .Values.cloudflare.tokenSecretName }}
                         key: {{ .Values.cloudflare.tokenSecretKey }}
 {{ range $prefix := .Values.cloudflare.certificateRootDomains }}       
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: cloudflare-wildcard{{$prefix}}.{{ $.Values.global.rootSubDomain }}.{{ $.Values.global.domain }}
-spec:
-  secretName: cloudflare-wildcard{{$prefix}}.{{ $.Values.global.rootSubDomain }}.{{ $.Values.global.domain }}
-  issuerRef:
-    name: cloudflare
-    kind: Issuer
-  commonName: '*{{$prefix}}.{{ $.Values.global.rootSubDomain }}.{{ $.Values.global.domain }}'
-  dnsNames:
-    -   "*{{$prefix}}.{{ $.Values.global.rootSubDomain }}.{{ $.Values.global.domain }}"
+{{include "homelab.cert" (merge .Values.dns.primary (dict "prefix" $prefix))}}
+{{include "homelab.cert" (merge .Values.dns.secondary (dict "prefix" $prefix))}}
 {{ end }}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cloudflare-wildcard.{{ $.Values.global.domain }}
+  name: cloudflare.{{ $.Values.global.dns.primary.domain }}
 spec:
-  secretName: cloudflare-wildcard.{{ $.Values.global.domain }}
+  secretName: cloudflare.{{ $.Values.global.dns.primary.domain }}
   issuerRef:
     name: cloudflare
     kind: Issuer
-  commonName: '*.{{ $.Values.global.domain }}'
+  commonName: '{{ $.Values.global.dns.primary.domain }}'
   dnsNames:
-    -   "*.{{ $.Values.global.domain }}"
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: cloudflare-wildcard.{{ $.Values.global.secondaryDomain }}
-spec:
-  secretName: cloudflare-wildcard.{{ $.Values.global.secondaryDomain }}
-  issuerRef:
-    name: cloudflare
-    kind: Issuer
-  commonName: '*.{{ $.Values.global.secondaryDomain }}'
-  dnsNames:
-    -   "*.{{ $.Values.global.secondaryDomain }}"
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: cloudflare.{{ $.Values.global.domain }}
-spec:
-  secretName: cloudflare.{{ $.Values.global.domain }}
-  issuerRef:
-    name: cloudflare
-    kind: Issuer
-  commonName: '{{ $.Values.global.domain }}'
-  dnsNames:
-    -   "{{ $.Values.global.domain }}"
+    -   "{{ $.Values.global.dns.primary.domain }}"
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate

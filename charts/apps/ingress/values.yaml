@@ -7,3 +7,19 @@ cloudflare:
         - ".core"
         - ".vh"
         - ".wa"
+
+
+global:
+    dns:
+        primary: 
+            domain: "internal"
+            root: "k3s"
+        secondary:
+            domain: "local"
+            root: "k3s"
+        tls:
+             enabled: false
+            issuer: ""
+            acmeServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+            skipTLSVerify: false
+            useWildCard: true
