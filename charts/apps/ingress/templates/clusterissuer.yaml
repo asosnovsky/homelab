@@ -39,6 +39,9 @@ spec:
 {{include "homelab.cert" (merge $.Values.global.dns.primary (dict "prefix" $prefix))}}
 {{include "homelab.cert" (merge $.Values.global.dns.secondary (dict "prefix" $prefix))}}
 {{ end }}
+
+{{include "homelab.cert" (merge $.Values.global.dns.primary (dict "prefix" ""))}}
+{{include "homelab.cert" (merge $.Values.global.dns.secondary (dict "prefix" ""))}}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
