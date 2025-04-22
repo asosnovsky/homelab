@@ -1,0 +1,10 @@
+global:
+    dns:
+        primary: 
+            domain: "internal"
+            root: "k3s"
+        secondary:
+            domain: "local"
+            root: "k3s"
+        tls:
+            enabled: false

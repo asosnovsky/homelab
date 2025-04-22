@@ -1,0 +1,52 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: secret-manager
+  namespace: "{{ .Release.Namespace }}"
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["list", "get"]
+---
+apiVersion: v1
+automountServiceAccountToken: true
+kind: ServiceAccount
+metadata:
+  name: secret-manager
+  namespace: "{{ .Release.Namespace }}"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: secret-manager
+  namespace:
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: secret-manager
+subjects:
+- kind: ServiceAccount
+  name: secret-manager
+  namespace: "{{ .Release.Namespace }}"
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ClusterSecretStore
+metadata:
+  name: store
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  provider:
+    kubernetes:
+      remoteNamespace:
+      server:
+        caProvider:
+          type: ConfigMap
+          name: kube-root-ca.crt
+          key: ca.crt
+          namespace: "{{ .Release.Namespace }}"
+      auth:
+        serviceAccount:
+          name: secret-manager
+          namespace: "{{ .Release.Namespace }}"
