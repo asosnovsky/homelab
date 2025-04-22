@@ -12,12 +12,6 @@ rules:
       - get
       - list
       - watch
-  - apiGroups:
-      - authorization.k8s.io
-    resources:
-      - selfsubjectrulesreviews
-    verbs:
-      - create
 ---
 apiVersion: v1
 automountServiceAccountToken: true
@@ -49,13 +43,7 @@ metadata:
 spec:
   provider:
     kubernetes:
-      remoteNamespace:
-      server:
-        caProvider:
-          type: ConfigMap
-          name: kube-root-ca.crt
-          key: ca.crt
-          namespace: "{{ .Release.Namespace }}"
+      remoteNamespace: "{{ .Release.Namespace }}"
       auth:
         serviceAccount:
           name: secret-manager
