@@ -18,11 +18,11 @@ spec:
   data:
     - secretKey: tls.crt
       remoteRef:
-        key: cloudflare-wildcard{{ .domain }}
+        key: cloudflare-wildcard.{{ .domain }}
         property: tls.crt
     - secretKey: tls.key
       remoteRef:
-        key: cloudflare-wildcard{{ .domain }}
+        key: cloudflare-wildcard.{{ .domain }}
         property: tls.key
 {{ else }}
 ---
