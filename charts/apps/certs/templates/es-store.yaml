@@ -5,9 +5,19 @@ metadata:
   name: secret-manager
   namespace: "{{ .Release.Namespace }}"
 rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["list", "get"]
+  - apiGroups: [""]
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - selfsubjectrulesreviews
+    verbs:
+      - create
 ---
 apiVersion: v1
 automountServiceAccountToken: true
