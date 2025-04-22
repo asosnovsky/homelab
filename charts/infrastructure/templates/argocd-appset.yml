@@ -23,7 +23,7 @@ spec:
       destination:
         namespace: "{{`{{path.basename}}`}}"
         server: https://kubernetes.default.svc
-      project: default
+      project: main
       revisionHistoryLimit: 10
       source:
         path: '{{`{{path}}`}}'
