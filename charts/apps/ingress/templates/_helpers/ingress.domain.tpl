@@ -1,0 +1,12 @@
+{{- define "homelab.ingress.domain" -}}
+  {{- $rootPrefix := empty .leadPrefix | ternary "" (printf "%s." .leadPrefix) -}}
+  {{- if .useSecondaryDomain -}}
+{{$rootPrefix}}{{.global.secondaryDomain}}
+  {{- else -}}
+    {{- if .useDirectPrefix -}}
+{{$rootPrefix}}{{.global.domain}}
+    {{- else -}}
+{{$rootPrefix}}{{.global.rootSubDomain}}.{{.global.domain}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

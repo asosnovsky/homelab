@@ -8,3 +8,5 @@ global:
             root: "k3s"
         tls:
             enabled: false
+
+reverseProxy: {}
