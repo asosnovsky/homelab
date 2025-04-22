@@ -4,7 +4,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: "tls-{{.prefix}}.{{ .domain }}"
+  name: "tls-{{.prefix}}{{ .domain }}"
   namespace: {{ .namespace }}
 spec:
   refreshInterval: 1h
@@ -12,7 +12,7 @@ spec:
     kind: ClusterSecretStore
     name: k8s-ns-certs
   target:
-    name: tls-{{.prefix}}.{{ .domain }}
+    name: tls-{{.prefix}}{{ .domain }}
     creationPolicy: Owner
     deletionPolicy: Delete
   data:
@@ -29,15 +29,15 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "tls-{{.prefix}}.{{ .domain }}"
+  name: "tls-{{.prefix}}{{ .domain }}"
   namespace: {{ .namespace }}
 spec:
-  secretName: "tls-{{.prefix}}.{{ .domain }}"
+  secretName: "tls-{{.prefix}}{{ .domain }}"
   issuerRef: 
     kind: ClusterIssuer
-    name: "{{ .global.tls.issuer }}"
-  commonName: "{{.prefix}}.{{ .domain }}"
+    name: "{{ .global.dns.tls.issuer }}"
+  commonName: "{{.prefix}}{{ .domain }}"
   dnsNames:
-    - "{{.prefix}}.{{ .domain }}"
+    - "{{.prefix}}{{ .domain }}"
 {{ end }}
 {{ end }}

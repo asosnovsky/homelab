@@ -29,14 +29,14 @@
 
 # .domain = {{ .domain }}
 # .prefix = {{ .prefix }}
-{{ if .global.tls.enabled  }}
+{{ if .global.dns.tls.enabled  }}
 {{ include "homelab.ingress.domain.tls" . }}
 {{ end }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "{{.prefix}}.{{ $domain }}"
+  name: "{{.prefix}}{{ $domain }}"
   namespace: {{ .namespace }}
   annotations:
     homelab-ingress/managing-app-namespace: "apps-ingresses"
@@ -63,7 +63,7 @@ metadata:
   {{ end }}
 spec:
   rules:
-  - host: "{{.prefix}}.{{ $domain }}"
+  - host: "{{.prefix}}{{ $domain }}"
     http:
       paths:
       - backend:
@@ -73,11 +73,11 @@ spec:
               number: {{.port | default 80}}
         path: {{ .path | default "/" }}
         pathType: Prefix
-  {{ if .global.tls.enabled }}
+  {{ if .global.dns.tls.enabled }}
   tls:
-    - secretName: "tls-{{.prefix}}.{{ $domain }}"
+    - secretName: "tls-{{.prefix}}{{ $domain }}"
       hosts:
-        - "{{.prefix}}.{{ $domain }}"
+        - "{{.prefix}}{{ $domain }}"
   {{ end }}
 ---
 apiVersion: networking.k8s.io/v1

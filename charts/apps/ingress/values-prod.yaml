@@ -1,0 +1,12 @@
+reverseProxy:
+    castle:
+        ip: "10.0.12.1"
+        port: "80"
+        overrides:
+            icon: http://10.0.12.1:80/static/icons/favicon.ico
+    jellyfin:
+        ip: 10.0.10.5
+        port: 8096
+        overrides:
+            prefix: "jellyfin"
+            group: "Video Hosting"
