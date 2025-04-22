@@ -41,7 +41,7 @@ function run-upload-tfvars() {
     kubectl -n $tfvar_ns create secret generic tfvars \
     --dry-run=client \
     --save-config \
-    --from-file=tfvars=./$tfvar_file \
+    --from-file=tfvars=$tfvar_file \
     -o yaml | \
     kubectl -n $tfvar_ns apply -f -
 }
@@ -50,6 +50,26 @@ function run-download-tfvars() {
     : Download tfvars from k8s cluster
     : dev download-tfvars
     kubectl -n $tfvar_ns get secrets/tfvars -o jsonpath='{.data.tfvars}' | base64 -d > $tfvar_file
+}
+
+function run-template() {
+    :
+    :
+    app_name=${1}
+    tmp_folder=$ROOT_FOLDER/.tmp/homelab/tpl-$app_name
+    rm -rf $tmp_folder
+    mkdir -p $tmp_folder
+    kubectl get -n plugin-argo-cd applications.argoproj.io $app_name -o jsonpath='{.spec.source}' > $tmp_folder/spec.json
+    folder=$(cat $tmp_folder/spec.json | jq -r '.path')
+    cat $tmp_folder/spec.json | jq -r '.helm.values' > $tmp_folder/v.yaml
+    valuesFiles="--values "$(cat $tmp_folder/spec.json | jq -r '.helm.valueFiles | join(" --values ")')
+    pushd $ROOT_FOLDER/$folder &> /dev/null
+    hcmd="helm template --debug $valuesFiles --values $tmp_folder/v.yaml ."
+    echo $hcmd
+    $hcmd > $tmp_folder/rendered.yaml
+    cat $tmp_folder/rendered.yaml
+    echo $tmp_folder/rendered.yaml
+    popd &> /dev/null
 }
 
 start_cli $@

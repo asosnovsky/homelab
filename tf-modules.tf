@@ -17,8 +17,17 @@ resource "helm_release" "local-chart-infrastructure" {
       value = var.ssh_key
     }
   ]
-  timeout      = 120
-  force_update = true
+  values = [
+    yamlencode({
+      "global" : var.globals
+    })
+  ]
+  timeout       = 120
+  force_update  = true
+  lint          = true
+  wait          = true
+  wait_for_jobs = true
+  max_history   = 4
 }
 
 module "k8s-helm-charts" {

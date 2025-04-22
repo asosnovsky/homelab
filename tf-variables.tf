@@ -1,8 +1,9 @@
 variable "cloudflare" {
   sensitive = true
   type = object({
-    api_token  = string
-    account_id = string
+    api_token    = string
+    account_id   = string
+    cm_api_token = string
   })
 }
 variable "main_domain" {
@@ -26,4 +27,39 @@ variable "tailscale" {
     client_secret = string,
   })
   sensitive = true
+}
+
+variable "globals" {
+  type = object({
+    deployment = string
+    email      = string
+    timezone   = string
+
+    dns = object({
+      primary = object({
+        domain = string
+        root   = optional(string, "")
+      })
+      secondary = object({
+        domain = string
+        root   = optional(string, "")
+      })
+      tls = object({
+        enabled       = bool
+        useWildCard   = optional(bool, true)
+        skipTLSVerify = optional(bool, true)
+        issuer        = optional(string, "letsencrypt")
+        acmeServer    = optional(string, "https://acme-v02.api.letsencrypt.org/directory")
+      })
+    })
+    nfs = object({
+      server = string
+      shares = object({
+        k3s-cluster-pvc = string
+      })
+    })
+    smtp = object({
+      email = string
+    })
+  })
 }
