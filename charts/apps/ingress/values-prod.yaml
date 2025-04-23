@@ -10,3 +10,10 @@ reverseProxy:
         overrides:
             prefix: "jellyfin"
             group: "Video Hosting"
+
+services:
+  - prefix: "demo"
+    service: "dummy-app"
+    namespace: "dummy"
+    # middleware: "apps-ingresses-forwardauth-authentik"
+    group: "Demo"

@@ -9,10 +9,12 @@ spec:
   selector:
     matchLabels:
       app: dummy
+      release: "{{ .Release.Name }}"
   template:
     metadata:
       labels:
         app: dummy
+        release: "{{ .Release.Name }}"
     spec:
       containers:
         - name: name
@@ -22,3 +24,18 @@ spec:
               memory: 1Gi
           ports:
             - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: dummy-app
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  selector:
+    app: dummy
+    release: "{{ .Release.Name }}"
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
