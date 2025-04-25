@@ -90,6 +90,10 @@ module "k8s-helm-charts" {
           }
         })
       ]
+    },
+    "traefik" : {
+      repository = "https://traefik.github.io/charts"
+      version    = "35.0.1"
     }
   }
 }
