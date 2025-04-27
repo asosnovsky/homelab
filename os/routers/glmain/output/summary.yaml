@@ -32,7 +32,6 @@ Lab:
    Minipc3:
        ip: "10.0.10.10"
        host: "minipc3.lab.internal"
-       domain: "home.sosnovsky.ca,k3sapp.internal"
 Hub:
    Castle:
        ip: "10.0.12.1"

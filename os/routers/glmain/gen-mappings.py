@@ -40,10 +40,10 @@ def cap1_and_join(*args: str) -> str:
     return out
 
 with CONFIG_FILE.open('r') as fp:
-    devices = yaml.safe_load(fp)
+    settings = yaml.safe_load(fp)
 
 with DNSMASQ_CONF.open('w') as dfp, SUMMARY.open('w') as sfp, ETHERS.open('w') as efp:
-    for sub_domain, configs in devices.items():
+    for sub_domain, configs in settings['networks'].items():
         default_values = defaults.get(sub_domain, {})
         ip_prefix = ip_prefix_map[sub_domain]
         sfp.write(f'\n{cap1_and_join(sub_domain)}:')
@@ -71,3 +71,8 @@ with DNSMASQ_CONF.open('w') as dfp, SUMMARY.open('w') as sfp, ETHERS.open('w') a
                         dfp.write(f"address=/.{domain}/{ip}\n")
                     sfp.write(f'\n       domain: "{domains}"')
             efp.write(f'{mac} {host}\n')
+    for config in settings['general_mappings']:
+        ip = config['ip']
+        for domain in config['domains']:
+            dfp.write(f"address=/{domain}/{ip}\n")
+            dfp.write(f"address=/.{domain}/{ip}\n")
