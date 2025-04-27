@@ -2,7 +2,7 @@ general_mappings:
     -   ip: 10.0.100.1
         domains: 
             - home.sosnovsky.ca
-            - k3sapp.internal
+            - k3s.local
 networks:
     lab:
         -   mac: '3C:7C:3F:1E:B7:A0'
