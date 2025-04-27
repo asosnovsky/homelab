@@ -21,7 +21,7 @@ lab:
         name: terra1
     -   mac: '58:47:CA:71:D8:E6'
         name: 'minipc3'
-        domain: home.sosnovsky.ca
+        domain: home.sosnovsky.ca,k3sapp.internal
 hub:
     -   mac: 'E4:5F:01:A2:8D:BC'
         name: 'castle'
