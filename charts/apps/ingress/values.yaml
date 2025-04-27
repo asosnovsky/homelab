@@ -1,5 +1,6 @@
 global:
     dns:
+        internalPrefix: k3s.local
         primary: 
             domain: "internal"
             root: "k3s"
@@ -8,6 +9,7 @@ global:
             root: "k3s"
         tls:
             enabled: false
+
 
 reverseProxy: {}
 services: []

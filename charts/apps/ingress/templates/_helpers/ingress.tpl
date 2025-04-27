@@ -109,7 +109,7 @@ metadata:
   {{ end }}
 spec:
   rules:
-  - host: "{{.prefix}}.k3sapp.internal"
+  - host: "{{.prefix}}.{{ .global.internalPrefix }}"
     http:
       paths:
       - backend:
