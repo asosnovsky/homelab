@@ -109,7 +109,7 @@ metadata:
   {{ end }}
 spec:
   rules:
-  - host: "{{.prefix}}.{{ .global.internalPrefix }}"
+  - host: "{{.prefix}}.{{ .global.dns.internalPrefix }}"
     http:
       paths:
       - backend:
