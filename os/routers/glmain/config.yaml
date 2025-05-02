@@ -30,10 +30,10 @@ networks:
     hub:
         -   mac: 'E4:5F:01:A2:8D:BC'
             name: 'castle'
-            domain: castle.home.sosnovsky.ca
+            # domain: castle.home.sosnovsky.ca
         -   mac: 'DC:A6:32:92:B2:79'
             name: 'basement'
-            domain: basement.home.sosnovsky.ca
+            # domain: basement.home.sosnovsky.ca
         -   mac: '4E:F6:9C:7C:56:33'
             name: 'flic'
         -   name: 'voice-m5stack-office'

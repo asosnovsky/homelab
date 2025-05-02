@@ -36,11 +36,9 @@ Hub:
    Castle:
        ip: "10.0.12.1"
        host: "castle.hub.internal"
-       domain: "castle.home.sosnovsky.ca"
    Basement:
        ip: "10.0.12.2"
        host: "basement.hub.internal"
-       domain: "basement.home.sosnovsky.ca"
    Flic:
        ip: "10.0.12.3"
        host: "flic.hub.internal"
