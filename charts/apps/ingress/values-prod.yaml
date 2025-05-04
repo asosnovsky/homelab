@@ -12,11 +12,11 @@ reverseProxy:
             group: "Video Hosting"
 
 services:
-#   - prefix: "demo"
-#     service: "dummy-app"
-#     namespace: "dummy"
-#     # middleware: "apps-ingresses-forwardauth-authentik"
-#     group: "Demo"
+    -   prefix: "demo"
+        service: "dummy-app"
+        namespace: "dummy"
+        # middleware: "apps-ingresses-forwardauth-authentik"
+        group: "Demo"
     -   prefix: "auth"
         service: "authelia"
         namespace: "authelia"
