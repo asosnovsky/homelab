@@ -10,6 +10,8 @@ authelia:
     enableAdminUI: true
     redis:
         image: redis:7
+    pg:
+        image: postgres:17.4
     configuration: 
         theme: 'dark'
         authentication_backend:

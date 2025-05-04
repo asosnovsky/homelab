@@ -24,6 +24,10 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "5.2.0"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.7.2"
+    }
   }
 }
 
@@ -39,3 +43,4 @@ provider "http" {}
 provider "cloudflare" {
   api_token = var.cloudflare.api_token
 }
+provider "random" {}

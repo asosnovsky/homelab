@@ -30,6 +30,7 @@
               argocd
               yq
               jq
+              authelia
             ];
             shellHook = ''
               echo "$(pwd)"

@@ -53,9 +53,14 @@ variable "globals" {
       })
     })
     nfs = object({
-      server = string
-      shares = object({
-        k3s-cluster-pvc = string
+      storageClassName = string
+      directMounts = object({
+        server = string
+        path   = string
+      })
+      storageProvider = object({
+        server = string
+        path   = string
       })
     })
     smtp = object({

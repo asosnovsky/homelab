@@ -1,5 +1,8 @@
 {
     "yaml.schemas": {
         "https://json.schemastore.org/helmfile.json": "file:///Users/asosnovsky/git/personal/homelab/k8s/argoapps/apps-values/ingresses.yaml"
-    }
+    },
+    "cSpell.words": [
+        "authelia"
+    ]
 }

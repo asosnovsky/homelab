@@ -103,6 +103,18 @@ module "k8s-helm-charts" {
           }
         })
       ]
+    },
+    "nfs-subdir-external-provisioner" : {
+      repository = "https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
+      version    = "4.0.18"
+      values = [
+        yamlencode({
+          storageClass : {
+            name = var.globals.nfs.storageClassName
+          }
+          nfs : var.globals.nfs.storageProvider
+        })
+      ]
     }
   }
 }
