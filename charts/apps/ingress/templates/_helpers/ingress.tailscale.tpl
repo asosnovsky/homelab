@@ -7,11 +7,16 @@ metadata:
     namespace: {{ .namespace }}
 spec:
   ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: tailscale-{{.name}}
-      port:
-        name: main
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tailscale-{{.name}}
+                port:
+                  number: 80
 ---
 apiVersion: v1
 kind: Service
