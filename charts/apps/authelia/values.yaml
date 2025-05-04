@@ -8,6 +8,8 @@ authelia:
     logLevel: INFO
     image: "docker.io/authelia/authelia:latest"
     enableAdminUI: true
+    redis:
+        image: redis:7
     configuration: 
         theme: 'dark'
         authentication_backend:
