@@ -35,10 +35,10 @@ spec:
           configMap:
             name: authelia-config
             defaultMode: 0400
-        - name: files
-          secret:
-            secretName: authelia-files
-            defaultMode: 0400
+        # - name: files
+        #   secret:
+        #     secretName: authelia-files
+        #     defaultMode: 0400
       containers:
         - name: authelia
           image: "{{ .Values.authelia.image }}"
