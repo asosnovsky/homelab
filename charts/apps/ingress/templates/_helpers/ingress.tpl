@@ -40,7 +40,7 @@ metadata:
   namespace: {{ .namespace }}
   annotations:
     homelab-ingress/managing-app-namespace: "apps-ingresses"
-    traefik.ingress.kubernetes.io/router.middlewares: {{ .middleware | default "ingress-https-redirect"}}@kubernetescrd
+    # traefik.ingress.kubernetes.io/router.middlewares: {{ .middleware | default "ingress-https-redirect"}}@kubernetescrd
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: "{{.prefix}}@{{.namespace}}"
     gethomepage.dev/siteMonitor: 'http://{{.service}}.{{ .namespace }}.svc.cluster.local:{{.port | default 80}}{{ .path | default "/" }}{{ .health | default "" }}'
