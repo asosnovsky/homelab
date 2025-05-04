@@ -1,0 +1,74 @@
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: authelia-files
+# data:
+#     logo.png: ".Files.Get "files/logo.png" | b64enc }}"
+#     favicon.ico: ".Files.Get "files/favico.svg" | b64enc }}"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: authelia-config
+data:
+  configuration.yml: |
+    server:
+      asset_path: /config/assets/
+      address: 'tcp://:80'
+      endpoints:
+        authz:
+          forward-auth:
+            implementation: 'ForwardAuth'
+            authn_strategies:
+              - name: 'HeaderAuthorization'
+                schemes:
+                  - 'Basic'
+              - name: 'CookieSession'
+          ext-authz:
+            implementation: 'ExtAuthz'
+            authn_strategies:
+              - name: 'HeaderAuthorization'
+                schemes:
+                  - 'Basic'
+              - name: 'CookieSession'
+          auth-request:
+            implementation: 'AuthRequest'
+            authn_strategies:
+              - name: 'HeaderAuthRequestProxyAuthorization'
+                schemes:
+                  - 'Basic'
+              - name: 'CookieSession'
+    webauthn:
+      disable: false
+      display_name: '{{ .Values.authelia.appName }}'
+      attestation_conveyance_preference: 'indirect'
+      user_verification: 'preferred'
+      timeout: '60s'
+    totp:
+      disable: false
+      issuer: '{{ .Values.global.dns.primary.domain }}'
+      algorithm: 'sha1'
+      digits: 6
+      period: 30
+      skew: 1
+      secret_size: 32
+      allowed_algorithms:
+        - 'SHA1'
+      allowed_digits:
+        - 6
+      allowed_periods:
+        - 30
+      disable_reuse_security_policy: false
+    log:
+      level: '{{ .Values.authelia.logLevel }}'
+    {{ if .Values.authelia.enableAdminUI }}
+    administration:
+      enable: true
+      enable_ui: true
+      address: 'tcp://:9092'
+      url: 'https://{{.Values.global.dns.primary.domain}}'
+      groups:
+        - 'admins'
+    {{ end }}
+    {{ tpl (.Values.authelia.configuration | toYaml) . | nindent 4 }}

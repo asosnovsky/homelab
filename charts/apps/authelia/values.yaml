@@ -1,0 +1,35 @@
+global:
+    dns:
+        primary: 
+            domain: "internal"
+
+authelia:
+    appName: 'Sosnovsky Cloud'
+    logLevel: INFO
+    image: "docker.io/authelia/authelia:latest"
+    enableAdminUI: true
+    configuration: 
+        theme: 'dark'
+        authentication_backend:
+            file:
+                path: '/config/users_database.yml'
+                watch: true
+        access_control:
+            default_policy: 'deny'
+            rules:
+                -   domain: "auth.{{ .Values.global.dns.primary.domain }}"
+                    policy: one_factor
+                -   domain: "{{ .Values.global.dns.primary.domain }}"
+                    policy: two_factor
+        notifier:
+            filesystem:
+                filename: '/config/notification.txt'
+        session:
+            name: 'authelia_session'
+            inactivity: '5m'
+            expiration: '1h'
+            remember_me: '1M'
+            cookies:
+                -   domain: '{{ .Values.global.dns.primary.domain }}'
+                    authelia_url: 'https://auth.{{ .Values.global.dns.primary.domain }}'
+        

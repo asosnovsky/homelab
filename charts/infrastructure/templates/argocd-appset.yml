@@ -23,6 +23,9 @@ spec:
       destination:
         namespace: "{{`{{path.basename}}`}}"
         server: https://kubernetes.default.svc
+      syncPolicy:
+        syncOptions:
+          - RespectIgnoreDifferences=true
       project: main``
       revisionHistoryLimit: 10
       source:
