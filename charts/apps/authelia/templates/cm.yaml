@@ -14,7 +14,7 @@ metadata:
 data:
   configuration.yml: |
     server:
-      asset_path: /config/assets/
+      # asset_path: /config/assets/
       address: 'tcp://:80'
       endpoints:
         authz:
