@@ -44,7 +44,8 @@ data:
       disable: false
       display_name: '{{ .Values.authelia.appName }}'
       attestation_conveyance_preference: 'indirect'
-      user_verification: 'preferred'
+      selection_criteria:
+        user_verification: 'preferred'
       timeout: '60s'
     totp:
       disable: false
