@@ -1,3 +1,6 @@
 {{ range $svc := .Values.services }}
 {{ include "homelab.ingress" (merge $svc (dict "global" $.Values.global)) }}
 {{ end }}
+{{ range $svc := .Values.tailScaleServices }}
+{{ include "homelab.ingress.tailscale" (merge $svc (dict "global" $.Values.global)) }}
+{{ end }}

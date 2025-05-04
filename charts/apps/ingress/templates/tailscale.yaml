@@ -1,3 +1,0 @@
-{{ range $svc := .Values.tailScaleServices }}
-{{ include "homelab.ingress.tailscale" $svc }}
-{{ end }}
