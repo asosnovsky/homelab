@@ -3,7 +3,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: tailscale-{{.name}}
+    name: tailscale-{{.name}}
+    namespace: {{ .namespace }}
 spec:
   ingressClassName: tailscale
   defaultBackend:
@@ -15,7 +16,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tailscale-{{.name}}
+    name: tailscale-{{.name}}
+    namespace: {{ .namespace }}
 spec:
   type: ClusterIP
   ports:

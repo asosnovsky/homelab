@@ -15,7 +15,7 @@ services:
   - prefix: "demo"
     service: "dummy-app"
     namespace: "dummy"
-    middleware: "apps-ingresses-forwardauth-authentik"
+    # middleware: "apps-ingresses-forwardauth-authentik"
     group: "Demo"
 
 tailScaleServices:
