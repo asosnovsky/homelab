@@ -25,5 +25,5 @@ spec:
       port: 80
       targetPort: {{.port | default 80}}
   selector:
-    {{ .selector | toYaml | indent 4 }}
+    {{ .selector | toYaml | nindent 4 }}
 {{ end }}
