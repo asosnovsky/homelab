@@ -12,17 +12,21 @@ reverseProxy:
             group: "Video Hosting"
 
 services:
-  - prefix: "demo"
-    service: "dummy-app"
-    namespace: "dummy"
-    # middleware: "apps-ingresses-forwardauth-authentik"
-    group: "Demo"
+#   - prefix: "demo"
+#     service: "dummy-app"
+#     namespace: "dummy"
+#     # middleware: "apps-ingresses-forwardauth-authentik"
+#     group: "Demo"
+    -   prefix: "auth"
+        service: "authelia"
+        namespace: "authelia"
+        group: "Admin"
 
 tailScaleServices:
-    -   name: dummy
-        namespace: "dummy"
-        selector:
-            app: dummy
+    # -   name: dummy
+    #     namespace: "dummy"
+    #     selector:
+    #         app: dummy
     -   name: "argocd"
         namespace: plugin-argo-cd
         selector:
