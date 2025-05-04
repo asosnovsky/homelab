@@ -62,13 +62,4 @@ data:
       disable_reuse_security_policy: false
     log:
       level: '{{ .Values.authelia.logLevel }}'
-    {{ if .Values.authelia.enableAdminUI }}
-    administration:
-      enable: true
-      enable_ui: true
-      address: 'tcp://:9092'
-      url: 'https://{{.Values.global.dns.primary.domain}}'
-      groups:
-        - 'admins'
-    {{ end }}
     {{ tpl (.Values.authelia.configuration | toYaml) . | nindent 4 }}
