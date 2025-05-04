@@ -5,7 +5,7 @@ global:
 
 authelia:
     appName: 'Sosnovsky Cloud'
-    logLevel: INFO
+    logLevel: info
     image: "docker.io/authelia/authelia:latest"
     enableAdminUI: true
     redis:
