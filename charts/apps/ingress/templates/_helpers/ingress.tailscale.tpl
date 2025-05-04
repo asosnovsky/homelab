@@ -23,5 +23,7 @@ spec:
   ports:
     - name: main
       port: 80
-      targetPort: {{.port}}
+      targetPort: {{.port | default 80}}
+  selector:
+    {{ .selector | toYaml | indent 4 }}
 {{ end }}

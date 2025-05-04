@@ -21,12 +21,12 @@ services:
 tailScaleServices:
     -   name: dummy
         namespace: "dummy"
-        annotations:
+        selector:
             app: dummy
         port: 80
     -   name: "argocd"
         namespace: plugin-argo-cd
-        annotations:
+        selector:
             "app.kubernetes.io/instance" : "argo-cd"
             "app.kubernetes.io/name" : "argocd-server"
         port: 80
