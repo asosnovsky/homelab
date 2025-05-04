@@ -19,6 +19,11 @@ services:
     group: "Demo"
 
 tailScaleServices:
+    -   name: dummy
+        namespace: "dummy"
+        annotations:
+            app: dummy
+        port: 80
     -   name: "argocd"
         namespace: plugin-argo-cd
         annotations:
