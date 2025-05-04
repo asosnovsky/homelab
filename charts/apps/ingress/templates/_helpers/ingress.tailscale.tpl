@@ -7,6 +7,9 @@ metadata:
     namespace: {{ .namespace }}
 spec:
   ingressClassName: tailscale
+  tls:
+    - hosts:
+        - {{ .name }}
   rules:
     - http:
         paths:
