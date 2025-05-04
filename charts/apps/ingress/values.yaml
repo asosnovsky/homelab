@@ -13,3 +13,4 @@ global:
 
 reverseProxy: {}
 services: []
+tailScaleServices: []

@@ -1,0 +1,24 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: https-redirect
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  redirectScheme:
+    scheme: https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strict-transport
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  headers:
+    hostsProxyHeaders:
+      - "X-Forwarded-Host"
+    referrerPolicy: "same-origin"
+    stsSeconds: 15552000
+    stsIncludeSubdomains: true
+    stsPreload: true
+    forceSTSHeader: true
