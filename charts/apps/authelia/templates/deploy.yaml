@@ -24,7 +24,7 @@ spec:
       labels:
         app.kubernetes.io/name: authelia
       annotations:
-        checksums/config: "{{ .Values.authelia.configuration | toYaml | sha256sum }}"
+        checksums/config: "{{ (tpl (.Values.authelia.configuration | toYaml) .) | sha256sum }}"
     spec:
       enableServiceLinks: false
       volumes:
