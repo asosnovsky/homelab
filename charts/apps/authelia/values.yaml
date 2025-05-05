@@ -19,7 +19,7 @@ authelia:
                 path: '/config/users_database.yml'
                 watch: true
         access_control:
-            default_policy: 'deny'
+            default_policy: 'two_factor'
             rules:
                 -   domain: "auth.{{ .Values.global.dns.primary.domain }}"
                     policy: one_factor
