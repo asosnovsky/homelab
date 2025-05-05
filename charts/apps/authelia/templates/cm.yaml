@@ -1,12 +1,10 @@
 {{ $config := tpl (.Values.authelia.configuration | toYaml) . }}
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: authelia-files
-stringData:
-  start_up.sh: |-
-    {{ include "authelia.scripts.startUp" ($config | fromYaml) | nindent 4 }}
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: authelia-files
+# stringData:
 ---
 apiVersion: v1
 kind: ConfigMap

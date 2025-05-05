@@ -35,10 +35,10 @@ spec:
           configMap:
             name: authelia-config
             defaultMode: 0400
-        - name: files
-          secret:
-            secretName: authelia-files
-            defaultMode: 0400
+        # - name: files
+        #   secret:
+        #     secretName: authelia-files
+        #     defaultMode: 0400
       initContainers:
         - name: setup-script
           image: "{{ .Values.authelia.image }}"
@@ -55,8 +55,8 @@ spec:
             - mountPath: /config/configuration.yml
               subPath: configuration.yml
               name: config-yaml
-            - mountPath: /config/assets/
-              name: files
+            # - mountPath: /config/assets/
+            #   name: files
           command: ["sh"]
           args:
             - "/config/assets/start_up.sh"
