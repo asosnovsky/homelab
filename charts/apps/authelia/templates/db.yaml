@@ -17,7 +17,7 @@ kind: ExternalSecret
 metadata:
   name: "password"
 spec:
-  refreshInterval: "30m"
+  refreshInterval: "CreatedOnce"
   target:
     name: authelia-db-secrets
     creationPolicy: Merge
@@ -27,7 +27,6 @@ spec:
       data:
         POSTGRES_PASSWORD: "{{`{{.password}}`}}"
         AUTHELIA_STORAGE_POSTGRES_PASSWORD: "{{`{{.password}}`}}"
-
   dataFrom:
     - sourceRef:
         generatorRef:
