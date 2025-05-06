@@ -3,7 +3,7 @@ global:
         primary: 
             domain: "internal"
     nfs:
-        storageClassName: change-me
+        storageClassName: nfs-provider
 
 authelia:
     appName: 'Sosnovsky Cloud'
