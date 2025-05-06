@@ -4,6 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: authelia-config
 spec:
+  storageClassName: {{ .Values.global.nfs.storageClassName }}
   resources:
     requests:
       storage: 10M

@@ -2,6 +2,8 @@ global:
     dns:
         primary: 
             domain: "internal"
+    nfs:
+        storageClassName: change-me
 
 authelia:
     appName: 'Sosnovsky Cloud'
@@ -36,19 +38,3 @@ authelia:
             cookies:
                 -   domain: '{{ .Values.global.dns.primary.domain }}'
                     authelia_url: 'https://auth.{{ .Values.global.dns.primary.domain }}'
-        # identity_providers:
-        #     oidc:
-        #         clients:
-        #         -   client_id: 'homeassistant'
-        #             client_name: 'Home Assistant'
-        #             public: true
-        #             require_pkce: true
-        #             pkce_challenge_method: 'S256'
-        #             authorization_policy: 'two_factor'
-        #             redirect_uris:
-        #                 - 'https://castle.home.sosnovsky.ca/auth/oidc/callback'
-        #             scopes:
-        #                 - 'openid'
-        #                 - 'profile'
-        #                 - 'groups'
-        #             userinfo_signed_response_alg: 'RS256'
