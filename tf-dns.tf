@@ -1,6 +1,10 @@
 data "http" "myip" {
   url = "https://api.myip.com/"
 }
+
+locals {
+  myip = var.myip != "" ? var.myip : jsondecode(data.http.myip.response_body)["ip"]
+}
 data "cloudflare_zone" "this" {
   for_each = var.domain_mappings
   filter = {
@@ -13,7 +17,6 @@ data "cloudflare_zone" "this" {
 
 
 locals {
-  myip = jsondecode(data.http.myip.response_body)["ip"]
   records = flatten([
     for zone, records in var.domain_mappings : [
       for r, def in records :

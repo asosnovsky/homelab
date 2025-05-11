@@ -35,7 +35,7 @@ module "k8s-helm-charts" {
   plugins = {
     "external-secrets" : {
       repository = "https://charts.external-secrets.io"
-      version    = "0.14.2"
+      version    = "0.16.1"
     },
     "metallb" : {
       repository = "https://metallb.github.io/metallb"
@@ -50,7 +50,7 @@ module "k8s-helm-charts" {
     },
     "argo-cd" : {
       "repository" : "https://argoproj.github.io/argo-helm"
-      "version" : "7.8.7"
+      "version" : "7.9.0"
       "values" : [
         yamlencode({
           configs = {
@@ -101,18 +101,6 @@ module "k8s-helm-charts" {
               enabled : true
             }
           }
-        })
-      ]
-    },
-    "nfs-subdir-external-provisioner" : {
-      repository = "https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
-      version    = "4.0.18"
-      values = [
-        yamlencode({
-          storageClass : {
-            name = var.globals.nfs.storageClassName
-          }
-          nfs : var.globals.nfs.storageProvider
         })
       ]
     }

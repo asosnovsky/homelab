@@ -1,3 +1,6 @@
+variable "myip" {
+  default = ""
+}
 variable "cloudflare" {
   sensitive = true
   type = object({

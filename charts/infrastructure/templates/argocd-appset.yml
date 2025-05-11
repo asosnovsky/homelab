@@ -26,8 +26,8 @@ spec:
       syncPolicy:
         syncOptions:
           - RespectIgnoreDifferences=true
-      project: main``
-      revisionHistoryLimit: 10
+      project: main
+      revisionHistoryLimit: 4
       source:
         path: '{{`{{path}}`}}'
         repoURL: git@github.com:{{ .Values.gitops.repo }}.git
