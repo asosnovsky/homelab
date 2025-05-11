@@ -1,0 +1,6 @@
+apiVersion: v2
+name: argoapps
+description: Extra argo apps for homelab
+type: application
+version: 0.1.0
+dependencies: []
