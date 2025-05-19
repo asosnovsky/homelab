@@ -3,6 +3,7 @@ services:
     image: ghcr.io/immich-app/immich-server:release
     volumes:
       upload: /usr/src/app/upload
+      family-storage: /family-storage
     envFrom:
       - secretRef:
           name: immich-shared
@@ -48,7 +49,7 @@ volumes:
     size: 200Mi
   upload:
     type: nfs-provider
-  family_storage:
+  family-storage:
     type: nfs
     server: tnas1.lab.internal
     path: /mnt/EightTerra/FamilyStorage
