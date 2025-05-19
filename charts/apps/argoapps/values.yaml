@@ -6,4 +6,4 @@ global:
         storageProvider: ""
 gitops:
     repo: asosnovsky/homelab
-    revision: HEAD
+    revision: v2
