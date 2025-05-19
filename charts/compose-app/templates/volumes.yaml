@@ -5,7 +5,7 @@
 
 {{ if (eq $volType "nfs") }}
 
-{{-  $vname := printf "%s-nfs-%s" $.Release.Namespace $name  -}}
+{{-  $vname := printf "%s-nfs-%s" $.Release.Namespace ($name | sha256sum | substr 0 23)  -}}
 
 ---
 kind: PersistentVolume
