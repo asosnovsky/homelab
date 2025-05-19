@@ -12,8 +12,8 @@ spec:
             app: {{ $name }}
     template:
         metadata:
-        labels:
-            app: {{ $name }}
+            labels:
+                app: {{ $name }}
         spec:
             {{ if $data.volumes -}}
             {{ range $volname, $_ := $data.volumes }}
