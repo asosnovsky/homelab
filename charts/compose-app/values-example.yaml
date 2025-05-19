@@ -1,0 +1,97 @@
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:release
+    volumes:
+      upload: /usr/src/app/upload
+    envFrom:
+      - secretRef:
+          name: immich-shared
+    ports:
+      - port: '2283'
+    restart: always
+
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:release
+    volumes:
+      model-cache: /cache
+    envFrom:
+      - secretRef:
+          name: immich-shared
+    restart: always
+
+  redis:
+    image: docker.io/valkey/valkey:8-bookworm@sha256:42cba146593a5ea9a622002c1b7cba5da7be248650cbb64ecb9c6c33d29794b1
+    healthcheck:
+      test: redis-cli ping || exit 1
+    restart: always
+
+  database:
+    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52
+    environment:
+      POSTGRES_INITDB_ARGS: '--data-checksums'
+    volumes:
+        db-data: /var/lib/postgresql/data
+    healthcheck:
+      test: >-
+        pg_isready --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" || exit 1; 
+      interval: 5m
+      start_interval: 30s
+      start_period: 5m
+    command: >-
+      postgres -c shared_preload_libraries=vectors.so -c 'search_path="$$user", public, vectors' -c logging_collector=on -c max_wal_size=2GB -c shared_buffers=512MB -c wal_compression=on
+    restart: always
+
+volumes:
+  model-cache:
+  db-data:
+    type: nfs-provider
+    size: 200Mi
+  upload:
+    type: nfs-provider
+  family_storage:
+    type: nfs
+    server: tnas1.lab.internal
+    path: /mnt/EightTerra/FamilyStorage
+
+secrets:
+  immich-shared:
+    - name: DB_USERNAME
+      aliases:
+        - POSTGRES_USER  
+      value: immich
+    - name: DB_DATABASE_NAME
+      aliases:
+        - POSTGRES_DB
+      value: immich
+    - name: DB_HOSTNAME
+      value: database
+    - name: REDIS_HOSTNAME
+      value: redis
+
+externalSecrets:
+  generators:
+    db-password:
+      length: 16
+      digits: 5
+      symbols: 5
+      symbolCharacters: "-_$@"
+      noUpper: false
+      allowRepeat: true
+  secrets:
+    db-password:
+      refreshPolicy: "CreatedOnce"
+      target:
+        name: immich-shared
+        creationPolicy: Merge
+        deletionPolicy: Merge
+        template:
+          engineVersion: v2
+          data:
+            POSTGRES_PASSWORD: "{{`{{.password}}`}}"
+            DB_PASSWORD: "{{`{{.password}}`}}"
+      dataFrom:
+        - sourceRef:
+            generatorRef:
+                apiVersion: generators.external-secrets.io/v1alpha1
+                kind: Password
+                name: "db-password"

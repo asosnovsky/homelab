@@ -18,7 +18,7 @@ function run-new-chart() {
     : Create a new helm chart
     : dev new-chart {path-to-chart}
     
-    full_path=$ROOT_FOLDER/apps${1}
+    full_path=$ROOT_FOLDER/charts/apps/${1}
     app=$(basename $full_path)
     location=$(dirname $full_path)
     typeofapp=$(basename $location)

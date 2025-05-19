@@ -1,0 +1,9 @@
+services: []
+
+volumes: {}
+
+secrets: {}
+
+externalSecrets:
+  generators: {}
+  secrets: {}

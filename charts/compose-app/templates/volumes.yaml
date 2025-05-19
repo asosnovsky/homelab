@@ -1,0 +1,57 @@
+{{ range $name, $data := .Values.volumes}}
+
+{{ if (eq $data.type "nfs") }}
+
+{{-  $vname := printf "%s-nfs-%s" $.Release.Namespace $name  -}}
+
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: "{{ $vname }}"
+  namespace: {{ $.Release.Namespace | quote }}
+spec:
+    capacity:
+        storage: 1Mi
+    accessModes:
+        - "ReadWriteMany"
+    nfs:
+        server: {{ $data.server | quote }}
+        path: {{ $data.path | quote }}
+    mountOptions:
+        - nfsvers=4.2
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Release.Namespace | quote }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Mi
+  volumeName: {{ $vname | quote }}
+
+{{ else }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Release.Namespace | quote }}
+spec:
+    accessModes:
+        - {{ $data.accessMode | default "ReadWriteOnce" | quote }}
+    resources:
+        requests:
+            storage: {{ $data.size | default "1Gi" | quote }}
+    {{- if $data.type }}
+    storageClassName: {{ $data.type | quote }}
+    {{- end }}
+    persistentVolumeReclaimPolicy: {{ $data.persistentVolumeReclaimPolicy | default "Retain"}}
+{{ end }}
+{{ end }}

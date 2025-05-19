@@ -1,0 +1,59 @@
+{{ range $name, $data := .Values.services }}
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Release.Namespace | quote }}
+spec:
+    replicas: {{ $data.replicas | default 1 }}
+    selector:
+        matchLabels:
+            app: {{ $name }}
+    template:
+        metadata:
+        labels:
+            app: {{ $name }}
+        spec:
+            containers:
+                -   name: {{ $name }}
+                    image: {{ $data.image | quote }}
+                    ports:
+                    {{ range $p := $data.ports }}
+                        -   containerPort: {{ $p }}
+                    {{ end }}
+                {{ if $data.envFrom}}
+                envFrom:
+                    {{ $data.envFrom | toYaml | nindent 20 }}
+                {{ end }}
+                {{ if $data.volumes }}
+                {{ range $volname, $mountPath := $data.volumes }}
+                volumeMounts:
+                    -   name: {{ $volname | quote }}
+                        mountPath: {{ $mountPath | quote }}
+                {{ end }}
+            {{ if $data.volumes }}
+            {{ range $volname, $_ := $data.volumes }}
+            volumes:
+                -   name: {{ $volname }}
+                    persistentVolumeClaim:
+                        claimName: {{ $volname }}
+            {{ end }}
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Release.Namespace | quote }}
+spec:
+    selector:
+        app: {{ $name }}
+    type: {{ $data.service.type | default "ClusterIP" | quote }}
+    ports:
+        {{ range $port := $data.ports }}
+        -   name: {{ $port.name | default "http" | quote }}
+            port: {{ $port.port }}
+            targetPort: {{ $port.port }}
+        {{ end }}
+{{ end }}
