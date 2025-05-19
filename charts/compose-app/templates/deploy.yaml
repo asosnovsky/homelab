@@ -15,6 +15,15 @@ spec:
         labels:
             app: {{ $name }}
         spec:
+            {{ if $data.volumes -}}
+            {{ range $volname, $_ := $data.volumes }}
+            volumes:
+                -   name: "{{ $volname }}"
+                    persistentVolumeClaim:
+                        claimName: "{{ $volname }}"
+            {{- end }}
+            {{- end }}
+
             containers:
                 -   name: {{ $name }}
                     image: {{ $data.image | quote }}
@@ -22,24 +31,17 @@ spec:
                     {{ range $p := $data.ports }}
                         -   containerPort: {{ $p }}
                     {{ end }}
-                {{ if $data.envFrom}}
-                envFrom:
-                    {{ $data.envFrom | toYaml | nindent 20 }}
-                {{ end }}
-                {{ if $data.volumes }}
-                {{ range $volname, $mountPath := $data.volumes }}
-                volumeMounts:
-                    -   name: {{ $volname | quote }}
-                        mountPath: {{ $mountPath | quote }}
-                {{ end }}
-            {{ if $data.volumes }}
-            {{ range $volname, $_ := $data.volumes }}
-            volumes:
-                -   name: {{ $volname }}
-                    persistentVolumeClaim:
-                        claimName: {{ $volname }}
-            {{ end }}
-
+                    {{ if $data.volumes }}
+                    {{ range $volname, $mountPath := $data.volumes }}
+                    volumeMounts:
+                        -   name: {{ $volname | quote }}
+                            mountPath: {{ $mountPath | quote }}
+                    {{ end }}
+                    {{ end }}
+                    {{ if $data.envFrom}}
+                    envFrom:
+                        {{ $data.envFrom | toYaml | nindent 26 }}
+                    {{ end }}
 ---
 kind: Service
 apiVersion: v1
@@ -49,11 +51,12 @@ metadata:
 spec:
     selector:
         app: {{ $name }}
-    type: {{ $data.service.type | default "ClusterIP" | quote }}
+    type: {{ $data.serviceType | default "ClusterIP" | quote }}
     ports:
         {{ range $port := $data.ports }}
         -   name: {{ $port.name | default "http" | quote }}
             port: {{ $port.port }}
             targetPort: {{ $port.port }}
         {{ end }}
+
 {{ end }}
