@@ -1,0 +1,4 @@
+{{ if .Values.ingress.enabled }}
+{{ $_ := set .Values.ingress "namespace" $.Release.Namespace }}
+{{ include "homelab.ingress" .Values.ingress }}
+{{ end }}

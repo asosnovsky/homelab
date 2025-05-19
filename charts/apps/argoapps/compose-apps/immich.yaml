@@ -109,3 +109,8 @@ externalSecrets:
                 apiVersion: generators.external-secrets.io/v1alpha1
                 kind: Password
                 name: "db-password"
+ingress:
+  enabled: true
+  prefix: immich
+  service: immich-server
+  port: 2283
