@@ -1,0 +1,26 @@
+{{ range $fileName, $_ := .Files.Glob "compose-apps/*.yaml" }}
+{{- $data := $.Files.Get $fileName | fromYaml -}}
+{{- $name := ($data.name | default ($fileName | base | trimSuffix ".yaml")) }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ $name }}"
+  namespace: {{ $.Values.ns.argocd }}
+spec:
+    project: main
+    source:
+        path: 'charts/compose-app'
+        repoURL: git@github.com:{{ $.Values.gitops.repo }}.git
+        targetRevision: {{ $.Values.gitops.revision }}
+        helm:
+            values: |-
+                {{ $data | toYaml | nindent 16 }}
+    destination:
+        namespace: comap-{{ $data.namespace | default $name }}
+        server: https://kubernetes.default.svc
+    syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+{{ end }}

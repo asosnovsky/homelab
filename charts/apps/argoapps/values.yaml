@@ -1,2 +1,9 @@
 ns:
     argocd: plugin-argo-cd
+global:
+    nfs:
+        storageClassName: ""
+        storageProvider: ""
+gitops:
+    repo: asosnovsky/homelab
+    revision: HEAD
