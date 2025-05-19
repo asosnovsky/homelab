@@ -55,6 +55,5 @@ spec:
     {{- if $volType }}
     storageClassName: {{ $volType | quote }}
     {{- end }}
-    persistentVolumeReclaimPolicy: {{ $data.persistentVolumeReclaimPolicy | default "Retain"}}
 {{ end }}
 {{ end }}
