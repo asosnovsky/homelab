@@ -1,3 +1,18 @@
+global:
+  dns:
+    internalPrefix: k3s.local
+    primary:
+      domain: "bob.cat"
+      root: ""
+    secondary:
+      domain: "tod.cat"
+      root: "gr"
+    tls:
+      acmeServer: "http://acme"
+      enabled: true
+      issuer: "issue"
+      skipTLSVerify: true
+      useWildCard: true
 services: []
 
 volumes: {}
@@ -9,3 +24,4 @@ externalSecrets:
   secrets: {}
 
 ingress: {}
+

@@ -39,6 +39,7 @@ variable "globals" {
     timezone   = string
 
     dns = object({
+      internalPrefix = string
       primary = object({
         domain = string
         root   = optional(string, "")

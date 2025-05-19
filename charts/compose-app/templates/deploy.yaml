@@ -16,8 +16,8 @@ spec:
                 app: {{ $name }}
         spec:
             {{ if $data.volumes -}}
-            {{ range $volname, $_ := $data.volumes }}
             volumes:
+            {{ range $volname, $_ := $data.volumes }}
                 -   name: "{{ $volname }}"
                     persistentVolumeClaim:
                         claimName: "{{ $volname }}"
@@ -33,8 +33,8 @@ spec:
                             protocol: {{ $p.protocol | default "TCP" | quote }}
                     {{ end }}
                     {{ if $data.volumes }}
-                    {{ range $volname, $mountPath := $data.volumes }}
                     volumeMounts:
+                    {{ range $volname, $mountPath := $data.volumes }}
                         -   name: {{ $volname | quote }}
                             mountPath: {{ $mountPath | quote }}
                     {{ end }}

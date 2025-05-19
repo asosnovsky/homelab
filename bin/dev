@@ -72,4 +72,18 @@ function run-template() {
     popd &> /dev/null
 }
 
+function run-template-compose-app() {
+    :
+    :
+    pushd $ROOT_FOLDER/charts/compose-app
+    helm template -f values.yaml -f $ROOT_FOLDER/charts/apps/argoapps/compose-apps/$1 . > $ROOT_FOLDER/.tmp/compose-app-$1
+    echo $ROOT_FOLDER/.tmp/compose-app-$1
+    # if [ $? -ne 0 ]; then
+    #     echo "Error: helm template failed"
+    #     ehco $out
+    #     exit 1
+    # fi
+    # echo $out | bat -l yaml
+}
+
 start_cli $@
