@@ -1,6 +1,9 @@
 {{ range $name, $data := .Values.volumes}}
 
-{{ if (eq $data.type "nfs") }}
+{{ $data := $data | default (dict) }}
+{{- $volType := ($data.type | default "") -}}
+
+{{ if (eq $volType "nfs") }}
 
 {{-  $vname := printf "%s-nfs-%s" $.Release.Namespace $name  -}}
 
@@ -49,8 +52,8 @@ spec:
     resources:
         requests:
             storage: {{ $data.size | default "1Gi" | quote }}
-    {{- if $data.type }}
-    storageClassName: {{ $data.type | quote }}
+    {{- if $volType }}
+    storageClassName: {{ $volType | quote }}
     {{- end }}
     persistentVolumeReclaimPolicy: {{ $data.persistentVolumeReclaimPolicy | default "Retain"}}
 {{ end }}
