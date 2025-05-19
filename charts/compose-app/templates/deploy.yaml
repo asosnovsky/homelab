@@ -50,6 +50,18 @@ spec:
                             value: {{ $value | quote }}
                         {{ end }}
                     {{ end }}
+                    {{ if $data.command }}
+                    command:
+                        {{ range $cmd := $data.command }}
+                        -   {{ $cmd | quote }}
+                        {{ end }}
+                    {{ end }}
+                    {{ if $data.args }}
+                    args:
+                        {{ range $cmd := $data.args }}
+                        -   {{ $cmd | quote }}
+                        {{ end }}
+                    {{ end }}
 ---
 kind: Service
 apiVersion: v1

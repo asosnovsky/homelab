@@ -1,0 +1,108 @@
+services:
+  broker:
+    image: docker.io/library/redis:8
+    volumes:
+      - redisdata: /data
+    ports:
+      - port: '6379'
+  db:
+    image: docker.io/library/postgres:17
+    volumes:
+      - pgdata: /var/lib/postgresql/data
+    envFrom:
+      - secretRef:
+          name: shared
+    ports:
+      - port: '5432'
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    ports:
+      - port: 8000
+    volumes:
+      - data: /usr/src/paperless/data
+      - media: /usr/src/paperless/media
+      - export: /usr/src/paperless/export
+      - consume: /usr/src/paperless/consume
+    envFrom:
+      - secretRef:
+          name: shared
+    environment:
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+  gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.20
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+    ports:
+      - port: '3000'
+  tika:
+    image: docker.io/apache/tika:latest
+    ports:
+      - port: '9998'
+
+volumes:
+  export:
+    type: nfs-provider
+  consume:
+    type: nfs-provider
+  data:
+    type: nfs-provider
+  media:
+    type: nfs-provider
+  pgdata:
+    type: nfs-provider
+    size: 200Mi
+  redisdata:
+    type: nfs-provider
+    size: 200Mi
+
+secrets:
+  shared:
+    - name: DB_USERNAME
+      aliases:
+        - POSTGRES_USER  
+      value: paperless
+    - name: DB_DATABASE_NAME
+      aliases:
+        - POSTGRES_DB
+      value: paperless
+    - name: PAPERLESS_DBHOST
+      value: database
+    - name: PAPERLESS_REDIS
+      value: redis://broker:6379
+
+externalSecrets:
+  generators:
+    db-password:
+      length: 16
+      digits: 5
+      symbols: 5
+      symbolCharacters: "-_$@"
+      noUpper: false
+      allowRepeat: true
+  secrets:
+    db-password:
+      refreshPolicy: "CreatedOnce"
+      target:
+        name: shared
+        creationPolicy: Merge
+        deletionPolicy: Merge
+        template:
+          engineVersion: v2
+          data:
+            POSTGRES_PASSWORD: "{{`{{.password}}`}}"
+            PAPERLESS_DBPASS: "{{`{{.password}}`}}"
+      dataFrom:
+        - sourceRef:
+            generatorRef:
+                apiVersion: generators.external-secrets.io/v1alpha1
+                kind: Password
+                name: "db-password"
+ingress:
+  enabled: true
+  prefix: paper
+  service: webserver
+  port: 8000
