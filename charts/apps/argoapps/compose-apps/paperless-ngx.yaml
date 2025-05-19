@@ -2,13 +2,13 @@ services:
   broker:
     image: docker.io/library/redis:8
     volumes:
-      - redisdata: /data
+      redisdata: /data
     ports:
       - port: '6379'
   db:
     image: docker.io/library/postgres:17
     volumes:
-      - pgdata: /var/lib/postgresql/data
+      pgdata: /var/lib/postgresql/data
     envFrom:
       - secretRef:
           name: shared
@@ -19,10 +19,10 @@ services:
     ports:
       - port: 8000
     volumes:
-      - data: /usr/src/paperless/data
-      - media: /usr/src/paperless/media
-      - export: /usr/src/paperless/export
-      - consume: /usr/src/paperless/consume
+      data: /usr/src/paperless/data
+      media: /usr/src/paperless/media
+      export: /usr/src/paperless/export
+      consume: /usr/src/paperless/consume
     envFrom:
       - secretRef:
           name: shared
