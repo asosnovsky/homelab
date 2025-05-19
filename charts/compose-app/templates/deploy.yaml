@@ -29,7 +29,8 @@ spec:
                     image: {{ $data.image | quote }}
                     ports:
                     {{ range $p := $data.ports }}
-                        -   containerPort: {{ $p }}
+                        -   containerPort: {{ $p.port }}
+                            protocol: {{ $p.protocol | default "TCP" | quote }}
                     {{ end }}
                     {{ if $data.volumes }}
                     {{ range $volname, $mountPath := $data.volumes }}
@@ -63,6 +64,7 @@ spec:
         {{ range $port := $data.ports }}
         -   name: {{ $port.name | default "http" | quote }}
             port: {{ $port.port }}
+            protocol: {{ $port.protocol | default "TCP" | quote }}
             targetPort: {{ $port.port }}
         {{ end }}
 
