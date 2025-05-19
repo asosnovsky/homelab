@@ -10,6 +10,8 @@ services:
     ports:
       - port: '2283'
     restart: always
+    environment:
+      REDIS_PORT: "6379"
 
   immich-machine-learning:
     image: ghcr.io/immich-app/immich-machine-learning:release
@@ -19,6 +21,8 @@ services:
       - secretRef:
           name: immich-shared
     restart: always
+    environment:
+      REDIS_PORT: "6379"
     ports:
       - port: '3003'
 
