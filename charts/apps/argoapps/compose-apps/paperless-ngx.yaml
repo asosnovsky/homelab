@@ -70,7 +70,7 @@ secrets:
         - POSTGRES_DB
       value: paperless
     - name: PAPERLESS_DBHOST
-      value: database
+      value: db
     - name: PAPERLESS_REDIS
       value: redis://broker:6379
 
