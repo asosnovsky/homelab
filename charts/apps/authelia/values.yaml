@@ -38,3 +38,21 @@ authelia:
             cookies:
                 -   domain: '{{ .Values.global.dns.primary.domain }}'
                     authelia_url: 'https://auth{{ .Values.global.dns.primary.root }}.{{ .Values.global.dns.primary.domain }}'
+        identity_providers:
+            oidc:
+                clients:
+                    -   client_id: 'immich'
+                        client_name: 'immich'
+                        client_secret: '$pbkdf2-sha512$310000$Q.wxPDRHGpOuns0zDC9ZAA$R1s0k48mYelv/aSNFy6pPrVwePYjqicY9H1MUWcDwP1nMEsaiNQDMBjSuIlfW18deP5qtTNjCbTJRpM6lsmo6Q'  
+                        public: false
+                        authorization_policy: 'two_factor'
+                        redirect_uris:
+                            - 'https://immich.{{ .Values.global.dns.primary.root }}.{{ .Values.global.dns.primary.domain }}/auth/login'
+                            - 'https://immich.{{ .Values.global.dns.primary.root }}.{{ .Values.global.dns.primary.domain }}/user-settings'
+                            - 'app.immich:///oauth-callback'
+                        scopes:
+                            - 'openid'
+                            - 'profile'
+                            - 'email'
+                        userinfo_signed_response_alg: 'none'
+                        token_endpoint_auth_method: 'client_secret_post'
