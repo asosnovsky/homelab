@@ -13,6 +13,8 @@ reverseProxy:
     scrypted:
         ip: 10.0.10.7
         port: 11080
+        useTailscale: true
+        disableIngress: true
         overrides:
             group: "Cameras"
 services:
@@ -27,10 +29,6 @@ services:
         group: "Admin"
 
 tailScaleServices:
-    # -   name: dummy
-    #     namespace: "dummy"
-    #     selector:
-    #         app: dummy
     -   name: "argocd"
         namespace: plugin-argo-cd
         selector:
