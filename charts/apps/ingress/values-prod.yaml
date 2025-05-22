@@ -10,7 +10,11 @@ reverseProxy:
         overrides:
             prefix: "jellyfin"
             group: "Video Hosting"
-
+    scrypted:
+        ip: 10.0.10.5
+        port: 11080
+        overrides:
+            group: "Cameras"
 services:
     -   prefix: "demo"
         service: "dummy-app"
