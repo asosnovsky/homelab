@@ -10,6 +10,7 @@ OUTPUT_FOLDER = BASE_PATH / "output"
 DNSMASQ_CONF = OUTPUT_FOLDER / "etc/dnsmasq.conf"
 ETHERS = OUTPUT_FOLDER / "etc/ethers"
 SUMMARY = OUTPUT_FOLDER / "summary.yaml"
+WHITELIST = OUTPUT_FOLDER / "white.list"
 
 shutil.rmtree(OUTPUT_FOLDER)
 DNSMASQ_CONF.parent.mkdir(exist_ok=True, parents=True)
@@ -42,6 +43,8 @@ def cap1_and_join(*args: str) -> str:
 with CONFIG_FILE.open('r') as fp:
     settings = yaml.safe_load(fp)
 
+mac_addrs = set()
+
 with DNSMASQ_CONF.open('w') as dfp, SUMMARY.open('w') as sfp, ETHERS.open('w') as efp:
     for sub_domain, configs in settings['networks'].items():
         default_values = defaults.get(sub_domain, {})
@@ -49,14 +52,22 @@ with DNSMASQ_CONF.open('w') as dfp, SUMMARY.open('w') as sfp, ETHERS.open('w') a
         sfp.write(f'\n{cap1_and_join(sub_domain)}:')
         efp.write(f'#{cap1_and_join(sub_domain)}\n')
         ip_suffix = 0
+        seen_nets = set()
         for dvc in configs:
             if dvc.get('id'):
                 ip_suffix = dvc.get('id')
             else:
                 ip_suffix += 1
+            for _ in range(254):
+                if ip_suffix in seen_nets:
+                    ip_suffix += 1
+                else:
+                    break
+            seen_nets.add(ip_suffix)
             dvc = {**default_values, **dvc}
             mac = dvc['mac']
             name = dvc['name']
+            mac_addrs.add(mac)
             sfp.write(f'\n   {cap1_and_join(name)}:')
             ip = f"{ip_prefix}{ip_suffix}"
             host = f"{name}.{sub_domain}.{root_domain}"
@@ -76,3 +87,5 @@ with DNSMASQ_CONF.open('w') as dfp, SUMMARY.open('w') as sfp, ETHERS.open('w') a
         for domain in config['domains']:
             dfp.write(f"address=/{domain}/{ip}\n")
             dfp.write(f"address=/.{domain}/{ip}\n")
+
+WHITELIST.write_text('\n'.join(mac_addrs))

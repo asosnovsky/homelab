@@ -125,6 +125,14 @@ Apl:
        host: "amzn-bedroom.apl.internal"
    Lgtv-bedroom:
        host: "lgtv-bedroom.apl.internal"
+   Pablo:
+       host: "pablo.apl.internal"
+   Pod-eddie:
+       host: "pod-eddie.apl.internal"
+   Brother-printer:
+       host: "brother-printer.apl.internal"
+   Ipad-eddie:
+       host: "ipad-eddie.apl.internal"
 Router:
    Gl-basement:
        ip: "10.0.16.1"
@@ -138,6 +146,9 @@ Router:
    Velica-node2:
        ip: "10.0.16.4"
        host: "velica-node2.router.internal"
+   Extender:
+       ip: "10.0.16.100"
+       host: "extender.router.internal"
 Devices:
    Fwlaptop:
        host: "fwlaptop.devices.internal"
@@ -151,3 +162,5 @@ Devices:
        host: "vitaphone.devices.internal"
    Levaphone:
        host: "levaphone.devices.internal"
+   Koriephone:
+       host: "koriephone.devices.internal"
