@@ -14,7 +14,7 @@ networks:
             name: 'pi1'
         -   mac: '9C:BF:0D:00:56:51'
             name: 'fws1'
-        -   mac: '98:03:8E:A7:C2:6A'
+        -   mac: '74:56:3C:CA:E2:ED'
             name: 'bigbox1'
             domain: compute.internal
         -   mac: '68:1D:EF:26:B7:6C'
