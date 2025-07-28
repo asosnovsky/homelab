@@ -7,9 +7,13 @@ services:
       certs: /bumper/certs
     ports:
       - port: '443'
+        name: https
       - port: '8007'
+        name: '8007'
       - port: '8883'
+        name: http
       - port: '5223'
+        name: '5223'
     annotations:
       "metallb.universe.tf/loadBalancerIPs" : "10.0.100.3"
       "metallb.io/ip-allocated-from-pool" : "homelab-pool"
