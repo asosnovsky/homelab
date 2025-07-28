@@ -1,6 +1,6 @@
 services:
   bumper:
-    image: bmartin5692/bumper
+    image: ghcr.io/mvladislav/bumper:develop
     restart: always
     volumes:
       data: /bumper/data
@@ -19,6 +19,11 @@ services:
       "metallb.io/ip-allocated-from-pool" : "homelab-pool"
     serviceType: LoadBalancer
     environment:
+      BUMPER_DATA: /bumper/data
+      BUMPER_CA: /bumper/certs
+      BUMPER_PROXY_WEB: true
+      BUMPER_PROXY_MQTT: true
+      NETWORK_MODE: overlay
       BUMPER_ANNOUNCE_IP: "10.0.100.3"
       PUID: 1000
       PGID: 1000
