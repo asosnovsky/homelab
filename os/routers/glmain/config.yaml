@@ -5,6 +5,7 @@ general_mappings:
             - k3s.local
     -   ip: 10.0.100.3
         domains:
+            - ecouser.com
             - ecouser.net
             - ecovacs.com
             - ecovacs.net
