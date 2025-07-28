@@ -66,6 +66,10 @@ apiVersion: v1
 metadata:
   name: {{ $name }}
   namespace: {{ $.Release.Namespace | quote }}
+  annotations:
+    {{- if $data.annotations }}
+    {{ $data.annotations | toYaml | nindent 4 }}
+    {{- end }}
 spec:
     selector:
         app: {{ $name }}
