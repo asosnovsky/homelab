@@ -20,7 +20,6 @@ services:
     serviceType: LoadBalancer
     environment:
       BUMPER_DATA: /bumper/data
-      BUMPER_CA: /bumper/certs
       BUMPER_PROXY_WEB: true
       BUMPER_PROXY_MQTT: true
       NETWORK_MODE: overlay
