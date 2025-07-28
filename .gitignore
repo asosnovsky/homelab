@@ -19,3 +19,4 @@ devenv.local.nix
 
 # router
 os/routers/openwrt-mesh/.env
+.venv
