@@ -49,6 +49,8 @@ services:
       - database
       - radarr
       - sonarr
+    ports:
+      - port: '80'
   lidarr:
     image: lscr.io/linuxserver/lidarr
     restart: unless-stopped
