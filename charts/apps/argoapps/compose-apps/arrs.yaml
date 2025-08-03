@@ -141,8 +141,26 @@ services:
     serviceAnnotations:
         "metallb.universe.tf/loadBalancerIPs" : "10.0.100.7"
         "metallb.io/ip-allocated-from-pool" : "homelab-pool"
+  nzbget:
+    image: lscr.io/linuxserver/nzbget:latest
+    restart: always
+    volumes:
+        config: /config
+        torrents: /torrents
+    labels:
+      - homepage.group=Torrent
+      - homepage.name=nzbget
+      - homepage.href=/nzbget/
+      - homepage.icon=/nzbget/img/favicon.ico
+
+networks:
+  caddy_caddy:
+    external: true
 
 volumes:
+  nzbget:
+    type: nfs-provider
+    size: 100Mi
   db:
     type: nfs
     server: terra1.lab.internal
