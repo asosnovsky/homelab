@@ -5,6 +5,13 @@ apiVersion: apps/v1
 metadata:
   name: {{ $name }}
   namespace: {{ $.Release.Namespace | quote }}
+  annotations:
+    {{- if $data.labels }}
+    {{ range $i, $val := $data.labels }}
+        {{- $parts := splitList "=" $val -}}
+    "{{ index $parts 0 }}": "{{ index $parts 1 }}"
+    {{ end }}
+    {{- end }}
 spec:
     replicas: {{ $data.replicas | default 1 }}
     selector:
@@ -60,6 +67,16 @@ spec:
                         -   {{ $cmd | quote }}
                         {{ end }}
                     {{ end }}
+                    {{ if $data.healthcheck }}
+                    livenessProbe:
+                        exec:
+                            command:
+                                {{ $data.healthcheck.test | toYaml | nindent 32 }}
+                        initialDelaySeconds: {{ $data.healthcheck.start_period | default 3 }}
+                        periodSeconds: {{ $data.healthcheck.interval | default 30 }}
+                        timeoutSeconds: {{ $data.healthcheck.timeout | default 5 }}
+                    {{ end }}
+                
 ---
 kind: Service
 apiVersion: v1
@@ -67,8 +84,8 @@ metadata:
   name: {{ $name }}
   namespace: {{ $.Release.Namespace | quote }}
   annotations:
-    {{- if $data.annotations }}
-    {{ $data.annotations | toYaml | nindent 4 }}
+    {{- if $data.serviceAnnotations }}
+    {{ $data.serviceAnnotations | toYaml | nindent 4 }}
     {{- end }}
 spec:
     selector:

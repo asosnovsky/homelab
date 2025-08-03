@@ -1,0 +1,165 @@
+version: "3.8"
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    restart: unless-stopped
+  database:
+    image: postgres:17
+    restart: unless-stopped
+    volumes:
+        db: /var/lib/postgresql/data
+    ports:
+      - port: '5432'
+    healthcheck:
+      test:
+        - pg_isready
+        - --username=postgres
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr
+    restart: unless-stopped
+    environment:
+        PUID: "1000"
+        PGID: "100"
+    volumes:
+        prowlarr: /config
+        torrents: /torrents
+    serviceType: LoadBalancer
+    serviceAnnotations:
+        "metallb.universe.tf/loadBalancerIPs" : "10.0.100.4"
+        "metallb.io/ip-allocated-from-pool" : "homelab-pool"
+    healthcheck:
+      test:
+        - curl
+        - -f
+        - http://localhost/prowlarr/ping
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+    labels:
+      - homepage.group=Torrent
+      - homepage.name=Prowlarr
+      - homepage.icon=/prowlarr/Content/Images/logo.png
+      - homepage.href=/prowlarr/
+    depends_on:
+      - database
+      - radarr
+      - sonarr
+  lidarr:
+    image: lscr.io/linuxserver/lidarr
+    restart: unless-stopped
+    ports:
+      - port: '80'
+    environment:
+        PUID: "1000"
+        PGID: "100"
+    volumes:
+        lidarr: /config
+        torrents: /torrents
+    labels:
+      - homepage.group=Torrent
+      - homepage.name=lidarr
+      - homepage.icon=/lidarr/Content/Images/logo.png
+      - homepage.href=/lidarr/
+    depends_on:
+      - database
+    healthcheck:
+      test:
+        - curl
+        - -f
+        - http://localhost/lidarr/ping
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+    serviceType: LoadBalancer
+    serviceAnnotations:
+        "metallb.universe.tf/loadBalancerIPs" : "10.0.100.5"
+        "metallb.io/ip-allocated-from-pool" : "homelab-pool"
+  radarr:
+    image: lscr.io/linuxserver/radarr
+    restart: unless-stopped
+    environment:
+        PUID: "1000"
+        PGID: "100"
+    ports:
+      - port: '80'
+    volumes:
+        radarr: /config
+        torrents: /torrents
+    labels:
+      - homepage.group=Torrent
+      - homepage.name=Radarr
+      - homepage.icon=/radarr/Content/Images/logo.png
+      - homepage.href=/radarr/
+    depends_on:
+      - database
+    healthcheck:
+      test:
+        - curl
+        - -f
+        - http://localhost/radarr/ping
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+    serviceType: LoadBalancer
+    serviceAnnotations:
+        "metallb.universe.tf/loadBalancerIPs" : "10.0.100.6"
+        "metallb.io/ip-allocated-from-pool" : "homelab-pool"
+  sonarr:
+    image: lscr.io/linuxserver/sonarr
+    restart: unless-stopped
+    environment:
+        PUID: "1000"
+        PGID: "100"
+    volumes:
+        sonarr: /config
+        torrents: /torrents
+    ports:
+      - port: '80'
+    depends_on:
+      - database
+    labels:
+      - homepage.group=Torrent
+      - homepage.name=Sonarr
+      - homepage.icon=/sonarr/Content/Images/logo.svg
+      - homepage.href=/sonarr/
+    healthcheck:
+      test:
+        - curl
+        - -f
+        - http://localhost/sonarr/ping
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+    serviceType: LoadBalancer
+    serviceAnnotations:
+        "metallb.universe.tf/loadBalancerIPs" : "10.0.100.7"
+        "metallb.io/ip-allocated-from-pool" : "homelab-pool"
+
+volumes:
+  db:
+    type: nfs
+    server: tnas1.lab.internal
+    path: /mnt/Data/apps/arrs/data/database
+  torrents:
+    type: nfs
+    server: tnas1.lab.internal
+    path: /mnt/EightTerra/DownloadedTorrents
+  prowlarr:
+    type: nfs
+    server: terra1.lab.internal
+    path: /mnt/Data/apps/arrs/configs/prowlarr
+  sonarr:
+    type: nfs
+    server: terra1.lab.internal
+    path: /mnt/Data/apps/arrs/configs/sonarr
+  radarr:
+    type: nfs
+    server: terra1.lab.internal
+    path: /mnt/Data/apps/arrs/configs/radarr
+  lidarr:
+    type: nfs
+    server: terra1.lab.internal
+    path: /mnt/Data/apps/arrs/configs/lidarr
