@@ -145,7 +145,7 @@ services:
 volumes:
   db:
     type: nfs
-    server: tnas1.lab.internal
+    server: terra1.lab.internal
     path: /mnt/Data/apps/arrs/data/database
   torrents:
     type: nfs
