@@ -64,6 +64,8 @@ B8:D6:1A:8C:4C:DC 10.0.14.10
 B8:D6:1A:8C:4C:DC shelly-basement-shared.iot.internal
 C8:2B:96:1D:DA:B4 10.0.14.11
 C8:2B:96:1D:DA:B4 shelly-laundry-light.iot.internal
+B0:B2:1C:10:DC:48 10.0.14.12
+B0:B2:1C:10:DC:48 shelly-bathroom.iot.internal
 #Apl
 48:9E:BD:CB:07:E3 10.0.15.1
 48:9E:BD:CB:07:E3 hp-print.apl.internal

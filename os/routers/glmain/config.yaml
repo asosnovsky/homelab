@@ -80,6 +80,8 @@ networks:
             mac: 'B8:D6:1A:8C:4C:DC'
         -   name: 'shelly-laundry-light'
             mac: 'C8:2B:96:1D:DA:B4'
+        -   name: 'shelly-bathroom'
+            mac: 'B0:B2:1C:10:DC:48'
     apl:
         -   name: 'hp-print'
             mac: '48:9E:BD:CB:07:E3'

@@ -98,6 +98,9 @@ Iot:
    Shelly-laundry-light:
        ip: "10.0.14.11"
        host: "shelly-laundry-light.iot.internal"
+   Shelly-bathroom:
+       ip: "10.0.14.12"
+       host: "shelly-bathroom.iot.internal"
 Apl:
    Hp-print:
        ip: "10.0.15.1"
