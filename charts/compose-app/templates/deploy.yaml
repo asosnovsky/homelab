@@ -67,15 +67,6 @@ spec:
                         -   {{ $cmd | quote }}
                         {{ end }}
                     {{ end }}
-                    # {{ if $data.healthcheck }}
-                    # livenessProbe:
-                    #     exec:
-                    #         command:
-                    #             {{ $data.healthcheck.test | toYaml | nindent 32 }}
-                    #     initialDelaySeconds: {{ $data.healthcheck.start_period | default 3 }}
-                    #     periodSeconds: {{ $data.healthcheck.interval | default 30 }}
-                    #     timeoutSeconds: {{ $data.healthcheck.timeout | default 5 }}
-                    # {{ end }}
                 
 ---
 kind: Service
