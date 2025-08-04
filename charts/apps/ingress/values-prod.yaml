@@ -29,7 +29,7 @@ services:
         group: "Admin"
     -   prefix: "torrent"
         service: "transmission"
-        namespace: "transmission"
+        namespace: "torrents"
         group: "Torrenting"
         disableExternalIngress: true
 
