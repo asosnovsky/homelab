@@ -144,6 +144,8 @@ services:
   nzbget:
     image: lscr.io/linuxserver/nzbget:latest
     restart: always
+    ports:
+      - port: '6789'
     volumes:
         config: /config
         torrents: /torrents
