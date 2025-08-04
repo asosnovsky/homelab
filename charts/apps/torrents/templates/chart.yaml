@@ -15,7 +15,7 @@ spec:
                 gluetun:
                     envFrom:
                         - secretRef:
-                            name: vpn-creds
+                            name: vpn-credentials
     destination:
         namespace: {{ .Release.Namespace }}
         server: https://kubernetes.default.svc
