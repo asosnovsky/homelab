@@ -147,7 +147,7 @@ services:
     ports:
       - port: '6789'
     volumes:
-        config: /config
+        nzbget: /config
         torrents: /torrents
     labels:
       - homepage.group=Torrent
