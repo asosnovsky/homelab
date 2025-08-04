@@ -16,6 +16,20 @@ spec:
                     envFrom:
                         - secretRef:
                             name: vpn-credentials
+                volumes:
+                    -   name: "torrents"
+                        nfs:
+                            server: tnas1.lab.internal
+                            path: /mnt/EightTerra/DownloadedTorrents
+                    -   name: "config"
+                        persistentVolumeClaim:
+                            claimName: "transmission-config"
+                transmission:
+                    volumeMounts:
+                        -   name: torrents
+                            mountPath: /torrents
+                        -   name: config
+                            mountPath: /config
     destination:
         namespace: {{ .Release.Namespace }}
         server: https://kubernetes.default.svc
