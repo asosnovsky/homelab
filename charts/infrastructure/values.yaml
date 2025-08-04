@@ -9,8 +9,8 @@ ns:
     argocd: "change-me"
 
 gitops:
-  revision: "v2"
-  repo: "asosnovsky/homelab"
+  revision: "main"
+  repo: "ssh://gitea@minipc1.lab.internal/ari/homelab.git"
   sshkey: ""
 
 metallb:

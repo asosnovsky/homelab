@@ -5,5 +5,5 @@ global:
         storageClassName: ""
         storageProvider: ""
 gitops:
-    repo: asosnovsky/homelab
-    revision: v2
+    repo: ssh://gitea@minipc1.lab.internal/ari/homelab.git
+    revision: main
