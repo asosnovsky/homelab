@@ -53,6 +53,11 @@ services:
         namespace: "comap-arrs"
         group: "Torrenting"
         disableExternalIngress: true
+    -   prefix: "nzbget"
+        service: "nzbget"
+        namespace: "comap-arrs"
+        group: "Torrenting"
+        disableExternalIngress: true
 
 
 tailScaleServices:
