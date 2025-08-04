@@ -28,10 +28,6 @@ services:
     volumes:
         prowlarr: /config
         torrents: /torrents
-    serviceType: LoadBalancer
-    serviceAnnotations:
-        "metallb.universe.tf/loadBalancerIPs" : "10.0.100.4"
-        "metallb.io/ip-allocated-from-pool" : "homelab-pool"
     healthcheck:
       test:
         - curl
@@ -77,10 +73,6 @@ services:
       interval: 30s
       timeout: 5s
       start_period: 10s
-    serviceType: LoadBalancer
-    serviceAnnotations:
-        "metallb.universe.tf/loadBalancerIPs" : "10.0.100.5"
-        "metallb.io/ip-allocated-from-pool" : "homelab-pool"
   radarr:
     image: lscr.io/linuxserver/radarr
     restart: unless-stopped
@@ -107,10 +99,6 @@ services:
       interval: 30s
       timeout: 5s
       start_period: 10s
-    serviceType: LoadBalancer
-    serviceAnnotations:
-        "metallb.universe.tf/loadBalancerIPs" : "10.0.100.6"
-        "metallb.io/ip-allocated-from-pool" : "homelab-pool"
   sonarr:
     image: lscr.io/linuxserver/sonarr
     restart: unless-stopped
@@ -137,10 +125,6 @@ services:
       interval: 30s
       timeout: 5s
       start_period: 10s
-    serviceType: LoadBalancer
-    serviceAnnotations:
-        "metallb.universe.tf/loadBalancerIPs" : "10.0.100.7"
-        "metallb.io/ip-allocated-from-pool" : "homelab-pool"
   nzbget:
     image: lscr.io/linuxserver/nzbget:latest
     restart: always
