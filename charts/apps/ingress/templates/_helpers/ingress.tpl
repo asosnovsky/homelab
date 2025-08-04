@@ -13,6 +13,7 @@
 #   useSecondaryDomain: bool = False = {{ .useSecondaryDomain }}
 #   useDirectPrefix: bool = False = {{ .useDirectPrefix }}
 #   widget: bool = False = {{ .widget | toJson }}
+#   disableExternalIngress: bool = False = {{ .disableExternalIngress | toJson }}
 #   
 
 
@@ -26,6 +27,8 @@
 {{- $domain := (include "homelab.ingress.domain" .) -}}
 
 {{- $_ := set . "domain" $domain -}}
+
+{{ if (not .disableExternalIngress) }}
 
 # .domain = {{ .domain }}
 # .prefix = {{ .prefix }}
@@ -79,6 +82,9 @@ spec:
       hosts:
         - "{{.prefix}}{{ $domain }}"
   {{ end }}
+
+{{ end }}
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
