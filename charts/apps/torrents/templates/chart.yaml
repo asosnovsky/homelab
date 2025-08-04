@@ -1,0 +1,24 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "transmission"
+spec:
+    project: main
+    source:
+        path: 'charts/transmission'
+        repoURL: "git@github.com:asosnovsky/helm-charts.git"
+        targetRevision: main
+        helm:
+            values: |-
+                glueten:
+                    envFrom:
+                        - secretRef:
+                            name: vpn-creds
+    destination:
+        namespace: {{ .Release.Namespace }}
+        server: https://kubernetes.default.svc
+    syncPolicy:
+        automation:
+            prune: true
+            selfHeal: true
