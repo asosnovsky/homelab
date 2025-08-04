@@ -64,7 +64,7 @@ networks:
             mac: 'DC:4F:22:24:0C:E4'
         -   name: 'ecobee'
             mac: '44:61:32:FC:10:EC'
-        -   name: 'apollo-eddie'
+        -   name: 'apollo-kitchen'
             mac: '30:30:F9:DC:A8:18'
         -   name: 'apollo-office'
             mac: '30:30:F9:DA:C7:A4'

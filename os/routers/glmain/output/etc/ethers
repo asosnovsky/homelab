@@ -49,7 +49,7 @@ DC:4F:22:24:0C:E4 office-strip.iot.internal
 44:61:32:FC:10:EC 10.0.14.3
 44:61:32:FC:10:EC ecobee.iot.internal
 30:30:F9:DC:A8:18 10.0.14.4
-30:30:F9:DC:A8:18 apollo-eddie.iot.internal
+30:30:F9:DC:A8:18 apollo-kitchen.iot.internal
 30:30:F9:DA:C7:A4 10.0.14.5
 30:30:F9:DA:C7:A4 apollo-office.iot.internal
 30:30:F9:DC:BE:7C 10.0.14.6
