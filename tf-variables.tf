@@ -24,6 +24,9 @@ variable "domain_mappings" {
 variable "ssh_key" {
   sensitive = true
 }
+variable "github_ssh_key" {
+  sensitive = true
+}
 variable "tailscale" {
   type = object({
     client_id     = string,

@@ -1,16 +1,15 @@
----
-apiVersion: v1
-kind: Secret
-metadata:
-  labels:
-    argocd.argoproj.io/secret-type: repository
-  name: homelab
-  namespace: "{{ .Values.ns.argocd }}"
-type: Opaque
-stringData:
-    name: homelab
-    type: git
-    username: git
-    url: {{ .Values.gitops.repo }}
-data:
-  sshPrivateKey: "{{ .Values.gitops.sshkey | b64enc }}"
+{{ include "git-repo" (dict 
+  "name" "homelab"
+  "namespace" $.Values.ns.argocd 
+  "sshkey" $.Values.gitops.sshkey
+  "url" $.Values.gitops.repo
+)}}
+
+
+
+{{- range $name, $val := .Values.additionalRepos }}
+{{ include "git-repo" (merge $val (dict 
+  "name" $name
+  "namespace" $.Values.ns.argocd
+))}}
+{{ end -}}

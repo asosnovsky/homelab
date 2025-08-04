@@ -15,6 +15,10 @@ resource "helm_release" "local-chart-infrastructure" {
     {
       name  = "gitops.sshkey"
       value = var.ssh_key
+    },
+    {
+      name  = "additionalRepos.github-helm-charts.sshkey"
+      value = var.github_ssh_key
     }
   ]
   values = [

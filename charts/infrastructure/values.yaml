@@ -13,6 +13,13 @@ gitops:
   repo: "ssh://gitea@minipc1.lab.internal/ari/homelab.git"
   sshkey: ""
 
+additionalRepos:
+  github-helm-charts:
+    type: git
+    username: git
+    url:  git@github.com:asosnovsky/helm-charts.git
+    sshkey: ""
+
 metallb:
     addresses:
         - 10.0.100.1-10.0.100.255

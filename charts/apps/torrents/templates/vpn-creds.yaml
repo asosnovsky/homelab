@@ -1,0 +1,29 @@
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: vpn-creds
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets
+  target:
+    name: vpn-credentials
+  data:
+  - secretKey: SERVER_COUNTRIES
+    remoteRef:
+      key: vpn-credentials
+      property: country
+  - secretKey: OPENVPN_USER
+    remoteRef:
+      key: vpn-credentials
+      property: user
+  - secretKey: OPENVPN_PASSWORD
+    remoteRef:
+      key: vpn-credentials
+      property: password
+  - secretKey: VPN_SERVICE_PROVIDER
+    remoteRef:
+      key: vpn-credentials
+      property: provider
