@@ -19,6 +19,6 @@ spec:
         namespace: {{ .Release.Namespace }}
         server: https://kubernetes.default.svc
     syncPolicy:
-        automation:
+        automated:
             prune: true
             selfHeal: true
