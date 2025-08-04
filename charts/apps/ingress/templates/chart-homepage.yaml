@@ -1,4 +1,9 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: homepage
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -17,13 +22,11 @@ spec:
         namespace: "homepage"
         server: https://kubernetes.default.svc
     syncPolicy:
-        syncOptions:
-            - CreateNamespace=true
         automated:
             prune: true
             selfHeal: true
----
 
+---
 {{ include "homelab.ingress" (dict 
     "global" $.Values.global
     "prefix" "home"
