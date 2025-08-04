@@ -32,6 +32,7 @@ services:
         namespace: "torrents"
         group: "Torrenting"
         disableExternalIngress: true
+        port: 9091
 
 tailScaleServices:
     -   name: "argocd"
