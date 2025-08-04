@@ -58,6 +58,7 @@ services:
         namespace: "comap-arrs"
         group: "Torrenting"
         disableExternalIngress: true
+        port: 6789
 
 
 tailScaleServices:
