@@ -12,7 +12,7 @@ spec:
         targetRevision: main
         helm:
             values: |-
-                glueten:
+                gluetun:
                     envFrom:
                         - secretRef:
                             name: vpn-creds
