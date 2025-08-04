@@ -16,3 +16,6 @@ gitops:
 metallb:
     addresses:
         - 10.0.100.1-10.0.100.255
+
+enabledClusterSecretStores:
+    - secrets

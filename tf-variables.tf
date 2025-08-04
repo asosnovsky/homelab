@@ -31,6 +31,16 @@ variable "tailscale" {
   })
   sensitive = true
 }
+variable "vpn" {
+  type = object({
+    user     = string,
+    password = string,
+    provider = string,
+    country  = string,
+  })
+  sensitive = true
+
+}
 
 variable "globals" {
   type = object({
