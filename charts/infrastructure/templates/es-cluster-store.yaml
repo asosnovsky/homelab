@@ -1,3 +1,3 @@
 {{ range $i, $val := .Values.enabledClusterSecretStores }}
-{{ include "es-cluster-store" (dict "name" $val)}}
+{{ include "es-cluster-store" (dict "namespace" $val)}}
 {{ end }}
