@@ -4,6 +4,8 @@ global:
     nfs:
         storageClassName: ""
         storageProvider: ""
-gitops:
-    repo: ssh://gitea@minipc1.lab.internal/ari/homelab.git
-    revision: main
+
+composeApp:
+    gitops:
+        repo: git@github.com:asosnovsky/helm-charts.git
+        revision: main

@@ -11,8 +11,8 @@ spec:
     project: main
     source:
         path: 'charts/compose-app'
-        repoURL: {{ $.Values.gitops.repo }}
-        targetRevision: {{ $.Values.gitops.revision }}
+        repoURL: {{ $.Values.composeApp.gitops.repo }}
+        targetRevision: {{ $.Values.composeApp.gitops.revision }}
         helm:
             values: |-
                 global:
