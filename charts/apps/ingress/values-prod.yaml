@@ -31,6 +31,7 @@ services:
         service: "transmission"
         namespace: "transmission"
         group: "Torrenting"
+        disableExternalIngress: true
 
 tailScaleServices:
     -   name: "argocd"
