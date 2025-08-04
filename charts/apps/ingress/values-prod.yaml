@@ -33,6 +33,27 @@ services:
         group: "Torrenting"
         disableExternalIngress: true
         port: 9091
+    -   prefix: "lidarr"
+        service: "lidarr"
+        namespace: "comap-arrs"
+        group: "Torrenting"
+        disableExternalIngress: true
+    -   prefix: "radarr"
+        service: "radarr"
+        namespace: "comap-arrs"
+        group: "Torrenting"
+        disableExternalIngress: true
+    -   prefix: "sonarr"
+        service: "sonarr"
+        namespace: "comap-arrs"
+        group: "Torrenting"
+        disableExternalIngress: true
+    -   prefix: "prowlarr"
+        service: "prowlarr"
+        namespace: "comap-arrs"
+        group: "Torrenting"
+        disableExternalIngress: true
+
 
 tailScaleServices:
     -   name: "argocd"
