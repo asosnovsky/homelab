@@ -23,10 +23,11 @@ spec:
             prune: true
             selfHeal: true
 ---
+
 {{ include "homelab.ingress" (dict 
     "global" $.Values.global
     "prefix" "home"
-    "service": "homepage"
-    "namespace": "homepage"
+    "service" "homepage"
+    "namespace" "homepage"
     "disableExternalIngress" true
 ) }}
