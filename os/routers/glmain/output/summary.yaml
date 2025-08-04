@@ -83,12 +83,12 @@ Iot:
    Apollo-laundry:
        ip: "10.0.14.6"
        host: "apollo-laundry.iot.internal"
-   Epl-kitchen:
+   Epl-living-room:
        ip: "10.0.14.7"
-       host: "epl-kitchen.iot.internal"
-   Epl-livingroom:
+       host: "epl-living-room.iot.internal"
+   Expired-epl:
        ip: "10.0.14.8"
-       host: "epl-livingroom.iot.internal"
+       host: "expired-epl.iot.internal"
    Shelly-basement-living:
        ip: "10.0.14.9"
        host: "shelly-basement-living.iot.internal"

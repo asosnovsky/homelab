@@ -55,9 +55,9 @@ DC:4F:22:24:0C:E4 office-strip.iot.internal
 30:30:F9:DC:BE:7C 10.0.14.6
 30:30:F9:DC:BE:7C apollo-laundry.iot.internal
 64:B7:08:28:52:50 10.0.14.7
-64:B7:08:28:52:50 epl-kitchen.iot.internal
+64:B7:08:28:52:50 epl-living-room.iot.internal
 64:B7:08:28:56:F4 10.0.14.8
-64:B7:08:28:56:F4 epl-livingroom.iot.internal
+64:B7:08:28:56:F4 expired-epl.iot.internal
 B8:D6:1A:8A:5F:F4 10.0.14.9
 B8:D6:1A:8A:5F:F4 shelly-basement-living.iot.internal
 B8:D6:1A:8C:4C:DC 10.0.14.10
