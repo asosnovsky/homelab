@@ -9,7 +9,7 @@ spec:
   - git:
       directories:
       - path: charts/apps/*
-      repoURL: git@github.com:{{ .Values.gitops.repo }}.git
+      repoURL: {{ .Values.gitops.repo }}
       revision: "{{ .Values.gitops.revision }}"
       template:
         metadata: {}
@@ -30,7 +30,7 @@ spec:
       revisionHistoryLimit: 4
       source:
         path: '{{`{{path}}`}}'
-        repoURL: git@github.com:{{ .Values.gitops.repo }}.git
+        repoURL: {{ .Values.gitops.repo }}
         targetRevision: "{{ .Values.gitops.revision }}"
         helm:
             valueFiles:

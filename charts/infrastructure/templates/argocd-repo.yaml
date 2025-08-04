@@ -11,6 +11,6 @@ stringData:
     name: homelab
     type: git
     username: git
-    url: git@github.com:{{ .Values.gitops.repo }}.git
+    url: {{ .Values.gitops.repo }}
 data:
   sshPrivateKey: "{{ .Values.gitops.sshkey | b64enc }}"
