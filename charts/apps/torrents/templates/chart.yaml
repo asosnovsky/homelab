@@ -3,6 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: "transmission"
+  namespace: {{ .Values.ns.argocd }}
 spec:
     project: main
     source:
