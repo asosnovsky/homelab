@@ -27,12 +27,18 @@ services:
         service: "authelia"
         namespace: "authelia"
         group: "Admin"
-    -   prefix: "torrent"
-        service: "transmission"
+    -   prefix: "transmission"
+        service: "torrents"
         namespace: "torrents"
         group: "Torrenting"
         disableExternalIngress: true
         port: 9091
+    -   prefix: "qbit"
+        service: "torrents"
+        namespace: "torrents"
+        group: "Torrenting"
+        disableExternalIngress: true
+        port: 3000
     -   prefix: "lidarr"
         service: "lidarr"
         namespace: "comap-arrs"
