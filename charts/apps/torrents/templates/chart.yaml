@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "transmission"
+  name: "torrent-client"
   namespace: {{ .Values.ns.argocd }}
 spec:
     project: main
@@ -21,14 +21,23 @@ spec:
                         nfs:
                             server: tnas1.lab.internal
                             path: /mnt/EightTerra/DownloadedTorrents
-                    -   name: "config"
+                    -   name: "transmission"
                         persistentVolumeClaim:
                             claimName: "transmission-config"
+                    -   name: "qbittorrent"
+                        persistentVolumeClaim:
+                            claimName: "qbittorrent-config"
                 transmission:
                     volumeMounts:
                         -   name: torrents
                             mountPath: /torrents
-                        -   name: config
+                        -   name: transmission
+                            mountPath: /config
+                qbittorrent:
+                    volumeMounts:
+                        -   name: torrents
+                            mountPath: /torrents
+                        -   name: qbittorrent
                             mountPath: /config
     destination:
         namespace: {{ .Release.Namespace }}

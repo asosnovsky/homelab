@@ -10,3 +10,16 @@ spec:
         requests:
             storage: "100Mi"
     storageClassName: {{ .Values.global.nfs.storageClassName }}
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: qbittorrent-config
+spec:
+    accessModes:
+        - "ReadWriteOnce"
+    resources:
+        requests:
+            storage: "100Mi"
+    storageClassName: {{ .Values.global.nfs.storageClassName }}
