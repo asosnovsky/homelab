@@ -130,6 +130,10 @@ services:
     restart: always
     ports:
       - port: '6789'
+    environment:
+      PUID: 1000
+      PGID: 100
+      TZ: Etc/UTC
     volumes:
         nzbget: /config
         torrents: /torrents
