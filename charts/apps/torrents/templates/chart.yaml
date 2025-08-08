@@ -2,12 +2,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "torrent-client"
-  namespace: {{ .Values.ns.argocd }}
+    name: "torrent-client"
+    namespace: { { .Values.ns.argocd } }
 spec:
     project: main
     source:
-        path: 'charts/transmission'
+        path: "charts/torrents"
         repoURL: "git@github.com:asosnovsky/helm-charts.git"
         targetRevision: main
         helm:
@@ -40,7 +40,7 @@ spec:
                         -   name: qbittorrent
                             mountPath: /config
     destination:
-        namespace: {{ .Release.Namespace }}
+        namespace: { { .Release.Namespace } }
         server: https://kubernetes.default.svc
     syncPolicy:
         automated:
