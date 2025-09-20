@@ -47,7 +47,7 @@ module "k8s-helm-charts" {
     },
     "cert-manager" : {
       repository = "https://charts.jetstack.io"
-      version    = "1.17.1"
+      version    = "1.18.2"
       values : [yamlencode({
         installCRDs : true
       })]
