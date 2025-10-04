@@ -7,17 +7,17 @@ metadata:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "homepage"
-  namespace: {{ .Values.ns.argocd }}
+    name: "homepage"
+    namespace: { { .Values.ns.argocd } }
 spec:
     project: main
     source:
-        path: 'charts/homepage'
+        path: "charts/homepage"
         repoURL: "git@github.com:asosnovsky/helm-charts.git"
         targetRevision: main
         helm:
             values: |-
-                allowedHosts: "home.k3s.local" 
+                allowedHosts: "home.k3s.internal"
     destination:
         namespace: "homepage"
         server: https://kubernetes.default.svc
@@ -27,10 +27,14 @@ spec:
             selfHeal: true
 
 ---
-{{ include "homelab.ingress" (dict 
-    "global" $.Values.global
-    "prefix" "home"
-    "service" "homepage"
-    "namespace" "homepage"
-    "disableExternalIngress" true
-) }}
+{
+    {
+        include "homelab.ingress" (dict
+        "global" $.Values.global
+        "prefix" "home"
+        "service" "homepage"
+        "namespace" "homepage"
+        "disableExternalIngress" true
+        ),
+    },
+}
