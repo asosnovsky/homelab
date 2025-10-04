@@ -18,59 +18,61 @@ reverseProxy:
         overrides:
             group: "Cameras"
 services:
-    -   prefix: "demo"
-        service: "dummy-app"
-        namespace: "dummy"
-        # middleware: "apps-ingresses-forwardauth-authentik"
-        group: "Demo"
-    -   prefix: "auth"
-        service: "authelia"
-        namespace: "authelia"
-        group: "Admin"
-    -   prefix: "transmission"
-        service: "torrents"
-        namespace: "torrents"
-        group: "Torrenting"
-        disableExternalIngress: true
-        port: 9091
-    -   prefix: "qbit"
-        service: "torrents"
-        namespace: "torrents"
-        group: "Torrenting"
-        disableExternalIngress: true
-        port: 3000
-    -   prefix: "lidarr"
-        service: "lidarr"
-        namespace: "comap-arrs"
-        group: "Torrenting"
-        disableExternalIngress: true
-    -   prefix: "radarr"
-        service: "radarr"
-        namespace: "comap-arrs"
-        group: "Torrenting"
-        disableExternalIngress: true
-    -   prefix: "sonarr"
-        service: "sonarr"
-        namespace: "comap-arrs"
-        group: "Torrenting"
-        disableExternalIngress: true
-    -   prefix: "prowlarr"
-        service: "prowlarr"
-        namespace: "comap-arrs"
-        group: "Torrenting"
-        disableExternalIngress: true
-    -   prefix: "nzbget"
-        service: "nzbget"
-        namespace: "comap-arrs"
-        group: "Torrenting"
-        disableExternalIngress: true
-        port: 6789
-
+    - prefix: "demo"
+      service: "dummy-app"
+      namespace: "dummy"
+      # middleware: "apps-ingresses-forwardauth-authentik"
+      group: "Demo"
+    - prefix: "auth"
+      service: "authelia"
+      namespace: "authelia"
+      group: "Admin"
+    - prefix: "transmission"
+      service: "torrents"
+      namespace: "torrents"
+      group: "Torrenting"
+      disableExternalIngress: true
+      port: 9091
+    - prefix: "qbit"
+      service: "torrents"
+      namespace: "torrents"
+      group: "Torrenting"
+      disableExternalIngress: true
+      port: 3000
+    - prefix: "lidarr"
+      service: "lidarr"
+      namespace: "comap-arrs"
+      group: "Torrenting"
+      disableExternalIngress: true
+    - prefix: "radarr"
+      service: "radarr"
+      namespace: "comap-arrs"
+      group: "Torrenting"
+      disableExternalIngress: true
+      useTailscale: true
+    - prefix: "sonarr"
+      service: "sonarr"
+      namespace: "comap-arrs"
+      group: "Torrenting"
+      disableExternalIngress: true
+      useTailscale: true
+    - prefix: "prowlarr"
+      service: "prowlarr"
+      namespace: "comap-arrs"
+      group: "Torrenting"
+      disableExternalIngress: true
+    - prefix: "nzbget"
+      service: "nzbget"
+      namespace: "comap-arrs"
+      group: "Torrenting"
+      disableExternalIngress: true
+      useTailscale: true
+      port: 6789
 
 tailScaleServices:
-    -   name: "argocd"
-        namespace: plugin-argo-cd
-        selector:
-            "app.kubernetes.io/instance" : "argo-cd"
-            "app.kubernetes.io/name" : "argocd-server"
-        port: 8080
+    - name: "argocd"
+      namespace: plugin-argo-cd
+      selector:
+          "app.kubernetes.io/instance": "argo-cd"
+          "app.kubernetes.io/name": "argocd-server"
+      port: 8080
