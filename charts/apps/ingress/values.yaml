@@ -1,6 +1,6 @@
 global:
     dns:
-        internalPrefix: k3s.internal
+        internalPrefix: "k3s.internal"
         primary:
             domain: "internal"
             root: "k3s"
