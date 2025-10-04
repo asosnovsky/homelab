@@ -125,4 +125,29 @@ spec:
               number: {{.port | default 80}}
         path: {{ .path | default "/" }}
         pathType: Prefix
+
+{{ if .useTailscale }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "tailscale-{{.prefix}}"
+  namespace: {{ .namespace }}
+spec:
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - {{ .prefix }}
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: "{{.service}}"
+            port:
+              number: {{.port | default 80}}
+        path: {{ .path | default "/" }}
+        pathType: Prefix
+{{ end }}  
+
 {{- end -}}
