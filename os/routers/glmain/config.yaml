@@ -1,154 +1,155 @@
 general_mappings:
-    - ip: 10.0.100.1
-      domains:
-          - home.sosnovsky.ca
-          - k3s.local
-    - ip: 10.0.100.3
-      domains:
-          - ecouser.com
-          - ecouser.net
-          - ecovacs.com
-          - ecovacs.net
+  - ip: 10.0.100.1
+    domains:
+      - home.sosnovsky.ca
+      - k3s.local
+      - k3s.internal
+  - ip: 10.0.100.3
+    domains:
+      - ecouser.com
+      - ecouser.net
+      - ecovacs.com
+      - ecovacs.net
 networks:
-    lab:
-        - mac: "3C:7C:3F:1E:B7:A0"
-          name: "tnas1"
-          domain: "tnas1.lab.local"
-        - mac: "00:A0:98:3D:7C:C8"
-          name: "kubedb"
-        - mac: "B8:27:EB:F7:44:4E"
-          name: "pi1"
-        - mac: "9C:BF:0D:00:56:51"
-          name: "fws1"
-        - mac: "74:56:3C:CA:E2:ED"
-          name: "bigbox1"
-          domain: compute.internal
-        - mac: "68:1D:EF:26:B7:6C"
-          name: "minipc1"
-        - mac: "7C:83:34:B8:7B:43"
-          name: "minipc2"
-        - mac: "6C:BF:B5:01:E9:86"
-          name: terra1
-        - mac: "6C:BF:B5:01:E9:87"
-          name: terra1
-        - mac: "58:47:CA:71:D8:E6"
-          name: "minipc3"
-    hub:
-        - mac: "2C:CF:67:FB:C8:1F"
-          name: "castle"
-          # domain: castle.home.sosnovsky.ca
-        - mac: "DC:A6:32:92:B2:79"
-          name: "basement"
-          # domain: basement.home.sosnovsky.ca
-        - mac: "4E:F6:9C:7C:56:33"
-          name: "flic"
-        - name: "voice-m5stack-office"
-          mac: "E8:6B:EA:23:F9:14"
-    cam:
-        - name: "korie"
-          mac: "9C:8E:CD:25:83:1F"
-        - name: "eddie"
-          mac: "A0:60:32:03:86:8A"
-        - name: "doorbell"
-          mac: "48:9E:9D:4A:32:80"
-        - name: "livingroom"
-          mac: "34:60:F9:D7:51:3F"
-        - name: "living"
-          mac: "EC:71:DB:0C:5A:6E"
-        - name: "driveway"
-          mac: "EC:71:DB:2E:6F:F5"
-    iot:
-        - name: "korie-lamp"
-          mac: "60:74:F4:4D:B8:C5"
-        - name: "office-strip"
-          mac: "DC:4F:22:24:0C:E4"
-        - name: "ecobee"
-          mac: "44:61:32:FC:10:EC"
-        - name: "apollo-kitchen"
-          mac: "30:30:F9:DC:A8:18"
-        - name: "apollo-office"
-          mac: "30:30:F9:DA:C7:A4"
-        - name: "apollo-laundry"
-          mac: "30:30:F9:DC:BE:7C"
-        - name: "epl-living-room"
-          mac: "64:B7:08:28:52:50"
-        - name: "expired-epl"
-          mac: "64:B7:08:28:56:F4"
-        - name: "shelly-basement-living"
-          mac: "B8:D6:1A:8A:5F:F4"
-        - name: "shelly-basement-shared"
-          mac: "B8:D6:1A:8C:4C:DC"
-        - name: "shelly-laundry-light"
-          mac: "C8:2B:96:1D:DA:B4"
-        - name: "shelly-bathroom"
-          mac: "B0:B2:1C:10:DC:48"
-    apl:
-        - name: "hp-print"
-          mac: "48:9E:BD:CB:07:E3"
-        - name: "gm-eddie"
-          mac: "20:DF:B9:71:55:9C"
-          justMac: true
-        - name: "myq-garage"
-          mac: "CC:6A:10:8B:7D:D3"
-        - name: "pod-korie"
-          mac: "04:99:B9:86:2D:AE"
-          justMac: true
-        - name: "pod-livingroom"
-          mac: "04:99:B9:88:ED:3B"
-          justMac: true
-        - name: "appletv-livingroom"
-          mac: "48:E1:5C:5B:CB:A3"
-        - name: "samsuntv-livingroom"
-          mac: "F0:70:4F:54:F3:F0"
-        - name: "leviot-humid1"
-          mac: "3C:E9:0E:62:14:D8"
-          justMac: true
-        - name: "leviot-humid2"
-          mac: "1C:9D:C2:39:61:F8"
-          justMac: true
-        - name: "amzn-bedroom"
-          mac: "D8:BE:65:F2:ED:18"
-          justMac: true
-        - name: "lgtv-bedroom"
-          mac: "A8:A2:37:27:3F:8A"
-          justMac: true
-        - name: "pablo"
-          mac: "B0:4A:39:F7:E5:8E"
-          justMac: true
-        - name: "pod-eddie"
-          mac: "40:ED:CF:9D:C1:01"
-          justMac: true
-        - name: "brother-printer"
-          mac: "00:1B:A9:B9:37:B7"
-          justMac: true
-        - name: "ipad-eddie"
-          mac: "F0:DB:F8:4C:96:B9"
-          justMac: true
+  lab:
+    - mac: "3C:7C:3F:1E:B7:A0"
+      name: "tnas1"
+      domain: "tnas1.lab.local"
+    - mac: "00:A0:98:3D:7C:C8"
+      name: "kubedb"
+    - mac: "B8:27:EB:F7:44:4E"
+      name: "pi1"
+    - mac: "9C:BF:0D:00:56:51"
+      name: "fws1"
+    - mac: "74:56:3C:CA:E2:ED"
+      name: "bigbox1"
+      domain: compute.internal
+    - mac: "68:1D:EF:26:B7:6C"
+      name: "minipc1"
+    - mac: "7C:83:34:B8:7B:43"
+      name: "minipc2"
+    - mac: "6C:BF:B5:01:E9:86"
+      name: terra1
+    - mac: "6C:BF:B5:01:E9:87"
+      name: terra1
+    - mac: "58:47:CA:71:D8:E6"
+      name: "minipc3"
+  hub:
+    - mac: "2C:CF:67:FB:C8:1F"
+      name: "castle"
+      # domain: castle.home.sosnovsky.ca
+    - mac: "DC:A6:32:92:B2:79"
+      name: "basement"
+      # domain: basement.home.sosnovsky.ca
+    - mac: "4E:F6:9C:7C:56:33"
+      name: "flic"
+    - name: "voice-m5stack-office"
+      mac: "E8:6B:EA:23:F9:14"
+  cam:
+    - name: "korie"
+      mac: "9C:8E:CD:25:83:1F"
+    - name: "eddie"
+      mac: "A0:60:32:03:86:8A"
+    - name: "doorbell"
+      mac: "48:9E:9D:4A:32:80"
+    - name: "livingroom"
+      mac: "34:60:F9:D7:51:3F"
+    - name: "living"
+      mac: "EC:71:DB:0C:5A:6E"
+    - name: "driveway"
+      mac: "EC:71:DB:2E:6F:F5"
+  iot:
+    - name: "korie-lamp"
+      mac: "60:74:F4:4D:B8:C5"
+    - name: "office-strip"
+      mac: "DC:4F:22:24:0C:E4"
+    - name: "ecobee"
+      mac: "44:61:32:FC:10:EC"
+    - name: "apollo-kitchen"
+      mac: "30:30:F9:DC:A8:18"
+    - name: "apollo-office"
+      mac: "30:30:F9:DA:C7:A4"
+    - name: "apollo-laundry"
+      mac: "30:30:F9:DC:BE:7C"
+    - name: "epl-living-room"
+      mac: "64:B7:08:28:52:50"
+    - name: "expired-epl"
+      mac: "64:B7:08:28:56:F4"
+    - name: "shelly-basement-living"
+      mac: "B8:D6:1A:8A:5F:F4"
+    - name: "shelly-basement-shared"
+      mac: "B8:D6:1A:8C:4C:DC"
+    - name: "shelly-laundry-light"
+      mac: "C8:2B:96:1D:DA:B4"
+    - name: "shelly-bathroom"
+      mac: "B0:B2:1C:10:DC:48"
+  apl:
+    - name: "hp-print"
+      mac: "48:9E:BD:CB:07:E3"
+    - name: "gm-eddie"
+      mac: "20:DF:B9:71:55:9C"
+      justMac: true
+    - name: "myq-garage"
+      mac: "CC:6A:10:8B:7D:D3"
+    - name: "pod-korie"
+      mac: "04:99:B9:86:2D:AE"
+      justMac: true
+    - name: "pod-livingroom"
+      mac: "04:99:B9:88:ED:3B"
+      justMac: true
+    - name: "appletv-livingroom"
+      mac: "48:E1:5C:5B:CB:A3"
+    - name: "samsuntv-livingroom"
+      mac: "F0:70:4F:54:F3:F0"
+    - name: "leviot-humid1"
+      mac: "3C:E9:0E:62:14:D8"
+      justMac: true
+    - name: "leviot-humid2"
+      mac: "1C:9D:C2:39:61:F8"
+      justMac: true
+    - name: "amzn-bedroom"
+      mac: "D8:BE:65:F2:ED:18"
+      justMac: true
+    - name: "lgtv-bedroom"
+      mac: "A8:A2:37:27:3F:8A"
+      justMac: true
+    - name: "pablo"
+      mac: "B0:4A:39:F7:E5:8E"
+      justMac: true
+    - name: "pod-eddie"
+      mac: "40:ED:CF:9D:C1:01"
+      justMac: true
+    - name: "brother-printer"
+      mac: "00:1B:A9:B9:37:B7"
+      justMac: true
+    - name: "ipad-eddie"
+      mac: "F0:DB:F8:4C:96:B9"
+      justMac: true
 
-    router:
-        - name: "gl-basement"
-          mac: "94:83:C4:31:D5:CE"
-        - name: "velica-main"
-          mac: "94:83:C4:41:77:BA"
-        - name: "velica-node1"
-          mac: "94:83:C4:41:77:29"
-        - name: "velica-node2"
-          mac: "94:83:C4:41:77:B0"
-        - name: "extender"
-          id: 100
-          mac: "5C:E9:31:00:65:61"
-    devices:
-        - name: "fwlaptop"
-          mac: "14:AC:60:29:85:4D"
-        - name: "sumomac"
-          mac: "F8:E4:3B:36:0F:E4"
-        - name: "steamdeck"
-          mac: "34:6F:24:CA:70:57"
-        - name: "vitapc"
-          mac: "E0:0A:F6:79:C6:E9"
-        - name: "vitaphone"
-          mac: "E0:92:5C:20:F7:21"
-        - name: "levaphone"
-          mac: "EC:28:D3:53:30:59"
-        - name: "koriephone"
-          mac: "D8:DC:40:DC:D4:A0"
+  router:
+    - name: "gl-basement"
+      mac: "94:83:C4:31:D5:CE"
+    - name: "velica-main"
+      mac: "94:83:C4:41:77:BA"
+    - name: "velica-node1"
+      mac: "94:83:C4:41:77:29"
+    - name: "velica-node2"
+      mac: "94:83:C4:41:77:B0"
+    - name: "extender"
+      id: 100
+      mac: "5C:E9:31:00:65:61"
+  devices:
+    - name: "fwlaptop"
+      mac: "14:AC:60:29:85:4D"
+    - name: "sumomac"
+      mac: "F8:E4:3B:36:0F:E4"
+    - name: "steamdeck"
+      mac: "34:6F:24:CA:70:57"
+    - name: "vitapc"
+      mac: "E0:0A:F6:79:C6:E9"
+    - name: "vitaphone"
+      mac: "E0:92:5C:20:F7:21"
+    - name: "levaphone"
+      mac: "EC:28:D3:53:30:59"
+    - name: "koriephone"
+      mac: "D8:DC:40:DC:D4:A0"
