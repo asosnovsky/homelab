@@ -4,6 +4,7 @@ general_mappings:
       - home.sosnovsky.ca
       - k3s.local
       - k3s.internal
+      - skyg
   - ip: 10.0.100.3
     domains:
       - ecouser.com
