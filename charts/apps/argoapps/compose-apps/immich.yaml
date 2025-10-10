@@ -1,6 +1,6 @@
 services:
   immich-server:
-    image: ghcr.io/immich-app/immich-server:release
+    image: ghcr.io/immich-app/immich-server:v2
     volumes:
       upload: /usr/src/app/upload
       family-storage: /family-storage
@@ -8,13 +8,13 @@ services:
       - secretRef:
           name: immich-shared
     ports:
-      - port: '2283'
+      - port: "2283"
     restart: always
     environment:
       REDIS_PORT: "6379"
 
   immich-machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:release
+    image: ghcr.io/immich-app/immich-machine-learning:v2
     volumes:
       model-cache: /cache
     envFrom:
@@ -24,7 +24,7 @@ services:
     environment:
       REDIS_PORT: "6379"
     ports:
-      - port: '3003'
+      - port: "3003"
 
   redis:
     image: docker.io/valkey/valkey:8-bookworm@sha256:42cba146593a5ea9a622002c1b7cba5da7be248650cbb64ecb9c6c33d29794b1
@@ -32,19 +32,19 @@ services:
       test: redis-cli ping || exit 1
     restart: always
     ports:
-      - port: '6379'
+      - port: "6379"
 
   database:
     image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52
     environment:
-      POSTGRES_INITDB_ARGS: '--data-checksums'
+      POSTGRES_INITDB_ARGS: "--data-checksums"
     ports:
-      - port: '5432'
+      - port: "5432"
     envFrom:
       - secretRef:
           name: immich-shared
     volumes:
-        db-data: /var/lib/postgresql/data
+      db-data: /var/lib/postgresql/data
     restart: always
     healthcheck:
       interval: 5m
@@ -68,7 +68,7 @@ secrets:
   immich-shared:
     - name: DB_USERNAME
       aliases:
-        - POSTGRES_USER  
+        - POSTGRES_USER
       value: immich
     - name: DB_DATABASE_NAME
       aliases:
@@ -103,9 +103,9 @@ externalSecrets:
       dataFrom:
         - sourceRef:
             generatorRef:
-                apiVersion: generators.external-secrets.io/v1alpha1
-                kind: Password
-                name: "db-password"
+              apiVersion: generators.external-secrets.io/v1alpha1
+              kind: Password
+              name: "db-password"
 ingress:
   enabled: true
   prefix: immich
