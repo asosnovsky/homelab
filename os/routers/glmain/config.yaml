@@ -35,6 +35,8 @@ networks:
       name: terra1
     - mac: "58:47:CA:71:D8:E6"
       name: "minipc3"
+    - mac: "9C:BF:0D:00:FA:22"
+      name: "fwdesk"
   hub:
     - mac: "2C:CF:67:FB:C8:1F"
       name: "castle"

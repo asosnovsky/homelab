@@ -32,6 +32,9 @@ Lab:
    Minipc3:
        ip: "10.0.10.10"
        host: "minipc3.lab.internal"
+   Fwdesk:
+       ip: "10.0.10.11"
+       host: "fwdesk.lab.internal"
 Hub:
    Castle:
        ip: "10.0.12.1"
