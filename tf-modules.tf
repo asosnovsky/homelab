@@ -58,7 +58,7 @@ module "k8s-helm-charts" {
     },
     "argo-cd" : {
       "repository" : "https://argoproj.github.io/argo-helm"
-      "version" : "7.9.0"
+      "version" : "8.5.0"
       "values" : [
         yamlencode({
           configs = {
