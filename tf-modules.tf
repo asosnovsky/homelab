@@ -49,7 +49,11 @@ module "k8s-helm-charts" {
       repository = "https://charts.jetstack.io"
       version    = "1.19.2"
       values : [yamlencode({
-        installCRDs : true
+        installCRDs : true,
+        extraArgs : [
+          "--dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53",
+          "--dns01-recursive-nameservers-only"
+        ]
       })]
     },
     "argo-cd" : {

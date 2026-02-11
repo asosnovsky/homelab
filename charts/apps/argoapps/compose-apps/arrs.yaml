@@ -2,16 +2,18 @@ version: "3.8"
 services:
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
+    imagePullPolicy: Always
     restart: unless-stopped
     ports:
-      - port: '8191'
+      - port: "8191"
   database:
     image: postgres:17
+    imagePullPolicy: IfNotPresent
     restart: unless-stopped
     volumes:
-        db: /var/lib/postgresql/data
+      db: /var/lib/postgresql/data
     ports:
-      - port: '5432'
+      - port: "5432"
     healthcheck:
       test:
         - pg_isready
@@ -22,12 +24,13 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr
     restart: unless-stopped
+    imagePullPolicy: Always
     environment:
-        PUID: "1000"
-        PGID: "100"
+      PUID: "1000"
+      PGID: "100"
     volumes:
-        prowlarr: /config
-        torrents: /torrents
+      prowlarr: /config
+      torrents: /torrents
     healthcheck:
       test:
         - curl
@@ -46,18 +49,19 @@ services:
       - radarr
       - sonarr
     ports:
-      - port: '80'
+      - port: "80"
   lidarr:
     image: lscr.io/linuxserver/lidarr
+    imagePullPolicy: Always
     restart: unless-stopped
     ports:
-      - port: '80'
+      - port: "80"
     environment:
-        PUID: "1000"
-        PGID: "100"
+      PUID: "1000"
+      PGID: "100"
     volumes:
-        lidarr: /config
-        torrents: /torrents
+      lidarr: /config
+      torrents: /torrents
     labels:
       - homepage.group=Torrent
       - homepage.name=lidarr
@@ -75,15 +79,16 @@ services:
       start_period: 10s
   radarr:
     image: lscr.io/linuxserver/radarr
+    imagePullPolicy: Always
     restart: unless-stopped
     environment:
-        PUID: "1000"
-        PGID: "100"
+      PUID: "1000"
+      PGID: "100"
     ports:
-      - port: '80'
+      - port: "80"
     volumes:
-        radarr: /config
-        torrents: /torrents
+      radarr: /config
+      torrents: /torrents
     labels:
       - homepage.group=Torrent
       - homepage.name=Radarr
@@ -101,15 +106,16 @@ services:
       start_period: 10s
   sonarr:
     image: lscr.io/linuxserver/sonarr
+    imagePullPolicy: Always
     restart: unless-stopped
     environment:
-        PUID: "1000"
-        PGID: "100"
+      PUID: "1000"
+      PGID: "100"
     volumes:
-        sonarr: /config
-        torrents: /torrents
+      sonarr: /config
+      torrents: /torrents
     ports:
-      - port: '80'
+      - port: "80"
     depends_on:
       - database
     labels:
@@ -127,16 +133,17 @@ services:
       start_period: 10s
   nzbget:
     image: lscr.io/linuxserver/nzbget:latest
+    imagePullPolicy: Always
     restart: always
     ports:
-      - port: '6789'
+      - port: "6789"
     environment:
       PUID: 1000
       PGID: 100
       TZ: Etc/UTC
     volumes:
-        nzbget: /config
-        torrents: /torrents
+      nzbget: /config
+      torrents: /torrents
     labels:
       - homepage.group=Torrent
       - homepage.name=nzbget
