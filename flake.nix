@@ -42,7 +42,7 @@
           shellHook = ''
             echo "$(pwd)"
             export PATH="$(pwd)/bin:$PATH"
-            export PROMPT="🏠|$(kubectx -c)/$(kubens -c)> $PROMPT"
+            export PROMPT="🏠| \$(kubectx -c)@\$(kubens -c):📁$(pwd)> $PROMPT"
             export KUBE_CONFIG_PATH=~/.kube/config
             echo "Welcome to HomeLab!"
           '';
