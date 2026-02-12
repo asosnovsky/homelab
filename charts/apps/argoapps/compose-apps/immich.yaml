@@ -1,6 +1,6 @@
 services:
   immich-server:
-    image: ghcr.io/immich-app/immich-server:v2.4.1
+    image: ghcr.io/immich-app/immich-server:v2
     volumes:
       upload: /usr/src/app/upload
       family-storage: /family-storage
@@ -14,7 +14,7 @@ services:
       REDIS_PORT: "6379"
 
   immich-machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:v2.4.1
+    image: ghcr.io/immich-app/immich-machine-learning:v2
     volumes:
       model-cache: /cache
     envFrom:
