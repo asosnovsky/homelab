@@ -43,7 +43,7 @@ module "k8s-helm-charts" {
     },
     "metallb" : {
       repository = "https://metallb.github.io/metallb"
-      version    = "0.14.9"
+      version    = "0.15.2"
     },
     "cert-manager" : {
       repository = "https://charts.jetstack.io"
