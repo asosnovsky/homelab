@@ -1,0 +1,6 @@
+{{- range $name, $val := .Values.repos }}
+{{ include "git-repo" (merge $val (dict
+  "name" $name
+  "namespace" $.Values.ns.argocd
+))}}
+{{ end -}}

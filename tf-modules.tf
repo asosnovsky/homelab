@@ -13,11 +13,15 @@ resource "helm_release" "local-chart-infrastructure" {
       value = module.k8s-helm-charts.namespaces.plugins.argo-cd
     },
     {
-      name  = "gitops.sshkey"
-      value = var.ssh_key
+      name  = "gitops.data.username"
+      value = var.gitea.user
     },
     {
-      name  = "additionalRepos.github-helm-charts.sshkey"
+      name  = "gitops.data.password"
+      value = var.gitea.password
+    },
+    {
+      name  = "repos.github-helm-charts.data.sshPrivateKey"
       value = var.github_ssh_key
     }
   ]

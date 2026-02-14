@@ -21,7 +21,11 @@ variable "domain_mappings" {
     type = optional(string, "A"),
   })))
 }
-variable "ssh_key" {
+variable "gitea" {
+  type = object({
+    user = string
+    password  = string
+  })
   sensitive = true
 }
 variable "github_ssh_key" {

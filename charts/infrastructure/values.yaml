@@ -1,28 +1,31 @@
 global: {}
 
 registry:
-    ip: 10.0.100.101
-    image: registry:2
+  ip: 10.0.100.101
+  image: registry:2
 
 ns:
-    metallb: "change-me"
-    argocd: "change-me"
+  metallb: "change-me"
+  argocd: "change-me"
 
 gitops:
-  revision: "main"
-  repo: "ssh://gitea@minipc1.lab.internal/ari/homelab.git"
-  sshkey: ""
+  type: git
+  url: http://minipc1.lab.internal:3000/ari/homelab.git
+  revision: main
+  data:
+    username: argocd
+    password: "change-me"
 
-additionalRepos:
+repos:
   github-helm-charts:
     type: git
-    username: git
-    url:  git@github.com:asosnovsky/helm-charts.git
-    sshkey: ""
+    url: git@github.com:asosnovsky/helm-charts.git
+    data:
+      sshPrivateKey: "change-me"
 
 metallb:
-    addresses:
-        - 10.0.100.1-10.0.100.255
+  addresses:
+    - 10.0.100.1-10.0.100.255
 
 enabledClusterSecretStores:
-    - secrets
+  - secrets

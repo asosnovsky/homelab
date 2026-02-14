@@ -1,0 +1,5 @@
+
+{{ include "git-repo" (merge $.Values.gitops (dict
+  "name" "gitops"
+  "namespace" $.Values.ns.argocd
+))}}

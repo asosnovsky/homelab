@@ -5,13 +5,15 @@ kind: Secret
 metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
-  name: {{ .name }}
+  name: argocd-repo-{{ .name }}
   namespace: "{{ .namespace }}"
 type: Opaque
-stringData:
-    name: {{ .name }}
-    type: {{ .type | default "git" }}
-    url: {{ .url }}
 data:
-  sshPrivateKey: "{{ .sshkey | b64enc }}"
+    "name": "{{ .name | b64enc }}"
+    "type": "{{ .type | default "git" | b64enc }}"
+    "url": "{{ .url | b64enc }}"
+    {{ range $k, $v := .data }}
+    "{{ $k }}": |-
+      {{ $v | b64enc }}
+    {{ end }}
 {{ end }}
