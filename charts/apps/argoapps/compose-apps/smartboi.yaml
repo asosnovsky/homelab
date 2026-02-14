@@ -9,9 +9,6 @@ services:
       SMARTBOI_agent__base_url: http://fwdesk.lab.internal:11434
     volumes:
       db: /app/db/
-    serviceAnnotations:
-      "tailscale.com/expose": "true"
-      "tailscale.com/tags": "smartboi"
 
 volumes:
   db:
