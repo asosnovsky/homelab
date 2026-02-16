@@ -25,6 +25,7 @@
             yq
             bat
             jq
+            openssl
             # k8s
             kubectx
             k3d

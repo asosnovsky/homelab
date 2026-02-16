@@ -17,12 +17,12 @@ kubectl config use-context homelab
 function run-new-chart() {
     : Create a new helm chart
     : dev new-chart {path-to-chart}
-    
+
     full_path=$ROOT_FOLDER/charts/apps/${1}
     app=$(basename $full_path)
     location=$(dirname $full_path)
     typeofapp=$(basename $location)
-    
+
     mkdir -p $full_path/templates
     touch $full_path/values.yaml
     cat <<EOT >> $full_path/Chart.yaml
@@ -84,6 +84,12 @@ function run-template-compose-app() {
     #     exit 1
     # fi
     # echo $out | bat -l yaml
+}
+
+function run-htpasswd() {
+    : Generates htpasswd file
+    : dev htpasswd
+    openssl passwd -apr1 ${@}
 }
 
 start_cli $@

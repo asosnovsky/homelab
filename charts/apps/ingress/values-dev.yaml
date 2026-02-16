@@ -1,9 +1,7 @@
-
-
 reverseProxy:
-    home:
-        port: "8123"
-        ip: "192.168.0.20"
-    yellow:
-        port: "8123"
-        ip: "192.168.0.23"
+  home:
+    port: "8123"
+    ip: "192.168.0.20"
+  yellow:
+    port: "8123"
+    ip: "192.168.0.23"

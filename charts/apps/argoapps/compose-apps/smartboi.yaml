@@ -19,3 +19,4 @@ ingress:
   service: smartboi
   port: 8000
   useSecondaryDomain: true
+  middleware: basic-auth-smartboi
