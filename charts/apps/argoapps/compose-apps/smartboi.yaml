@@ -12,3 +12,10 @@ services:
 
 volumes:
   db:
+
+ingress:
+  enabled: true
+  prefix: smartboi
+  service: smartboi
+  port: 8000
+  useSecondaryDomain: true
