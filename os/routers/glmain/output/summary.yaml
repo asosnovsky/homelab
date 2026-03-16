@@ -35,6 +35,9 @@ Lab:
    Fwdesk:
        ip: "10.0.10.11"
        host: "fwdesk.lab.internal"
+   Bigbox2:
+       ip: "10.0.10.12"
+       host: "bigbox2.lab.internal"
 Hub:
    Castle:
        ip: "10.0.12.1"

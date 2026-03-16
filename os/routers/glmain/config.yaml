@@ -37,6 +37,8 @@ networks:
       name: "minipc3"
     - mac: "9C:BF:0D:00:FA:22"
       name: "fwdesk"
+    - mac: "A8:42:A1:5E:21:2C"
+      name: "bigbox2"
   hub:
     - mac: "2C:CF:67:FB:C8:1F"
       name: "castle"
