@@ -34,7 +34,6 @@ spec:
   buffering:
     maxRequestBodyBytes: 52428800000   # 50000M in bytes
     memRequestBodyBytes: 1048576       # 1024k client_body_buffer_size
-    requestBodyBuffering: false         # proxy_request_buffering off
     maxResponseBodyBytes: 0            # unlimited
     retryExpression: ""
 
