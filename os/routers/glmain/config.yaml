@@ -1,16 +1,3 @@
-general_mappings:
-  - ip: 10.0.100.1
-    domains:
-      - home.sosnovsky.ca
-      - k3s.local
-      - k3s.internal
-      - home.skyg
-  - ip: 10.0.100.3
-    domains:
-      - ecouser.com
-      - ecouser.net
-      - ecovacs.com
-      - ecovacs.net
 networks:
   lab:
     - mac: "3C:7C:3F:1E:B7:A0"
