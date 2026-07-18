@@ -112,5 +112,5 @@ ingress:
   service: immich-server
   port: 2283
   middleware: ingress-https-redirect
-  # annotations:
-  #   traefik.ingress.kubernetes.io/service.serverstransport: ingress-immich-transport@kubernetescrd
+  annotations:
+    traefik.ingress.kubernetes.io/service.serverstransport: ingress-immich-transport@kubernetescrd
