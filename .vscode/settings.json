@@ -4,5 +4,6 @@
     },
     "cSpell.words": [
         "authelia"
-    ]
+    ],
+    "nixEnvSelector.suggestion": false
 }
