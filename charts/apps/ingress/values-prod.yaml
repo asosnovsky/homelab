@@ -1,10 +1,10 @@
 reverseProxy:
-  gitea:
-    ip: "10.0.101.9"
-    port: 80
-    overrides:
-      useSecondaryDomain: true
-      group: "Admin"
+  # gitea:
+  #   ip: "10.0.101.9"
+  #   port: 80
+  #   overrides:
+  #     useSecondaryDomain: true
+  #     group: "Admin"
   castle:
     ip: "10.0.12.1"
     port: "80"
