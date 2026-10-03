@@ -72,7 +72,7 @@ terraform apply
 
 ### Key flows
 
-- **DNS:** Terraform looks up your current IP (`https://api.myip.com/`) and creates `A` records on Cloudflare for every zone/record in `domain_mappings` (unless an IP is pinned).
+- **DNS:** Terraform looks up your current IP (`https://api.ipify.org?format=json`) and creates `A` records on Cloudflare for every zone/record in `domain_mappings` (unless an IP is pinned via `myip`, in which case the lookup is skipped).
 - **Plugins:** Terraform uses the `k8s-helm-charts` module to install `external-secrets`, `metallb`, `cert-manager`, `argo-cd`, `tailscale-operator`, and `traefik`. Each lands in its own `plugin-<name>` namespace.
 - **Infrastructure:** Terraform deploys `charts/infrastructure`, which creates the Argo CD repo credentials, `AppProject main`, the ApplicationSet that watches `charts/apps/*`, the MetalLB IP address pool, and External Secrets ClusterSecretStores.
 - **GitOps:** The ApplicationSet automatically creates an Argo CD Application for each folder under `charts/apps/`, syncing it to its own namespace. Value files `values.yaml` + `values-<deployment>.yaml` are merged per deployment environment.

@@ -1,9 +1,10 @@
 data "http" "myip" {
-  url = "https://api.myip.com/"
+  count = var.myip == "" ? 1 : 0
+  url   = "https://api.ipify.org?format=json"
 }
 
 locals {
-  myip = var.myip != "" ? var.myip : jsondecode(data.http.myip.response_body)["ip"]
+  myip = var.myip != "" ? var.myip : jsondecode(data.http.myip[0].response_body)["ip"]
 }
 data "cloudflare_zone" "this" {
   for_each = var.domain_mappings
