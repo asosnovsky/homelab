@@ -1,6 +1,6 @@
 reverseProxy:
   gitea:
-    ip: "10.0.101.7"
+    ip: "10.0.101.9"
     port: 80
     overrides:
       useSecondaryDomain: true
