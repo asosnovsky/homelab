@@ -68,6 +68,28 @@ module "k8s-helm-charts" {
           configs = {
             cm = {
               "exec.enabled" : true
+              "resource.exclusions" : yamlencode([
+                { apiGroups = [""], kinds = ["Endpoints"] },
+                { apiGroups = ["coordination.k8s.io"], kinds = ["Lease"] },
+                {
+                  apiGroups = ["authentication.k8s.io", "authorization.k8s.io"]
+                  kinds = [
+                    "SelfSubjectReview", "TokenReview", "LocalSubjectAccessReview",
+                    "SelfSubjectAccessReview", "SelfSubjectRulesReview", "SubjectAccessReview",
+                  ]
+                },
+                { apiGroups = ["certificates.k8s.io"], kinds = ["CertificateSigningRequest"] },
+                { apiGroups = ["cert-manager.io"], kinds = ["CertificateRequest"] },
+                { apiGroups = ["cilium.io"], kinds = ["CiliumIdentity", "CiliumEndpoint", "CiliumEndpointSlice"] },
+                {
+                  apiGroups = ["kyverno.io", "reports.kyverno.io", "wgpolicyk8s.io"]
+                  kinds = [
+                    "PolicyReport", "ClusterPolicyReport", "EphemeralReport",
+                    "ClusterEphemeralReport", "AdmissionReport", "ClusterAdmissionReport",
+                    "BackgroundScanReport", "ClusterBackgroundScanReport", "UpdateRequest",
+                  ]
+                },
+              ])
             }
             params = {
               "server.insecure" = true
