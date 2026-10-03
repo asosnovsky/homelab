@@ -84,42 +84,42 @@ terraform apply
 
 ### Providers
 
-| Provider | Version | Purpose |
-|----------|---------|---------|
-| `hashicorp/helm` | `3.0.0-pre1` | Install Helm charts directly |
-| `hashicorp/kubernetes` | `2.35.1` | Create namespaces, secrets, services |
-| `hashicorp/http` | `3.4.5` | Discover public IP |
-| `cloudflare/cloudflare` | `5.2.0` | Manage DNS records |
-| `hashicorp/random` | `3.7.2` | Random values |
+| Provider                | Version      | Purpose                              |
+| ----------------------- | ------------ | ------------------------------------ |
+| `hashicorp/helm`        | `3.0.0-pre1` | Install Helm charts directly         |
+| `hashicorp/kubernetes`  | `2.35.1`     | Create namespaces, secrets, services |
+| `hashicorp/http`        | `3.4.5`      | Discover public IP                   |
+| `cloudflare/cloudflare` | `5.2.0`      | Manage DNS records                   |
+| `hashicorp/random`      | `3.7.2`      | Random values                        |
 
 The Terraform **state backend** is stored in a Kubernetes secret (`secret_suffix = "homelab"` in the `default` namespace) on the `homelab` context.
 
 ### Key configuration files
 
-| File | Purpose |
-|------|---------|
-| `tf-provider.tf` | Backend + provider configuration |
-| `tf-variables.tf` | All input variables (see below) |
-| `tf-dns.tf` | Cloudflare DNS records + public IP lookup |
-| `tf-modules.tf` | Plugin Helm releases + `infrastructure` chart |
-| `tf-ns-ingress.tf` | Argo CD server LoadBalancer service |
-| `tf-secrets.tf` | VPN credentials secret in `secrets` namespace |
-| `tf-svc.tf` | Service-related declarations |
-| `var.auto.tfvars` | Environment values (DNS maps, globals, secrets) |
+| File               | Purpose                                         |
+| ------------------ | ----------------------------------------------- |
+| `tf-provider.tf`   | Backend + provider configuration                |
+| `tf-variables.tf`  | All input variables (see below)                 |
+| `tf-dns.tf`        | Cloudflare DNS records + public IP lookup       |
+| `tf-modules.tf`    | Plugin Helm releases + `infrastructure` chart   |
+| `tf-ns-ingress.tf` | Argo CD server LoadBalancer service             |
+| `tf-secrets.tf`    | VPN credentials secret in `secrets` namespace   |
+| `tf-svc.tf`        | Service-related declarations                    |
+| `var.auto.tfvars`  | Environment values (DNS maps, globals, secrets) |
 
 ### Input variables
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| `myip` | `string` | Pin your public IP (default: auto-detected) |
-| `cloudflare` | `object` (sensitive) | Cloudflare `api_token`, `account_id`, `cm_api_token` |
-| `main_domain` / `secondary_domain` | `string` | Defaults `sosnovsky.ca` / `skyg.ca` |
-| `domain_mappings` | `map(map(...))` | DNS zone → records → type/IP |
-| `gitea` | `object` (sensitive) | GitOps repo username/password |
-| `github_ssh_key` | `string` (sensitive) | SSH key for the helm-charts git repo |
-| `tailscale` | `object` (sensitive) | Tailscale OAuth client id/secret |
-| `vpn` | `object` (sensitive) | VPN user/password/provider/country |
-| `globals` | `object` | Global app config (DNS, NFS, SMTP, deployment, email, timezone) |
+| Variable                           | Type                 | Description                                                     |
+| ---------------------------------- | -------------------- | --------------------------------------------------------------- |
+| `myip`                             | `string`             | Pin your public IP (default: auto-detected)                     |
+| `cloudflare`                       | `object` (sensitive) | Cloudflare `api_token`, `account_id`, `cm_api_token`            |
+| `main_domain` / `secondary_domain` | `string`             | Defaults `sosnovsky.ca` / `skyg.ca`                             |
+| `domain_mappings`                  | `map(map(...))`      | DNS zone → records → type/IP                                    |
+| `gitea`                            | `object` (sensitive) | GitOps repo username/password                                   |
+| `github_ssh_key`                   | `string` (sensitive) | SSH key for the helm-charts git repo                            |
+| `tailscale`                        | `object` (sensitive) | Tailscale OAuth client id/secret                                |
+| `vpn`                              | `object` (sensitive) | VPN user/password/provider/country                              |
+| `globals`                          | `object`             | Global app config (DNS, NFS, SMTP, deployment, email, timezone) |
 
 ---
 
@@ -127,14 +127,14 @@ The Terraform **state backend** is stored in a Kubernetes secret (`secret_suffix
 
 The `bin/dev` script is a small self-documenting CLI built on `common.sh`. Each subcommand matches a `run-<name>` function; running `bin/dev` with no args lists them with their doc comments.
 
-| Command | Description |
-|---------|-------------|
-| `dev new-chart <path>` | Scaffold a new Helm chart under `charts/apps/` (Chart.yaml + values.yaml + templates/) |
-| `dev upload-tfvars` | Push `var.auto.tfvars` into a `tfvars` secret in the `default` namespace |
-| `dev download-tfvars` | Pull the `tfvars` secret back into `var.auto.tfvars` |
-| `dev template <app>` | Render a deployed Argo app's Helm output locally (reads its spec from Argo CD) |
-| `dev template-compose-app <name>` | Render a compose-app chart under `charts/apps/argoapps/compose-apps/` |
-| `dev htpasswd [...]` | Generate an Apache-style htpasswd hash (`openssl passwd -apr1`) |
+| Command                           | Description                                                                            |
+| --------------------------------- | -------------------------------------------------------------------------------------- |
+| `dev new-chart <path>`            | Scaffold a new Helm chart under `charts/apps/` (Chart.yaml + values.yaml + templates/) |
+| `dev upload-tfvars`               | Push `var.auto.tfvars` into a `tfvars` secret in the `default` namespace               |
+| `dev download-tfvars`             | Pull the `tfvars` secret back into `var.auto.tfvars`                                   |
+| `dev template <app>`              | Render a deployed Argo app's Helm output locally (reads its spec from Argo CD)         |
+| `dev template-compose-app <name>` | Render a compose-app chart under `charts/apps/argoapps/compose-apps/`                  |
+| `dev htpasswd [...]`              | Generate an Apache-style htpasswd hash (`openssl passwd -apr1`)                        |
 
 ---
 
@@ -146,14 +146,14 @@ Cluster-scoped bootstrap resources. Version `0.1.15`. Rendered values come from 
 
 Templates:
 
-| Template | Contents |
-|----------|----------|
-| `argocd-appset.yml` | ApplicationSet that watches `charts/apps/*` in the gitops repo |
-| `argocd-projects.yaml` | `main` AppProject (cluster/destination/source allow-all) |
-| `argocd-repo-gitops.yaml` | Repository secret for the homelab gitops repo |
-| `argocd-repo-additionals.yaml` | Additional repo secrets (e.g. GitHub `helm-charts`) |
-| `es-cluster-store.yaml` | External Secrets ClusterSecretStore + RBAC per namespace |
-| `ips.yml` | MetalLB `IPAddressPool` + `L2Advertisement` |
+| Template                       | Contents                                                       |
+| ------------------------------ | -------------------------------------------------------------- |
+| `argocd-appset.yml`            | ApplicationSet that watches `charts/apps/*` in the gitops repo |
+| `argocd-projects.yaml`         | `main` AppProject (cluster/destination/source allow-all)       |
+| `argocd-repo-gitops.yaml`      | Repository secret for the homelab gitops repo                  |
+| `argocd-repo-additionals.yaml` | Additional repo secrets (e.g. GitHub `helm-charts`)            |
+| `es-cluster-store.yaml`        | External Secrets ClusterSecretStore + RBAC per namespace       |
+| `ips.yml`                      | MetalLB `IPAddressPool` + `L2Advertisement`                    |
 
 Key default `values.yaml`:
 
@@ -164,7 +164,7 @@ ns:
   metallb: "change-me"
   argocd: "change-me"
 gitops:
-  url: http://minipc1.lab.internal:3000/ari/homelab.git
+  url: http://gitea.app.internal:3000/ari/homelab.git
   revision: main
   data: { username: argocd, password: "change-me" }
 repos:
@@ -181,13 +181,13 @@ enabledClusterSecretStores:
 
 Each folder is auto-deployed by the ApplicationSet into a namespace named after the folder. Value merge order: `values.yaml`, then `values-<deployment>.yaml` (`dev`/`prod`), then inline `global`.
 
-| Chart | Purpose |
-|-------|---------|
-| `authelia` | SSO / authentication portal |
-| `certs` | Certificate management (issuers for TLS) |
-| `dummy` | Minimal example app |
-| `ingress` | Reverse proxies, cluster services, and ingress rules (Traefik + Tailscale) |
-| `torrents` | Torrenting stack |
+| Chart      | Purpose                                                                    |
+| ---------- | -------------------------------------------------------------------------- |
+| `authelia` | SSO / authentication portal                                                |
+| `certs`    | Certificate management (issuers for TLS)                                   |
+| `dummy`    | Minimal example app                                                        |
+| `ingress`  | Reverse proxies, cluster services, and ingress rules (Traefik + Tailscale) |
+| `torrents` | Torrenting stack                                                           |
 | `argoapps` | **Not** a normal app — creates additional Argo CD Applications (see below) |
 
 ### `charts/apps/ingress`
@@ -227,12 +227,12 @@ This is a special chart **needed by Argo CD itself** (bootstrapped via `infrastr
 
 Compose-apps are defined as docker-compose files; examples:
 
-| File | Stack |
-|------|-------|
-| `arrs.yaml` | Media stack: sonarr, radarr, lidarr, prowlarr, nzbget, flaresolverr + postgres |
-| `immich.yaml` | Photo library |
-| `paperless-ngx.yaml` | Document management |
-| `smartboi.yaml` | Smart device assistant |
+| File                 | Stack                                                                          |
+| -------------------- | ------------------------------------------------------------------------------ |
+| `arrs.yaml`          | Media stack: sonarr, radarr, lidarr, prowlarr, nzbget, flaresolverr + postgres |
+| `immich.yaml`        | Photo library                                                                  |
+| `paperless-ngx.yaml` | Document management                                                            |
+| `smartboi.yaml`      | Smart device assistant                                                         |
 
 ---
 
@@ -307,10 +307,10 @@ OpenWrt router configuration:
 
 ## Common Tasks
 
-| Task | Command |
-|------|---------|
-| Enter dev environment | `nix develop` |
-| Plan / apply Terraform | `terraform plan` / `terraform apply` |
-| Sync Argo app status | `kubectl -n plugin-argo-cd get applications.argoproj.io` |
-| Render an app's Helm output | `dev template <app>` |
-| Scaffold a new chart | `dev new-chart <name>` |
+| Task                        | Command                                                  |
+| --------------------------- | -------------------------------------------------------- |
+| Enter dev environment       | `nix develop`                                            |
+| Plan / apply Terraform      | `terraform plan` / `terraform apply`                     |
+| Sync Argo app status        | `kubectl -n plugin-argo-cd get applications.argoproj.io` |
+| Render an app's Helm output | `dev template <app>`                                     |
+| Scaffold a new chart        | `dev new-chart <name>`                                   |

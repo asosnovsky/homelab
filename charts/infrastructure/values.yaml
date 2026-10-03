@@ -10,7 +10,7 @@ ns:
 
 gitops:
   type: git
-  url: http://minipc1.lab.internal:3000/ari/homelab.git
+  url: http://gitea.app.internal:3000/ari/homelab.git
   revision: main
   data:
     username: argocd
