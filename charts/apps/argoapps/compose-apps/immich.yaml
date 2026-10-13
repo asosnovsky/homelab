@@ -107,7 +107,7 @@ externalSecrets:
               kind: Password
               name: "db-password"
 ingress:
-  enabled: true
+  enabled: false
   prefix: immich
   service: immich-server
   port: 2283
